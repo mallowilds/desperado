@@ -12,3 +12,42 @@ When desperado spins his barrel, which he does before reloading an attack (will 
 With the spinning being a set of 2 anim frames that repeat every 8 or so in game frames.
 When desperado shoots the gun (uses nspecial), it should play the Shoot anim (which isnt finished btw lol), for each bullet unloaded.
 */
+
+// Anim frame management
+var frame = 0;
+if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
+    if (attack == AT_DSPECIAL) {
+        switch window {
+            case 1:
+                frame = floor(2*window_timer/get_window_value(attack, window, AG_WINDOW_LENGTH));
+                break;
+            case 2:
+                if (window_timer < 40) frame = 3 + (window_timer/3)%2
+                else {
+                    frame = 5 + (window_timer-40)/2;
+                    print(string(window_timer) + " " + string(frame));
+                }
+                break;
+            
+        }
+    }
+    
+    
+}
+
+
+
+// Draw
+var my_color = get_player_color(player);
+
+for (var i = 5; i >= num_bullets; i--) {
+    set_article_color_slot(i, 0, 0, 0);
+}
+
+for (var i = 0; i < num_bullets; i++) {
+    set_article_color_slot(i, floor(get_color_profile_slot_r(my_color, 7)*1.4), floor(get_color_profile_slot_g(my_color, 7)*1.4), floor(get_color_profile_slot_b(my_color, 7)*1.4));
+}
+
+shader_start();
+draw_sprite(sprite_get("desp_hud"), frame, temp_x, temp_y-98);
+shader_end();

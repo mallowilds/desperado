@@ -50,6 +50,13 @@
 //put in extra stuff (portrait preview)
 //trailer
 
+
+// Character-specific assets
+num_bullets = 0;  // 0-6
+bullet_mult = 0.125 // multiplier per bullet. Constant value
+
+
+
 char_height = 70 // 36 – 74. Purely aesthetic. Used for centering things on the character, placing the overhead HUD, etc
 
 
