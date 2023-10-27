@@ -1,13 +1,7 @@
 // init.gml
-// https://rivalslib.com/workshop_guide/programming/reference/scripts/init_and_attack_scripts.html#initializing-variables
-// Initializes your character's variables. Runs at the beginning of a match.
-// Many of them are built-in variables to do with movement or animation, 
-// but you can also initialize any variables you need for your complex behavior, such as `laser_charge = 0`.
-
-// This is filled with Zetterburn's values, with the base cast's range in the comment.
-
-// Basecast frame data: docs.google.com/spreadsheets/d/19UtK7xG2c-ehxdlhCFKMpM4_IHSG-EXFgXLJaunE79I
-
+//note to shear:
+//sorry normals are kinda wacky rn. nair has no visual cus i deleted the sketch layer, a lot of the normals are weird fucked up terrible zetterburn ones because the rivals assistant template has them lke that for some reason and i was too lazy to change them.
+//lol
 
 
 //...And so he left, with his pyrrhic plunder.
@@ -35,15 +29,24 @@
 //Neutral Special - Desperate Measures 
 //Desperado shoots every bullet in his chamber in a hammer fan. This move gets sequentially stronger with every bullet shot, and at full bullets, becomes the strongest projectile in the game. Once used, you need to reload your bullets.
 
-//Forward Special -
+//Forward Special - maybe he sets upa smoke clone
+// after a second it sends writhing tendrils towards the opponent if they dont hit it 
+//idk yet :(
 
-//Up Special 
+//Up Special - Deadshot
+//Desperado uses a whip-like- attack and swings in front and above him. its a quick attack with a sweetspot on the end that makes as an excellent finisher.
+//If the whip touches a wall, he will zoop towards it, giving him an upwards boost and letting him walljump.
+//Otherwise, he'll get a small boost, and doesn't go into pratfall.
+
+
 //todo
+//update walk
+//update airdodges
 //finish movement
 //finish normals
 //finish moveset
 //finish specials
-//fix the stupid bullet css issue
+//fix the stupid bullet css issue (maybe shear can do this. the hud elements dont move for the player slot so if ur in 2, 3, 4, it looks wrong)
 //put in extra stuff (portrait preview)
 //trailer
 

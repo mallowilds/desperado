@@ -1,5 +1,14 @@
 // nspecial.gml
+//Desperado shoots every bullet in his chamber in a hammer fan. This move gets sequentially stronger with every bullet shot, and at full bullets, becomes the strongest projectile in the game. Once used, you need to reload your bullets.
 
+/*
+2 main parts. multihit and final hit. also a seperate version for no bullets.
+with 1 bullet: just does the final bit.
+2-6 bullets: releases every bullet for each multihit before doing the last bullet. Should be around 1-2 frame between each gunshot or whatever feels best. Last hit gets sequentially more KB for each previous bullet in the chamber.
+
+also has a slow fall during this attack.
+need to figure out visuals... i will see what i can do. Likely will need to be a rectangle pattern repeated until it hits someone or a wall, and then visual effect for when it does break on wall.
+*/
 make_attack(AT_NSPECIAL,
     AG_CATEGORY, 2,
     AG_SPRITE, sprite_get("nspecial"),
