@@ -40,8 +40,6 @@
 
 
 //todo
-//update walk
-//update airdodges
 //finish movement
 //finish normals
 //finish moveset
