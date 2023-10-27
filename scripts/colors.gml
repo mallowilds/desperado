@@ -32,6 +32,10 @@ set_color_profile_slot_range( 6, 1, 1, 1 );
 set_color_profile_slot( 0, 7, 177, 189, 196 );
 set_color_profile_slot_range( 7, 4, 23, 23 );
 
+// Firedark
+set_color_profile_slot( 0, 8, 130, 0, 0 );
+set_color_profile_slot_range( 8, 1, 1, 1 );
+
 
 // ALTERNATE COLORS
 set_num_palettes( 14 );
@@ -45,6 +49,7 @@ set_color_profile_slot( 1, 4, 35, 68, 161 ); //Coat
 set_color_profile_slot( 1, 5, 38, 154, 255 ); //Fire
 set_color_profile_slot( 1, 6, 89, 214, 255 ); //Fireyellow
 set_color_profile_slot( 1, 7, 94, 90, 156 ); //Gun
+set_color_profile_slot( 1, 8, 0, 11, 130 ); //Firedark
 
 // scorchshot - hyu
 set_color_profile_slot( 2, 0, 133, 44, 44 ); //Bones
@@ -55,6 +60,7 @@ set_color_profile_slot( 2, 4, 84, 55, 51 ); //Coat
 set_color_profile_slot( 2, 5, 143, 24, 0 ); //Fire
 set_color_profile_slot( 2, 6, 255, 102, 0 ); //Fireyellow
 set_color_profile_slot( 2, 7, 122, 109, 104 ); //Gun
+set_color_profile_slot( 2, 8, 130, 0, 0 ); //Firedark
 
 // earthrot - reiga
 set_color_profile_slot( 3, 0, 158, 166, 159 ); //Bones
@@ -65,6 +71,7 @@ set_color_profile_slot( 3, 4, 120, 113, 78 ); //Coat
 set_color_profile_slot( 3, 5, 209, 154, 77 ); //Fire
 set_color_profile_slot( 3, 6, 200, 224, 121 ); //Fireyellow
 set_color_profile_slot( 3, 7, 147, 156, 114 ); //Gun
+set_color_profile_slot( 3, 8, 130, 0, 0 ); //Firedark
 
 // skysought - hyu
 set_color_profile_slot( 4, 0, 69, 74, 79 ); //Bones
@@ -75,6 +82,7 @@ set_color_profile_slot( 4, 4, 106, 107, 153 ); //Coat
 set_color_profile_slot( 4, 5, 156, 128, 232 ); //Fire
 set_color_profile_slot( 4, 6, 255, 231, 43 ); //Fireyellow
 set_color_profile_slot( 4, 7, 37, 46, 54 ); //Gun
+set_color_profile_slot( 4, 8, 130, 0, 0 ); //Firedark
 
 // dust & desire - reiga
 set_color_profile_slot( 5, 0, 212, 207, 209 ); //Bones
@@ -85,6 +93,7 @@ set_color_profile_slot( 5, 4, 153, 121, 134 ); //Coat
 set_color_profile_slot( 5, 5, 181, 91, 139 ); //Fire
 set_color_profile_slot( 5, 6, 186, 160, 174 ); //Fireyellow
 set_color_profile_slot( 5, 7, 128, 101, 110 ); //Gun
+set_color_profile_slot( 5, 8, 130, 0, 0 ); //Firedark
 
 // doubt - hyu
 set_color_profile_slot( 6, 0, 160, 143, 196 ); //Bones
@@ -95,6 +104,7 @@ set_color_profile_slot( 6, 4, 105, 38, 86 ); //Coat
 set_color_profile_slot( 6, 5, 169, 75, 171 ); //Fire
 set_color_profile_slot( 6, 6, 186, 145, 255 ); //Fireyellow
 set_color_profile_slot( 6, 7, 82, 69, 125 ); //Gun
+set_color_profile_slot( 6, 8, 130, 0, 0 ); //Firedark
 
 // timeless
 set_color_profile_slot( 7, 0, 194, 212, 125 ); //Bones
@@ -105,6 +115,7 @@ set_color_profile_slot( 7, 4, 194, 212, 125 ); //Coat
 set_color_profile_slot( 7, 5, 89, 145, 58 ); //Fire
 set_color_profile_slot( 7, 6, 194, 212, 125 ); //Fireyellow
 set_color_profile_slot( 7, 7, 194, 212, 125 ); //Gun
+set_color_profile_slot( 7, 8, 130, 0, 0 ); //Firedark
 
 // posession
 set_color_profile_slot( 8, 0, 79, 61, 94 ); //Bones
@@ -115,6 +126,7 @@ set_color_profile_slot( 8, 4, 79, 61, 94 ); //Coat
 set_color_profile_slot( 8, 5, 54, 18, 104 ); //Fire
 set_color_profile_slot( 8, 6, 135, 139, 192 ); //Fireyellow
 set_color_profile_slot( 8, 7, 78, 23, 141 ); //Gun
+set_color_profile_slot( 8, 8, 130, 0, 0 ); //Firedark
 
 // blind obsession
 set_color_profile_slot( 9, 0, 67, 114, 150 ); //Bones
@@ -125,6 +137,7 @@ set_color_profile_slot( 9, 4, 41, 69, 87 ); //Coat
 set_color_profile_slot( 9, 5, 17, 166, 156 ); //Fire
 set_color_profile_slot( 9, 6, 136, 255, 130 ); //Fireyellow
 set_color_profile_slot( 9, 7, 17, 38, 51 ); //Gun
+set_color_profile_slot( 9, 8, 130, 0, 0 ); //Firedark
 
 // reap
 set_color_profile_slot( 10, 0, 170, 171, 167 ); //Bones
@@ -135,6 +148,7 @@ set_color_profile_slot( 10, 4, 115, 73, 25 ); //Coat
 set_color_profile_slot( 10, 5, 255, 127, 0 ); //Fire
 set_color_profile_slot( 10, 6, 255, 230, 0 ); //Fireyellow
 set_color_profile_slot( 10, 7, 170, 170, 170 ); //Gun
+set_color_profile_slot( 10, 8, 130, 0, 0 ); //Firedark
 
 // pyrrhic
 set_color_profile_slot( 11, 0, 132, 141, 145 ); //Bones
@@ -145,6 +159,7 @@ set_color_profile_slot( 11, 4, 94, 68, 38 ); //Coat
 set_color_profile_slot( 11, 5, 51, 59, 143 ); //Fire
 set_color_profile_slot( 11, 6, 119, 178, 212 ); //Fireyellow
 set_color_profile_slot( 11, 7, 177, 189, 196 ); //Gun
+set_color_profile_slot( 11, 8, 130, 0, 0 ); //Firedark
 
 // in the blood
 set_color_profile_slot( 12, 0, 171, 133, 133 ); //Bones
@@ -155,6 +170,7 @@ set_color_profile_slot( 12, 4, 164, 0, 0 ); //Coat
 set_color_profile_slot( 12, 5, 182, 1, 0 ); //Fire
 set_color_profile_slot( 12, 6, 180, 83, 18 ); //Fireyellow
 set_color_profile_slot( 12, 7, 212, 72, 55 ); //Gun
+set_color_profile_slot( 12, 8, 130, 0, 0 ); //Firedark
 
 // hunted
 set_color_profile_slot( 13, 0, 79, 79, 79 ); //Bones
@@ -165,10 +181,11 @@ set_color_profile_slot( 13, 4, 121, 32, 32 ); //Coat
 set_color_profile_slot( 13, 5, 255, 38, 38 ); //Fire
 set_color_profile_slot( 13, 6, 255, 0, 0 ); //Fireyellow
 set_color_profile_slot( 13, 7, 74, 62, 62 ); //Gun
+set_color_profile_slot( 13, 8, 130, 0, 0 ); //Firedark
 
 
 /* This is a comment used by that one RoA colors.gml generator tool to store palette data. You can safely keep it in your colors.gml if you plan to re-use the tool later, or safely remove it if you don't.
 === BEGIN JSON PALETTE ===
-{"formatversion":1,"data":[{"name":"Bones","colors":[{"r":221,"g":157,"b":136,"main":true},{"r":185,"g":108,"b":82},{"r":118,"g":58,"b":38}]},{"name":"Horns","colors":[{"r":39,"g":91,"b":117},{"r":83,"g":150,"b":184},{"r":136,"g":192,"b":219,"main":true}]},{"name":"Smog","colors":[{"r":43,"g":34,"b":34,"main":true},{"r":89,"g":78,"b":78},{"r":136,"g":120,"b":120}]},{"name":"Ash","colors":[{"r":32,"g":32,"b":32,"main":true}]},{"name":"Coat","colors":[{"r":106,"g":87,"b":65,"main":true},{"r":65,"g":53,"b":39}]},{"name":"Fire","colors":[{"r":255,"g":127,"b":0,"main":true}]},{"name":"Fireyellow","colors":[{"r":255,"g":230,"b":0,"main":true}]},{"name":"Gun","colors":[{"r":177,"g":189,"b":196,"main":true},{"r":95,"g":122,"b":140},{"r":233,"g":240,"b":245}]}]}
+{"formatversion":1,"data":[{"name":"Bones","colors":[{"r":221,"g":157,"b":136,"main":true},{"r":185,"g":108,"b":82},{"r":118,"g":58,"b":38}]},{"name":"Horns","colors":[{"r":39,"g":91,"b":117},{"r":83,"g":150,"b":184},{"r":136,"g":192,"b":219,"main":true}]},{"name":"Smog","colors":[{"r":43,"g":34,"b":34,"main":true},{"r":89,"g":78,"b":78},{"r":136,"g":120,"b":120}]},{"name":"Ash","colors":[{"r":32,"g":32,"b":32,"main":true}]},{"name":"Coat","colors":[{"r":106,"g":87,"b":65,"main":true},{"r":65,"g":53,"b":39}]},{"name":"Fire","colors":[{"r":255,"g":127,"b":0,"main":true}]},{"name":"Fireyellow","colors":[{"r":255,"g":230,"b":0,"main":true}]},{"name":"Gun","colors":[{"r":177,"g":189,"b":196,"main":true},{"r":95,"g":122,"b":140},{"r":233,"g":240,"b":245}]},{"name":"Firedark","colors":[{"r":130,"g":0,"b":0,"main":true}]}]}
 === END JSON PALETTE ===
 */
