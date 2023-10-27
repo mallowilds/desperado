@@ -23,10 +23,7 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
                 break;
             case 2:
                 if (window_timer < 40) frame = 3 + (window_timer/3)%2
-                else {
-                    frame = 5 + (window_timer-40)/2;
-                    print(string(window_timer) + " " + string(frame));
-                }
+                else frame = 5 + (window_timer-40)/2;
                 break;
             
         }

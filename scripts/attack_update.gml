@@ -19,6 +19,20 @@ switch (attack) {
             sound_play(sound_get("desp_click"))
         }
     break;
+    case AT_NSPECIAL:
+        if timer1 {
+            sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
+            //sound_play(sound_get("desp_whip"), 0, noone, 2, 1.05)
+            sound_play(sound_get("desp_shot"))
+            if (num_bullets > 0) num_bullets--; // Placeholder check 'till proper bullet checks are in
+        }
+        if (window == 3){
+            if (special_pressed) {
+                window = 1
+                window_timer = 0
+            }
+        }
+        break;
     case AT_USPECIAL:
         can_move = false;
         can_fast_fall = false;
@@ -62,20 +76,7 @@ switch (attack) {
             }
         }
 }
-// Sandbert code. Replace with your own.
-if (attack == AT_NSPECIAL) {
-    if timer1 {
-        sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
-        //sound_play(sound_get("desp_whip"), 0, noone, 2, 1.05)
-        sound_play(sound_get("desp_shot"))
-    }
-    if (window == 3){
-        if (special_pressed) {
-            window = 1
-            window_timer = 0
-        }
-    }
-}
+
 
 if (attack == AT_FSPECIAL) {
     if (window == 2){
