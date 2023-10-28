@@ -5,6 +5,23 @@ atk = my_hitboxID.attack
 hbox = my_hitboxID.hbox_num
 
 
+//#region Damage multiplier
+
+// Base amp
+var mult_damage_add = my_hitboxID.damage * (num_bullets*bullet_mult);
+take_damage(hit_player_obj.player, player, floor(mult_damage_add));
+
+// Buffer non-integer damage, apply buffer as needed
+hit_player_obj.u_mult_damage_buffer += mult_damage_add - floor(mult_damage_add);
+while (hit_player_obj.u_mult_damage_buffer >= 1) { // Shouldn't loop more than once, but just in case~
+    take_damage(hit_player_obj.player, player, 1);
+    hit_player_obj.u_mult_damage_buffer--;
+}
+
+//#endregion
+
+
+
 if atk == AT_FAIR && hbox != 4 {
     hit_player_obj.x = lerp(floor(hit_player_obj.x), x+10 * spr_dir, .4)
     hit_player_obj.y = lerp(floor(hit_player_obj.y), y-5, .4)

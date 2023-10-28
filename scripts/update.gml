@@ -28,32 +28,10 @@ if state == PS_WAVELAND && state_timer == 0 && !hitpause {
 
 }
 
-with (asset_get("pHitBox")){
-    if (player == other.player) {
-        damage = round(damage*other.damage_mult)
-    }
-}
 
-switch(bullets) {
-    case 0:
-        damage_mult = 1
-        break;
-    case 1:
-        damage_mult = 1.125
-        break;
-    case 2:
-        damage_mult = 1.25
-        break;
-    case 3:
-        damage_mult = 1.375
-        break;
-    case 4:
-        damage_mult = 1.50
-        break;
-    case 5:
-        damage_mult = 1.625
-        break;
-    case 6:
-        damage_mult = 1.75
-        break;
+// Reset damage buffer on enemy death
+with oPlayer {
+    if (state == PS_DEAD || state == PS_RESPAWN) {
+        u_mult_damage_buffer = 0;
+    }
 }

@@ -49,8 +49,11 @@
 
 
 // Character-specific assets
-num_bullets = 0;  // 0-6
-bullet_mult = 0.125 // multiplier per bullet. Constant value
+num_bullets = 0;                        // 0-6
+bullet_mult = 0.125;                    // multiplier per bullet. Constant value
+with oPlayer {
+    u_mult_damage_buffer = 0;             // buffer for fractional multiplier damage
+}
 
 
 
@@ -60,8 +63,6 @@ char_height = 70 // 36 – 74. Purely aesthetic. Used for centering things on th
 //Lightweight, slightly lower than average friction. Falls slowly.
 knockback_adj = 1.15 //.9 – 1.2. The multiplier to knockback dealt to you: 1 = default value higher values = lighter character lower values = heavier character
 
-damage_mult = 1
-bullets = 0
 // MOVEMENT
 
 // Ground Movement
