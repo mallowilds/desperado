@@ -10,13 +10,12 @@ if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || a
 
 switch (attack) {
     case AT_DSPECIAL:
-        if timer1 {
-            num_bullets++;
-            if num_bullets > 6 num_bullets = 0
-        }
         if window == 3 && window_timer == 1 && !hitpause {
             sound_stop(sound_get("desp_spin"))
             sound_play(sound_get("desp_click"))
+            
+            num_bullets++;
+            if num_bullets > 6 num_bullets = 0
         }
     break;
     case AT_NSPECIAL:
