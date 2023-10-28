@@ -5,7 +5,7 @@ atk = my_hitboxID.attack
 hbox = my_hitboxID.hbox_num
 
 
-//#region Damage multiplier
+//#region Damage multiplier & 4+ Bullet SFX
 
 // Base amp
 var mult_damage_add = my_hitboxID.damage * (num_bullets*bullet_mult);
@@ -18,7 +18,13 @@ while (hit_player_obj.u_mult_damage_buffer >= 1) { // Shouldn't loop more than o
     hit_player_obj.u_mult_damage_buffer--;
 }
 
+if (my_hitboxID.damage + mult_damage_add > 3 && num_bullets >= 4) {
+	sound_play(sound_get("desp_knock"));
+}
+
 //#endregion
+
+
 
 
 

@@ -3,17 +3,8 @@
 // Used to draw the character's hud.
 // The base location of their hud is available as `temp_x` and `temp_y`.
 
-/*desperado hud will show his revolver with the amount of bullets in it, up to 6. 
-/*sprite is desp_hud
 
-you can do this however you want, BUT the way i figured might be pretty simple to impliment would be to use article color slots with an empty article to link each bullet color to a slot and manually change them to either desperados Ash color, or the darkest color of his gun.
-If this is too complicated or annoying to impliment, let me know, or pitch a different way to do it, and i can try that. This is why the bullets are all different colors, though.
-When desperado spins his barrel, which he does before reloading an attack (will probably just be jab + dspecial, as well as a visual flare for fstrong), it should have the hud barrel spin (you can see the .ase file to see how it should generally work), 
-With the spinning being a set of 2 anim frames that repeat every 8 or so in game frames.
-When desperado shoots the gun (uses nspecial), it should play the Shoot anim (which isnt finished btw lol), for each bullet unloaded.
-*/
-
-// Anim frame management
+// Gun anim frame management
 var frame = 0;
 if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
     if (attack == AT_DSPECIAL) {
@@ -36,18 +27,25 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
 }
 
 
-
-// Draw
-var my_color = get_player_color(player);
+// Draw gun
+// TODO: fix outline color for GB alt, add color processing on 6 bullets
+var player_color = get_player_color(player);
+var gun_sprite = sprite_get("desp_hud");
 
 for (var i = 5; i >= num_bullets; i--) {
-    set_article_color_slot(i, floor(get_color_profile_slot_r(my_color, 7)*0.75), floor(get_color_profile_slot_g(my_color, 7)*0.75), floor(get_color_profile_slot_b(my_color, 7)*0.75));
+    set_article_color_slot(i, floor(get_color_profile_slot_r(player_color, 7)*0.75), floor(get_color_profile_slot_g(player_color, 7)*0.75), floor(get_color_profile_slot_b(player_color, 7)*0.75));
 }
 
 for (var i = 0; i < num_bullets; i++) {
-    set_article_color_slot(i, get_color_profile_slot_r(my_color, 3), get_color_profile_slot_g(my_color, 3), get_color_profile_slot_b(my_color, 3));
+    set_article_color_slot(i, get_color_profile_slot_r(player_color, 3), get_color_profile_slot_g(player_color, 3), get_color_profile_slot_b(player_color, 3));
 }
 
 shader_start();
-draw_sprite(sprite_get("desp_hud"), frame, temp_x, temp_y-98);
+draw_sprite(gun_sprite, frame, temp_x, temp_y-98);
 shader_end();
+
+
+// Reset article color slots
+for (var i = 0; i <= 5; i++) {
+    set_article_color_slot(i, get_color_profile_slot_r(player_color, i), get_color_profile_slot_g(player_color, i), get_color_profile_slot_b(player_color, i));
+}

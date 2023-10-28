@@ -6,7 +6,7 @@
 
 You can have up to 6 bullets, which have stacking effects on damage. I have the basic damage mult setup, but a few things need to be added. 
 -At 4+  bullets, i want there to be smoke particles that display around desperado. i still need to make these so dont worry about them rn
--Additionally, while at 4+ bullets, all attacks that deal more than 3% should layer a sound effect on top of the normal hit (Gonna change, for now use sound_get("desp_knock")
+-Additionally, while at 4+ bullets, all attacks that deal more than 3% should layer a sound effect on top of the normal hit (Gonna change, for now use sound_get("desp_knock") [DONE]
 -At 6 bullets, the outline should gradient from black to the 'FireOutline' color, the last extra slot. If possible. If not just use the default color (130, 0, 0)
 //i still need to update colors.gml with the unique fireoutline coloirs most of them are red rn, am lazy
 -When nspecial is used, each bullet is fired and removed.
