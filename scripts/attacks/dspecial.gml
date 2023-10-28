@@ -31,7 +31,7 @@ make_window(AT_DSPECIAL, 1, //start
 
 make_window(AT_DSPECIAL, 2, //loop
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 40,
+    AG_WINDOW_LENGTH, 60,
     AG_WINDOW_ANIM_FRAMES, 4,
     AG_WINDOW_ANIM_FRAME_START, 2,
 

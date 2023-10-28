@@ -36,6 +36,10 @@ if atk == AT_FAIR && hbox != 4 {
 if atk == AT_FAIR && hbox == 4 {
 	sound_play(sound_get("desp_cast_short"), 0, noone, 0.9, 1)
 }
+if atk == AT_UTILT {
+	//sound_play(sound_get("desp_cast_short"), 0, noone, 0.9, 1)
+}
+
 with hit_fx_obj {
 	if player_id == other.id {
         if hit_fx == other.hfx_bone_large {

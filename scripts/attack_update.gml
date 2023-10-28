@@ -10,9 +10,13 @@ if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || a
 
 switch (attack) {
     case AT_DSPECIAL:
+        if window == 2 && window_timer == 1 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+            sound_play(sound_get("desp_whisper"))
+        }
         if window == 3 && window_timer == 1 && !hitpause {
             sound_stop(sound_get("desp_spin"))
             sound_play(sound_get("desp_click"))
+            //sound_stop(sound_get("desp_whisper"))
             
             num_bullets++;
             if num_bullets > 6 num_bullets = 0
@@ -95,3 +99,12 @@ if (attack == AT_DSPECIAL){
     can_fast_fall = false
     can_move = false
 }
+
+// #region vvv LIBRARY DEFINES AND MACROS vvv
+// DANGER File below this point will be overwritten! Generated defines and macros below.
+// Write NO-INJECT in a comment above this area to disable injection.
+#define window_time_is(frame) // Version 0
+    // Returns if the current window_timer matches the frame AND the attack is not in hitpause
+    return window_timer == frame and !hitpause
+// DANGER: Write your code ABOVE the LIBRARY DEFINES AND MACROS header or it will be overwritten!
+// #endregion

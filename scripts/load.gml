@@ -55,6 +55,7 @@ sprite_change_offset("nair",150, 194)
 sprite_change_offset("ustrong", 150, 194)
 sprite_change_offset("parry", 150, 194)
 sprite_change_offset("dspecial", 150, 194)
+sprite_change_offset("utilt",150, 194)
 
 
 
@@ -64,7 +65,6 @@ sprite_change_offset("land", 150, 194)
 
 
 sprite_change_offset("ftilt", 64, 94)
-sprite_change_offset("utilt", 64, 94)
 sprite_change_offset("uair", 64, 94)
 sprite_change_offset("dair", 64, 94)
 sprite_change_offset("fstrong", 64, 94)
