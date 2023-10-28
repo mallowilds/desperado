@@ -59,7 +59,7 @@ make_hitbox(AT_FAIR, 1,
     HG_VISUAL_EFFECT, 301,
     HG_VISUAL_EFFECT_X_OFFSET, 32,
     HG_VISUAL_EFFECT_Y_OFFSET, 5,
-    //HG_HIT_SFX, asset_get("sfx_blow_weak1"),
+    HG_HIT_SFX, asset_get("sfx_blow_weak1"),
 )
 
 make_hitbox(AT_FAIR, 2,
@@ -87,7 +87,7 @@ make_hitbox(AT_FAIR, 2,
     HG_VISUAL_EFFECT, 301,
     HG_VISUAL_EFFECT_X_OFFSET, 32,
     HG_VISUAL_EFFECT_Y_OFFSET, 5,
-    //HG_HIT_SFX, asset_get("sfx_blow_weak1"),
+    HG_HIT_SFX, asset_get("sfx_blow_weak1"),
 )
 
 make_hitbox(AT_FAIR, 3,
@@ -114,7 +114,7 @@ make_hitbox(AT_FAIR, 3,
     HG_VISUAL_EFFECT, 301,
     HG_VISUAL_EFFECT_X_OFFSET, 32,
     HG_VISUAL_EFFECT_Y_OFFSET, 5,
-    //HG_HIT_SFX, asset_get("sfx_blow_weak1"),
+    HG_HIT_SFX, asset_get("sfx_blow_weak1"),
 )
 make_hitbox(AT_FAIR, 4,
     HG_WINDOW, 2,
