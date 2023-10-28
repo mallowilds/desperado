@@ -19,9 +19,9 @@ alt_name[12]  = "In the Blood";
 alt_name[13]  = "Hunted";
 
 
-bulletcoordmain = [24, 436]
-bulletcoordbe = [26, 426]
-bulletcoordab = [26, 446]
+bulletcoordmain = [10, 120]
+bulletcoordbe = [12, 110]
+bulletcoordab = [12, 130]
 
 bullet1cur = [bulletcoordmain[0], bulletcoordmain[1]]
 

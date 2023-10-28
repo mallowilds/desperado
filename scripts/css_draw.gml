@@ -15,13 +15,12 @@ draw_sprite_ext(sprite_get("bullet"), 0, bulletcoordab[0], bulletcoordab[1], 1, 
 */
 
 //main
-draw_sprite_tiled_area(sprite_get("bulletmid"), bsubimg, bulletcoordmain[0], bulletcoordmain[1], bulletcoordmain[0],  bulletcoordmain[1], bulletcoordmain[0] + bulletiple + 108, bulletcoordmain[1] + 38)
-draw_sprite_ext(sprite_get("bullet_tip"), bsubimg, bulletcoordmain[0] + bulletiple, bulletcoordmain[1], 1, 1, 0, c_white, 1)
+draw_sprite_tiled_area(sprite_get("bulletmid"), bsubimg, x+bulletcoordmain[0], y+bulletcoordmain[1], x+bulletcoordmain[0], y+bulletcoordmain[1], x + bulletcoordmain[0] + bulletiple + 108, y + bulletcoordmain[1] + 38)
+draw_sprite_ext(sprite_get("bullet_tip"), bsubimg, x+bulletcoordmain[0] + bulletiple, y+bulletcoordmain[1], 1, 1, 0, c_white, 1)
 
-
-draw_text_transformed_color(bulletcoordmain[0] + 2, bulletcoordmain[1] + 12, alt_name[get_player_color(player)], 1, 1, 0, tcolor1, tcolor1, tcolor1, tcolor1, alpha_timer)
-draw_text_transformed_color(bulletcoordmain[0] + 4, bulletcoordmain[1] + 12, alt_name[get_player_color(player)], 1, 1, 0, tcolor2, tcolor2, tcolor2, tcolor2, alpha_timer)
-draw_sprite_ext(sprite_get("cssicons"), get_player_color(player), bulletcoordmain[0]+ bulletiple + 70, bulletcoordmain[1] - 2, 1, 1, 0, c_white, alpha_timer)
+draw_text_transformed_color(x + bulletcoordmain[0] + 2, y + bulletcoordmain[1] + 12, alt_name[get_player_color(player)], 1, 1, 0, tcolor1, tcolor1, tcolor1, tcolor1, alpha_timer)
+draw_text_transformed_color(x + bulletcoordmain[0] + 4, y + bulletcoordmain[1] + 12, alt_name[get_player_color(player)], 1, 1, 0, tcolor2, tcolor2, tcolor2, tcolor2, alpha_timer)
+draw_sprite_ext(sprite_get("cssicons"), get_player_color(player), x + bulletcoordmain[0]+ bulletiple + 70, y + bulletcoordmain[1] - 2, 1, 1, 0, c_white, alpha_timer)
 
 #define draw_sprite_tiled_area(sprite,subimg,x,y,x1,y1,x2,y2)
     //
