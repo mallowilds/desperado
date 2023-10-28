@@ -41,11 +41,11 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
 var my_color = get_player_color(player);
 
 for (var i = 5; i >= num_bullets; i--) {
-    set_article_color_slot(i, 0, 0, 0);
+    set_article_color_slot(i, floor(get_color_profile_slot_r(my_color, 7)*0.75), floor(get_color_profile_slot_g(my_color, 7)*0.75), floor(get_color_profile_slot_b(my_color, 7)*0.75));
 }
 
 for (var i = 0; i < num_bullets; i++) {
-    set_article_color_slot(i, floor(get_color_profile_slot_r(my_color, 7)*1.4), floor(get_color_profile_slot_g(my_color, 7)*1.4), floor(get_color_profile_slot_b(my_color, 7)*1.4));
+    set_article_color_slot(i, get_color_profile_slot_r(my_color, 3), get_color_profile_slot_g(my_color, 3), get_color_profile_slot_b(my_color, 3));
 }
 
 shader_start();
