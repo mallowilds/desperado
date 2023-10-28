@@ -40,8 +40,7 @@
 
 
 //todo
-//finish movement
-//finish normals
+
 //finish moveset
 //finish specials
 //fix the stupid bullet css issue (maybe shear can do this. the hud elements dont move for the player slot so if ur in 2, 3, 4, it looks wrong)

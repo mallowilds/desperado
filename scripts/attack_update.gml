@@ -14,7 +14,7 @@ switch (attack) {
             num_bullets++;
             if num_bullets > 6 num_bullets = 0
         }
-        if window == 2 && window_timer == 45 && !hitpause {
+        if window == 3 && window_timer == 1 && !hitpause {
             sound_stop(sound_get("desp_spin"))
             sound_play(sound_get("desp_click"))
         }

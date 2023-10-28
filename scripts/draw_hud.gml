@@ -18,11 +18,11 @@ var frame = 0;
 if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
     if (attack == AT_DSPECIAL) {
         switch window {
-            case 1:
+            case 2:
                 frame = floor(2*window_timer/get_window_value(attack, window, AG_WINDOW_LENGTH));
                 break;
-            case 2:
-                if (window_timer < 40) frame = 3 + (window_timer/3)%2
+            case 3:
+                if (window_timer < 1) frame = 3 + (window_timer/3)%2
                 else frame = 5 + (window_timer-40)/2;
                 break;
             

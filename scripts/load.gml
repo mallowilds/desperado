@@ -54,6 +54,7 @@ sprite_change_offset("landinglag",150, 194)
 sprite_change_offset("nair",150, 194)
 sprite_change_offset("ustrong", 150, 194)
 sprite_change_offset("parry", 150, 194)
+sprite_change_offset("dspecial", 150, 194)
 
 
 
@@ -70,7 +71,6 @@ sprite_change_offset("fstrong", 64, 94)
 sprite_change_offset("dstrong", 64, 94)
 sprite_change_offset("nspecial", 64, 94)
 sprite_change_offset("fspecial", 64, 94)
-sprite_change_offset("dspecial", 64, 94)
 sprite_change_offset("taunt", 64, 94)
 
 sprite_change_offset("plat", 64, 94)

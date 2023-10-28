@@ -11,17 +11,17 @@ anim wise, after the startup i want the spinning animation (4 frames) to loop 3 
 make_attack(AT_DSPECIAL,
     AG_CATEGORY, 2,
     AG_SPRITE, sprite_get("dspecial"),
-    AG_NUM_WINDOWS, 2,
+    AG_NUM_WINDOWS, 3,
     AG_HAS_LANDING_LAG, 4,
     AG_OFF_LEDGE, 1,
     AG_AIR_SPRITE, sprite_get("dspecial"),
     AG_HURTBOX_SPRITE, sprite_get("dspecial_hurt"),
 )
 
-make_window(AT_DSPECIAL, 1,
+make_window(AT_DSPECIAL, 1, //start
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
-    AG_WINDOW_ANIM_FRAMES, 1,
+    AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_HSPEED_TYPE, 1,
     AG_WINDOW_VSPEED_TYPE, 1,
     AG_WINDOW_HAS_SFX, 1,
@@ -29,10 +29,20 @@ make_window(AT_DSPECIAL, 1,
     AG_WINDOW_SFX, sound_get("desp_spin"),
 )
 
-make_window(AT_DSPECIAL, 2,
+make_window(AT_DSPECIAL, 2, //loop
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 50,
-    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_LENGTH, 40,
+    AG_WINDOW_ANIM_FRAMES, 4,
+    AG_WINDOW_ANIM_FRAME_START, 2,
+
+)
+
+make_window(AT_DSPECIAL, 3, //loop
+    AG_WINDOW_TYPE, 1,
+    AG_WINDOW_LENGTH, 20,
+    AG_WINDOW_ANIM_FRAMES, 4,
+    AG_WINDOW_ANIM_FRAME_START, 6,
+
 )
 
 set_num_hitboxes(AT_DSPECIAL, 0);
