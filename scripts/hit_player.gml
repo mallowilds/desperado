@@ -13,9 +13,9 @@ take_damage(hit_player_obj.player, player, floor(mult_damage_add));
 
 // Buffer non-integer damage, apply buffer as needed
 hit_player_obj.u_mult_damage_buffer += mult_damage_add - floor(mult_damage_add);
-while (hit_player_obj.u_mult_damage_buffer >= 1) { // Shouldn't loop more than once, but just in case~
-    take_damage(hit_player_obj.player, player, 1);
-    hit_player_obj.u_mult_damage_buffer--;
+if (hit_player_obj.u_mult_damage_buffer >= 1) {
+    take_damage(hit_player_obj.player, player, floor(hit_player_obj.u_mult_damage_buffer));
+    hit_player_obj.u_mult_damage_buffer -= floor(hit_player_obj.u_mult_damage_buffer);
 }
 
 if (my_hitboxID.damage + mult_damage_add > 3 && num_bullets >= 4) {

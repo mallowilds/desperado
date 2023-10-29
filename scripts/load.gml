@@ -57,7 +57,9 @@ sprite_change_offset("parry", 150, 194)
 sprite_change_offset("dspecial", 150, 194)
 sprite_change_offset("utilt",150, 194)
 
-
+sprite_change_offset("fire1", 10, 10)
+sprite_change_offset("fire2", 10, 10)
+sprite_change_offset("fire3", 10, 10)
 
 //not done
 sprite_change_offset("pratfall", 64, 94)

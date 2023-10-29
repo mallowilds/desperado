@@ -16,17 +16,18 @@ make_attack(AT_DSPECIAL,
     AG_OFF_LEDGE, 1,
     AG_AIR_SPRITE, sprite_get("dspecial"),
     AG_HURTBOX_SPRITE, sprite_get("dspecial_hurt"),
+    AG_USES_CUSTOM_GRAVITY, 1, // Tampered with in attack_update
+    AG_OFF_LEDGE, 0,
 )
 
 make_window(AT_DSPECIAL, 1, //start
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
     AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_HSPEED_TYPE, 1,
-    AG_WINDOW_VSPEED_TYPE, 1,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX_FRAME, 4,
     AG_WINDOW_SFX, sound_get("desp_spin"),
+    AG_WINDOW_CUSTOM_GRAVITY, 0.3,
 )
 
 make_window(AT_DSPECIAL, 2, //loop
@@ -34,7 +35,7 @@ make_window(AT_DSPECIAL, 2, //loop
     AG_WINDOW_LENGTH, 60,
     AG_WINDOW_ANIM_FRAMES, 8,
     AG_WINDOW_ANIM_FRAME_START, 2,
-
+    AG_WINDOW_CUSTOM_GRAVITY, 0.3,
 )
 
 make_window(AT_DSPECIAL, 3, //loop
@@ -42,7 +43,7 @@ make_window(AT_DSPECIAL, 3, //loop
     AG_WINDOW_LENGTH, 20,
     AG_WINDOW_ANIM_FRAMES, 4,
     AG_WINDOW_ANIM_FRAME_START, 10,
-
+    AG_WINDOW_CUSTOM_GRAVITY, 0.3,
 )
 
 set_num_hitboxes(AT_DSPECIAL, 0);
