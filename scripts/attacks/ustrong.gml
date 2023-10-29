@@ -38,6 +38,7 @@ make_window(AT_USTRONG, 4,
 set_num_hitboxes(AT_USTRONG, 2)
 
 make_hitbox(AT_USTRONG, 1,
+    HG_HITBOX_TYPE, 0,
     HG_WINDOW, 3,
     HG_LIFETIME, 3,
     HG_HITBOX_GROUP, 1,
@@ -63,6 +64,7 @@ make_hitbox(AT_USTRONG, 1,
 
 
 make_hitbox(AT_USTRONG, 2,
+    HG_HITBOX_TYPE, 0,
     HG_WINDOW, 3,
     HG_LIFETIME, 3,
     HG_HITBOX_GROUP, 1,

@@ -16,11 +16,11 @@ switch (attack) {
         hsp = clamp (hsp, -2.5, 2.5);
         can_fast_fall = false;
         
-        if window == 1 && window_timer == 1 {
+        if window == 1 && window_timer == 1 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
             if (vsp > 0) vsp = 0;
         }
         
-        if window == 2 && window_timer == 1 && !hitpause { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+        if window == 2 && window_timer == 1 && !hitpause {
             sound_play(sound_get("desp_whisper"))
         }
         
@@ -33,7 +33,7 @@ switch (attack) {
             else create_hitbox(AT_DSPECIAL, 1, x-(4*spr_dir), y-6); // Wasted bullet visual
         }
         
-        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH)) {
+        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH)) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
             window = 1;
             window_timer = 0;
         }
