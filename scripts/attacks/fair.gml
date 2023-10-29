@@ -36,7 +36,7 @@ make_window(AT_FAIR, 3,
 set_num_hitboxes(AT_FAIR, 4)
 
 make_hitbox(AT_FAIR, 1,
-    HG_HITBOX_TYPE, 0,
+    HG_HITBOX_TYPE, 1,
     HG_WINDOW, 2,
     HG_WINDOW_CREATION_FRAME, 0,
     HG_LIFETIME, 3,
@@ -64,7 +64,7 @@ make_hitbox(AT_FAIR, 1,
 )
 
 make_hitbox(AT_FAIR, 2,
-    HG_HITBOX_TYPE, 0,
+    HG_HITBOX_TYPE, 1,
     HG_WINDOW, 2,
     HG_WINDOW_CREATION_FRAME, 3,
 
@@ -84,7 +84,7 @@ make_hitbox(AT_FAIR, 2,
     HG_KNOCKBACK_SCALING, 0,
     HG_BASE_HITPAUSE, 2,
     HG_HITPAUSE_SCALING, 0,
-    HG_HITSTUN_MULTIPLIER, 0.6,
+    HG_HITSTUN_MULTIPLIER, .9,
 
     HG_VISUAL_EFFECT, 301,
     HG_VISUAL_EFFECT_X_OFFSET, 32,
@@ -93,7 +93,7 @@ make_hitbox(AT_FAIR, 2,
 )
 
 make_hitbox(AT_FAIR, 3,
-    HG_HITBOX_TYPE, 0,
+    HG_HITBOX_TYPE, 1,
     HG_WINDOW, 2,
     HG_WINDOW_CREATION_FRAME, 6,
     HG_LIFETIME, 3,
@@ -112,7 +112,7 @@ make_hitbox(AT_FAIR, 3,
     HG_KNOCKBACK_SCALING, 0,
     HG_BASE_HITPAUSE, 2,
     HG_HITPAUSE_SCALING, 0,
-    HG_HITSTUN_MULTIPLIER, 0.6,
+    HG_HITSTUN_MULTIPLIER, 0.9,
 
     HG_VISUAL_EFFECT, 301,
     HG_VISUAL_EFFECT_X_OFFSET, 32,
@@ -120,7 +120,7 @@ make_hitbox(AT_FAIR, 3,
     HG_HIT_SFX, asset_get("sfx_blow_weak1"),
 )
 make_hitbox(AT_FAIR, 4,
-    HG_HITBOX_TYPE, 0,
+    HG_HITBOX_TYPE, 1,
     HG_WINDOW, 2,
     HG_WINDOW_CREATION_FRAME, 9,
     HG_LIFETIME, 3,

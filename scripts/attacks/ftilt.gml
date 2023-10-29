@@ -2,67 +2,64 @@
 
 make_attack(AT_FTILT, 
     AG_SPRITE, sprite_get("ftilt"),
-    AG_NUM_WINDOWS, 4,
+    AG_NUM_WINDOWS, 3,
     AG_HURTBOX_SPRITE, sprite_get("ftilt_hurt"),
 )
 
 make_window(AT_FTILT, 1,
-    AG_WINDOW_LENGTH, 8,
+    AG_WINDOW_LENGTH, 7,
     AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_HAS_SFX, 1,
+    AG_WINDOW_SFX_FRAME, 6,
+    AG_WINDOW_SFX, asset_get("sfx_swipe_medium2"),
+    AG_WINDOW_HSPEED, 2,
+    AG_WINDOW_HAS_CUSTOM_FRICTION, 1,
+    AG_WINDOW_CUSTOM_GROUND_FRICTION, 0.05,
+    AG_WINDOW_CUSTOM_AIR_FRICTION, 0.05,
 )
 
 make_window(AT_FTILT, 2,
-    AG_WINDOW_LENGTH, 1,
-    AG_WINDOW_HSPEED, 1, 
+    AG_WINDOW_LENGTH, 3,
+    //AG_WINDOW_HSPEED, 1, 
     AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 3,
+    AG_WINDOW_ANIM_FRAME_START, 2,
 
-    AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, asset_get("sfx_swipe_medium2"),
 )
+
 
 make_window(AT_FTILT, 3,
-    AG_WINDOW_LENGTH, 2,
+    AG_WINDOW_LENGTH, 11,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 3,
-)
-
-make_window(AT_FTILT, 4,
-    AG_WINDOW_LENGTH, 7,
-    AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 4,
     AG_WINDOW_HAS_WHIFFLAG, 4,
 )
 
 set_num_hitboxes(AT_FTILT, 2)
 
 make_hitbox(AT_FTILT, 1,
+    HG_HITBOX_TYPE, 1,
     HG_WINDOW, 2,
     HG_LIFETIME, 1,
 
-    HG_HITBOX_X, 50,
-    HG_HITBOX_Y, -35,
-    HG_WIDTH, 80,
-    HG_HEIGHT, 50,
+    HG_HITBOX_X, 66,
+    HG_HITBOX_Y, -27,
+    HG_WIDTH, 102,
+    HG_HEIGHT, 61,
     HG_SHAPE, 1,
 
     HG_PRIORITY, 1,
     HG_HITBOX_GROUP, -1,
-    HG_DAMAGE, 5,
-    HG_ANGLE, 361,
-    HG_BASE_KNOCKBACK, 4,
-    HG_BASE_HITPAUSE, 10,
-    HG_HITPAUSE_SCALING, 1,
-
-    HG_VISUAL_EFFECT, 1,
-    HG_VISUAL_EFFECT_X_OFFSET, 0,
-    HG_VISUAL_EFFECT_Y_OFFSET, 20,
-    HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
-    HG_EXTRA_CAMERA_SHAKE, 2,
-    HG_IGNORES_PROJECTILES, 1,
+    HG_DAMAGE, 7,
+    HG_ANGLE, 45,
+    HG_ANGLE_FLIPPER, 6,
+    HG_BASE_KNOCKBACK, 7,
+    HG_KNOCKBACK_SCALING, .5,
+    HG_BASE_HITPAUSE, 7,
+    HG_HITPAUSE_SCALING, .6,
+    HG_HIT_SFX, asset_get("sfx_blow_medium2"),
 )
 
-
+/*
 make_hitbox(AT_FTILT, 2,
     HG_WINDOW, 3,
     HG_LIFETIME, 2,
@@ -89,7 +86,7 @@ make_hitbox(AT_FTILT, 2,
     HG_HIT_SFX, asset_get("sfx_blow_medium2"),
     HG_EXTRA_CAMERA_SHAKE, 2,
     HG_IGNORES_PROJECTILES, 1,
-)
+)*/
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
