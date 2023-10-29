@@ -28,8 +28,8 @@ switch (attack) {
             sound_play(sound_get("desp_click"))
             //sound_stop(sound_get("desp_whisper"))
             
-            num_bullets++;
-            if num_bullets > 6 num_bullets = 0
+            if (num_bullets < 6) num_bullets++;
+            else create_hitbox(AT_DSPECIAL, 1, x-(8*spr_dir), y-6); // Wasted bullet visual
         }
         
         if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH)) {
