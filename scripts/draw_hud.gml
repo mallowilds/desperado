@@ -4,6 +4,9 @@
 // The base location of their hud is available as `temp_x` and `temp_y`.
 
 
+if ("num_bullets" not in self) exit; // Cull error messages on reload
+
+
 // Gun anim frame management
 var frame = 0;
 if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {

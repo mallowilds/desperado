@@ -9,19 +9,36 @@ if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || a
 }
 
 switch (attack) {
+    
     case AT_DSPECIAL:
-        if window == 2 && window_timer == 1 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+        set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
+        if (vsp > 3) vsp = 3;
+        hsp = clamp (hsp, -4, 4);
+        
+        if window == 1 && window_timer == 1 {
+            if (vsp > 0) vsp = 0;
+        }
+        
+        if window == 2 && window_timer == 1 && !hitpause { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
             sound_play(sound_get("desp_whisper"))
         }
+        
         if window == 3 && window_timer == 1 && !hitpause {
             sound_stop(sound_get("desp_spin"))
             sound_play(sound_get("desp_click"))
             //sound_stop(sound_get("desp_whisper"))
             
-            num_bullets++;
-            if num_bullets > 6 num_bullets = 0
+            if (num_bullets < 6) num_bullets++;
+            else create_hitbox(AT_DSPECIAL, 1, x-(8*spr_dir), y-6); // Wasted bullet visual
         }
+        
+        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH)) {
+            window = 1;
+            window_timer = 0;
+        }
+        
     break;
+    
     case AT_NSPECIAL:
         if timer1 {
             sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)

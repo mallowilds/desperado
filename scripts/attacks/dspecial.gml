@@ -16,17 +16,18 @@ make_attack(AT_DSPECIAL,
     AG_OFF_LEDGE, 1,
     AG_AIR_SPRITE, sprite_get("dspecial"),
     AG_HURTBOX_SPRITE, sprite_get("dspecial_hurt"),
+    AG_USES_CUSTOM_GRAVITY, 1, // Tampered with in attack_update
+    AG_OFF_LEDGE, 0,
 )
 
 make_window(AT_DSPECIAL, 1, //start
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
     AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_HSPEED_TYPE, 1,
-    AG_WINDOW_VSPEED_TYPE, 1,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX_FRAME, 4,
     AG_WINDOW_SFX, sound_get("desp_spin"),
+    AG_WINDOW_CUSTOM_GRAVITY, 0.3,
 )
 
 make_window(AT_DSPECIAL, 2, //loop
@@ -34,7 +35,7 @@ make_window(AT_DSPECIAL, 2, //loop
     AG_WINDOW_LENGTH, 60,
     AG_WINDOW_ANIM_FRAMES, 8,
     AG_WINDOW_ANIM_FRAME_START, 2,
-
+    AG_WINDOW_CUSTOM_GRAVITY, 0.3,
 )
 
 make_window(AT_DSPECIAL, 3, //loop
@@ -42,29 +43,30 @@ make_window(AT_DSPECIAL, 3, //loop
     AG_WINDOW_LENGTH, 20,
     AG_WINDOW_ANIM_FRAMES, 4,
     AG_WINDOW_ANIM_FRAME_START, 10,
-
+    AG_WINDOW_CUSTOM_GRAVITY, 0.3,
 )
 
 set_num_hitboxes(AT_DSPECIAL, 0);
 
 make_hitbox(AT_DSPECIAL, 1,
-    HG_PARENT_HITBOX, 1,
-    HG_HITBOX_TYPE, 1,
-    HG_WINDOW, 1,
-    HG_WINDOW_CREATION_FRAME, 1,
-    HG_LIFETIME, 3,
-    HG_HITBOX_Y, -30,
-    HG_WIDTH, 80,
-    HG_HEIGHT, 80,
-    HG_PRIORITY, 1,
-    HG_DAMAGE, 4,
-    HG_BASE_KNOCKBACK, 10,
-    HG_KNOCKBACK_SCALING, .1,
-    HG_BASE_HITPAUSE, 3,
-    HG_VISUAL_EFFECT, 20,
-    HG_HIT_SFX, asset_get("sfx_absa_singlezap1"),
-    HG_ANGLE_FLIPPER, 6,
-    HG_TECHABLE, 1,
+  HG_HITBOX_TYPE, 2,
+  HG_LIFETIME, 120,
+  HG_PROJECTILE_SPRITE, sprite_get("bair_proj"),
+  HG_PROJECTILE_MASK, sprite_get("bair_proj"),
+  HG_PROJECTILE_GRAVITY, 0.35,
+  HG_PROJECTILE_VSPEED, -4,
+  HG_PROJECTILE_HSPEED, -2,
+  HG_PROJECTILE_AIR_FRICTION, 0.02,
+
+  HG_WIDTH, 1,
+  HG_HEIGHT, 1,
+  HG_PRIORITY, 0,
+  
+  HG_DAMAGE, 0,
+  HG_ANGLE, 0,
+  HG_BASE_KNOCKBACK, 1,
+  HG_KNOCKBACK_SCALING, .1,
+  
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

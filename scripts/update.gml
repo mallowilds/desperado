@@ -29,9 +29,50 @@ if state == PS_WAVELAND && state_timer == 0 && !hitpause {
 }
 
 
-// Reset damage buffer on enemy death
+//#region Flame management (drawn in pre_draw.gml, added by update/attack_update.gml)
+for (var i = 0; i < ds_list_size(sparkle_list); i++) {
+    var sp = ds_list_find_value(sparkle_list, i);
+    sp.sp_lifetime++;
+    if (sp.sp_lifetime >= sp.sp_max_lifetime) {
+        ds_list_remove(sparkle_list, sp);
+        i--;
+    }
+}
+
+if (num_bullets >= 4 && get_gameplay_time() % 7 == 0) spawn_sparkle(get_gameplay_time()%17, get_gameplay_time()%37);
+//#endregion
+
+
+//#region Reset fractional damage on enemy death
 with oPlayer {
-    if (state == PS_DEAD || state == PS_RESPAWN) {
+    if (!clone && (state == PS_DEAD || state == PS_RESPAWN)) {
         u_mult_damage_buffer = 0;
     }
 }
+//#endregion
+
+
+
+#define spawn_sparkle(seed1, seed2)
+    var sparkle_type = random_func_2(seed1, 3, true);
+    if (sparkle_type == 0) spawn_particle_random("fire1", 10, seed2);
+    else if (sparkle_type == 1) spawn_particle_random("fire2", 15, seed2);
+    else if (sparkle_type == 2) spawn_particle_random("fire3", 15, seed2);
+    
+#define spawn_particle_random(in_sprite, lifetime, seed)
+    var min_rad = 34;
+    var rad_range = 14;
+    var y_offset = -40;
+    var _rot = random_func_2(seed, 240, false) - 60;
+    var _dist = min_rad + random_func_2(seed+1, rad_range, false);
+    var _x = x + lengthdir_x(_dist, _rot);
+    var _y = y + lengthdir_y(_dist, _rot) + y_offset;
+    var sparkle = {
+        sp_x : _x,
+        sp_y : _y,
+        sp_sprite_index : sprite_get(in_sprite),
+        sp_max_lifetime : lifetime,
+        sp_lifetime : 0,
+        sp_spr_dir : spr_dir
+    };
+    ds_list_add(sparkle_list, sparkle);

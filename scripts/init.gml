@@ -43,7 +43,6 @@
 
 //finish moveset
 //finish specials
-//fix the stupid bullet css issue (maybe shear can do this. the hud elements dont move for the player slot so if ur in 2, 3, 4, it looks wrong)
 //put in extra stuff (portrait preview)
 //trailer
 
@@ -52,8 +51,11 @@
 num_bullets = 0;                        // 0-6
 bullet_mult = 0.125;                    // multiplier per bullet. Constant value
 with oPlayer {
-    u_mult_damage_buffer = 0;             // buffer for fractional multiplier damage
+    u_mult_damage_buffer = 0;           // buffer for fractional multiplier damage
 }
+
+sparkle_list = ds_list_create();        // particle list. implementation is taken from aur, hence the name
+
 
 
 
