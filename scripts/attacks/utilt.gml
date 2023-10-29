@@ -7,11 +7,11 @@ make_attack(AT_UTILT,
 )
 
 make_window(AT_UTILT, 1,
-    AG_WINDOW_LENGTH, 8,
+    AG_WINDOW_LENGTH, 6,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_weak1"),
-    AG_WINDOW_SFX_FRAME, 7,
+    AG_WINDOW_SFX_FRAME, 5,
 )
 
 make_window(AT_UTILT, 2,
@@ -102,8 +102,8 @@ make_hitbox(AT_UTILT, 3,
     
     HG_PRIORITY, 1,
     HG_DAMAGE, 4,
-    HG_BASE_KNOCKBACK, 8,
-    HG_KNOCKBACK_SCALING, .6,
+    HG_BASE_KNOCKBACK, 7,
+    HG_KNOCKBACK_SCALING, .5,
     HG_ANGLE, 85,
     HG_BASE_HITPAUSE, 6,
     HG_HITPAUSE_SCALING, .5,

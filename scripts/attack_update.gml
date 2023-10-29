@@ -45,6 +45,7 @@ switch (attack) {
         move_cooldown[AT_DTILT] = 1 
     break;
     case AT_FAIR:
+
         if timer1 {
            sound_play(sound_get("desp_breathsmall"))
         }
@@ -90,14 +91,6 @@ if (attack == AT_FSPECIAL) {
         }
     }
     can_fast_fall = false
-}
-
-if (attack == AT_DSPECIAL){
-    if (window == 2 && !was_parried){
-        can_jump = true
-    }
-    can_fast_fall = false
-    can_move = false
 }
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
