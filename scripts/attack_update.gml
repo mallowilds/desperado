@@ -9,7 +9,12 @@ if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || a
 }
 
 switch (attack) {
-    
+    case AT_BAIR: {
+        if window == 1 && window_timer == 1 && !hitpause {
+            sound_play(sound_get("desp_whip"), 0, noone, .8, 1 )
+        }
+    }
+    break;    
     case AT_DSPECIAL:
         set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
         if (vsp > 3) vsp = 3;

@@ -4,7 +4,7 @@ make_attack(AT_BAIR,
   AG_CATEGORY, 1,
   AG_SPRITE, sprite_get("bair"),
   AG_HAS_LANDING_LAG, 1,
-  AG_LANDING_LAG, 7,
+  AG_LANDING_LAG, 8,
   AG_NUM_WINDOWS, 3,
   AG_HURTBOX_SPRITE, sprite_get("bair_hurt"))
 
@@ -44,13 +44,14 @@ make_hitbox(AT_BAIR, 1,
   HG_DAMAGE, 7,
   HG_ANGLE, 140,
   //HG_ANGLE_FLIPPER, 5,
-  HG_BASE_KNOCKBACK, 8,
-  HG_KNOCKBACK_SCALING, .8,
+  HG_BASE_KNOCKBACK, 7,
+  HG_KNOCKBACK_SCALING, .6,
 
-  HG_BASE_HITPAUSE, 7,
+  HG_BASE_HITPAUSE, 8,
   HG_HITPAUSE_SCALING, .8,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+  HG_VISUAL_EFFECT, 304
   
 )
 
@@ -69,10 +70,10 @@ make_hitbox(AT_BAIR, 2,
   HG_DAMAGE, 7,
   HG_ANGLE, 140,
  // HG_ANGLE_FLIPPER, 5,
-  HG_BASE_KNOCKBACK, 8,
+  HG_BASE_KNOCKBACK, 7,
   HG_KNOCKBACK_SCALING, .6,
 
-  HG_BASE_HITPAUSE, 9,
+  HG_BASE_HITPAUSE, 8,
   HG_HITPAUSE_SCALING, .8,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
