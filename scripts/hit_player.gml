@@ -27,8 +27,8 @@ if (my_hitboxID.damage + mult_damage_add > 3 && num_bullets >= 4) {
 
 
 
-if atk == AT_BAIR {
-	//sound_play(sound_get("desp_weirdhit"))
+if atk == AT_EXTRA_1 && hbox == 3 {
+	sound_play(sound_get("desp_weirdhit"))
 }
 if atk == AT_FAIR && hbox != 4 {
     hit_player_obj.x = lerp(floor(hit_player_obj.x), x+10 * spr_dir, .4)

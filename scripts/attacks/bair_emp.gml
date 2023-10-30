@@ -9,13 +9,13 @@ make_attack(AT_EXTRA_1,
   AG_HURTBOX_SPRITE, sprite_get("bair_hurt"))
 
 make_window(AT_EXTRA_1, 1,
-  AG_WINDOW_LENGTH, 12,
+  AG_WINDOW_LENGTH, 14,
   AG_WINDOW_ANIM_FRAMES, 1,
   AG_WINDOW_ANIM_FRAME_START, 5,
   AG_WINDOW_VSPEED, -1,
   AG_WINDOW_HAS_SFX, 1,
   AG_WINDOW_SFX, asset_get("sfx_swipe_heavy1"),
-  AG_WINDOW_SFX_FRAME, 11)
+  AG_WINDOW_SFX_FRAME, 13)
 
 make_window(AT_EXTRA_1, 2,
   AG_WINDOW_LENGTH, 3,
@@ -42,14 +42,14 @@ make_hitbox(AT_EXTRA_1, 1,
 
 
   HG_PRIORITY, 1,
-  HG_DAMAGE, 7,
+  HG_DAMAGE, 6,
   HG_ANGLE, 140,
   //HG_ANGLE_FLIPPER, 5,
-  HG_BASE_KNOCKBACK, 7,
+  HG_BASE_KNOCKBACK, 6,
   HG_KNOCKBACK_SCALING, .6,
 
-  HG_BASE_HITPAUSE, 8,
-  HG_HITPAUSE_SCALING, .8,
+  HG_BASE_HITPAUSE, 7,
+  HG_HITPAUSE_SCALING, .6,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
   HG_VISUAL_EFFECT, 304
@@ -68,10 +68,10 @@ make_hitbox(AT_EXTRA_1, 2,
 
 
   HG_PRIORITY, 1,
-  HG_DAMAGE, 7,
+  HG_DAMAGE, 6,
   HG_ANGLE, 140,
  // HG_ANGLE_FLIPPER, 5,
-  HG_BASE_KNOCKBACK, 7,
+  HG_BASE_KNOCKBACK, 6,
   HG_KNOCKBACK_SCALING, .6,
 
   HG_BASE_HITPAUSE, 8,
@@ -94,7 +94,7 @@ make_hitbox(AT_EXTRA_1, 3,
 
 
   HG_PRIORITY, 2,
-  HG_DAMAGE, 9,
+  HG_DAMAGE, 8,
   HG_ANGLE, 140,
   //HG_ANGLE_FLIPPER, 5,
   HG_BASE_KNOCKBACK, 8,
@@ -114,7 +114,7 @@ make_hitbox(AT_EXTRA_1, 3,
 #define make_attack // Version 0
     // make_attack(_attack_name, (value_name, value)... )
     // Sets attack values for the given attack.
-    // e.g. make_attack(AT_EXTRA_1,
+    // e.g. make_attack(AT_BAIR,
     //     AG_CATEGORY, 1,
     //     AG_SPRITE, sprite_get("bair")
     // )
@@ -128,7 +128,7 @@ make_hitbox(AT_EXTRA_1, 3,
 #define make_window // Version 0
     // make_window(_attack_name, _index, (value_name, value)... )
     // Sets window values for the given window.
-    // e.g.make_window(AT_EXTRA_1, 1,
+    // e.g.make_window(AT_BAIR, 1,
     //         AG_WINDOW_TYPE, 1,
     //         AG_WINDOW_LENGTH, 6
     //     )
@@ -143,7 +143,7 @@ make_hitbox(AT_EXTRA_1, 3,
 #define make_hitbox // Version 0
     // make_hitbox(_attack_name, _index, (value_name, value)... )
     // Sets hitbox values for the given hitbox.
-    // e.g. make_hitbox(AT_EXTRA_1, 1,
+    // e.g. make_hitbox(AT_BAIR, 1,
     //         HG_PARENT_HITBOX, 1,
     //         HG_HITBOX_TYPE, 1
     //     );
