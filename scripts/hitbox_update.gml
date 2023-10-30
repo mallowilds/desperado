@@ -9,6 +9,7 @@ if (attack == AT_DSPECIAL && hit_priority == 0) {
     proj_angle += 5*spr_dir;
     
     if (!free && vis_bounces == 0) {
+        sound_play(sound_get("desp_cointoss"))
         
         vsp = -3;
         vis_bounces++;

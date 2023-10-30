@@ -187,7 +187,7 @@ set_color_profile_slot( 13, 8, 130, 0, 0 ); //Firedark
 set_color_profile_slot( 14, 0, 139, 194, 189 ); //Bones
 set_color_profile_slot( 14, 1, 86, 173, 97 ); //Horns
 set_color_profile_slot( 14, 2, 8, 117, 75 ); //Smog
-set_color_profile_slot( 14, 3, 28, 61, 37 ); //Ash
+set_color_profile_slot( 14, 3, 29, 38, 29 ); //Ash
 set_color_profile_slot( 14, 4, 29, 116, 108 ); //Coat
 set_color_profile_slot( 14, 5, 86, 173, 97 ); //Fire
 set_color_profile_slot( 14, 6, 84, 255, 108 ); //Fireyellow
