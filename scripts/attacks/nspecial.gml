@@ -12,7 +12,7 @@ need to figure out visuals... i will see what i can do. Likely will need to be a
 make_attack(AT_NSPECIAL,
     AG_CATEGORY, 2,
     AG_SPRITE, sprite_get("nspecial"),
-    AG_NUM_WINDOWS, 5,
+    AG_NUM_WINDOWS, 4,
     AG_HAS_LANDING_LAG, 4,
     AG_OFF_LEDGE, 1,
     AG_AIR_SPRITE, sprite_get("nspecial"),
@@ -30,38 +30,81 @@ make_window(AT_NSPECIAL, 1,
 
 make_window(AT_NSPECIAL, 2,
     AG_WINDOW_TYPE, 1,
+    AG_WINDOW_LENGTH, 6,
+    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_ANIM_FRAME_START, 2,
+)
+
+make_window(AT_NSPECIAL, 3,
+    AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 3,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 2,
 )
 
-
-make_window(AT_NSPECIAL, 3,
+make_window(AT_NSPECIAL, 4,
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 16,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 3,
 )
 
-set_num_hitboxes(AT_NSPECIAL, 1);
+set_num_hitboxes(AT_NSPECIAL, 2);
 
 make_hitbox(AT_NSPECIAL, 1,
-    HG_PARENT_HITBOX, 1,
-    HG_HITBOX_TYPE, 2,
+    HG_HITBOX_TYPE, 1,
     HG_WINDOW, 2,
-    HG_LIFETIME, 30,
+    HG_WINDOW_CREATION_FRAME, 0,
+    HG_LIFETIME, 3,
+
     HG_HITBOX_X, 32,
-    HG_WIDTH, 90,
+    HG_HITBOX_Y, -32,
+    HG_WIDTH, 86,
+    HG_HEIGHT, 56,
+    HG_HITBOX_GROUP, 0,
+
+    HG_PRIORITY, 2,
+    HG_DAMAGE, 1,
+    HG_ANGLE, 90,
+    //HG_ANGLE_FLIPPER36,
+    HG_BASE_KNOCKBACK, 3,
+    HG_KNOCKBACK_SCALING, 0,
+    HG_BASE_HITPAUSE, 1,
+    HG_EXTRA_HITPAUSE, 3,
+    HG_HITPAUSE_SCALING, 0.3,
+    HG_HITSTUN_MULTIPLIER, 0.9,
+
+    HG_VISUAL_EFFECT, 301,
+    HG_VISUAL_EFFECT_X_OFFSET, 32,
+    HG_VISUAL_EFFECT_Y_OFFSET, 5,
+    HG_HIT_SFX, asset_get("sfx_blow_weak1"),
+)
+
+make_hitbox(AT_NSPECIAL, 2,
+    HG_HITBOX_TYPE, 1,
+    HG_WINDOW, 3,
+    HG_WINDOW_CREATION_FRAME, 0,
+    HG_LIFETIME, 3,
+
+    HG_HITBOX_X, 32,
+    HG_HITBOX_Y, -44,
+    HG_WIDTH, 86,
     HG_HEIGHT, 60,
-    HG_PRIORITY, 3,
+    HG_HITBOX_GROUP, 3,
+
+    HG_PRIORITY, 2,
     HG_DAMAGE, 3,
-    HG_ANGLE, 50,
-    HG_VISUAL_EFFECT_Y_OFFSET, -16,
-    HG_HITSTUN_MULTIPLIER, -1,
-    HG_PROJECTILE_SPRITE, sprite_get("nspecial_proj"),
-    HG_PROJECTILE_MASK, sprite_get("nspecial_proj"),
-    HG_PROJECTILE_ANIM_SPEED, .2,
-    HG_PROJECTILE_HSPEED, 18,
+    HG_ANGLE, 40,
+    //HG_ANGLE_FLIPPER, 6,
+    HG_BASE_KNOCKBACK, 8, // Tampered with in attack_update
+    HG_KNOCKBACK_SCALING, .7, // Tampered with in attack_update
+    HG_BASE_HITPAUSE, 6,
+    HG_HITPAUSE_SCALING, .4,
+
+    HG_VISUAL_EFFECT, 301,
+    HG_VISUAL_EFFECT_X_OFFSET, 32,
+    HG_VISUAL_EFFECT_Y_OFFSET, 5,
+    HG_HIT_SFX, asset_get("sfx_blow_medium3"),
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

@@ -25,10 +25,20 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
             
         }
     }
-    
+    if (attack == AT_NSPECIAL) {
+        switch window {
+            case 2:
+            case 3:
+                frame = 10 + (window_timer / 2);
+                break;
+            case 4:
+                frame = 11 + (window_timer / 2);
+                if (frame >= 14) frame = 0;
+                break;
+        }
+    }
     
 }
-
 
 // Draw gun
 // TODO: fix outline color for GB alt, add color processing on 6 bullets

@@ -57,8 +57,6 @@ with oPlayer {
 sparkle_list = ds_list_create();        // particle list. implementation is taken from aur, hence the name
 
 
-
-
 char_height = 70 // 36 – 74. Purely aesthetic. Used for centering things on the character, placing the overhead HUD, etc
 
 

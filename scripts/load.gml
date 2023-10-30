@@ -72,7 +72,7 @@ sprite_change_offset("uair", 64, 94)
 sprite_change_offset("dair", 64, 94)
 sprite_change_offset("fstrong", 64, 94)
 sprite_change_offset("dstrong", 64, 94)
-sprite_change_offset("nspecial", 64, 94)
+sprite_change_offset("nspecial", 150, 194)
 sprite_change_offset("fspecial", 64, 94)
 sprite_change_offset("taunt", 64, 94)
 

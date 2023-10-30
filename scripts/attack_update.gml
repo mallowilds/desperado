@@ -9,12 +9,14 @@ if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || a
 }
 
 switch (attack) {
-    case AT_BAIR: {
+    
+    case AT_BAIR: 
+    case AT_EXTRA_1:
         if window == 1 && window_timer == 1 && !hitpause {
             sound_play(sound_get("desp_whip"), 0, noone, .8, 1 )
         }
-    }
     break;    
+    
     case AT_DSPECIAL:
         set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
         if (vsp > 3) vsp = 3;
@@ -48,16 +50,39 @@ switch (attack) {
     case AT_NSPECIAL:
         if timer1 {
             sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
-            //sound_play(sound_get("desp_whip"), 0, noone, 2, 1.05)
             sound_play(sound_get("desp_shot"))
+            
+            set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 6 + (0.25 * num_bullets));
+            set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.4 + (0.05 * num_bullets));
+            
+            if (num_bullets <= 0) { // temp override. TODO: replace with proper fail fire
+                window = 4;
+                window_timer = 0;
+            }
+            else {
+                num_bullets--;
+                if (num_bullets <= 0) {
+                    window = 3;
+                    window_timer = 0;
+                }
+            }
+            
+            //sound_play(sound_get("desp_whip"), 0, noone, 2, 1.05)
+            
             if (num_bullets > 0) num_bullets--; // Placeholder check 'till proper bullet checks are in
         }
-        if (window == 3){
-            if (special_pressed) {
-                window = 1
-                window_timer = 0
+        
+        if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) && window == 2 && !hitpause) {
+            sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
+            sound_play(sound_get("desp_shot"))
+            attack_end()
+            if (num_bullets > 0) {
+                num_bullets--;
+                window = 2;
+                window_timer = 0;
             }
         }
+        
         break;
     case AT_USPECIAL:
         can_move = false;
