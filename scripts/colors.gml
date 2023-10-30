@@ -38,7 +38,7 @@ set_color_profile_slot_range( 8, 1, 1, 1 );
 
 
 // ALTERNATE COLORS
-set_num_palettes( 14 );
+set_num_palettes( 15 );
 
 // dreadnought - hyu
 set_color_profile_slot( 1, 0, 209, 207, 255 ); //Bones
@@ -71,7 +71,7 @@ set_color_profile_slot( 3, 4, 120, 113, 78 ); //Coat
 set_color_profile_slot( 3, 5, 209, 154, 77 ); //Fire
 set_color_profile_slot( 3, 6, 200, 224, 121 ); //Fireyellow
 set_color_profile_slot( 3, 7, 147, 156, 114 ); //Gun
-set_color_profile_slot( 3, 8, 130, 0, 0 ); //Firedark
+set_color_profile_slot( 3, 8, 26, 41, 28 ); //Firedark
 
 // skysought - hyu
 set_color_profile_slot( 4, 0, 69, 74, 79 ); //Bones
@@ -115,7 +115,7 @@ set_color_profile_slot( 7, 4, 194, 212, 125 ); //Coat
 set_color_profile_slot( 7, 5, 89, 145, 58 ); //Fire
 set_color_profile_slot( 7, 6, 194, 212, 125 ); //Fireyellow
 set_color_profile_slot( 7, 7, 194, 212, 125 ); //Gun
-set_color_profile_slot( 7, 8, 130, 0, 0 ); //Firedark
+set_color_profile_slot( 7, 8, 89, 145, 58 ); //Firedark
 
 // posession
 set_color_profile_slot( 8, 0, 79, 61, 94 ); //Bones
@@ -126,7 +126,7 @@ set_color_profile_slot( 8, 4, 79, 61, 94 ); //Coat
 set_color_profile_slot( 8, 5, 54, 18, 104 ); //Fire
 set_color_profile_slot( 8, 6, 135, 139, 192 ); //Fireyellow
 set_color_profile_slot( 8, 7, 78, 23, 141 ); //Gun
-set_color_profile_slot( 8, 8, 130, 0, 0 ); //Firedark
+set_color_profile_slot( 8, 8, 54, 18, 104 ); //Firedark
 
 // blind obsession
 set_color_profile_slot( 9, 0, 67, 114, 150 ); //Bones
@@ -137,7 +137,7 @@ set_color_profile_slot( 9, 4, 41, 69, 87 ); //Coat
 set_color_profile_slot( 9, 5, 17, 166, 156 ); //Fire
 set_color_profile_slot( 9, 6, 136, 255, 130 ); //Fireyellow
 set_color_profile_slot( 9, 7, 17, 38, 51 ); //Gun
-set_color_profile_slot( 9, 8, 130, 0, 0 ); //Firedark
+set_color_profile_slot( 9, 8, 17, 38, 51 ); //Firedark
 
 // reap
 set_color_profile_slot( 10, 0, 170, 171, 167 ); //Bones
@@ -159,7 +159,7 @@ set_color_profile_slot( 11, 4, 94, 68, 38 ); //Coat
 set_color_profile_slot( 11, 5, 51, 59, 143 ); //Fire
 set_color_profile_slot( 11, 6, 119, 178, 212 ); //Fireyellow
 set_color_profile_slot( 11, 7, 177, 189, 196 ); //Gun
-set_color_profile_slot( 11, 8, 130, 0, 0 ); //Firedark
+set_color_profile_slot( 11, 8, 51, 59, 143 ); //Firedark
 
 // in the blood
 set_color_profile_slot( 12, 0, 171, 133, 133 ); //Bones
@@ -182,6 +182,17 @@ set_color_profile_slot( 13, 5, 255, 38, 38 ); //Fire
 set_color_profile_slot( 13, 6, 255, 0, 0 ); //Fireyellow
 set_color_profile_slot( 13, 7, 74, 62, 62 ); //Gun
 set_color_profile_slot( 13, 8, 130, 0, 0 ); //Firedark
+
+// baja
+set_color_profile_slot( 14, 0, 139, 194, 189 ); //Bones
+set_color_profile_slot( 14, 1, 86, 173, 97 ); //Horns
+set_color_profile_slot( 14, 2, 8, 117, 75 ); //Smog
+set_color_profile_slot( 14, 3, 28, 61, 37 ); //Ash
+set_color_profile_slot( 14, 4, 29, 116, 108 ); //Coat
+set_color_profile_slot( 14, 5, 86, 173, 97 ); //Fire
+set_color_profile_slot( 14, 6, 84, 255, 108 ); //Fireyellow
+set_color_profile_slot( 14, 7, 161, 205, 208 ); //Gun
+set_color_profile_slot( 14, 8, 179, 39, 54 ); //Firedark
 
 
 /* This is a comment used by that one RoA colors.gml generator tool to store palette data. You can safely keep it in your colors.gml if you plan to re-use the tool later, or safely remove it if you don't.

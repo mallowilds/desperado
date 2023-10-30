@@ -4,7 +4,7 @@ make_attack(AT_EXTRA_1,
   AG_CATEGORY, 1,
   AG_SPRITE, sprite_get("bair"),
   AG_HAS_LANDING_LAG, 1,
-  AG_LANDING_LAG, 8,
+  AG_LANDING_LAG, 10,
   AG_NUM_WINDOWS, 3,
   AG_HURTBOX_SPRITE, sprite_get("bair_hurt"))
 
@@ -98,7 +98,7 @@ make_hitbox(AT_EXTRA_1, 3,
   HG_ANGLE, 140,
   //HG_ANGLE_FLIPPER, 5,
   HG_BASE_KNOCKBACK, 8,
-  HG_KNOCKBACK_SCALING, .8,
+  HG_KNOCKBACK_SCALING, .75,
 
   HG_BASE_HITPAUSE, 9,
   HG_HITPAUSE_SCALING, 1,
