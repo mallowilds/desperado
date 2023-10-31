@@ -29,7 +29,7 @@ if state == PS_WAVELAND && state_timer == 0 && !hitpause {
 }
 
 
-//#region Flame management (drawn in pre_draw.gml, added by update/attack_update.gml)
+//#region Flame management (drawn in post_draw.gml, added by update/attack_update.gml)
 for (var i = 0; i < ds_list_size(sparkle_list); i++) {
     var sp = ds_list_find_value(sparkle_list, i);
     sp.sp_lifetime++;
@@ -40,6 +40,18 @@ for (var i = 0; i < ds_list_size(sparkle_list); i++) {
 }
 
 if (num_bullets >= 4 && get_gameplay_time() % 7 == 0) spawn_sparkle(get_gameplay_time()%17, get_gameplay_time()%37);
+//#endregion
+
+
+//#region NSpec gunshot management (drawn in pre_draw.gml, added by attack_update.gml)
+for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
+    var sp = ds_list_find_value(nspec_shot_list, i);
+    sp.sp_lifetime++;
+    if (sp.sp_lifetime >= sp.sp_max_lifetime) {
+        ds_list_remove(nspec_shot_list, sp);
+        i--;
+    }
+}
 //#endregion
 
 

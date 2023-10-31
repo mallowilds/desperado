@@ -48,6 +48,7 @@ switch (attack) {
     break;
     
     case AT_NSPECIAL:
+        
         if (window == 1 && window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause) {
             sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
             sound_play(sound_get("desp_shot"))
@@ -85,46 +86,129 @@ switch (attack) {
         
         // Hitbox handling
         if (window == 2 && window_timer == 1 && !hitpause) {
+            
+            
+            // Set initial hitboxes
             var shot_loops = 0;
             var shot_x = get_hitbox_value(AT_NSPECIAL, 1, HG_HITBOX_X);
             var shot_y = get_hitbox_value(AT_NSPECIAL, 1, HG_HITBOX_Y);
-            var shot_hbox = create_hitbox(attack, 1, x+(shot_x*spr_dir), y+shot_y);
+            var shot_hb_w = get_hitbox_value(AT_NSPECIAL, 1, HG_WIDTH);
+            var shot_hb_h = get_hitbox_value(AT_NSPECIAL, 1, HG_HEIGHT);
             
-            while (!object_meeting(shot_hbox, asset_get("par_block")) && shot_loops < 20) {
+            while (!centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block")) && shot_loops < 20) {
+                
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_PARENT_HITBOX, 1);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, 2, HG_LIFETIME));
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_X, shot_x);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_Y, shot_y);
+                
+                shot_hbox = create_hitbox(attack, 3+shot_loops, x+(shot_x*spr_dir), y+shot_y);
                 
                 shot_loops++;
-                shot_x += get_hitbox_value(AT_NSPECIAL, 1, HG_WIDTH);
-                
-                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_PARENT_HITBOX, 1);
-                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, 1, HG_LIFETIME));
-                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_HITBOX_X, shot_x);
-                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_HITBOX_Y, shot_y);
-                
-                shot_hbox = create_hitbox(attack, 2+shot_loops, x+(shot_x*spr_dir), y+shot_y);
+                shot_x += shot_hb_w;
                 
             }
+            
+            // Create sunken hitbox
+            while (centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block")) && shot_hb_w > 0) {
+                shot_hb_w -= 2;
+                if (centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"))) shot_x -= 1;
+            }
+            
+            if (shot_hb_w > 0) {
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_PARENT_HITBOX, 0);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_TYPE, get_hitbox_value(AT_NSPECIAL, 1, HG_HITBOX_TYPE));
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, 1, HG_LIFETIME));
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_X, shot_x);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_Y, shot_y);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_WIDTH, shot_hb_w);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HEIGHT, shot_hb_h);
+                for (var i = 9; i <= 57; i++) set_hitbox_value(AT_NSPECIAL, 3+shot_loops, i, get_hitbox_value(AT_NSPECIAL, 1, i));
+                
+                shot_hbox = create_hitbox(attack, 3+shot_loops, x+(shot_x*spr_dir), y+shot_y);
+            }
+            
+            // Set up visual
+            var shot_end_x = shot_x+shot_hb_w/2;
+            shot_x = get_hitbox_value(AT_NSPECIAL, 1, HG_HITBOX_X);
+            shot_hb_w = get_hitbox_value(AT_NSPECIAL, 1, HG_WIDTH);
+            
+            var shot_visual = {
+                sp_x : x + shot_x - shot_hb_w/2,
+                sp_y : y + shot_y,
+                sp_length : abs((shot_x - shot_hb_w/2) - shot_end_x),
+                sp_tile_index : sprite_get("nspec_beam_segment"),
+                sp_tile_height : 32, // Hardcoded. Not ideal but y'know
+                sp_edge_index : sprite_get("nspec_beam_end"),
+                sp_edge_width : 32, // Again, hardcoded. Update to match the sprite as needed
+                sp_max_lifetime : 4,
+                sp_lifetime : 0,
+                sp_spr_dir : spr_dir
+            };
+            ds_list_add(nspec_shot_list, shot_visual);
             
         }
         
         if (window == 3 && window_timer == 1 && !hitpause) {
+            
+            // Set initial hitboxes
             var shot_loops = 0;
             var shot_x = get_hitbox_value(AT_NSPECIAL, 2, HG_HITBOX_X);
             var shot_y = get_hitbox_value(AT_NSPECIAL, 2, HG_HITBOX_Y);
-            var shot_hbox = create_hitbox(attack, 2, x+(shot_x*spr_dir), y+shot_y);
+            var shot_hb_w = get_hitbox_value(AT_NSPECIAL, 2, HG_WIDTH);
+            var shot_hb_h = get_hitbox_value(AT_NSPECIAL, 2, HG_HEIGHT);
             
-            while (!object_meeting(shot_hbox, asset_get("par_block")) && shot_loops < 20) {
+            while (!centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block")) && shot_loops < 20) {
+                
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_PARENT_HITBOX, 2);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, 2, HG_LIFETIME));
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_X, shot_x);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_Y, shot_y);
+                
+                shot_hbox = create_hitbox(attack, 3+shot_loops, x+(shot_x*spr_dir), y+shot_y);
                 
                 shot_loops++;
-                shot_x += get_hitbox_value(AT_NSPECIAL, 2, HG_WIDTH);
-                
-                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_PARENT_HITBOX, 2);
-                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, 2, HG_LIFETIME));
-                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_HITBOX_X, shot_x);
-                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_HITBOX_Y, shot_y);
-                
-                shot_hbox = create_hitbox(attack, 2+shot_loops, x+(shot_x*spr_dir), y+shot_y);
+                shot_x += shot_hb_w;
                 
             }
+            
+            // Create sunken hitbox
+            while (centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block")) && shot_hb_w > 0) {
+                shot_hb_w -= 2;
+                if (centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"))) shot_x -= 1;
+            }
+            
+            if (shot_hb_w > 0) {
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_PARENT_HITBOX, 0);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_TYPE, get_hitbox_value(AT_NSPECIAL, 2, HG_HITBOX_TYPE));
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, 2, HG_LIFETIME));
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_X, shot_x);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HITBOX_Y, shot_y);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_WIDTH, shot_hb_w);
+                set_hitbox_value(AT_NSPECIAL, 3+shot_loops, HG_HEIGHT, shot_hb_h);
+                for (var i = 9; i <= 57; i++) set_hitbox_value(AT_NSPECIAL, 3+shot_loops, i, get_hitbox_value(AT_NSPECIAL, 2, i));
+                
+                shot_hbox = create_hitbox(attack, 3+shot_loops, x+(shot_x*spr_dir), y+shot_y);
+            }
+            
+            // Set up visual
+            var shot_end_x = shot_x+shot_hb_w/2;
+            shot_x = get_hitbox_value(AT_NSPECIAL, 2, HG_HITBOX_X);
+            shot_hb_w = get_hitbox_value(AT_NSPECIAL, 2, HG_WIDTH);
+            
+            var shot_visual = {
+                sp_x : x + shot_x - shot_hb_w/2,
+                sp_y : y + shot_y,
+                sp_length : abs((shot_x - shot_hb_w/2) - shot_end_x),
+                sp_tile_index : sprite_get("nspec_beam_segment"),
+                sp_tile_height : 32, // Hardcoded. Not ideal but y'know
+                sp_edge_index : sprite_get("nspec_beam_end"),
+                sp_edge_width : 32, // Again, hardcoded. Update to match the sprite as needed
+                sp_max_lifetime : 4,
+                sp_lifetime : 0,
+                sp_spr_dir : spr_dir
+            };
+            ds_list_add(nspec_shot_list, shot_visual);
             
         }
         
@@ -186,6 +270,10 @@ if (attack == AT_FSPECIAL) {
     }
     can_fast_fall = false
 }
+
+
+#define centered_rect_meeting(_x, _y, _w, _h, obj)
+    return collision_rectangle(_x-(_w/2), _y-(_h/2), _x+(_w/2), _y+(_h/2), obj, false, false);
 
 
 
