@@ -69,16 +69,14 @@ switch (attack) {
             }
             
             //sound_play(sound_get("desp_whip"), 0, noone, 2, 1.05)
-            
-            if (num_bullets > 0) num_bullets--; // Placeholder check 'till proper bullet checks are in
         }
         
         if (window == 2 && window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause) {
             sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
             sound_play(sound_get("desp_shot"))
             attack_end()
+            num_bullets--;
             if (num_bullets > 0) {
-                num_bullets--;
                 window = 2;
                 window_timer = 0;
             }
