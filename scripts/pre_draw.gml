@@ -13,7 +13,7 @@ for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
     var tile_tl_x = (sp_x_far < sp.sp_x ? sp_x_far : sp.sp_x);
     var tile_br_x = (sp_x_far > sp.sp_x ? sp_x_far : sp.sp_x);
     
-    draw_sprite_tiled_area(sp.sp_tile_index, sp_image_index, sp.sp_x, sp.sp_y-(sp.sp_tile_height/2), tile_tl_x, sp.sp_y-(sp.sp_tile_height/2), tile_br_x, sp.sp_y+(sp.sp_tile_height/2))
+    draw_sprite_tiled_area(sp.sp_tile_index, sp_image_index, sp.sp_x, sp.sp_y-(sprite_get_height(sp.sp_tile_index)/2), tile_tl_x, sp.sp_y-(sprite_get_height(sp.sp_tile_index)/2), tile_br_x, sp.sp_y+(sprite_get_height(sp.sp_tile_index)/2))
     draw_sprite_ext(sp.sp_edge_index, sp_image_index, sp_x_far, sp.sp_y, spr_dir, 1, 0, c_white, 1);
 }
 
