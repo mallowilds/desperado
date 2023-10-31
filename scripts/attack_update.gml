@@ -134,8 +134,8 @@ switch (attack) {
             shot_hb_w = get_hitbox_value(AT_NSPECIAL, 1, HG_WIDTH);
             
             var shot_visual = {
-                sp_x : x + (shot_x - shot_hb_w/2)*spr_dir,
-                sp_y : y + shot_y,
+                sp_x : x + (shot_x - shot_hb_w/2)*spr_dir + hsp,
+                sp_y : y + shot_y + vsp,
                 sp_length : shot_end_x - (shot_x - shot_hb_w/2),
                 sp_tile_index : sprite_get("nspec_beam_segment"),
                 sp_tile_height : 32, // Hardcoded. Not ideal but y'know
@@ -197,8 +197,8 @@ switch (attack) {
             shot_hb_w = get_hitbox_value(AT_NSPECIAL, 1, HG_WIDTH);
             
             var shot_visual = {
-                sp_x : x + (shot_x - shot_hb_w/2)*spr_dir,
-                sp_y : y + shot_y,
+                sp_x : x + (shot_x - shot_hb_w/2)*spr_dir + hsp,
+                sp_y : y + shot_y + vsp,
                 sp_length : shot_end_x - (shot_x - shot_hb_w/2),
                 sp_tile_index : sprite_get("nspec_beam_segment"),
                 sp_tile_height : 32, // Hardcoded. Not ideal but y'know
