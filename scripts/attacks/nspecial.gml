@@ -21,16 +21,16 @@ make_attack(AT_NSPECIAL,
 
 make_window(AT_NSPECIAL, 1,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 6,
+    AG_WINDOW_LENGTH, 13,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_HAS_SFX, 1,
     //AG_WINDOW_SFX, sound_get("desp_shot"),
-    AG_WINDOW_SFX_FRAME, 4,
+    AG_WINDOW_SFX_FRAME, 12,
 )
 
 make_window(AT_NSPECIAL, 2,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 6,
+    AG_WINDOW_LENGTH, 4,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 2,
 )
@@ -44,7 +44,7 @@ make_window(AT_NSPECIAL, 3,
 
 make_window(AT_NSPECIAL, 4,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 16,
+    AG_WINDOW_LENGTH, 28,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 3,
 )
@@ -65,7 +65,7 @@ make_hitbox(AT_NSPECIAL, 1,
     HG_HITBOX_GROUP, 0,
 
     HG_PRIORITY, 2,
-    HG_DAMAGE, 1,
+    HG_DAMAGE, 3,
     HG_ANGLE, 90,
     //HG_ANGLE_FLIPPER36,
     HG_BASE_KNOCKBACK, 3,
@@ -95,18 +95,17 @@ make_hitbox(AT_NSPECIAL, 2,
     HG_HITBOX_GROUP, 3,
 
     HG_PRIORITY, 2,
-    HG_DAMAGE, 3,
-    HG_ANGLE, 40,
+    HG_DAMAGE, 4,
+    HG_ANGLE, 45,
     //HG_ANGLE_FLIPPER, 6,
     HG_BASE_KNOCKBACK, 8, // Tampered with in attack_update
     HG_KNOCKBACK_SCALING, .7, // Tampered with in attack_update
-    HG_BASE_HITPAUSE, 6,
-    HG_HITPAUSE_SCALING, .4,
+    HG_BASE_HITPAUSE, 10,
+    HG_HITPAUSE_SCALING, .9,
+    HG_EXTRA_HITPAUSE, 5,
 
-    HG_VISUAL_EFFECT, 301,
-    HG_VISUAL_EFFECT_X_OFFSET, 32,
-    HG_VISUAL_EFFECT_Y_OFFSET, 5,
-    HG_HIT_SFX, asset_get("sfx_blow_medium3"),
+    HG_VISUAL_EFFECT, 304,
+    HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

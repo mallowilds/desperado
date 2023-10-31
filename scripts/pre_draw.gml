@@ -37,32 +37,32 @@ shader_end();
     {
         var sprite,subimg,xx,yy,x1,y1,x2,y2;
         sprite = argument0;
-        subimg = argument1;
-        xx = argument2;
-        yy = argument3;
-        x1 = argument4;
-        y1 = argument5;
-        x2 = argument6;
-        y2 = argument7;
+        subimg = argument1; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+        xx = argument2; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+        yy = argument3; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+        x1 = argument4; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+        y1 = argument5; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+        x2 = argument6; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+        y2 = argument7; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
      
         var sw,sh,i,j,jj,left,top,width,height,X,Y;
         sw = sprite_get_width(sprite);
-        sh = sprite_get_height(sprite);
+        sh = sprite_get_height(sprite); // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
      
         i = x1-((x1 mod sw) - (xx mod sw)) - sw*((x1 mod sw)<(xx mod sw));
-        j = y1-((y1 mod sh) - (yy mod sh)) - sh*((y1 mod sh)<(yy mod sh)); 
-        jj = j;
+        j = y1-((y1 mod sh) - (yy mod sh)) - sh*((y1 mod sh)<(yy mod sh));  // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+        jj = j; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
      
         for(i=i; i<=x2; i+=sw) {
             for(j=j; j<=y2; j+=sh) {
      
                 if(i <= x1) left = x1-i;
                 else left = 0;
-                X = i+left;
+                X = i+left; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
      
                 if(j <= y1) top = y1-j;
                 else top = 0;
-                Y = j+top;
+                Y = j+top; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
      
                 if(x2 <= i+sw) width = ((sw)-(i+sw-x2)+1)-left;
                 else width = sw-left;
@@ -72,7 +72,7 @@ shader_end();
      
                 draw_sprite_part(sprite,subimg,left,top,width,height,X,Y);
             }
-            j = jj;
+            j = jj; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
         }
         return 0;
     }

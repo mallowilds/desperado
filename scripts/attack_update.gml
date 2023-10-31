@@ -40,15 +40,24 @@ switch (attack) {
             else create_hitbox(AT_DSPECIAL, 1, x-(4*spr_dir), y-6); // Wasted bullet visual
         }
         
-        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH)) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH) - 4 && !hitpause && !free) {
             window = 1;
-            window_timer = 0;
+            window_timer = 4;
         }
         
     break;
     
     case AT_NSPECIAL:
-        
+        can_move = false
+        can_fast_fall = false
+        if window == 1 {
+            hsp = hsp*.75
+            vsp = vsp*.75
+        }
+        if window == 2 || (window == 3 && window_timer < 6){
+            vsp = 0
+            hsp = 0 
+        }
         if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
             sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
             sound_play(sound_get("desp_shot"))
@@ -211,8 +220,6 @@ if (attack == AT_FSPECIAL) {
         sp_spr_dir : spr_dir
     };
     ds_list_add(nspec_shot_list, shot_visual);
-
-
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.

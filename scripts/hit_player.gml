@@ -41,6 +41,14 @@ if atk == AT_FAIR && hbox == 4 {
 if atk == AT_UTILT {
 	//sound_play(sound_get("desp_cast_short"), 0, noone, 0.9, 1)
 }
+if atk == AT_NSPECIAL {
+	if hbox == 1 {
+		sound_play(sound_get("hit_p00_a"))
+	}
+	if hbox == 2 {
+		sound_play(sound_get("desp_heavy_hit"))
+	}
+}
 
 with hit_fx_obj {
 	if player_id == other.id {
