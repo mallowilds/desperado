@@ -1,14 +1,7 @@
 // nspecial.gml
-//Desperado shoots every bullet in his chamber in a hammer fan. This move gets sequentially stronger with every bullet shot, and at full bullets, becomes the strongest projectile in the game. Once used, you need to reload your bullets.
+// Desperado shoots every bullet in his chamber in a hammer fan. This move gets sequentially stronger with every bullet shot,
+// and at full bullets, becomes the strongest projectile in the game. Once used, you need to reload your bullets.
 
-/*
-2 main parts. multihit and final hit. also a seperate version for no bullets.
-with 1 bullet: just does the final bit.
-2-6 bullets: releases every bullet for each multihit before doing the last bullet. Should be around 1-2 frame between each gunshot or whatever feels best. Last hit gets sequentially more KB for each previous bullet in the chamber.
-
-also has a slow fall during this attack.
-need to figure out visuals... i will see what i can do. Likely will need to be a rectangle pattern repeated until it hits someone or a wall, and then visual effect for when it does break on wall.
-*/
 make_attack(AT_NSPECIAL,
     AG_CATEGORY, 2,
     AG_SPRITE, sprite_get("nspecial"),
@@ -17,6 +10,7 @@ make_attack(AT_NSPECIAL,
     AG_OFF_LEDGE, 1,
     AG_AIR_SPRITE, sprite_get("nspecial"),
     AG_HURTBOX_SPRITE, sprite_get("nspecial_hurt"),
+    AG_USES_CUSTOM_GRAVITY, 1,
 )
 
 make_window(AT_NSPECIAL, 1,
@@ -40,6 +34,7 @@ make_window(AT_NSPECIAL, 3,
     AG_WINDOW_LENGTH, 3,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 2,
+    AG_WINDOW_CUSTOM_GRAVITY, gravity_speed,
 )
 
 make_window(AT_NSPECIAL, 4,
@@ -47,6 +42,7 @@ make_window(AT_NSPECIAL, 4,
     AG_WINDOW_LENGTH, 28,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 3,
+    AG_WINDOW_CUSTOM_GRAVITY, gravity_speed,
 )
 
 set_num_hitboxes(AT_NSPECIAL, 2);

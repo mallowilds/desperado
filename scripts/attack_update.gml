@@ -51,15 +51,20 @@ switch (attack) {
         can_move = false
         can_fast_fall = false
         if window == 1 {
-            hsp = hsp*.75
-            vsp = vsp*.75
+            var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
+            if (window_time_is(1)) {
+                start_hsp = hsp;
+                start_vsp = vsp;
+            }
+            hsp = lerp(hsp, 0, window_timer/window_len);
+            vsp = lerp(vsp, 0, window_timer/window_len);
         }
         if window == 2 || (window == 3 && window_timer < 6){
             vsp = 0
             hsp = 0 
         }
         if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
-            sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
+            
             sound_play(sound_get("desp_shot"))
             
             set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 6 + (0.25 * num_bullets));
@@ -72,6 +77,7 @@ switch (attack) {
             else {
                 num_bullets--;
                 if (num_bullets <= 0) {
+                    sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1);
                     window = 3;
                     window_timer = 0;
                 }
@@ -81,7 +87,7 @@ switch (attack) {
         }
         
         if (window == 2 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
-            sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
+            
             sound_play(sound_get("desp_shot"))
             attack_end()
             num_bullets--;
@@ -89,10 +95,13 @@ switch (attack) {
                 window = 2;
                 window_timer = 0;
             }
+            else { // Continuing to window 3
+                sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1);
+            }
         }
         
         if (window == 2 && window_time_is(1)) create_nspec_shot(1, sprite_get("nspec_beam_segment"), sprite_get("nspec_beam_end"), 32);
-        if (window == 3 && window_time_is(2)) create_nspec_shot(2, sprite_get("nspec_beam_segment"), sprite_get("nspec_beam_end"), 32);
+        if (window == 3 && window_time_is(1)) create_nspec_shot(2, sprite_get("nspec_beam_segment"), sprite_get("nspec_beam_end"), 32);
         
         break;
         
