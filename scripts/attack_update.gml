@@ -116,28 +116,8 @@ switch (attack) {
         }
     break;
     case AT_DSTRONG:
-        can_fast_fall = false
-        if window == 1 && window_timer == 1 && !hitpause {
-                set_attack_value(AT_DSTRONG, AG_CATEGORY, 0)
-                print("reset")
-        }
-        if !free && ground_type == 2 {
-            if (window == 1 && down_pressed) or (window == 2 && strong_charge > 40) {
-                set_attack_value(AT_DSTRONG, AG_CATEGORY, 2)
-                y += 10;
-                window = 7
-                window_timer = 0
-                strong_charge = 0 
-            }
-        }
-        if window == 7 {
-            vsp = 8
-            print(window_timer)
-            if !free && window_timer > 1 {
-                print("y")
-                window = 3 
-                window_timer = 0;
-            }
+        if attack_down {
+            num_bullets = 6
         }
 }
 
