@@ -48,7 +48,7 @@ switch (attack) {
     break;
     
     case AT_NSPECIAL:
-        if timer1 {
+        if (window == 1 && window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause) {
             sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
             sound_play(sound_get("desp_shot"))
             
@@ -72,7 +72,7 @@ switch (attack) {
             if (num_bullets > 0) num_bullets--; // Placeholder check 'till proper bullet checks are in
         }
         
-        if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) && window == 2 && !hitpause) {
+        if (window == 2 && window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause) {
             sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1)
             sound_play(sound_get("desp_shot"))
             attack_end()
@@ -82,6 +82,52 @@ switch (attack) {
                 window_timer = 0;
             }
         }
+        
+        // Hitbox handling
+        if (window == 2 && window_timer == 1 && !hitpause) {
+            var shot_loops = 0;
+            var shot_x = get_hitbox_value(AT_NSPECIAL, 1, HG_HITBOX_X);
+            var shot_y = get_hitbox_value(AT_NSPECIAL, 1, HG_HITBOX_Y);
+            var shot_hbox = create_hitbox(attack, 1, x+(shot_x*spr_dir), y+shot_y);
+            
+            while (!object_meeting(shot_hbox, asset_get("par_block")) && shot_loops < 20) {
+                
+                shot_loops++;
+                shot_x += get_hitbox_value(AT_NSPECIAL, 1, HG_WIDTH);
+                
+                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_PARENT_HITBOX, 1);
+                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, 1, HG_LIFETIME));
+                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_HITBOX_X, shot_x);
+                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_HITBOX_Y, shot_y);
+                
+                shot_hbox = create_hitbox(attack, 2+shot_loops, x+(shot_x*spr_dir), y+shot_y);
+                
+            }
+            
+        }
+        
+        if (window == 3 && window_timer == 1 && !hitpause) {
+            var shot_loops = 0;
+            var shot_x = get_hitbox_value(AT_NSPECIAL, 2, HG_HITBOX_X);
+            var shot_y = get_hitbox_value(AT_NSPECIAL, 2, HG_HITBOX_Y);
+            var shot_hbox = create_hitbox(attack, 2, x+(shot_x*spr_dir), y+shot_y);
+            
+            while (!object_meeting(shot_hbox, asset_get("par_block")) && shot_loops < 20) {
+                
+                shot_loops++;
+                shot_x += get_hitbox_value(AT_NSPECIAL, 2, HG_WIDTH);
+                
+                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_PARENT_HITBOX, 2);
+                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, 2, HG_LIFETIME));
+                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_HITBOX_X, shot_x);
+                set_hitbox_value(AT_NSPECIAL, 2+shot_loops, HG_HITBOX_Y, shot_y);
+                
+                shot_hbox = create_hitbox(attack, 2+shot_loops, x+(shot_x*spr_dir), y+shot_y);
+                
+            }
+            
+        }
+        
         
         break;
     case AT_USPECIAL:
@@ -140,6 +186,11 @@ if (attack == AT_FSPECIAL) {
     }
     can_fast_fall = false
 }
+
+
+
+#define object_meeting(obj1, obj2)
+    with (obj1) return place_meeting(x, y, obj2)
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
