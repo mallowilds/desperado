@@ -58,6 +58,7 @@ sprite_change_offset("dspecial", 150, 194)
 sprite_change_offset("utilt",150, 194)
 sprite_change_offset("ftilt", 150, 194)
 sprite_change_offset("uair", 150, 194)
+sprite_change_offset("dair", 150, 194)
 
 sprite_change_offset("fire1", 10, 10);
 sprite_change_offset("fire2", 10, 10);
@@ -72,7 +73,6 @@ sprite_change_offset("pratfall", 64, 94)
 sprite_change_offset("land", 150, 194)
 
 
-sprite_change_offset("dair", 64, 94)
 sprite_change_offset("fstrong", 64, 94)
 sprite_change_offset("dstrong", 64, 94)
 sprite_change_offset("nspecial", 150, 194)

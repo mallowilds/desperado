@@ -7,9 +7,7 @@ var timer1 = window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) 
 if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || attack == AT_USPECIAL){
     trigger_b_reverse()
 }
-
 switch (attack) {
-    
     case AT_BAIR: 
     case AT_EXTRA_1:
         if window == 1 && window_timer == 1 && !hitpause {
