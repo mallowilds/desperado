@@ -21,6 +21,7 @@ make_window(AT_DAIR, 1,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium2"),
     AG_WINDOW_SFX_FRAME, 6,
+    AG_WINDOW_CUSTOM_GRAVITY, 0,
 )
 
 make_window(AT_DAIR, 2, //down
@@ -39,8 +40,9 @@ make_window(AT_DAIR, 3, //up (endlag)
     AG_WINDOW_LENGTH, 16,
     AG_WINDOW_ANIM_FRAMES, 3,
     AG_WINDOW_ANIM_FRAME_START, 2,
-    // Nope, handling this manually (attack_update.gml)
+    // Nope, handling this movement manually (attack_update.gml)
     AG_WINDOW_HAS_WHIFFLAG, 1,
+    AG_WINDOW_CUSTOM_GRAVITY, 0,
 )
 
 make_window(AT_DAIR, 4, //land (endlag)
@@ -48,6 +50,9 @@ make_window(AT_DAIR, 4, //land (endlag)
     AG_WINDOW_ANIM_FRAMES, 3,
     AG_WINDOW_ANIM_FRAME_START, 5,
     AG_WINDOW_HAS_WHIFFLAG, 1,
+    AG_WINDOW_HAS_CUSTOM_FRICTION, 1,
+    AG_WINDOW_CUSTOM_GROUND_FRICTION, 0.6,
+    AG_WINDOW_CUSTOM_GRAVITY, gravity_speed,
 )
 
 set_num_hitboxes(AT_DAIR, 2)

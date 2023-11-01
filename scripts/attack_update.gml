@@ -129,6 +129,7 @@ switch (attack) {
         if (!free && window != 4 && !hitpause) {
             window = 4;
             window_timer = 0;
+            destroy_hitboxes();
         }
         
         if (free && window == 4 && !hitpause) {
@@ -171,8 +172,8 @@ switch (attack) {
                 }
                 if (window_timer < 3) {
                     can_fast_fall = false;
-                    hsp = lerp(7*spr_dir, 0, window_timer/4);
-                    vsp = lerp(2.5, 0, window_timer/4);
+                    hsp = lerp(start_hsp, 0, window_timer/4);
+                    vsp = lerp(start_vsp, 0, window_timer/4);
                 }
                 else if (window_timer == 3) {
                     hsp = -2.5*(1/dairs_used)*spr_dir;
