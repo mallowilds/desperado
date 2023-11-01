@@ -87,7 +87,7 @@ switch (attack) {
         if (window == 2 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
             
             sound_play(sound_get("desp_shot"))
-            attack_end()
+            
             num_bullets--;
             if (num_bullets > 0) {
                 window = 2;
@@ -98,8 +98,11 @@ switch (attack) {
             }
         }
         
-        if (window == 2 && window_time_is(1)) create_nspec_shot(1, sprite_get("nspec_beam_segment"), sprite_get("nspec_beam_end"), 32);
-        if (window == 3 && window_time_is(1)) create_nspec_shot(2, sprite_get("nspec_beam_segment"), sprite_get("nspec_beam_end"), 32);
+        if (window_time_is(1)) {
+            attack_end()
+            if (window == 2) create_nspec_shot(1, sprite_get("nspec_beam_segment"), sprite_get("nspec_beam_end"), 32);
+            if (window == 3) create_nspec_shot(2, sprite_get("nspec_beam_segment"), sprite_get("nspec_beam_end"), 32);
+        }
         
         break;
         
