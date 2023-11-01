@@ -3,4 +3,8 @@
 // Called when your character dies.
 
 
+// Reset bullets
 num_bullets = 0;
+
+// Reset anti-stall checks
+dairs_used = 0;

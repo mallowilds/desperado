@@ -57,6 +57,8 @@ with oPlayer {
 sparkle_list = ds_list_create();        // particle list. implementation is taken from aur, hence the name
 nspec_shot_list = ds_list_create();     // similar particle manager for nspecial shots.
 
+dairs_used = 0;                         // dairs used per airtime
+
 
 char_height = 70 // 36 – 74. Purely aesthetic. Used for centering things on the character, placing the overhead HUD, etc
 

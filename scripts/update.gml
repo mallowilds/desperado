@@ -13,6 +13,9 @@ You can have up to 6 bullets, which have stacking effects on damage. I have the 
 -When fstrong is used (dw about this yet gonna animate first), 1 bullet is removed. If no bullets, its just a punch.
 
 */
+
+
+//#region SFX things
 if state == PS_CROUCH && state_timer == 1 && !hitpause {
     //sound_stop(wavedashsfx)
     //sound_play(wavedashsfx, 0, noone, 1, 1.3)
@@ -27,6 +30,15 @@ if state == PS_WAVELAND && state_timer == 0 && !hitpause {
     sound_play(wavedashsfx, 0, noone, 1, 1.3)
 
 }
+//#endregion
+
+
+//#region Anti-stall check management
+// Be sure to reset these in death.gml and got_hit.gml too!
+
+if (!free) dairs_used = 0;
+
+//#endregion
 
 
 //#region Flame management (drawn in post_draw.gml, added by update/attack_update.gml)

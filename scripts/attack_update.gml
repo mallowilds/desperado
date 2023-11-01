@@ -121,41 +121,70 @@ switch (attack) {
         }
     break;
     case AT_DAIR:
+        
+        can_wall_jump = true;
+        
+        
+        // Landing lag
+        if (!free && window != 4 && !hitpause) {
+            window = 4;
+            window_timer = 0;
+        }
+        
+        if (free && window == 4 && !hitpause) {
+            attack_end();
+            set_state(PS_IDLE_AIR);
+            hsp = clamp(hsp, leave_ground_max*-1, leave_ground_max);
+        }
+        
+        
+        
+        
+        if (window == 1 && !hitpause) {
+            can_move = false;
+            if (window_time_is(1)) {
+                stored_fast_fall = false;
+                dairs_used++;
+            }
+            
+            if (fast_falling) {
+                fast_falling = false;
+                can_fast_fall = false;
+                stored_fast_fall = true;
+                vsp = get_window_value(attack, window, AG_WINDOW_VSPEED);
+            }
+            
+        }
+        
+        if (window == 2 && (fast_falling || stored_fast_fall) && !hitpause) {
+            vsp = 9;
+            stored_fast_fall = false;
+        }
+        
         if (window == 3) {
             
-            // Version A: Floaty loop-back
-            var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
-            hsp = 3*cos(pi*window_timer/window_len)*spr_dir;
-            vsp = -7*sin(pi*window_timer/(1.3*window_len));
-            
-            /*
-            // Version B: Immediate jump back
-            if (window_time_is(1)) {
-                hsp = -2.5*spr_dir;
-                vsp = -7;
-                print_debug(":)");
-            }
-            else vsp += gravity_speed;
-            */
-            
-            /*
             // Version C: Pause and jump back
             if (!hitpause) {
-                if (window_timer < 4) {
+                if (window_timer == 1) {
+                    start_hsp = hsp;
+                    start_vsp = vsp;
+                }
+                if (window_timer < 3) {
+                    can_fast_fall = false;
                     hsp = lerp(7*spr_dir, 0, window_timer/4);
                     vsp = lerp(2.5, 0, window_timer/4);
                 }
-                else if (window_timer == 4) {
-                    hsp = -2.5*spr_dir;
-                    vsp = -7;
+                else if (window_timer == 3) {
+                    hsp = -2.5*(1/dairs_used)*spr_dir;
+                    vsp = -7*(1/dairs_used);
                 }
                 else {
                     vsp += gravity_speed;
                 }
             }
-            */
             
         }
+        break;
     case AT_USTRONG:
         if window > 1 && (window < 5 && window_timer < 17) {
             hud_offset = 60;

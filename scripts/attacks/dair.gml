@@ -1,18 +1,19 @@
 // dair.gml
 
 make_attack(AT_DAIR,
-    AG_CATEGORY, 1,
+    AG_CATEGORY, 2,
     AG_SPRITE, sprite_get("dair"),
     AG_NUM_WINDOWS, 3,
-    AG_HAS_LANDING_LAG, 1,
-    AG_LANDING_LAG, 4,
+    //AG_HAS_LANDING_LAG, 1,
+    //AG_LANDING_LAG, 4,
     AG_HURTBOX_SPRITE, sprite_get("dair_hurt"),
-    AG_USES_CUSTOM_GRAVITY, 1
+    AG_USES_CUSTOM_GRAVITY, 1,
+    AG_OFF_LEDGE, 1,
 )
 
 make_window(AT_DAIR, 1,
     AG_WINDOW_LENGTH, 7,
-    AG_WINDOW_ANIM_FRAMES, 3,
+    AG_WINDOW_ANIM_FRAMES, 1,
     
     AG_WINDOW_HSPEED, -2,
     AG_WINDOW_VSPEED, -1,
@@ -25,26 +26,28 @@ make_window(AT_DAIR, 1,
 make_window(AT_DAIR, 2, //down
     AG_WINDOW_LENGTH, 16,
     AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 3,
+    AG_WINDOW_ANIM_FRAME_START, 1,
     AG_WINDOW_VSPEED_TYPE, 2,
     AG_WINDOW_HSPEED_TYPE, 2,
-    AG_WINDOW_HSPEED, 9,
-    AG_WINDOW_VSPEED, 3,
-    AG_WINDOW_CUSTOM_AIR_FRICTION, 0.15,
-    AG_WINDOW_CUSTOM_GRAVITY, -0.05
+    AG_WINDOW_HSPEED, 13.5,
+    AG_WINDOW_VSPEED, 4, // Fast-fall vspeed set in attack_update.gml
+    AG_WINDOW_HAS_CUSTOM_FRICTION, 1,
+    AG_WINDOW_CUSTOM_AIR_FRICTION, 0.4,
+    AG_WINDOW_CUSTOM_GRAVITY, -0.1,
 )
-make_window(AT_DAIR, 3, //up
-    AG_WINDOW_LENGTH, 8,
-    AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 3,
+make_window(AT_DAIR, 3, //up (endlag)
+    AG_WINDOW_LENGTH, 16,
+    AG_WINDOW_ANIM_FRAMES, 3,
+    AG_WINDOW_ANIM_FRAME_START, 2,
     // Nope, handling this manually (attack_update.gml)
+    AG_WINDOW_HAS_WHIFFLAG, 1,
 )
 
-make_window(AT_DAIR, 4, //endlag
-    AG_WINDOW_LENGTH, 8,
-    AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 4,
-    AG_WINDOW_HAS_WHIFFLAG, 5,
+make_window(AT_DAIR, 4, //land (endlag)
+    AG_WINDOW_LENGTH, 15,
+    AG_WINDOW_ANIM_FRAMES, 3,
+    AG_WINDOW_ANIM_FRAME_START, 5,
+    AG_WINDOW_HAS_WHIFFLAG, 1,
 )
 
 set_num_hitboxes(AT_DAIR, 2)
