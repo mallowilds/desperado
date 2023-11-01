@@ -120,6 +120,42 @@ switch (attack) {
            sound_play(sound_get("desp_breathsmall"))
         }
     break;
+    case AT_DAIR:
+        if (window == 3) {
+            
+            // Version A: Floaty loop-back
+            var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
+            hsp = 3*cos(pi*window_timer/window_len)*spr_dir;
+            vsp = -7*sin(pi*window_timer/(1.3*window_len));
+            
+            /*
+            // Version B: Immediate jump back
+            if (window_time_is(1)) {
+                hsp = -2.5*spr_dir;
+                vsp = -7;
+                print_debug(":)");
+            }
+            else vsp += gravity_speed;
+            */
+            
+            /*
+            // Version C: Pause and jump back
+            if (!hitpause) {
+                if (window_timer < 4) {
+                    hsp = lerp(7*spr_dir, 0, window_timer/4);
+                    vsp = lerp(2.5, 0, window_timer/4);
+                }
+                else if (window_timer == 4) {
+                    hsp = -2.5*spr_dir;
+                    vsp = -7;
+                }
+                else {
+                    vsp += gravity_speed;
+                }
+            }
+            */
+            
+        }
     case AT_USTRONG:
         if window > 1 && (window < 5 && window_timer < 17) {
             hud_offset = 60;

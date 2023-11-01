@@ -7,12 +7,14 @@ make_attack(AT_DAIR,
     AG_HAS_LANDING_LAG, 1,
     AG_LANDING_LAG, 4,
     AG_HURTBOX_SPRITE, sprite_get("dair_hurt"),
+    AG_USES_CUSTOM_GRAVITY, 1
 )
 
 make_window(AT_DAIR, 1,
     AG_WINDOW_LENGTH, 7,
     AG_WINDOW_ANIM_FRAMES, 3,
     
+    AG_WINDOW_HSPEED, -2,
     AG_WINDOW_VSPEED, -1,
     
     AG_WINDOW_HAS_SFX, 1,
@@ -26,20 +28,19 @@ make_window(AT_DAIR, 2, //down
     AG_WINDOW_ANIM_FRAME_START, 3,
     AG_WINDOW_VSPEED_TYPE, 2,
     AG_WINDOW_HSPEED_TYPE, 2,
-    AG_WINDOW_VSPEED, 2,
     AG_WINDOW_HSPEED, 9,
+    AG_WINDOW_VSPEED, 3,
+    AG_WINDOW_CUSTOM_AIR_FRICTION, 0.15,
+    AG_WINDOW_CUSTOM_GRAVITY, -0.05
 )
 make_window(AT_DAIR, 3, //up
-    AG_WINDOW_LENGTH, 5,
+    AG_WINDOW_LENGTH, 8,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 3,
-    AG_WINDOW_VSPEED_TYPE, 1,
-    AG_WINDOW_HSPEED_TYPE, 2,
-    AG_WINDOW_VSPEED, -6.5,
-    AG_WINDOW_HSPEED, 2,
+    // Nope, handling this manually (attack_update.gml)
 )
 
-make_window(AT_DAIR, 3, //endlag
+make_window(AT_DAIR, 4, //endlag
     AG_WINDOW_LENGTH, 8,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 4,
