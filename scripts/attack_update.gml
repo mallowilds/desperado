@@ -4,7 +4,7 @@
 var timer1 = window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) && window == 1 && !hitpause
 
 //B - Reversals
-if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || attack == AT_USPECIAL){
+if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || attack == AT_USPECIAL || attack == AT_DAIR){
     trigger_b_reverse()
 }
 switch (attack) {
@@ -172,11 +172,11 @@ switch (attack) {
                 }
                 if (window_timer < 3) {
                     can_fast_fall = false;
-                    hsp = lerp(start_hsp, 2.5*spr_dir, window_timer/4);
+                    hsp = lerp(start_hsp, 1*spr_dir, window_timer/4);
                     vsp = lerp(start_vsp, 0, window_timer/4);
                 }
                 else if (window_timer == 3) {
-                    hsp = 2.5*spr_dir;
+                    hsp = 1*spr_dir;
                     vsp = -7*(1/dairs_used);
                 }
                 else {
