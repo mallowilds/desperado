@@ -172,11 +172,11 @@ switch (attack) {
                 }
                 if (window_timer < 3) {
                     can_fast_fall = false;
-                    hsp = lerp(start_hsp, 0, window_timer/4);
+                    hsp = lerp(start_hsp, 2.5*spr_dir, window_timer/4);
                     vsp = lerp(start_vsp, 0, window_timer/4);
                 }
                 else if (window_timer == 3) {
-                    hsp = -2.5*(1/dairs_used)*spr_dir;
+                    hsp = 2.5*spr_dir;
                     vsp = -7*(1/dairs_used);
                 }
                 else {
