@@ -123,7 +123,7 @@ switch (attack) {
     case AT_DAIR:
         
         can_wall_jump = true;
-        
+        can_move = false;
         
         // Landing lag
         if (!free && window != 4 && !hitpause) {
