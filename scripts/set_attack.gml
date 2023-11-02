@@ -4,7 +4,9 @@
 
 
 switch attack {
-    
+    case AT_JAB:
+        //attack = AT_INTRO //just used to test the intro lol
+        break;
     // Empowered BAir
     case AT_BAIR:
         if (num_bullets >= 4) attack = AT_EXTRA_1;

@@ -7,6 +7,7 @@
 
 //done
 sprite_change_offset("idle", 150, 194)
+sprite_change_offset("intro", 150, 194)
 sprite_change_offset("desp_hurt", 150, 194)
 sprite_change_offset("hurt", 150, 194)
 sprite_change_offset("uphurt", 150, 194)

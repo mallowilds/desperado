@@ -14,6 +14,7 @@ You can have up to 6 bullets, which have stacking effects on damage. I have the 
 
 */
 
+if (get_gameplay_time() == 4 && has_intro) set_attack(AT_INTRO);
 
 //#region SFX things
 if state == PS_CROUCH && state_timer == 1 && !hitpause {

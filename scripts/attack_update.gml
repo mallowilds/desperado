@@ -8,7 +8,29 @@ if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || a
     trigger_b_reverse()
 }
 switch (attack) {
+    case 2: //intro
+        if window == 1 && (window_timer == 39 || window_timer == 55) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+            sound_play(asset_get("sfx_kragg_spike"), 0, noone, .3, 1.1)
+        }
+        if window == 2 {
+            switch (window_timer) {
+                case 1: 
+                   // sound_play(sound_get("desp_whisper"))
+                    sound_play(sound_get("desp_breathsmall"))
+                    sound_play(asset_get("sfx_syl_ustrong_part2"), 0, noone, .6, .9)
+                    sound_play(sound_get("desp_swinglow"), 0, noone, .6, .9)
+                    break;
+                case 11:
+                    sound_play(asset_get("sfx_syl_ustrong_part2"), 0, noone, .6, 1.1)
+                    break;
+                case 31:
+                    sound_play(sound_get("sfx_snb_clothes"))
+                    break;
+            }
+        }
+    break;
     case AT_BAIR: 
+    break;
     case AT_EXTRA_1:
         if window == 1 && window_timer == 1 && !hitpause {
             sound_play(sound_get("desp_whip"), 0, noone, .8, 1 )
@@ -27,6 +49,7 @@ switch (attack) {
         
         if window == 2 && window_timer == 1 && !hitpause {
             sound_play(sound_get("desp_whisper"))
+
         }
         
         if window == 3 && window_timer == 1 && !hitpause {
