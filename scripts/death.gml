@@ -8,3 +8,4 @@ num_bullets = 0;
 
 // Reset anti-stall checks
 dairs_used = 0;
+move_cooldown[AT_DSPECIAL] = 0;

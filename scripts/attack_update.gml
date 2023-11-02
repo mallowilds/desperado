@@ -38,6 +38,8 @@ switch (attack) {
     break;    
     
     case AT_DSPECIAL:
+        move_cooldown[AT_DSPECIAL] = 70;
+    
         set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
         if (vsp > 3) vsp = 3;
         hsp = clamp (hsp, -2.5, 2.5);

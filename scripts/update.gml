@@ -31,13 +31,19 @@ if state == PS_WAVELAND && state_timer == 0 && !hitpause {
     sound_play(wavedashsfx, 0, noone, 1, 1.3)
 
 }
+if state == PS_LANDING_LAG && (attack == AT_BAIR || attack == AT_EXTRA_1) {
+    sound_stop(sound_get("desp_whip"));
+}
 //#endregion
 
 
 //#region Anti-stall check management
-// Be sure to reset these in death.gml and got_hit.gml too!
+// Be sure to also reset these in death.gml and got_hit.gml as needed!
 
-if (!free) dairs_used = 0;
+if (!free) {
+    dairs_used = 0;
+    move_cooldown[AT_DSPECIAL] = 0;
+}
 
 //#endregion
 
@@ -66,6 +72,7 @@ for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
     }
 }
 //#endregion
+
 
 
 //#region Reset fractional damage on enemy death

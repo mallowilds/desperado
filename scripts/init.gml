@@ -60,6 +60,8 @@ nspec_shot_list = ds_list_create();     // similar particle manager for nspecial
 dairs_used = 0;                         // dairs used per airtime
 
 
+
+
 char_height = 70 // 36 – 74. Purely aesthetic. Used for centering things on the character, placing the overhead HUD, etc
 
 

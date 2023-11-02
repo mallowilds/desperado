@@ -7,15 +7,18 @@ hbox = my_hitboxID.hbox_num
 
 //#region Damage multiplier & 4+ Bullet SFX
 
+
 // Base amp
 var mult_damage_add = my_hitboxID.damage * (num_bullets*bullet_mult);
 take_damage(hit_player_obj.player, player, floor(mult_damage_add));
 
 // Buffer non-integer damage, apply buffer as needed
-hit_player_obj.u_mult_damage_buffer += mult_damage_add - floor(mult_damage_add);
-if (hit_player_obj.u_mult_damage_buffer >= 1) {
-    take_damage(hit_player_obj.player, player, floor(hit_player_obj.u_mult_damage_buffer));
-    hit_player_obj.u_mult_damage_buffer -= floor(hit_player_obj.u_mult_damage_buffer);
+if (!hit_player_obj.clone) {
+	hit_player_obj.u_mult_damage_buffer += mult_damage_add - floor(mult_damage_add);
+	if (hit_player_obj.u_mult_damage_buffer >= 1) {
+	    take_damage(hit_player_obj.player, player, floor(hit_player_obj.u_mult_damage_buffer));
+	    hit_player_obj.u_mult_damage_buffer -= floor(hit_player_obj.u_mult_damage_buffer);
+	}
 }
 
 if (my_hitboxID.damage + mult_damage_add > 3 && num_bullets >= 4) {

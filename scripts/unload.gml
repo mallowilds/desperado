@@ -7,3 +7,4 @@
 print_debug("Destroying particle lists.");
 
 ds_list_destroy(sparkle_list);
+ds_list_destroy(nspec_shot_list);
