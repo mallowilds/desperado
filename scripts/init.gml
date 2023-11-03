@@ -211,6 +211,7 @@ air_dodge_sound = 0;
 //custom intro
 AT_INTRO = 2; //the attack index the intro uses, 2 doesn't overwrite any other attack
 has_intro = true; //change to false if you don't have one/don't want it active
+AG_MUNO_ATTACK_NAME = 70; // this can be any number you want!
 
 // VFX
 hfx_bone_large = hit_fx_create(sprite_get("vfx_bone_large"), 28)

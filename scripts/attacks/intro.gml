@@ -9,6 +9,7 @@ make_attack(AT_INTRO,
     AG_NUM_WINDOWS, 2,
     AG_OFF_LEDGE, 1,
     AG_HURTBOX_SPRITE, asset_get("desp_hurt"),
+    AG_MUNO_ATTACK_NAME, "Intro"
 )
 
 make_window(AT_INTRO, 1,

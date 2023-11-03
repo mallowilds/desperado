@@ -41,9 +41,11 @@ switch (attack) {
         move_cooldown[AT_DSPECIAL] = 70;
     
         set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
-        if (vsp > 3) vsp = 3;
-        hsp = clamp (hsp, -2.5, 2.5);
-        can_fast_fall = false;
+        if window != 3 {
+            if (vsp > 3) vsp = 3;
+            hsp = clamp (hsp, -2.5, 2.5);
+            can_fast_fall = false;
+        }
         
         if window == 1 && window_timer == 1 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
             if (vsp > 0) vsp = 0;
@@ -63,7 +65,7 @@ switch (attack) {
             else create_hitbox(AT_DSPECIAL, 1, x-(4*spr_dir), y-6); // Wasted bullet visual
         }
         
-        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH) - 4 && !hitpause && !free) {
+        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause && !free) {
             window = 1;
             window_timer = 4;
         }
