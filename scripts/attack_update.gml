@@ -37,7 +37,7 @@ switch (attack) {
     break;    
     case AT_NAIR:
         if window == 3 {
-            if attack_pressed {
+            if attack_pressed || (window_timer > 5 && attack_down) {
                 window = 4
                 window_timer = 1
             }
