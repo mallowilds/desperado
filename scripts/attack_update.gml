@@ -30,13 +30,23 @@ switch (attack) {
         }
     break;
     case AT_BAIR: 
-    break;
-    case AT_EXTRA_1:
+    case AT_EXTRA_1://bair 2
         if window == 1 && window_timer == 1 && !hitpause {
             sound_play(sound_get("desp_whip"), 0, noone, .8, 1 )
         }
     break;    
-    
+    case AT_NAIR:
+        if window == 3 {
+            if attack_pressed {
+                window = 4
+                window_timer = 1
+            }
+            if window_timer == get_window_value(AT_NAIR, 3, AG_WINDOW_LENGTH) && !hitpause{
+                attack_end();
+                set_state(PS_IDLE_AIR)
+            }
+        }
+    break;
     case AT_DSPECIAL:
         move_cooldown[AT_DSPECIAL] = 70;
     

@@ -6,86 +6,127 @@ make_attack(AT_NAIR,
     AG_HAS_LANDING_LAG, 1,
     AG_LANDING_LAG, 4,
     AG_HURTBOX_SPRITE, sprite_get("nair_hurt"),
-    AG_NUM_WINDOWS, 4,
+    AG_NUM_WINDOWS, 6,
 )
 
-make_window(AT_NAIR, 1,
+make_window(AT_NAIR, 1, //startup 1
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
-    AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_ANIM_FRAME_START, 1,
+    AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, asset_get("sfx_swipe_weak1"),
+    AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
     AG_WINDOW_SFX_FRAME, 4,
 )
 
-make_window(AT_NAIR, 2,
+make_window(AT_NAIR, 2, //active 2
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 8,
-    AG_WINDOW_ANIM_FRAMES, 3,
-    AG_WINDOW_ANIM_FRAME_START, 3,
-    AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
-    AG_WINDOW_SFX_FRAME, 7,
-)
-
-make_window(AT_NAIR, 3,
-    AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 4,
+    AG_WINDOW_LENGTH, 2,
     AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 6,
+    AG_WINDOW_ANIM_FRAME_START, 1,
+
 )
 
-make_window(AT_NAIR, 4,
+make_window(AT_NAIR, 3, //endlag 1
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 16,
     AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_ANIM_FRAME_START, 7,
-    AG_WINDOW_HAS_WHIFFLAG, 4,
+    AG_WINDOW_ANIM_FRAME_START, 2,
+   // AG_WINDOW_HAS_WHIFFLAG, 1,
 )
 
-set_num_hitboxes(AT_NAIR, 2);
+make_window(AT_NAIR, 4, //startup 2
+    AG_WINDOW_TYPE, 1,
+    AG_WINDOW_LENGTH, 5,
+    AG_WINDOW_ANIM_FRAMES, 1,
+    AG_WINDOW_ANIM_FRAME_START, 4,
+    AG_WINDOW_HAS_SFX, 1,
+    AG_WINDOW_SFX, asset_get("sfx_swipe_medium2"),
+    AG_WINDOW_SFX_FRAME, 4,
+)
+
+make_window(AT_NAIR, 5, //active 2
+    AG_WINDOW_TYPE, 1,
+    AG_WINDOW_LENGTH, 2,
+    AG_WINDOW_ANIM_FRAMES, 1,
+    AG_WINDOW_ANIM_FRAME_START, 5,
+
+)
+
+make_window(AT_NAIR, 6, //endlag 1
+    AG_WINDOW_TYPE, 1,
+    AG_WINDOW_LENGTH, 16,
+    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_ANIM_FRAME_START, 6,
+    AG_WINDOW_HAS_WHIFFLAG, 1,
+)
+
+set_num_hitboxes(AT_NAIR, 3);
 
 make_hitbox(AT_NAIR, 1,
     HG_WINDOW, 2,
-    HG_LIFETIME, 4,
+    HG_LIFETIME, 2,
 
-    HG_HITBOX_X, 40,
-    HG_HITBOX_Y, -34,
+    HG_HITBOX_X, -4,
+    HG_HITBOX_Y, -2,
 
-    HG_WIDTH, 50,
-    HG_HEIGHT, 106,
+    HG_WIDTH, 86,
+    HG_HEIGHT, 29,
 
     HG_PRIORITY, 1,
-    HG_DAMAGE, 6,
-    HG_ANGLE, 45,
-    HG_BASE_KNOCKBACK, 6,
-    HG_KNOCKBACK_SCALING, .5,
-    HG_BASE_HITPAUSE, 5,
-    HG_HITPAUSE_SCALING, .5,
-
-    HG_HIT_SFX, asset_get("sfx_blow_medium3"),
+    HG_DAMAGE, 4,
+    HG_ANGLE, 40,
+    HG_BASE_KNOCKBACK, 5,
+    HG_KNOCKBACK_SCALING, .1,
+    HG_BASE_HITPAUSE, 4,
+    HG_HITPAUSE_SCALING, .3,
+    HG_HITSTUN_MULTIPLIER, .8,
+    
+    HG_HIT_SFX, asset_get("sfx_blow_medium2"),
 );
 
 make_hitbox(AT_NAIR, 2,
-    HG_WINDOW, 3,
-    HG_LIFETIME, 4,
-    
-    HG_HITBOX_X, -46,
+    HG_WINDOW, 2,
+    HG_LIFETIME, 2,
+
+    HG_HITBOX_X, 45,
     HG_HITBOX_Y, -20,
-    HG_WIDTH, 50,
+
+    HG_WIDTH, 67,
+    HG_HEIGHT, 27,
+
+    HG_PRIORITY, 1,
+    HG_DAMAGE, 4,
+    HG_ANGLE, 40,
+    HG_BASE_KNOCKBACK, 5,
+    HG_KNOCKBACK_SCALING, .1,
+    HG_BASE_HITPAUSE, 4,
+    HG_HITPAUSE_SCALING, .3,
+    HG_HITSTUN_MULTIPLIER, .8,
+
+
+    HG_HIT_SFX, asset_get("sfx_blow_medium2"),
+);
+
+
+make_hitbox(AT_NAIR, 3,
+    HG_WINDOW, 5,
+    HG_LIFETIME, 2,
+    
+    HG_HITBOX_X, 34,
+    HG_HITBOX_Y, -5,
+    HG_WIDTH, 63,
     HG_HEIGHT, 88,
     
     HG_PRIORITY, 1,
-    HG_DAMAGE, 6,
-    HG_ANGLE, 85,
+    HG_DAMAGE, 5,
+    HG_ANGLE, 45,
     //HG_ANGLE_FLIPPER, 3,
     HG_BASE_KNOCKBACK, 6,
     HG_KNOCKBACK_SCALING, .5,
     HG_BASE_HITPAUSE, 7,
     HG_HITPAUSE_SCALING, .6,
-    
-    HG_HIT_SFX, asset_get("sfx_blow_medium2"),
+    HG_VISUAL_EFFECT, 304,
+    HG_HIT_SFX, asset_get("sfx_blow_medium3"),
     HG_HITBOX_GROUP, 2,
 );
 
