@@ -2,25 +2,22 @@
 // https://rivalslib.com/workshop_guide/programming/reference/scripts/animation_scripts.html#draw-scripts
 // Draws in FRONT of your character
 
-
 shader_start();
 
 // Skull rendering
 if (head.state == 0) {
 	
 	var _s = null;
-	var _image_index = image_index;
 	
 	for (var i = 0; i < array_length(anim_list); i++) {
 		if (sprite_index == sprite_get(anim_list[i])) {
-			sprite_index = sprite_get(anim_list[i]+"_detached");
 			_s = anim_list[i];
 		}
 	}
 	
 	if (_s != null) {
 	    _s = _s + "_skull";
-	    draw_sprite_ext(sprite_get(_s), _image_index, x, y, spr_dir, 1, 0, c_white, 1);
+	    draw_sprite_ext(sprite_get(_s), image_index, x, y, spr_dir, 1, 0, c_white, 1);
 	    print_debug(image_index);
 	}
 	
