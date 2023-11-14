@@ -149,7 +149,7 @@ switch (attack) {
 		can_fast_fall = false;
 		switch(window){
 			case 1:
-				if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) - 2 {
+				if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) - 2 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					sound_play(asset_get("sfx_spin"));
 				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
 					set_head_state(AT_FSPECIAL);
@@ -171,7 +171,7 @@ switch (attack) {
 		can_fast_fall = false;
 		switch(window){
 			case 1:
-				if window_timer == 1 {
+				if window_timer == 1 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					set_head_state(AT_FSPECIAL);
 					head.spr_dir = spr_dir;
 				}

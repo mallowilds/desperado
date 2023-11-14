@@ -151,7 +151,7 @@ techroll_speed = 10 // 8 – 11. The speed during techroll’s movement
 
 // Landing
 land_time = 4 // 4 – 6. The number of frames in your normal landing state
-prat_land_time = 10 // 3 – 24. The number of frames in your prat land state
+prat_land_time = 15 // 3 – 24. The number of frames in your prat land state
 wave_land_time = 12 // 6 – 12 usually 8. The number of frames your waveland state lasts
 wave_land_adj = 1.1 // 1.2 – 1.5. The multiplier to your initial hsp when wavelanding. Usually greater than 1
 wave_friction = 0.15 // 0 – .15. Grounded deceleration when wavelanding

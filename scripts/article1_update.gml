@@ -213,7 +213,7 @@ switch (state) {
 			
 			case 1:
 				image_index = (window_timer / 9);
-				if (window_timer == 16) {
+				if (window_timer == 16) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					sound_play(asset_get("sfx_spin"));
 				} else if (window_timer >= 18) {
 					window = 2;
@@ -225,7 +225,7 @@ switch (state) {
 				image_index = 2+((window_timer / 2)%2);
 				hsp = 10*spr_dir;
 				
-				if (window_timer == 1) {
+				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
 					hitbox.spr_dir = spr_dir;
 				}
@@ -270,11 +270,11 @@ switch (state) {
 				x = player_id.x;
 				hsp = player_id.hsp;
 				
-				if (window_timer == 1) {
+				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					sound_play(asset_get("sfx_spin"));
 				}
 				
-				if (window_timer == 1) {
+				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hitbox = create_hitbox(AT_DSPECIAL, 1, x, y);
 					hitbox.spr_dir = spr_dir;
 				}
@@ -316,7 +316,7 @@ switch (state) {
 			
 			case 1:
 				image_index = (window_timer / 15);
-				if (window_timer == 30) {
+				if (window_timer == 30) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					sound_play(asset_get("sfx_spin"));
 				} else if (window_timer >= 32) {
 					window = 2;
@@ -334,7 +334,7 @@ switch (state) {
 				hsp = lengthdir_x(move_speed, move_angle);
 				vsp = lengthdir_y(move_speed, move_angle);
 				
-				if (window_timer == 1) {
+				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hitbox = create_hitbox(AT_DSPECIAL_2, 1, x, y);
 					hitbox.spr_dir = spr_dir;
 				}
@@ -386,7 +386,7 @@ switch (state) {
 			case 2:
 				image_index = 4+(window_timer*5/15);
 				
-				if (window_timer == 3) {
+				if (window_timer == 3) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hitbox = create_hitbox(AT_NSPECIAL, 1, x, y-20);
 					hitbox.spr_dir = spr_dir;
 				} else if (window_timer >= 14) {
@@ -429,7 +429,7 @@ switch (state) {
 			
 			case 1:
 				image_index = 0;
-				if (window_timer == 13) {
+				if (window_timer == 13) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					sound_play(asset_get("sfx_swipe_heavy2"));
 				} else if (window_timer >= 15) {
 					window = 2;
@@ -440,7 +440,7 @@ switch (state) {
 			case 2:
 				image_index = 1;
 				
-				if (window_timer == 1) {
+				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hitbox = create_hitbox(AT_USTRONG, 2, x+(10*spr_dir), y-62);
 					hitbox.spr_dir = spr_dir;
 				}
@@ -560,3 +560,12 @@ window_timer++;
 	var _xdist = abs(x-player_id.x);
 	var _ydist = abs(y-(player_id.y-24));
 	return _xdist <= 12 && _ydist <= 28
+
+// #region vvv LIBRARY DEFINES AND MACROS vvv
+// DANGER File below this point will be overwritten! Generated defines and macros below.
+// Write NO-INJECT in a comment above this area to disable injection.
+#define window_time_is(frame) // Version 0
+    // Returns if the current window_timer matches the frame AND the attack is not in hitpause
+    return window_timer == frame and !hitpause
+// DANGER: Write your code ABOVE the LIBRARY DEFINES AND MACROS header or it will be overwritten!
+// #endregion

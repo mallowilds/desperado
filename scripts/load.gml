@@ -60,6 +60,8 @@ sprite_change_offset("utilt",150, 194)
 sprite_change_offset("ftilt", 150, 194)
 sprite_change_offset("uair", 150, 194)
 sprite_change_offset("dair", 150, 194)
+sprite_change_offset("pratfall", 150, 194)
+
 
 sprite_change_offset("idle_skull", 150, 194)
 sprite_change_offset("intro_skull", 150, 194)
@@ -114,6 +116,7 @@ sprite_change_offset("utilt_skull",150, 194)
 sprite_change_offset("ftilt_skull", 150, 194)
 sprite_change_offset("uair_skull", 150, 194)
 sprite_change_offset("dair_skull", 150, 194)
+sprite_change_offset("pratfall_skull", 150, 194)
 
 
 sprite_change_offset("skullidle", 150, 194)
@@ -130,7 +133,6 @@ sprite_change_offset("nspec_beam_segment", 0, 16);
 sprite_change_offset("nspec_beam_end", 0, 30);
 
 //not done
-sprite_change_offset("pratfall", 64, 94)
 sprite_change_offset("land", 150, 194)
 
 
