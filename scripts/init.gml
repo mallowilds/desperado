@@ -101,7 +101,7 @@ wave_friction = 0.15 // 0 – .15. Grounded deceleration when wavelanding
 // Air Movement
 air_dodge_speed = 7.5 // 7.5 – 8	The speed during airdodge’s movement
 
-air_accel = .35 // .2 – .4. The hsp acceleration applied when you hold left or right in a normal aerial state
+air_accel = .43 // .2 – .4. The hsp acceleration applied when you hold left or right in a normal aerial state
 prat_fall_accel = .85 // .4 – 1.5.	A multiplier to your normal horizontal aerial acceleration: 1 = normal 0 = no acceleration
 air_friction = .02 // .02 – .07. Natural deceleration applied while in the air. Also applies while in hitstun, increasing survivability
 
