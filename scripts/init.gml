@@ -59,6 +59,64 @@ nspec_shot_list = ds_list_create();     // similar particle manager for nspecial
 
 dairs_used = 0;                         // dairs used per airtime
 
+//Article
+head = instance_create(x, y, "obj_article1");
+hit_cancel = false;
+head_lockout = false;
+
+anim_list = [
+    "idle",
+    "desp_hurt",
+    "hurt",
+    "uphurt",
+    "downhurt",
+    "bighurt",
+    "bouncehurt",
+    "spinhurt",
+    "hurtground",
+    "desp_hitstun_hurt",
+    "crouch",
+    "desp_crouch_hurt",
+    "walk",
+    "walkturn",
+    "dash",
+    "dashstart",
+    "dashstop",
+    "dashturn",
+    "jumpstart",
+    "jump",
+    "doublejump",
+    "jab",
+    "fair",
+    "bair",
+    "roll_forward",
+    "roll_backward",
+    "uspecial",
+    "dtilt",
+    "airdodge",
+    "airdodge_forward",
+    "airdodge_up",
+    "airdodge_upforward",
+    "airdodge_forward",
+    "airdodge_downforward",
+    "airdodge_down",
+    "airdodge_downback",
+    "airdodge_back",
+    "airdodge_upback",
+    "dattack",
+    "waveland",
+    "tech",
+    "walljump",
+    "landinglag",
+    "nair",
+    "ustrong",
+    "parry",
+    "dspecial",
+    "utilt",
+    "ftilt",
+    "uair",
+    "dair",
+    ];
 
 
 
