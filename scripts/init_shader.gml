@@ -1,6 +1,10 @@
 // init_shader.gml
 // https://rivalslib.com/workshop_guide/programming/reference/scripts/init_and_attack_scripts.html#initializing-graphics
 
+// Reset article color slots
+for (var i = 0; i <= 7; i++) set_article_color_slot(i, get_color_profile_slot_r(get_player_color(player), i), get_color_profile_slot_g(get_player_color(player), i), get_color_profile_slot_b(get_player_color(player), i), 1);
+
+
 switch get_player_color(player) {
     
     case 0:

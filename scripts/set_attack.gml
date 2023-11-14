@@ -12,5 +12,8 @@ switch attack {
         if (num_bullets >= 4) attack = AT_EXTRA_1;
         break;
     
+    case AT_FSPECIAL:
+        if (head.state != 0) attack = AT_FSPECIAL_2;
+        break;
     
 }

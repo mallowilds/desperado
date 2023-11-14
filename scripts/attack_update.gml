@@ -143,6 +143,47 @@ switch (attack) {
         
         break;
         
+        
+    case AT_FSPECIAL:
+		can_move = false;
+		can_fast_fall = false;
+		switch(window){
+			case 1:
+				if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) - 2 {
+					sound_play(asset_get("sfx_spin"));
+				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
+					set_head_state(AT_FSPECIAL);
+					head.window = 2;
+					head.spr_dir = spr_dir;
+					head.x = x;
+					head.y = y-36;
+				}
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+		}
+		break;
+	
+	case AT_FSPECIAL_2:
+		can_move = false;
+		can_fast_fall = false;
+		switch(window){
+			case 1:
+				if window_timer == 1 {
+					set_head_state(AT_FSPECIAL);
+					head.spr_dir = spr_dir;
+				}
+				break;
+			case 2:
+				break;
+			case 3:
+				break;
+		}
+		break;
+		
+	
     case AT_USPECIAL:
         can_move = false;
         can_fast_fall = false;
@@ -237,16 +278,14 @@ switch (attack) {
 }
 
 
-if (attack == AT_FSPECIAL) {
-    if (window == 2){
-        if (special_pressed) {
-            window = 3
-            window_timer = 0
-            destroy_hitboxes()
-        }
-    }
-    can_fast_fall = false
-}
+
+#define set_head_state(new_state)
+    head.state = new_state;
+    head.state_timer = 0;
+    head.window = 1;
+    head.window_timer = 1;
+    return;
+
 
 
 #define centered_rect_meeting(_x, _y, _w, _h, obj)

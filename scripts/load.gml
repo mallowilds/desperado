@@ -115,6 +115,12 @@ sprite_change_offset("ftilt_skull", 150, 194)
 sprite_change_offset("uair_skull", 150, 194)
 sprite_change_offset("dair_skull", 150, 194)
 
+
+sprite_change_offset("skullidle", 150, 194)
+sprite_change_offset("skullactive", 150, 194)
+sprite_change_offset("skullhurt", 150, 194)
+sprite_change_offset("skulldie", 150, 194)
+
 sprite_change_offset("fire1", 10, 10);
 sprite_change_offset("fire2", 10, 10);
 sprite_change_offset("fire3", 10, 10);

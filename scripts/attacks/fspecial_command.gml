@@ -1,6 +1,6 @@
 // fspecial.gml
 
-make_attack(AT_FSPECIAL,
+make_attack(AT_FSPECIAL_2,
     AG_CATEGORY, 2,
     AG_SPRITE, sprite_get("fspecial"),
     AG_NUM_WINDOWS, 3,
@@ -9,7 +9,7 @@ make_attack(AT_FSPECIAL,
     AG_HURTBOX_SPRITE, sprite_get("fspecial_hurt"),
 )
 
-make_window(AT_FSPECIAL, 1,
+make_window(AT_FSPECIAL_2, 1,
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 10,
     AG_WINDOW_ANIM_FRAMES, 2,
@@ -20,23 +20,23 @@ make_window(AT_FSPECIAL, 1,
     AG_WINDOW_SFX_FRAME, 8,
 )
 
-make_window(AT_FSPECIAL, 2,
+make_window(AT_FSPECIAL_2, 2,
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 2,
 )
 
-make_window(AT_FSPECIAL, 3,
+make_window(AT_FSPECIAL_2, 3,
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 16,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 4,
 )
 
-set_num_hitboxes(AT_FSPECIAL, 1);
+set_num_hitboxes(AT_FSPECIAL_2, 1);
 
-make_hitbox(AT_FSPECIAL, 1,
+make_hitbox(AT_FSPECIAL_2, 1,
     HG_HITBOX_TYPE, 2,
     HG_LIFETIME, 14,
     HG_WIDTH, 50,

@@ -32,8 +32,8 @@ if (head.state == 0) {
     	    shader_start();
     	    draw_sprite_ext(sprite_get(_s), image_index, x, y, spr_dir, 1, 0, c_white, 1);
     	    shader_end();
-    	    // Reset article color slots
-            for (var i = 0; i <= 7; i++) set_article_color_slot(i, get_color_profile_slot_r(get_player_color(player), i), get_color_profile_slot_g(get_player_color(player), i), get_color_profile_slot_b(get_player_color(player), i), 1);
+    	    init_shader();
+    	    
 	    }
 	    
         if (invincible || attack_invince || initial_invince || hurtboxID.dodging) {

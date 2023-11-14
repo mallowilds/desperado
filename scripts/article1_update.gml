@@ -34,7 +34,7 @@ switch (state) {
 	//#region State 1: Idle	----------------------------------------------------
 	case 1:
 		visible = true;
-	    sprite_index = sprite_get("head_idle");
+	    sprite_index = sprite_get("skullidle");
 	    image_index = state_timer * player_id.idle_anim_speed;
 	    vsp = 0;
 	    hsp = 0;
@@ -206,7 +206,7 @@ switch (state) {
 	//#region Attack: AT_FSPECIAL ----------------------------------------------
 	case AT_FSPECIAL:
 		visible = true;
-	    sprite_index = sprite_get("head_fspecial");
+	    sprite_index = sprite_get("skullactive");
 	    player_id.head_lockout = true;
 		
 		switch (window) {

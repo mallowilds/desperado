@@ -59,6 +59,4 @@ shader_end();
 
 
 // Reset article color slots
-for (var i = 0; i <= 5; i++) {
-    set_article_color_slot(i, get_color_profile_slot_r(player_color, i), get_color_profile_slot_g(player_color, i), get_color_profile_slot_b(player_color, i));
-}
+init_shader();

@@ -84,6 +84,25 @@ with oPlayer {
 //#endregion
 
 
+//#region Skull article management
+
+// Lock out commands if head is in a busy state
+if (head_lockout) {
+    move_cooldown[AT_FSPECIAL] = 2;
+    move_cooldown[AT_FSPECIAL_2] = 2;
+}
+
+if (!instance_exists(head)) {
+    head = instance_create(x, y, "obj_article1");
+    print_debug("------------------------------------------------------------------------------------");
+    print_debug("Spawning new skull. If this occurs, something has gone wrong.");
+    print_debug("Please ensure that opposing characters aren't improperly destroying enemy articles.");
+    print_debug("------------------------------------------------------------------------------------");
+}
+
+//#endregion
+
+
 
 #define spawn_sparkle(seed1, seed2)
     var sparkle_type = random_func_2(seed1, 3, true);
