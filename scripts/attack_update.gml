@@ -208,7 +208,7 @@ switch (attack) {
     		case 2:
     			move_cooldown[AT_USPECIAL] = 999;
     			// Reminder: this check is rendered in debug_draw, so update accordingly~
-    			if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(36*spr_dir), y-60, 40, 60, head_obj)) {
+    			if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(36*spr_dir), y-53, 40, 74, head_obj)) {
 		        	set_head_state(0);
 		        	window = 4;
 		        	window_timer = 0;

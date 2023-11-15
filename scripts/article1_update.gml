@@ -165,9 +165,9 @@ switch (state) {
 					hitbox.head_obj = self;
 				}
 				
-				// End just before hitting ground
+				// End just before hitting ground (or if it takes too long)
 				var offset = (vsp > 4 ? 30 : 5*vsp + 10);
-				if ( vsp > 0 && (position_meeting(x, y+offset, asset_get("par_block")) || position_meeting(x, y+30, asset_get("par_jumpthrough"))) ) {
+				if ( window_timer >= 60 || ( vsp > 0 && (position_meeting(x, y+offset, asset_get("par_block")) || position_meeting(x, y+30, asset_get("par_jumpthrough"))) ) ) {
 					hitbox = null;
 					window = 3;
 					window_timer = 0;
@@ -177,7 +177,7 @@ switch (state) {
 				
 				// Update hitbox
 				if (hitbox != null) {
-					hitbox.hitbox_timer = 0; // Lifetime extender
+					hitbox.length++; // Lifetime extender
 					hitbox.x = x;
 					hitbox.y = y-30;
 					hitbox.hsp = hsp;

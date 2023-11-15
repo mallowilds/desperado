@@ -14,7 +14,7 @@ if (get_match_setting(SET_HITBOX_VIS)) {
     
     if (attack == AT_USPECIAL && window == 2) {
         draw_set_alpha(0.5);
-        draw_rectangle_color(x+(16*spr_dir), y-30, x+(56*spr_dir), y-90, /*#*/$ff00ff, /*#*/$ff00ff, /*#*/$ff00ff, /*#*/$ff00ff, false);
+        draw_rectangle_color(x+(16*spr_dir), y-16, x+(56*spr_dir), y-90, /*#*/$ff00ff, /*#*/$ff00ff, /*#*/$ff00ff, /*#*/$ff00ff, false);
         draw_set_alpha(1);
     }
     
