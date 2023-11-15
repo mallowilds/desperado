@@ -143,9 +143,9 @@ switch (state) {
 			
 			case 1:
 				image_index = 0;
-				if (window_timer == 16) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (window_timer == 12) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					sound_play(asset_get("sfx_spin"));
-				} else if (window_timer >= 18) {
+				} else if (window_timer >= 13) {
 					window = 2;
 					window_timer = 0;
 				}

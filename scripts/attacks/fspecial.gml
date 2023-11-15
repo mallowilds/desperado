@@ -13,8 +13,7 @@ make_window(AT_FSPECIAL, 1,
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 10,
     AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_HSPEED_TYPE, 1,
-    AG_WINDOW_VSPEED_TYPE, 1,
+
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_may_arc_cointoss"),
     AG_WINDOW_SFX_FRAME, 8,
@@ -25,6 +24,8 @@ make_window(AT_FSPECIAL, 2,
     AG_WINDOW_LENGTH, 5,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 2,
+    AG_WINDOW_VSPEED_TYPE, 1,
+    AG_WINDOW_VSPEED, -3,
 )
 
 make_window(AT_FSPECIAL, 3,
@@ -46,6 +47,8 @@ make_hitbox(AT_FSPECIAL, 1,
     HG_ANGLE, 90,
     HG_BASE_KNOCKBACK, 6,
     HG_KNOCKBACK_SCALING, .3,
+    HG_HITSTUN_MULTIPLIER, .7,
+
     HG_BASE_HITPAUSE, 5,
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
     
