@@ -39,12 +39,13 @@ switch (state) {
 	    vsp = 0;
 	    hsp = 0;
 	    
+	    /*
 	    // USpecial reattach
 	    if (in_reattach_range() && player_in_attack(AT_USPECIAL) && player_id.window = 2) {
 	    	state = 0;
 			state_timer = 0;
 			sprite_index = sprite_get("null");
-	    }
+	    }*/
 	    
 	    /* Movement with left stick. This felt awful
 	    var is_mobile = player_id.state_cat == SC_GROUND_NEUTRAL

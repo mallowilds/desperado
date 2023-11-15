@@ -43,6 +43,11 @@ if state == PS_LANDING_LAG && (attack == AT_BAIR || attack == AT_EXTRA_1) {
 if (!free) {
     dairs_used = 0;
     move_cooldown[AT_DSPECIAL] = 0;
+    move_cooldown[AT_USPECIAL] = 0;
+}
+
+else if (state == PS_WALL_JUMP) {
+    move_cooldown[AT_USPECIAL] = 0;
 }
 
 //#endregion
