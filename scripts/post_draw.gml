@@ -6,7 +6,7 @@ init_shader();
 
 
 // Skull rendering
-if (head.state == 0) {
+if (head_obj.state == 0) {
 	
 	var _s = null;
 	

@@ -60,7 +60,7 @@ nspec_shot_list = ds_list_create();     // similar particle manager for nspecial
 dairs_used = 0;                         // dairs used per airtime
 
 //Article
-head = instance_create(x, y, "obj_article1");
+head_obj = instance_create(x, y, "obj_article1");
 hit_cancel = false;
 head_lockout = false;
 
@@ -273,6 +273,7 @@ AG_MUNO_ATTACK_NAME = 70; // this can be any number you want!
 
 // VFX
 hfx_bone_large = hit_fx_create(sprite_get("vfx_bone_large"), 28)
+hfx_null = hit_fx_create(sprite_get("null"), 0)
 
 //Sprites
 // spr_nspecial_proj = sprite_get("nspecial_proj")

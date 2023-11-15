@@ -153,10 +153,11 @@ switch (attack) {
 					sound_play(asset_get("sfx_spin"));
 				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
 					set_head_state(AT_FSPECIAL);
-					head.window = 2;
-					head.spr_dir = spr_dir;
-					head.x = x;
-					head.y = y-36;
+					head_obj.window = 2;
+					head_obj.window_timer = 1;
+					head_obj.spr_dir = spr_dir;
+					head_obj.x = x;
+					head_obj.y = y-36;
 				}
 				break;
 			case 2:
@@ -173,7 +174,7 @@ switch (attack) {
 			case 1:
 				if window_timer == 1 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					set_head_state(AT_FSPECIAL);
-					head.spr_dir = spr_dir;
+					head_obj.spr_dir = spr_dir;
 				}
 				break;
 			case 2:
@@ -194,10 +195,12 @@ switch (attack) {
     		
     		case 2:
     			move_cooldown[AT_USPECIAL] = 999;
-    			if (position_meeting(x+(36*spr_dir), y-80, head)) {
+    			// Reminder: this check is rendered in debug_draw, so update accordingly~
+    			if (centered_rect_meeting(x+(36*spr_dir), y-60, 40, 60, head_obj)) {
 		        	set_head_state(0);
 		        	window = 4;
 		        	window_timer = 0;
+		        	destroy_hitboxes();
 		        }
 		        break;
 		       
@@ -306,10 +309,10 @@ switch (attack) {
 
 
 #define set_head_state(new_state)
-    head.state = new_state;
-    head.state_timer = 0;
-    head.window = 1;
-    head.window_timer = 1;
+    head_obj.state = new_state;
+    head_obj.state_timer = 0;
+    head_obj.window = 1;
+    head_obj.window_timer = 1;
     return;
 
 

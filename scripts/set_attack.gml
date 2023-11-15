@@ -13,7 +13,7 @@ switch attack {
         break;
     
     case AT_FSPECIAL:
-        if (head.state != 0) attack = AT_FSPECIAL_2;
+        if (head_obj.state != 0) attack = AT_FSPECIAL_2;
         break;
     
 }

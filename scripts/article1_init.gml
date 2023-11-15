@@ -19,18 +19,9 @@ window_timer = 0;
 hitstop = 0;                                        //The frames remaining in hitpause. Hitpause automatically prevents movement
 hsp = 0;                                            //The horizontal speed of the article. Multiply by spr_dir to correctly handle forward (+) or backward (-) movement
 vsp = 0;                                            //The vertical speed of the article.
-follow_player = false;
 
 //Terrain behavior
 can_be_grounded = false;                            //Determines if the article follows platforms when free == false.
 ignores_walls = false;                              //Determines if the article goes through walls.
 free = true;                                        //Whether the article is in the air or not.
 hit_wall = false;                                   //If the article moves into a wall on its own, this variable will be true.
-reattach = false;                                   //Whether the head should reattach to Seikibanki while moving.
-
-//Draw vars
-mc_active = false;
-mc_fade = false;
-mc_alpha = 0;
-mc_xscale = 2;
-mc_yscale = 2;

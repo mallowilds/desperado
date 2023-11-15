@@ -38,7 +38,7 @@ set_num_hitboxes(AT_FSPECIAL, 1);
 
 make_hitbox(AT_FSPECIAL, 1,
     HG_HITBOX_TYPE, 2,
-    HG_LIFETIME, 14,
+    HG_LIFETIME, 2,
     HG_WIDTH, 50,
     HG_HEIGHT, 50,
     HG_PRIORITY, 2,
@@ -48,9 +48,14 @@ make_hitbox(AT_FSPECIAL, 1,
     HG_KNOCKBACK_SCALING, .3,
     HG_BASE_HITPAUSE, 5,
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+    
     HG_PROJECTILE_SPRITE, sprite_get("null"),
+    HG_PROJECTILE_DESTROY_EFFECT, hfx_null,
     HG_PROJECTILE_MASK, -1,
     HG_PROJECTILE_IS_TRANSCENDENT, 1,
+    HG_PROJECTILE_ENEMY_BEHAVIOR, 1,
+    HG_PROJECTILE_GROUND_BEHAVIOR, 1,
+    HG_PROJECTILE_WALL_BEHAVIOR, 1,
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

@@ -91,8 +91,8 @@ with oPlayer {
 
 //#region Skull article management
 
-if (head.state != 0 && char_height > 50) char_height -= 2;
-else if (head.state == 0 && char_height < 70) char_height++;
+if (head_obj.state != 0 && char_height > 50) char_height -= 2;
+else if (head_obj.state == 0 && char_height < 70) char_height++;
 
 // Lock out commands if head is in a busy state
 if (head_lockout) {
@@ -100,8 +100,8 @@ if (head_lockout) {
     move_cooldown[AT_FSPECIAL_2] = 2;
 }
 
-if (!instance_exists(head)) {
-    head = instance_create(x, y, "obj_article1");
+if (!instance_exists(head_obj)) {
+    head_obj = instance_create(x, y, "obj_article1");
     print_debug("------------------------------------------------------------------------------------");
     print_debug("Spawning new skull. If this occurs, something has gone wrong.");
     print_debug("Please ensure that opposing characters aren't improperly destroying enemy articles.");
