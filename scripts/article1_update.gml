@@ -20,6 +20,7 @@ ignores_walls = false;
 player_id.head_lockout = false;
 follow_player = false;
 
+print_debug(hitstop);
 
 //#region Blast zone handling
 if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y) && (state != 4 && state != 5)) {
@@ -247,6 +248,7 @@ switch (state) {
 					window_timer = 0;
 				}
 				break;
+				
 			
 			case 2:
 				image_index = 1;
@@ -288,6 +290,7 @@ switch (state) {
 if (hitstop <= 0) {
 	state_timer++;
 	window_timer++;
+	hitstop = 0;
 }
 //#endregion
 

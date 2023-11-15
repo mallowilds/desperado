@@ -50,7 +50,7 @@ make_hitbox(AT_FSPECIAL, 1,
     HG_HITSTUN_MULTIPLIER, .7,
 
     HG_BASE_HITPAUSE, 6,
-    //HG_HITPAUSE_SCALING, .3,
+    HG_HITPAUSE_SCALING, .3,
 
     HG_HIT_SFX, asset_get("sfx_blow_medium3"),
     
