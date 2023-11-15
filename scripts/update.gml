@@ -91,6 +91,9 @@ with oPlayer {
 
 //#region Skull article management
 
+if (head.state != 0 && char_height > 50) char_height -= 2;
+else if (head.state == 0 && char_height < 70) char_height++;
+
 // Lock out commands if head is in a busy state
 if (head_lockout) {
     move_cooldown[AT_FSPECIAL] = 2;
