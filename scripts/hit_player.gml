@@ -30,6 +30,7 @@ if (my_hitboxID.damage + mult_damage_add > 3 && num_bullets >= 4) {
 
 if (atk == AT_FSPECIAL && my_hitboxID.orig_player == player) {
 	my_hitboxID.head_obj.hitstop = hit_player_obj.hitstop;
+	my_hitboxID.head_obj.has_hit = true;
 }
 
 if atk == AT_EXTRA_1 && hbox == 3 {

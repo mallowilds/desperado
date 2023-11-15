@@ -20,8 +20,6 @@ ignores_walls = false;
 player_id.head_lockout = false;
 follow_player = false;
 
-print_debug(hitstop);
-
 //#region Blast zone handling
 if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y) && (state != 4 && state != 5)) {
 	state = 4;
@@ -51,6 +49,8 @@ switch (state) {
 	    image_index = state_timer * player_id.idle_anim_speed;
 	    hsp *= 0.9;
 		vsp *= 0.9;
+	    
+	    has_hit = false;
 	    
 	    if (!free) y--;
 	    
@@ -153,11 +153,11 @@ switch (state) {
 				break;
 				
 			case 2:
-				image_index = 1 + (window_timer/4)%2;
+				image_index = 1 + (window_timer/3)%4;
 				
-				vsp = clamp(vsp+0.2, vsp, 7);
+				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
-				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hsp = 5*spr_dir;
 					vsp = -4;
 					
@@ -185,24 +185,40 @@ switch (state) {
 					hitbox.vsp = vsp;
 				}
 				
-				// The wall detection of all time
-				if (hsp == 0) {
-					state = 1;
-					state_timer = 0;
-					sprite_index = sprite_get("skullidle");
-					image_index = 0;
-					spr_dir *= -1;
-					hsp = 5*spr_dir;
-				}
-				
-				// Bounce detection (backup)
-				if (!free) {
-					state = 1;
-					state_timer = 0;
-					sprite_index = sprite_get("skullidle");
-					image_index = 0;
-					vsp = -4;
-					hsp = 3*spr_dir;
+				// Bounce detections
+				if (hitstop <= 0) {
+					
+					// The wall detection of all time
+					if (hsp == 0) {
+						state = 1;
+						state_timer = 0;
+						sprite_index = sprite_get("skullidle");
+						image_index = 0;
+						spr_dir *= -1;
+						hsp = 5*spr_dir;
+					}
+					
+					// Enemy bounce detection
+					if (has_hit) {
+						state = 1;
+						state_timer = 0;
+						sprite_index = sprite_get("skullidle");
+						image_index = 0;
+						vsp = -3;
+						hsp = -4*spr_dir;
+						has_hit = false;
+					}
+					
+					// Ground bounce detection (backup)
+					if (!free) {
+						state = 1;
+						state_timer = 0;
+						sprite_index = sprite_get("skullidle");
+						image_index = 0;
+						vsp = -4;
+						hsp = 3*spr_dir;
+					}
+					
 				}
 				
 				break;
@@ -212,11 +228,11 @@ switch (state) {
 				
 				hitbox = null;
 				
-				image_index = 3;
+				image_index = 5;
 				hsp *= 0.9;
 				vsp *= 0.9;
 				
-				if (window_timer >= 10) {
+				if (window_timer >= 5) {
 					state = 1;
 					state_timer = 0;
 				}
@@ -292,6 +308,7 @@ if (hitstop <= 0) {
 	window_timer++;
 	hitstop = 0;
 }
+else hitstop = floor(hitstop);	
 //#endregion
 
 #define read_inputs()
