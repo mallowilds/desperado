@@ -36,6 +36,23 @@ if (state != 4 && state != 5) {
 		visible = false;
 		y = get_stage_data(SD_BOTTOM_BLASTZONE_Y) - 1;
 		// might be cute to have a mini-death-explosion-slash-poof-of-smoke-vfx? also might be too much work lmao
+		// todo: sfx
+	}
+	
+	else if (x < get_stage_data(SD_LEFT_BLASTZONE_X)) {
+		state = 4;
+		state_timer = 0;
+		visible = false;
+		x = get_stage_data(SD_LEFT_BLASTZONE_X) + 1;
+		// todo: sfx
+	}
+	
+	else if (x > get_stage_data(SD_RIGHT_BLASTZONE_X)) {
+		state = 4;
+		state_timer = 0;
+		visible = false;
+		x = get_stage_data(SD_RIGHT_BLASTZONE_X) - 1;
+		// todo: sfx
 	}
 	
 	if (place_meeting(x, y, asset_get("plasma_field_obj")) && state != 0) {
@@ -173,7 +190,7 @@ switch (state) {
 				}
 				
 				// End if it takes too long
-				if ( window_timer >= 60 ) {
+				if ( window_timer >= 45 ) {
 					hitbox = null;
 					window = 3;
 					window_timer = 0;
@@ -295,6 +312,8 @@ switch (state) {
 			
 			case 1:
 				image_index = 0;
+				hsp *= 0.8
+				vsp *= 0.8
 				if (window_timer == 12) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					sound_play(asset_get("sfx_spin"));
 				} else if (window_timer >= 13) {
@@ -309,17 +328,20 @@ switch (state) {
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
 				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					hsp = 5*spr_dir;
-					vsp = -4;
+					hsp = 5.5*spr_dir;
+					vsp = -3;
 					
 					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
 					hitbox.spr_dir = spr_dir;
 					hitbox.head_obj = self;
 				}
 				
+				// TODO: if this stays, change to a separate FSpecial lockout
+				player_id.head_lockout = (window_timer < 30);
+				
 				// End just before hitting ground (or if it takes too long)
-				var offset = (vsp > 4 ? 30 : 5*vsp + 10);
-				if ( window_timer >= 60 || ( vsp > 0 && (position_meeting(x, y+offset, asset_get("par_block")) || position_meeting(x, y+30, asset_get("par_jumpthrough"))) ) ) {
+				var offset = (vsp > 4 ? 40 : 6.66*vsp + 10);
+				if ( window_timer >= 45 || ( vsp > 0 && (position_meeting(x, y+offset, asset_get("par_block")) || position_meeting(x, y+30, asset_get("par_jumpthrough"))) ) ) {
 					hitbox = null;
 					window = 3;
 					window_timer = 0;
@@ -346,7 +368,7 @@ switch (state) {
 						sprite_index = sprite_get("skullidle");
 						image_index = 0;
 						spr_dir *= -1;
-						hsp = 5*spr_dir;
+						hsp = 1.5*spr_dir;
 					}
 					
 					// Enemy bounce detection

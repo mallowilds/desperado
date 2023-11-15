@@ -162,7 +162,7 @@ switch (attack) {
 					head_obj.window_timer = 1;
 					head_obj.spr_dir = spr_dir;
 					head_obj.x = x+(48*spr_dir);
-					head_obj.y = y-20;
+					head_obj.y = y-16;
 				}
 				break;
 			case 2:
@@ -206,7 +206,7 @@ switch (attack) {
     	switch window {
     		
     		case 2:
-    			move_cooldown[AT_USPECIAL] = 999;
+    			// move_cooldown[AT_USPECIAL] = 999;
     			// Reminder: this check is rendered in debug_draw, so update accordingly~
     			if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(36*spr_dir), y-53, 40, 74, head_obj, false)) {
 		        	set_head_state(0);
@@ -223,6 +223,10 @@ switch (attack) {
     				hsp = get_window_value(attack, 5, AG_WINDOW_HSPEED) * spr_dir;
     				vsp = get_window_value(attack, 5, AG_WINDOW_VSPEED);
     			}
+    			break;
+    		
+    		case 5:
+    			move_cooldown[AT_FSPECIAL] = 30;
     			break;
     		
 		}
