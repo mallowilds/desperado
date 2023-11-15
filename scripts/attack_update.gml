@@ -233,6 +233,11 @@ switch (attack) {
         down_down = true;
         move_cooldown[AT_DTILT] = 1 
     break;
+    case AT_FTILT:
+    	if timer1 {
+    		sound_play(sound_get("sfx_snb_clothes"))
+    	}
+    break;
     case AT_FAIR:
 
         if timer1 {

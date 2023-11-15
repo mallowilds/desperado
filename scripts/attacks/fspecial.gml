@@ -15,7 +15,7 @@ make_window(AT_FSPECIAL, 1,
     AG_WINDOW_ANIM_FRAMES, 2,
 
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, asset_get("sfx_may_arc_cointoss"),
+    AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
     AG_WINDOW_SFX_FRAME, 8,
 )
 
@@ -44,13 +44,15 @@ make_hitbox(AT_FSPECIAL, 1,
     HG_HEIGHT, 50,
     HG_PRIORITY, 2,
     HG_DAMAGE, 6,
-    HG_ANGLE, 90,
-    HG_BASE_KNOCKBACK, 6,
+    HG_ANGLE, 70,
+    HG_BASE_KNOCKBACK, 8,
     HG_KNOCKBACK_SCALING, .3,
     HG_HITSTUN_MULTIPLIER, .7,
 
-    HG_BASE_HITPAUSE, 5,
-    HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+    HG_BASE_HITPAUSE, 6,
+    //HG_HITPAUSE_SCALING, .3,
+
+    HG_HIT_SFX, asset_get("sfx_blow_medium3"),
     
     HG_PROJECTILE_SPRITE, sprite_get("null"),
     HG_PROJECTILE_DESTROY_EFFECT, hfx_null,

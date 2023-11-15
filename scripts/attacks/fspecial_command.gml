@@ -15,7 +15,7 @@ make_window(AT_FSPECIAL_2, 1,
     AG_WINDOW_ANIM_FRAMES, 2,
 
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, asset_get("sfx_may_arc_cointoss"),
+    AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
     AG_WINDOW_SFX_FRAME, 8,
 )
 
