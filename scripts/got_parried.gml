@@ -12,7 +12,6 @@ if (my_hitboxID.orig_player == player && my_hitboxID.player != player) {
             was_parried = true;
             set_state(free ? PS_PRATFALL : PS_PRATLAND);
         }
-        
     }
     
     exit;

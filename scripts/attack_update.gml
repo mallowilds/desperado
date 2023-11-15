@@ -208,7 +208,7 @@ switch (attack) {
     		case 2:
     			move_cooldown[AT_USPECIAL] = 999;
     			// Reminder: this check is rendered in debug_draw, so update accordingly~
-    			if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(36*spr_dir), y-53, 40, 74, head_obj)) {
+    			if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(36*spr_dir), y-53, 40, 74, head_obj, false)) {
 		        	set_head_state(0);
 		        	window = 4;
 		        	window_timer = 0;
@@ -334,8 +334,8 @@ switch (attack) {
 
 
 
-#define centered_rect_meeting(_x, _y, _w, _h, obj)
-    return collision_rectangle(_x-(_w/2), _y-(_h/2), _x+(_w/2), _y+(_h/2), obj, false, false);
+#define centered_rect_meeting(_x, _y, _w, _h, obj, prec)
+    return collision_rectangle(_x-(_w/2), _y-(_h/2), _x+(_w/2), _y+(_h/2), obj, prec, false);
 
 
 // Generates hitboxes and visuals from an nspecial melee hitboxes.
@@ -350,7 +350,8 @@ switch (attack) {
     var shot_hb_w = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_WIDTH);
     var shot_hb_h = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HEIGHT);
     
-    while (!centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block")) && shot_loops < 20) {
+    var shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
+    while (!shot_collides && shot_loops < 20) {
         
         set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_PARENT_HITBOX, hbox_num);
         set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_LIFETIME));
@@ -362,12 +363,15 @@ switch (attack) {
         shot_loops++;
         shot_x += shot_hb_w;
         
+        shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
+        
     }
     
-    // Create sunken hitbox
-    while (centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block")) && shot_hb_w > 0) {
-        shot_hb_w -= 2;
-        if (centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"))) shot_x -= 1;
+    shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
+    while (shot_collides && shot_hb_w > 0) {
+        shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
+        if (shot_collides) shot_x -= 1;
+        shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
     }
     
     if (shot_hb_w > 0) {

@@ -51,7 +51,7 @@ if (state != 4 && state != 5) {
 //#region Bash handling
 
 unbashable = (state = 0 || state == 4 || state == 5) ? 1 : 0;
-if (getting_bashed) {
+if (getting_bashed && !unbashable) {
 	state = 3;
 	state_timer = 0;
 	window = 1;
@@ -172,6 +172,15 @@ switch (state) {
 					hitbox.projectile_parry_stun = false; // just handling this manually......
 				}
 				
+				// End if it takes too long
+				if ( window_timer >= 60 ) {
+					hitbox = null;
+					window = 3;
+					window_timer = 0;
+					if (vsp > 4) vsp = 4;
+					break;
+				}
+				
 				// Update hitbox
 				if (hitbox != null) {
 					hitbox.length++; // Lifetime extender
@@ -202,7 +211,7 @@ switch (state) {
 						sprite_index = sprite_get("skullidle");
 						image_index = 0;
 						vsp = -3;
-						hsp = -4*spr_dir;
+						hsp = moving_vertically ? 0 : -4*spr_dir;
 						has_hit = false;
 					}
 					
@@ -213,7 +222,7 @@ switch (state) {
 						sprite_index = sprite_get("skullidle");
 						image_index = 0;
 						vsp = -4;
-						hsp = 3*spr_dir;
+						hsp = moving_vertically ? 0 : 3*spr_dir;
 					}
 					
 				}
