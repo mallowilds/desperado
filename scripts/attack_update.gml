@@ -185,9 +185,35 @@ switch (attack) {
 		
 	
     case AT_USPECIAL:
-        can_move = false;
-        can_fast_fall = false;
+    
+    	can_fast_fall = false;
+    	can_move = (window == 3);
+    	can_wall_jump = (window != 4);
+    	
+    	switch window {
+    		
+    		case 2:
+    			move_cooldown[AT_USPECIAL] = 999;
+    			if (position_meeting(x+(36*spr_dir), y-80, head)) {
+		        	set_head_state(0);
+		        	window = 4;
+		        	window_timer = 0;
+		        }
+		        break;
+		       
+    		case 4:
+    			if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH)) {
+    				window = 5;
+    				window_timer = 0;
+    				hsp = get_window_value(attack, 5, AG_WINDOW_HSPEED) * spr_dir;
+    				vsp = get_window_value(attack, 5, AG_WINDOW_VSPEED);
+    			}
+    			break;
+    		
+		}
+        
     break;
+    
     case AT_DTILT:
         down_down = true;
         move_cooldown[AT_DTILT] = 1 

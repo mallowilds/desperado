@@ -61,6 +61,7 @@ sprite_change_offset("ftilt", 150, 194)
 sprite_change_offset("uair", 150, 194)
 sprite_change_offset("dair", 150, 194)
 sprite_change_offset("pratfall", 150, 194)
+sprite_change_offset("fspecial", 150, 194)
 
 
 sprite_change_offset("idle_skull", 150, 194)
@@ -117,8 +118,10 @@ sprite_change_offset("ftilt_skull", 150, 194)
 sprite_change_offset("uair_skull", 150, 194)
 sprite_change_offset("dair_skull", 150, 194)
 sprite_change_offset("pratfall_skull", 150, 194)
+sprite_change_offset("fspecial_skull", 150, 194)
 
 
+sprite_change_offset("skullhurtbox", 150, 194)
 sprite_change_offset("skullidle", 150, 194)
 sprite_change_offset("skullactive", 150, 194)
 sprite_change_offset("skullhurt", 150, 194)
@@ -139,7 +142,6 @@ sprite_change_offset("land", 150, 194)
 sprite_change_offset("fstrong", 64, 94)
 sprite_change_offset("dstrong", 64, 94)
 sprite_change_offset("nspecial", 150, 194)
-sprite_change_offset("fspecial", 64, 94)
 sprite_change_offset("taunt", 64, 94)
 
 sprite_change_offset("plat", 64, 94)
