@@ -6,8 +6,8 @@
 //#region Training mode collision visuals
 if (get_match_setting(SET_HITBOX_VIS)) {
     
-    with (obj_article1) {
-        if (player == other.player && state != 0) {
+    with (head_obj) {
+        if (state != 0 && state != 4 && state != 5) {
             draw_sprite_ext(mask_index, 0, x, y, spr_dir, 1, 0, c_white, 0.5);
         }
     }

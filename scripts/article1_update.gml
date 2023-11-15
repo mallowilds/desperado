@@ -48,8 +48,10 @@ switch (state) {
 		visible = true;
 	    sprite_index = sprite_get("skullidle");
 	    image_index = state_timer * player_id.idle_anim_speed;
-	    vsp = 0;
-	    hsp = 0;
+	    hsp *= 0.9;
+		vsp *= 0.9;
+	    
+	    if (!free) y--;
 	    
 	    /*
 	    // USpecial reattach
@@ -150,18 +152,30 @@ switch (state) {
 				break;
 				
 			case 2:
-				image_index = 1 + window_timer / 2;
+				image_index = 1 + (window_timer/4)%2;
 				
-				vsp = clamp(vsp+0.3, vsp, 7);
+				vsp = clamp(vsp+0.2, vsp, 7);
 				
 				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					hsp = 4*spr_dir;
-					vsp = -7;
+					hsp = 5*spr_dir;
+					vsp = -4;
 					
 					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
 					hitbox.spr_dir = spr_dir;
 					hitbox.head_obj = self;
 				}
+				
+				// End just before hitting ground
+				var offset = (vsp > 4 ? 30 : 5*vsp + 10);
+				if ( vsp > 0 && (position_meeting(x, y+offset, asset_get("par_block")) || position_meeting(x, y+30, asset_get("par_jumpthrough"))) ) {
+					hitbox = null;
+					window = 3;
+					window_timer = 0;
+					if (vsp > 4) vsp = 4;
+					break;
+				}
+				
+				// Update hitbox
 				if (hitbox != null) {
 					hitbox.hitbox_timer = 0; // Lifetime extender
 					hitbox.x = x;
@@ -172,19 +186,27 @@ switch (state) {
 				
 				// The wall detection of all time
 				if (hsp == 0) {
+					state = 1;
+					state_timer = 0;
+					sprite_index = sprite_get("skullidle");
+					image_index = 0;
 					spr_dir *= -1;
-					hsp = 4*spr_dir;
+					hsp = 5*spr_dir;
 				}
 				
+				// Bounce detection (backup)
 				if (!free) {
-					window = 3;
-					window_timer = 0;
+					state = 1;
+					state_timer = 0;
+					sprite_index = sprite_get("skullidle");
+					image_index = 0;
 					vsp = -4;
 					hsp = 3*spr_dir;
 				}
 				
 				break;
-				
+			
+			// Slow down
 			case 3:
 				
 				hitbox = null;
@@ -192,6 +214,7 @@ switch (state) {
 				image_index = 3;
 				hsp *= 0.9;
 				vsp *= 0.9;
+				
 				if (window_timer >= 10) {
 					state = 1;
 					state_timer = 0;
