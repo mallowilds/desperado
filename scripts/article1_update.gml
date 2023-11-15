@@ -6,13 +6,19 @@
 /*STATE LIST (outdated lmao)
 
 - 0: Inactive
-
 - 1: Idle
+- 2: 
+- 3: Bashed
+- 4: Dying
+- 5: Respawning
 
 - Attack: AT_FSPECIAL
 	- Window 1: Startup
 	- Window 2: Active
 	- Window 3: Endlag
+	
+- Attack: AT_USTRONG
+	- Unfilled
 
 */
 
@@ -20,15 +26,42 @@ ignores_walls = false;
 player_id.head_lockout = false;
 follow_player = false;
 
-//#region Blast zone handling
-if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y) && (state != 4 && state != 5)) {
-	state = 4;
-	state_timer = 0;
-	visible = false;
-	y = get_stage_data(SD_BOTTOM_BLASTZONE_Y) - 1;
-	// might be cute to have a mini-death-explosion-slash-poof-of-smoke-vfx? also might be too much work lmao
+//#region Blast zone / clairen field handling
+
+if (state != 4 && state != 5) {
+	
+	if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+		state = 4;
+		state_timer = 0;
+		visible = false;
+		y = get_stage_data(SD_BOTTOM_BLASTZONE_Y) - 1;
+		// might be cute to have a mini-death-explosion-slash-poof-of-smoke-vfx? also might be too much work lmao
+	}
+	
+	if (place_meeting(x, y, asset_get("plasma_field_obj")) && state != 0) {
+		state = 4;
+		state_timer = 0;
+		sound_play(asset_get("sfx_clairen_hit_med"));
+	}
+	
 }
-//#endregions
+
+//#endregion
+
+//#region Bash handling
+
+unbashable = (state = 0 || state == 4 || state == 5) ? 1 : 0;
+if (getting_bashed) {
+	state = 3;
+	state_timer = 0;
+	window = 1;
+	window_timer = 1;
+	orig_player = player;
+	orig_player_id = player_id;
+}
+
+//#endregion
+
 
 
 switch (state) {
@@ -93,9 +126,117 @@ switch (state) {
 		break;
 	//#endregion
 		
-	//#region State 3: Movement ------------------------------------------------
+	//#region State 3: Bashed ------------------------------------------------
 	case 3:
-		// Don't think this slot is getting used. Reinsert if needed.
+		visible = true;
+	    
+	    player_id.head_lockout = true;
+		
+		switch (window) {
+			
+			case 1:
+			
+			    if (window_timer == 1) {
+			    	sprite_index = sprite_get("skullhurt");
+			    	image_index = 0;
+			    	spr_dir = bashed_id.spr_dir;
+			    }
+			    
+			    player = orig_player;
+				player_id = orig_player_id;
+			    
+				if (!getting_bashed) {
+					window = 2;
+					window_timer = 0;
+					player = orig_player;
+					player_id = orig_player_id;
+				}
+				
+				break;
+				
+			case 2:
+				sprite_index = sprite_get("skullactive");
+				mask_index = sprite_get("skullhurtbox");
+				image_index = 1 + (window_timer/3)%4;
+				
+				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
+				
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+					hsp *= 2/3
+					vsp *= 2/3
+					moving_vertically = (hsp == 0);
+					
+					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
+					hitbox.spr_dir = spr_dir;
+					hitbox.head_obj = self;
+					hitbox.projectile_parry_stun = false; // just handling this manually......
+				}
+				
+				// Update hitbox
+				if (hitbox != null) {
+					hitbox.length++; // Lifetime extender
+					hitbox.x = x;
+					hitbox.y = y-30;
+					hitbox.hsp = hsp;
+					hitbox.vsp = vsp;
+					hitbox.player = bashed_id.player;
+				}
+				
+				// Bounce detections
+				if (hitstop <= 0) {
+					
+					// The wall detection of all time
+					if (hsp == 0 && !moving_vertically) {
+						state = 1;
+						state_timer = 0;
+						sprite_index = sprite_get("skullidle");
+						image_index = 0;
+						spr_dir *= -1;
+						hsp = 5*spr_dir;
+					}
+					
+					// Enemy bounce detection
+					if (has_hit) {
+						state = 1;
+						state_timer = 0;
+						sprite_index = sprite_get("skullidle");
+						image_index = 0;
+						vsp = -3;
+						hsp = -4*spr_dir;
+						has_hit = false;
+					}
+					
+					// Ground bounce detection (backup)
+					if (!free) {
+						state = 1;
+						state_timer = 0;
+						sprite_index = sprite_get("skullidle");
+						image_index = 0;
+						vsp = -4;
+						hsp = 3*spr_dir;
+					}
+					
+				}
+				
+				break;
+			
+			// Slow down
+			case 3:
+				
+				hitbox = null;
+				
+				image_index = 5;
+				hsp *= 0.9;
+				vsp *= 0.9;
+				
+				if (window_timer >= 5) {
+					state = 1;
+					state_timer = 0;
+				}
+				break;
+			
+		}
+		
 		break;
 	//#endregion
 	
@@ -108,10 +249,11 @@ switch (state) {
 		sprite_index = sprite_get("skulldie");
 		player_id.head_lockout = true;
 		
-		image_index = state_timer / 4;
+		image_index = state_timer / 5;
 		if (image_index >= 6) {
 			state = 5;
 			state_timer = 0;
+			visible = false;
 		}
 		
 		// TODO: add sfx
