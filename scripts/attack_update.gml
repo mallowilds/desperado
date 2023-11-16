@@ -102,8 +102,8 @@ switch (attack) {
             
             sound_play(sound_get("desp_shot"))
             
-            set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 6 + (0.25 * num_bullets));
-            set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.4 + (0.05 * num_bullets));
+            set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 8 + (0.3 * num_bullets));
+            set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.6 + (0.05 * num_bullets));
             
             if (num_bullets <= 0) { // temp override. TODO: replace with proper fail fire
                 window = 4;
