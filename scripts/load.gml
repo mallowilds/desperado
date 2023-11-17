@@ -134,6 +134,7 @@ sprite_change_offset("bullet", 3, 6); // Non-even offset to enable spinning
 
 sprite_change_offset("nspec_beam_segment", 0, 16);
 sprite_change_offset("nspec_beam_end", 0, 30);
+sprite_change_offset("nspecflash", 150, 194)
 
 //not done
 sprite_change_offset("land", 150, 194)

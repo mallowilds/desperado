@@ -274,7 +274,7 @@ AG_MUNO_ATTACK_NAME = 70; // this can be any number you want!
 // VFX
 hfx_bone_large = hit_fx_create(sprite_get("vfx_bone_large"), 28)
 hfx_null = hit_fx_create(sprite_get("null"), 0)
-
+vfx_flash = hit_fx_create(sprite_get("nspecflash"), 16)
 //Sprites
 // spr_nspecial_proj = sprite_get("nspecial_proj")
 

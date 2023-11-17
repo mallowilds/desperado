@@ -99,6 +99,7 @@ make_hitbox(AT_NSPECIAL, 2,
     HG_BASE_HITPAUSE, 10,
     HG_HITPAUSE_SCALING, .9,
     HG_EXTRA_HITPAUSE, 5,
+    HG_HITSTUN_MULTIPLIER, .8,
 
     HG_VISUAL_EFFECT, 304,
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),

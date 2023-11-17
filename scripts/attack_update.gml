@@ -86,6 +86,9 @@ switch (attack) {
         can_move = false
         can_fast_fall = false
         if window == 1 {
+        	if window_timer == 1 && !hitpause {
+        		spawn_hit_fx(x, y, vfx_flash)
+        	}
             var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
             if (window_time_is(1)) {
                 start_hsp = hsp;
@@ -103,8 +106,9 @@ switch (attack) {
             sound_play(sound_get("desp_shot"))
             
             set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 6 + (0.25 * num_bullets));
-            set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.4 + (0.05 * num_bullets));
-            
+            set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.7 + (0.05 * num_bullets));
+            print(get_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING))
+            print(get_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK))
             if (num_bullets <= 0) { // temp override. TODO: replace with proper fail fire
                 window = 4;
                 window_timer = 0;
