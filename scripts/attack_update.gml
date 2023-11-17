@@ -87,7 +87,8 @@ switch (attack) {
         can_fast_fall = false
         if window == 1 {
         	if window_timer == 1 && !hitpause {
-        		spawn_hit_fx(x, y, vfx_flash)
+        		var vflash = spawn_hit_fx(x, y, vfx_flash)
+        		vflash.depth = depth - 1;
         	}
             var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
             if (window_time_is(1)) {
