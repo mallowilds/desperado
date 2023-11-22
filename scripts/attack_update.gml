@@ -94,6 +94,7 @@ switch (attack) {
             if (window_time_is(1)) {
                 start_hsp = hsp;
                 start_vsp = vsp;
+                
             }
             hsp = lerp(hsp, 0, window_timer/window_len);
             vsp = lerp(vsp, 0, window_timer/window_len);
