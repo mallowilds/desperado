@@ -1,13 +1,17 @@
 // attack_update.gml
 // https://rivalslib.com/workshop_guide/programming/reference/scripts/event_scripts.html#every-frame
 // Runs every frame while your character is attacking.
-var timer1 = window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) && window == 1 && !hitpause
 
 //B - Reversals
 if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || attack == AT_USPECIAL || attack == AT_DAIR){
     trigger_b_reverse()
 }
+
+
+
 switch (attack) {
+	
+	//#region Intro ------------------------------------------------------------
     case 2: //intro
         if window == 1 && (window_timer == 39 || window_timer == 55) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
             sound_play(asset_get("sfx_kragg_spike"), 0, noone, .3, 1.1)
@@ -29,12 +33,35 @@ switch (attack) {
             }
         }
     break;
-    case AT_BAIR: 
-    case AT_EXTRA_1://bair 2
-        if window == 1 && window_timer == 1 && !hitpause {
-            sound_play(sound_get("desp_whip"), 0, noone, .8, 1 )
+    //#endregion
+    
+    
+    //#region Grounded Normals / Strongs ---------------------------------------
+    
+    case AT_DTILT:
+        down_down = true;			// huh?
+        move_cooldown[AT_DTILT] = 1 // ????
+    	break;
+    case AT_FTILT:
+    	if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
+    		sound_play(sound_get("sfx_snb_clothes"))
+    	}
+    	break;
+    
+    case AT_USTRONG:
+        if (window > 1 && (window < 5 && window_timer < 17)) {
+            hud_offset = 60;
         }
-    break;    
+    	break;
+    case AT_DSTRONG:
+        if (attack_down) num_bullets = 6; // Temp debugging utility
+        break;
+    
+    //#endregion
+    
+    
+    //#region Aerials ----------------------------------------------------------
+    	
     case AT_NAIR:
         if window == 3 {
             if attack_pressed || (window_timer > 5 && attack_down) {
@@ -46,41 +73,91 @@ switch (attack) {
                 set_state(PS_IDLE_AIR)
             }
         }
-    break;
-    case AT_DSPECIAL:
-        move_cooldown[AT_DSPECIAL] = 70;
-    
-        set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
-        if window != 3 {
-            if (vsp > 3) vsp = 3;
-            hsp = clamp (hsp, -2.5, 2.5);
-            can_fast_fall = false;
-        }
-        
-        if window == 1 && window_timer == 1 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-            if (vsp > 0) vsp = 0;
-        }
-        
-        if window == 2 && window_timer == 1 && !hitpause {
-            sound_play(sound_get("desp_whisper"))
+    	break;
 
+	case AT_FAIR:
+        if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
+           sound_play(sound_get("desp_breathsmall"))
+        }
+    	break;
+
+	case AT_BAIR: 
+    case AT_EXTRA_1: // empowered bair 
+        if (window == 1 && window_time_is(1)) {
+            sound_play(sound_get("desp_whip"), 0, noone, .8, 1 );
+        }
+    	break;    
+    
+    case AT_DAIR:
+        
+        can_wall_jump = true;
+        can_move = false;
+        
+        // Landing lag
+        if (!free && window != 4 && !hitpause) {
+            window = 4;
+            window_timer = 0;
+            destroy_hitboxes();
         }
         
-        if window == 3 && window_timer == 1 && !hitpause {
-            sound_stop(sound_get("desp_spin"))
-            sound_play(sound_get("desp_click"))
-            //sound_stop(sound_get("desp_whisper"))
+        if (free && window == 4 && !hitpause) {
+            attack_end();
+            set_state(PS_IDLE_AIR);
+            hsp = clamp(hsp, leave_ground_max*-1, leave_ground_max);
+        }
+        
+        if (window == 1 && !hitpause) {
+            can_move = false;
+            if (window_time_is(1)) {
+                stored_fast_fall = false;
+                dairs_used++;
+            }
             
-            if (num_bullets < 6) num_bullets++;
-            else create_hitbox(AT_DSPECIAL, 1, x-(4*spr_dir), y-6); // Wasted bullet visual
+            if (fast_falling) {
+                fast_falling = false;
+                can_fast_fall = false;
+                stored_fast_fall = true;
+                vsp = get_window_value(attack, window, AG_WINDOW_VSPEED);
+            }
+            
         }
         
-        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause && !free) {
-            window = 1;
-            window_timer = 4;
+        if (window == 2 && (fast_falling || stored_fast_fall) && !hitpause) {
+            vsp = 9;
+            stored_fast_fall = false;
         }
         
-    break;
+        if (window == 3) {
+            
+            // Version C: Pause and jump back
+            if (!hitpause) {
+                if (window_timer == 1) {
+                    start_hsp = hsp;
+                    start_vsp = vsp;
+                }
+                if (window_timer < 3) {
+                    can_fast_fall = false;
+                    hsp = lerp(start_hsp, 2*spr_dir, window_timer/4);
+                    vsp = lerp(start_vsp, 0, window_timer/4);
+                }
+                else if (window_timer == 3) {
+                    hsp = 2*spr_dir;
+                    vsp = -7*(1/dairs_used);
+                }
+                else {
+                    vsp += gravity_speed;
+                    if (left_down)  hsp -= 0.1
+                    if (right_down) hsp += 0.1
+                }
+            }
+            
+        }
+        break;
+    	
+    //#endregion
+    
+    
+    //#region Neutral Special --------------------------------------------------
     
     case AT_NSPECIAL:
         can_move = false
@@ -154,7 +231,11 @@ switch (attack) {
     	
         break;
         
+    //#endregion
+    
         
+    //#region Forward Special --------------------------------------------------
+    
     case AT_FSPECIAL:
 		can_move = false;
 		can_fast_fall = false;
@@ -206,7 +287,11 @@ switch (attack) {
 				break;
 		}
 		break;
-		
+	
+	//#endregion
+	
+	
+	//#region Up Special -------------------------------------------------------
 	
     case AT_USPECIAL:
     
@@ -248,100 +333,49 @@ switch (attack) {
     		
 		}
         
-    break;
+    	break;
+    	
+    //#endregion	
     
-    case AT_DTILT:
-        down_down = true;
-        move_cooldown[AT_DTILT] = 1 
-    break;
-    case AT_FTILT:
-    	if timer1 {
-    		sound_play(sound_get("sfx_snb_clothes"))
-    	}
-    break;
-    case AT_FAIR:
+    
+    //#region Down Special -----------------------------------------------------
+    case AT_DSPECIAL:
+        move_cooldown[AT_DSPECIAL] = 70;
+    
+        set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
+        if (window != 3) {
+            if (vsp > 3) vsp = 3;
+            hsp = clamp (hsp, -2.5, 2.5);
+            can_fast_fall = false;
+        }
+        
+        if (window == 1 && window_time_is(1)) {
+        	if (vsp > 0) vsp = 0;
+        }
+        
+        else if (window == 2 && window_time_is(1)) {
+            sound_play(sound_get("desp_whisper"))
 
-        if timer1 {
-           sound_play(sound_get("desp_breathsmall"))
-        }
-    break;
-    case AT_DAIR:
-        
-        can_wall_jump = true;
-        can_move = false;
-        
-        // Landing lag
-        if (!free && window != 4 && !hitpause) {
-            window = 4;
-            window_timer = 0;
-            destroy_hitboxes();
         }
         
-        if (free && window == 4 && !hitpause) {
-            attack_end();
-            set_state(PS_IDLE_AIR);
-            hsp = clamp(hsp, leave_ground_max*-1, leave_ground_max);
-        }
-        
-        
-        
-        
-        if (window == 1 && !hitpause) {
-            can_move = false;
-            if (window_time_is(1)) {
-                stored_fast_fall = false;
-                dairs_used++;
-            }
+        else if (window == 3 && window_time_is(1)) {
+            sound_stop(sound_get("desp_spin"))
+            sound_play(sound_get("desp_click"))
+            //sound_stop(sound_get("desp_whisper"))
             
-            if (fast_falling) {
-                fast_falling = false;
-                can_fast_fall = false;
-                stored_fast_fall = true;
-                vsp = get_window_value(attack, window, AG_WINDOW_VSPEED);
-            }
-            
+            if (num_bullets < 6) num_bullets++;
+            else create_hitbox(AT_DSPECIAL, 1, x-(4*spr_dir), y-6); // Wasted bullet visual
         }
         
-        if (window == 2 && (fast_falling || stored_fast_fall) && !hitpause) {
-            vsp = 9;
-            stored_fast_fall = false;
+        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause && !free) {
+            window = 1;
+            window_timer = 4;
         }
         
-        if (window == 3) {
-            
-            // Version C: Pause and jump back
-            if (!hitpause) {
-                if (window_timer == 1) {
-                    start_hsp = hsp;
-                    start_vsp = vsp;
-                }
-                if (window_timer < 3) {
-                    can_fast_fall = false;
-                    hsp = lerp(start_hsp, 2*spr_dir, window_timer/4);
-                    vsp = lerp(start_vsp, 0, window_timer/4);
-                }
-                else if (window_timer == 3) {
-                    hsp = 2*spr_dir;
-                    vsp = -7*(1/dairs_used);
-                }
-                else {
-                    vsp += gravity_speed;
-                    if (left_down)  hsp -= 0.1
-                    if (right_down) hsp += 0.1
-                }
-            }
-            
-        }
-        break;
-    case AT_USTRONG:
-        if window > 1 && (window < 5 && window_timer < 17) {
-            hud_offset = 60;
-        }
-    break;
-    case AT_DSTRONG:
-        if attack_down {
-            num_bullets = 6
-        }
+    	break;
+    	
+    //#endregion
+    
 }
 
 
