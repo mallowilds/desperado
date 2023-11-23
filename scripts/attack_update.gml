@@ -89,6 +89,7 @@ switch (attack) {
         	if window_timer == 1 && !hitpause {
         		var vflash = spawn_hit_fx(x, y, vfx_flash)
         		vflash.depth = depth - 1;
+        		sound_play(sound_get("desp_twirl"))
         	}
             var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
             if (window_time_is(1)) {
