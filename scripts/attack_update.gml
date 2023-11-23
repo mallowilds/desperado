@@ -218,8 +218,14 @@ switch (attack) {
     		
     		case 2:
     			// move_cooldown[AT_USPECIAL] = 999;
-    			// Reminder: this check is rendered in debug_draw, so update accordingly~
-    			if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(36*spr_dir), y-53, 40, 74, head_obj, false)) {
+    			// Hitbox rendered in debug_draw
+    			
+    			var _x = get_window_value(AT_USPECIAL, 2, AG_WINDOW_SKULL_GRABBOX_X);
+    			var _y = get_window_value(AT_USPECIAL, 2, AG_WINDOW_SKULL_GRABBOX_Y);
+    			var _w = get_window_value(AT_USPECIAL, 2, AG_WINDOW_SKULL_GRABBOX_W);
+    			var _h = get_window_value(AT_USPECIAL, 2, AG_WINDOW_SKULL_GRABBOX_H);
+    			
+    			if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false)) {
 		        	set_head_state(0);
 		        	window = 4;
 		        	window_timer = 0;
@@ -365,7 +371,7 @@ switch (attack) {
     var shot_hb_w = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_WIDTH);
     var shot_hb_h = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HEIGHT);
     
-    var shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
+    var shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h); // Helper function, checks for walls and clairen field (see below)
     while (!shot_collides && shot_loops < 20) {
         
         set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_PARENT_HITBOX, hbox_num);
@@ -378,16 +384,15 @@ switch (attack) {
         shot_loops++;
         shot_x += shot_hb_w;
         
-        shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
-        
+        shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);        
     }
     
-    shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
+    shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);
     while (shot_collides && shot_hb_w > 0) {
     	shot_hb_w -= 2;
-        shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
+    	shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);
         if (shot_collides) shot_x -= 1;
-        shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
+		shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);
     }
     
     if (shot_hb_w > 0) {
@@ -424,6 +429,13 @@ switch (attack) {
         sp_spr_dir : spr_dir
     };
     ds_list_add(nspec_shot_list, shot_visual);
+
+
+// Helper function for above
+#define shot_collision(_x, _y, _w, _h)
+	return centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("par_block"), false) || centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("plasma_field_obj"), true);
+
+
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.

@@ -47,6 +47,14 @@
 //trailer
 
 
+// Character-specific indices
+AG_WINDOW_SKULL_GRABBOX_X = 41; // Reserved slots for uspecial
+AG_WINDOW_SKULL_GRABBOX_Y = 42;
+AG_WINDOW_SKULL_GRABBOX_W = 43;
+AG_WINDOW_SKULL_GRABBOX_H = 44;
+AG_MUNO_ATTACK_NAME = 70; // Woodcock compat, can be freely changed
+
+
 // Character-specific assets
 num_bullets = 0;                        // 0-6
 bullet_mult = 0.125;                    // multiplier per bullet. Constant value
@@ -58,6 +66,10 @@ sparkle_list = ds_list_create();        // particle list. implementation is take
 nspec_shot_list = ds_list_create();     // similar particle manager for nspecial shots.
 
 dairs_used = 0;                         // dairs used per airtime
+
+
+
+
 
 //Article
 head_obj = instance_create(x, y, "obj_article1");
@@ -273,7 +285,7 @@ air_dodge_sound = 0;
 //custom intro
 AT_INTRO = 2; //the attack index the intro uses, 2 doesn't overwrite any other attack
 has_intro = true; //change to false if you don't have one/don't want it active
-AG_MUNO_ATTACK_NAME = 70; // this can be any number you want!
+
 
 // VFX
 hfx_bone_large = hit_fx_create(sprite_get("vfx_bone_large"), 28)
