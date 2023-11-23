@@ -116,6 +116,10 @@ anim_list = [
     "ftilt",
     "uair",
     "dair",
+    "pratfall",
+    "landinglag",
+    "land",
+    "nspecial",
     ];
 
 
