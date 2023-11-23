@@ -16,12 +16,9 @@ if (head_obj.state == 0) {
 		}
 	}
 	
-	print_debug(string(sprite_index) + ' ' + string(sprite_get("airdodge")) + ' ' + string(sprite_get("airdodge_upback")));
-	
 	if (_s != null) {
 	    _s = _s + "_skull";
-	    print_debug(_s);
-	    
+
 	    shader_start();
     	draw_sprite_ext(sprite_get(_s), image_index, x, y, spr_dir, 1, 0, c_white, 1);
         shader_end();
