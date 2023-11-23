@@ -210,7 +210,7 @@ switch (attack) {
 	
     case AT_USPECIAL:
     
-    	can_fast_fall = false;
+    	//can_fast_fall = (window == 3);
     	can_move = (window == 3);
     	can_wall_jump = (window != 4);
     	

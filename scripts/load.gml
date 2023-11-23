@@ -119,6 +119,7 @@ sprite_change_offset("uair_skull", 150, 194)
 sprite_change_offset("dair_skull", 150, 194)
 sprite_change_offset("pratfall_skull", 150, 194)
 sprite_change_offset("fspecial_skull", 150, 194)
+sprite_change_offset("nspecial_skull", 150, 194)
 
 
 sprite_change_offset("skullhurtbox", 150, 194)
