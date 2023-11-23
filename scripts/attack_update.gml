@@ -123,7 +123,7 @@ switch (attack) {
                     sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1);
                     window = 3;
                     window_timer = 0;
-                    create_nspec_shot(2, sprite_get("nspec_blast_close"), sprite_get("nspec_blast_segment"), sprite_get("nspec_blast_wall"), 38, 6, sprite_get("nspec_blast_smoke"), -2, 16);
+                    create_nspec_shot(2, sprite_get("nspec_blast_close"), sprite_get("nspec_blast_segment"), sprite_get("nspec_blast_wall"), 38, 6, sprite_get("nspec_blast_smoke"), -2, 24);
                 }
                 else {
                 	create_nspec_shot(1, sprite_get("nspec_blast_close"), sprite_get("nspec_blast_segment"), sprite_get("nspec_blast_wall"), 38, 6, sprite_get("null"), 0, 0);
@@ -148,7 +148,7 @@ switch (attack) {
             else { // Continuing to window 3
                 sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1);
                 attack_end();
-                create_nspec_shot(2, sprite_get("nspec_blast_close"), sprite_get("nspec_blast_segment"), sprite_get("nspec_blast_wall"), 38, 6, sprite_get("nspec_blast_smoke"), -2, 16);
+                create_nspec_shot(2, sprite_get("nspec_blast_close"), sprite_get("nspec_blast_segment"), sprite_get("nspec_blast_wall"), 38, 6, sprite_get("nspec_blast_smoke"), -2, 24);
             }
         }
     	

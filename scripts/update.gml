@@ -68,12 +68,14 @@ if (num_bullets >= 4 && get_gameplay_time() % 7 == 0) spawn_sparkle(get_gameplay
 
 
 //#region NSpec gunshot management (drawn in pre_draw.gml, added by attack_update.gml)
-for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
-    var sp = ds_list_find_value(nspec_shot_list, i);
-    sp.sp_lifetime++;
-    if (sp.sp_lifetime >= sp.sp_shot_lifetime + sp.sp_smoke_time_offset + sp.sp_smoke_lifetime) {
-        ds_list_remove(nspec_shot_list, sp);
-        i--;
+if (!hitpause || state == PS_HITSTUN) { // Should still advance on enemy hitpause, just not on Desperado's
+    for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
+        var sp = ds_list_find_value(nspec_shot_list, i);
+        sp.sp_lifetime++;
+        if (sp.sp_lifetime >= sp.sp_shot_lifetime + sp.sp_smoke_time_offset + sp.sp_smoke_lifetime) {
+            ds_list_remove(nspec_shot_list, sp);
+            i--;
+        }
     }
 }
 //#endregion
