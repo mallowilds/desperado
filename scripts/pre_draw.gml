@@ -18,7 +18,7 @@ for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
         
         // Draw priority: tile < end < start
         if (sp.sp_length > 44) {
-            draw_sprite_tiled_area(sp.sp_tile_index, sp_image_index, sp.sp_x+(sp.sp_spr_dir*sprite_get_width(sp.sp_start_index)), sp.sp_y-sprite_get_yoffset(sp.sp_tile_index), tile_tl_x, sp.sp_y-sprite_get_yoffset(sp.sp_tile_index), tile_br_x, sp.sp_y+(sprite_get_height(sp.sp_tile_index)/2))
+            draw_sprite_tiled_area(sp.sp_tile_index, sp_image_index, sp.sp_x, sp.sp_y-sprite_get_yoffset(sp.sp_tile_index), tile_tl_x, sp.sp_y-sprite_get_yoffset(sp.sp_tile_index), tile_br_x, sp.sp_y+(sprite_get_height(sp.sp_tile_index)/2))
             draw_sprite_ext(sp.sp_edge_index, sp_image_index, sp_x_far, sp.sp_y, sp.sp_spr_dir, 1, 0, c_white, 1);
         }
         draw_sprite_part_ext(sp.sp_start_index, sp_image_index, 0, 0, sp_start_width, sprite_get_height(sp.sp_start_index), sp.sp_x, sp.sp_y-sprite_get_yoffset(sp.sp_start_index), sp.sp_spr_dir, 1, c_white, 1);
@@ -29,9 +29,13 @@ for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
         
         var sp_image_index = (sp.sp_lifetime-smoke_start_time) * (sprite_get_number(sp.sp_smoke_index) / sp.sp_smoke_lifetime);
         var sp_start_width = min(sprite_get_width(sp.sp_smoke_index), sp.sp_length)
-        draw_sprite_part_ext(sp.sp_smoke_index, sp_image_index, 0, 0, sp_start_width, sprite_get_height(sp.sp_smoke_index), sp.sp_x+(sp.sp_spr_dir*sprite_get_xoffset(sp.sp_smoke_index)), sp.sp_y-sprite_get_yoffset(sp.sp_smoke_index), sp.sp_spr_dir, 1, c_white, 1);
+        var sp_x_near = sp.sp_x+(sp.sp_spr_dir*sprite_get_xoffset(sp.sp_smoke_index))
+        var sp_x_far = sp.sp_x+(sp.sp_spr_dir*sp.sp_length)
+        var tile_tl_x = (sp_x_far < sp.sp_x ? sp_x_far : sp_x_near);
+        var tile_br_x = (sp_x_far > sp.sp_x ? sp_x_far : sp_x_near);
 
-        
+        draw_sprite_tiled_area(sp.sp_smoke_index, sp_image_index, sp_x_near, sp.sp_y-sprite_get_yoffset(sp.sp_smoke_index), tile_tl_x, sp.sp_y-sprite_get_yoffset(sp.sp_smoke_index), tile_br_x, sp.sp_y-sprite_get_yoffset(sp.sp_smoke_index)+sprite_get_height(sp.sp_smoke_index));
+
     }
     
 }
