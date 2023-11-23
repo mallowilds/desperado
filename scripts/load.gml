@@ -136,6 +136,12 @@ sprite_change_offset("nspec_beam_segment", 0, 16);
 sprite_change_offset("nspec_beam_end", 0, 30);
 sprite_change_offset("nspecflash", 150, 194)
 
+sprite_change_offset("nspec_blast_close", 0, 52);
+sprite_change_offset("nspec_blast_segment", 0, 18);
+sprite_change_offset("nspec_blast_wall", 0, 34);
+sprite_change_offset("nspec_blast_smoke", 4, 8);
+
+
 //not done
 sprite_change_offset("land", 150, 194)
 

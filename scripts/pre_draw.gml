@@ -7,19 +7,36 @@ shader_start();
 // NSpecial shots
 for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
     var sp = ds_list_find_value(nspec_shot_list, i);
-    var sp_image_index = sp.sp_lifetime * (sprite_get_number(sp.sp_tile_index) / sp.sp_max_lifetime);
     
-    var sp_x_far = sp.sp_x+(sp.sp_spr_dir*(sp.sp_length-sp.sp_edge_width))
-    var tile_tl_x = (sp_x_far < sp.sp_x ? sp_x_far : sp.sp_x);
-    var tile_br_x = (sp_x_far > sp.sp_x ? sp_x_far : sp.sp_x);
+    if (sp.sp_lifetime < sp.sp_shot_lifetime) {
+        var sp_image_index = sp.sp_lifetime * (sprite_get_number(sp.sp_tile_index) / sp.sp_shot_lifetime);
+        
+        var sp_start_width = min(sprite_get_width(sp.sp_start_index), sp.sp_length)
+        var sp_x_far = sp.sp_x+(sp.sp_spr_dir*(sp.sp_length-sp.sp_edge_width))
+        var tile_tl_x = (sp_x_far < sp.sp_x ? sp_x_far : sp.sp_x+(sp.sp_spr_dir*sprite_get_width(sp.sp_start_index)));
+        var tile_br_x = (sp_x_far > sp.sp_x ? sp_x_far : sp.sp_x+(sp.sp_spr_dir*sprite_get_width(sp.sp_start_index)));
+        
+        // Draw priority: tile < end < start
+        if (sp.sp_length > 44) {
+            draw_sprite_tiled_area(sp.sp_tile_index, sp_image_index, sp.sp_x+(sp.sp_spr_dir*sprite_get_width(sp.sp_start_index)), sp.sp_y-sprite_get_yoffset(sp.sp_tile_index), tile_tl_x, sp.sp_y-sprite_get_yoffset(sp.sp_tile_index), tile_br_x, sp.sp_y+(sprite_get_height(sp.sp_tile_index)/2))
+            draw_sprite_ext(sp.sp_edge_index, sp_image_index, sp_x_far, sp.sp_y, sp.sp_spr_dir, 1, 0, c_white, 1);
+        }
+        draw_sprite_part_ext(sp.sp_start_index, sp_image_index, 0, 0, sp_start_width, sprite_get_height(sp.sp_start_index), sp.sp_x, sp.sp_y-sprite_get_yoffset(sp.sp_start_index), sp.sp_spr_dir, 1, c_white, 1);
+    }
     
-    draw_sprite_tiled_area(sp.sp_tile_index, sp_image_index, sp.sp_x, sp.sp_y-(sprite_get_height(sp.sp_tile_index)/2), tile_tl_x, sp.sp_y-(sprite_get_height(sp.sp_tile_index)/2), tile_br_x, sp.sp_y+(sprite_get_height(sp.sp_tile_index)/2))
-    draw_sprite_ext(sp.sp_edge_index, sp_image_index, sp_x_far, sp.sp_y, spr_dir, 1, 0, c_white, 1);
+    var smoke_start_time = sp.sp_smoke_time_offset + sp.sp_shot_lifetime
+    if (sp.sp_lifetime >= smoke_start_time) {
+        
+        var sp_image_index = (sp.sp_lifetime-smoke_start_time) * (sprite_get_number(sp.sp_smoke_index) / sp.sp_smoke_lifetime);
+        var sp_start_width = min(sprite_get_width(sp.sp_smoke_index), sp.sp_length)
+        draw_sprite_part_ext(sp.sp_smoke_index, sp_image_index, 0, 0, sp_start_width, sprite_get_height(sp.sp_smoke_index), sp.sp_x+(sp.sp_spr_dir*sprite_get_xoffset(sp.sp_smoke_index)), sp.sp_y-sprite_get_yoffset(sp.sp_smoke_index), sp.sp_spr_dir, 1, c_white, 1);
+
+        
+    }
+    
 }
 
 shader_end();
-
-
 
 
 #define draw_sprite_tiled_area(sprite,subimg,x,y,x1,y1,x2,y2)

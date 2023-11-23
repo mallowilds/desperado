@@ -86,10 +86,10 @@ switch (attack) {
         can_move = false
         can_fast_fall = false
         if window == 1 {
-        	if window_timer == 1 && !hitpause {
+        	if window_timer == 1 && !hitpause && num_bullets > 0 {
         		var vflash = spawn_hit_fx(x, y, vfx_flash)
         		vflash.depth = depth - 1;
-        		sound_play(sound_get("desp_twirl"))
+        		sound_play(sound_get("desp_sharpen"))
         	}
             var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
             if (window_time_is(1)) {
@@ -110,8 +110,9 @@ switch (attack) {
             
             set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 6 + (0.25 * num_bullets));
             set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.7 + (0.05 * num_bullets));
-            print(get_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING))
-            print(get_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK))
+            //print(get_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING))
+            //print(get_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK))
+            
             if (num_bullets <= 0) { // temp override. TODO: replace with proper fail fire
                 window = 4;
                 window_timer = 0;
@@ -144,8 +145,8 @@ switch (attack) {
         
         if (window_time_is(1)) {
             attack_end()
-            if (window == 2) create_nspec_shot(1, sprite_get("nspec_beam_segment"), sprite_get("nspec_beam_end"), 32);
-            if (window == 3) create_nspec_shot(2, sprite_get("nspec_beam_segment"), sprite_get("nspec_beam_end"), 32);
+            if (window == 2) create_nspec_shot(1, sprite_get("nspec_blast_close"), sprite_get("nspec_blast_segment"), sprite_get("nspec_blast_wall"), 38, 6, sprite_get("null"), -2, 16);
+            if (window == 3) create_nspec_shot(2, sprite_get("nspec_blast_close"), sprite_get("nspec_blast_segment"), sprite_get("nspec_blast_wall"), 38, 6, sprite_get("nspec_blast_smoke"), -2, 16);
         }
         
         break;
@@ -351,7 +352,7 @@ switch (attack) {
 
 // Generates hitboxes and visuals from an nspecial melee hitboxes.
 // edge_width is the length to the point in the edge sprite where it should hit a wall.
-#define create_nspec_shot(hbox_num, tile_index, edge_index, edge_width)
+#define create_nspec_shot(hbox_num, start_index, tile_index, edge_index, edge_width, shot_lifetime, smoke_index, smoke_time_offset, smoke_lifetime)
 
     // Set initial hitboxes
     var shot_loops = 0;
@@ -380,6 +381,7 @@ switch (attack) {
     
     shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
     while (shot_collides && shot_hb_w > 0) {
+    	shot_hb_w -= 2;
         shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
         if (shot_collides) shot_x -= 1;
         shot_collides = centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("par_block"), false) || centered_rect_meeting(x+(shot_x*spr_dir), y+shot_y, shot_hb_w, shot_hb_h, asset_get("plasma_field_obj"), true);
@@ -407,10 +409,14 @@ switch (attack) {
         sp_x : x + (shot_x - shot_hb_w/2)*spr_dir + hsp,
         sp_y : y + shot_y + vsp,
         sp_length : shot_end_x - (shot_x - shot_hb_w/2),
+        sp_start_index : start_index,
         sp_tile_index : tile_index,
         sp_edge_index : edge_index,
         sp_edge_width : edge_width,
-        sp_max_lifetime : 4,
+        sp_shot_lifetime : shot_lifetime,
+        sp_smoke_index : smoke_index,
+        sp_smoke_time_offset : smoke_time_offset,
+        sp_smoke_lifetime : smoke_lifetime,
         sp_lifetime : 0,
         sp_spr_dir : spr_dir
     };
