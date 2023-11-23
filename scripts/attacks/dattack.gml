@@ -2,50 +2,62 @@
 
 make_attack(AT_DATTACK,
     AG_SPRITE, sprite_get("dattack"),
-    AG_NUM_WINDOWS, 4,
+    AG_NUM_WINDOWS, 6,
     AG_AIR_SPRITE, sprite_get("dattack"),
     AG_HURTBOX_SPRITE, sprite_get("dattack_hurt"),
     
 )
 
-make_window(AT_DATTACK, 1,
-    AG_WINDOW_LENGTH, 6,
-    AG_WINDOW_ANIM_FRAMES, 1,
+make_window(AT_DATTACK, 1, //startup
+    AG_WINDOW_LENGTH, 4,
+    AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
-    AG_WINDOW_SFX_FRAME, 6,
-    AG_WINDOW_HSPEED, 6
+    AG_WINDOW_SFX_FRAME, 3,
 )
 
 make_window(AT_DATTACK, 2,
     AG_WINDOW_LENGTH, 3,
-    AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 1,
-    //AG_WINDOW_HSPEED, 5,
+    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_ANIM_FRAME_START, 2,
+    AG_WINDOW_HSPEED, 6,
 
 )
 
 make_window(AT_DATTACK, 3,
-    AG_WINDOW_LENGTH, 8,
-    AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_ANIM_FRAME_START, 2,
+    AG_WINDOW_LENGTH, 2,
+    AG_WINDOW_ANIM_FRAMES, 1,
+    AG_WINDOW_ANIM_FRAME_START, 3,
     AG_WINDOW_HAS_CUSTOM_FRICTION, 1,
-    AG_WINDOW_CUSTOM_GROUND_FRICTION, .8
+    AG_WINDOW_HSPEED, 2,
+    AG_WINDOW_CUSTOM_GROUND_FRICTION, .8,
+    AG_WINDOW_HAS_SFX, 1,
+    AG_WINDOW_SFX_FRAME, 1,
+    AG_WINDOW_SFX, asset_get("sfx_swipe_medium2"),
+
 )
 
 make_window(AT_DATTACK, 4,
-    AG_WINDOW_LENGTH, 9,
-    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_LENGTH, 3,
+    AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 4,
-    AG_WINDOW_HAS_WHIFFLAG, 7,
-    AG_WINDOW_CUSTOM_GROUND_FRICTION, 3
+    AG_WINDOW_HSPEED, 3,
+    AG_WINDOW_HSPEED_TYPE, 1,
+)
+make_window(AT_DATTACK, 5,
+    
+    AG_WINDOW_LENGTH, 16,
+    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_ANIM_FRAME_START, 5,
+    AG_WINDOW_HAS_WHIFFLAG, 1,
+    AG_WINDOW_CUSTOM_GROUND_FRICTION, 3,
 )
 
-set_num_hitboxes(AT_DATTACK, 1)
+set_num_hitboxes(AT_DATTACK, 2)
 
 make_hitbox(AT_DATTACK, 1,
     HG_WINDOW, 2,
-    HG_LIFETIME, 11,
+    HG_LIFETIME, 3,
 
     HG_HITBOX_X, 45,
     HG_HITBOX_Y, -10,
@@ -55,16 +67,41 @@ make_hitbox(AT_DATTACK, 1,
 
 
     HG_PRIORITY, 2,
-    HG_DAMAGE, 8,
-    HG_ANGLE, 110,
-    HG_ANGLE_FLIPPER, 6,
-    HG_BASE_KNOCKBACK, 8,
-    HG_FINAL_BASE_KNOCKBACK, 3,
-    HG_BASE_HITPAUSE, 5,
-    HG_KNOCKBACK_SCALING, .3,
+    HG_DAMAGE, 3,
+    HG_ANGLE, 45,
+    //HG_ANGLE_FLIPPER, 6,
+    HG_BASE_KNOCKBACK, 4,
+    HG_BASE_HITPAUSE, 3,
+    HG_KNOCKBACK_SCALING, 0,
 
-    HG_VISUAL_EFFECT_X_OFFSET, 32,
-    HG_VISUAL_EFFECT_Y_OFFSET, -20,
+
+    HG_HIT_SFX, asset_get("sfx_blow_weak1"),
+
+)
+
+make_hitbox(AT_DATTACK, 2,
+    HG_WINDOW, 4,
+    HG_LIFETIME, 3,
+    HG_HITBOX_GROUP, -1,
+    
+    HG_HITBOX_X, 45,
+    HG_HITBOX_Y, -10,
+    HG_WIDTH, 80,
+    HG_HEIGHT, 20,
+    HG_SHAPE, 2,
+
+
+    HG_PRIORITY, 2,
+    HG_DAMAGE, 4,
+    HG_ANGLE, 65,
+    //HG_ANGLE_FLIPPER, 6,
+    HG_BASE_KNOCKBACK, 7,
+    HG_BASE_HITPAUSE, 7,
+    HG_HITPAUSE_SCALING, .5,
+
+    HG_KNOCKBACK_SCALING, .4,
+
+
     HG_HIT_SFX, asset_get("sfx_blow_medium3"),
 
 )

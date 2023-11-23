@@ -246,7 +246,7 @@ switch (attack) {
 				} else {
 					set_window_value(AT_FSPECIAL, 2, AG_WINDOW_VSPEED, -3)
 				}
-				if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) - 2 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) - 2 {
 					sound_play(asset_get("sfx_spin"));
 				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
 					set_head_state(AT_FSPECIAL);
@@ -270,7 +270,7 @@ switch (attack) {
 		can_fast_fall = false;
 		switch(window){
 			case 1:
-				if window_timer == 1 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if window_timer == 1 {
 					set_head_state(AT_FSPECIAL);
 					head_obj.spr_dir = spr_dir;
 				}
@@ -319,7 +319,7 @@ switch (attack) {
 		        break;
 		       
     		case 4:
-    			if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH)) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+    			if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH)) {
     				window = 5;
     				window_timer = 0;
     				hsp = get_window_value(attack, 5, AG_WINDOW_HSPEED) * spr_dir;
