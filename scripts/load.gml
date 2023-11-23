@@ -61,6 +61,9 @@ sprite_change_offset("ftilt", 150, 194)
 sprite_change_offset("uair", 150, 194)
 sprite_change_offset("dair", 150, 194)
 sprite_change_offset("pratfall", 150, 194)
+sprite_change_offset("pratland", 150, 194)
+sprite_change_offset("land", 150, 194)
+
 sprite_change_offset("fspecial", 150, 194)
 
 
@@ -118,6 +121,9 @@ sprite_change_offset("ftilt_skull", 150, 194)
 sprite_change_offset("uair_skull", 150, 194)
 sprite_change_offset("dair_skull", 150, 194)
 sprite_change_offset("pratfall_skull", 150, 194)
+sprite_change_offset("pratland_skull", 150, 194)
+sprite_change_offset("land_skull", 150, 194)
+
 sprite_change_offset("fspecial_skull", 150, 194)
 sprite_change_offset("nspecial_skull", 150, 194)
 
@@ -144,7 +150,6 @@ sprite_change_offset("nspec_blast_smoke", 4, 8);
 
 
 //not done
-sprite_change_offset("land", 150, 194)
 
 
 sprite_change_offset("fstrong", 64, 94)

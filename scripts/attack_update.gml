@@ -210,7 +210,7 @@ switch (attack) {
 	
     case AT_USPECIAL:
     
-    	//can_fast_fall = (window == 3);
+    	if window == 3 { can_fast_fall = true }
     	can_move = (window == 3);
     	can_wall_jump = (window != 4);
     	
@@ -434,8 +434,6 @@ switch (attack) {
 // Helper function for above
 #define shot_collision(_x, _y, _w, _h)
 	return centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("par_block"), false) || centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("plasma_field_obj"), true);
-
-
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
