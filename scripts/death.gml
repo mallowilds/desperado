@@ -12,7 +12,7 @@ while (num_bullets > 0 && num_removed < 3) {
 }
 
 // Reset skull
-if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5) {
+if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && !head_obj.getting_bashed) {
     head_obj.state = 4;
     head_obj.state_timer = 0;
     head_obj.window = 1;

@@ -35,24 +35,8 @@ make_window(AT_FSPECIAL_2, 3,
     AG_WINDOW_ANIM_FRAME_START, 3,
 )
 
-set_num_hitboxes(AT_FSPECIAL_2, 1);
+set_num_hitboxes(AT_FSPECIAL_2, 0);
 
-make_hitbox(AT_FSPECIAL_2, 1,
-    HG_HITBOX_TYPE, 2,
-    HG_LIFETIME, 14,
-    HG_WIDTH, 50,
-    HG_HEIGHT, 50,
-    HG_PRIORITY, 2,
-    HG_DAMAGE, 6,
-    HG_ANGLE, 90,
-    HG_BASE_KNOCKBACK, 6,
-    HG_KNOCKBACK_SCALING, .3,
-    HG_BASE_HITPAUSE, 5,
-    HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
-    HG_PROJECTILE_SPRITE, sprite_get("null"),
-    HG_PROJECTILE_MASK, -1,
-    HG_PROJECTILE_IS_TRANSCENDENT, 1,
-)
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.

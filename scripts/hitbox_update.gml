@@ -18,5 +18,3 @@ if (attack == AT_DSPECIAL && hit_priority == 0) {
         
     }
 }
-
-print_debug(attack);
