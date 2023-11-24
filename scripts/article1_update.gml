@@ -7,7 +7,7 @@
 
 - 0: Inactive
 - 1: Idle
-- 2: 
+- 2: Hitstun
 - 3: Bashed
 - 4: Dying
 - 5: Respawning
@@ -26,11 +26,27 @@ ignores_walls = false;
 player_id.head_lockout = false;
 follow_player = false;
 
-//#region Blast zone / clairen field handling
+//#region Hittability handling
+is_hittable = !(state = 0 || (state == 3 && window == 1) || state == 4 || state == 5);
+can_be_hit[player] = 3;
+
+with oPlayer {
+	if (!clone && state != PS_ATTACK_AIR && state != PS_ATTACK_GROUND) {
+		other.last_attack[player] = noone;
+	}
+}
+//#endregion
+
+//#region Death / blast zone / clairen field handling
 
 if (state != 4 && state != 5) {
 	
-	if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+	if (health <= 0 && state != 2) {
+		state = 4;
+		state_timer = 0;
+	}
+	
+	else if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
 		state = 4;
 		state_timer = 0;
 		visible = false;
@@ -67,7 +83,7 @@ if (state != 4 && state != 5) {
 
 //#region Bash handling
 
-unbashable = (state = 0 || state == 4 || state == 5) ? 1 : 0;
+unbashable = !(state = 0 || state == 4 || state == 5);
 if (getting_bashed && !unbashable) {
 	state = 3;
 	state_timer = 0;
@@ -79,12 +95,13 @@ if (getting_bashed && !unbashable) {
 
 //#endregion
 
-
+print_debug(state);
 
 switch (state) {
 	
 	//#region State 0: Inactive	------------------------------------------------
 	case 0:
+		health = max_health;
 		sprite_index = sprite_get("null");
 	    vsp = 0;
 	    hsp = 0;
@@ -137,9 +154,41 @@ switch (state) {
 	    break;
 	//#endregion
 	
-	//#region State 2: Pushed down ---------------------------------------------
+	//#region State 2: Hitstun -------------------------------------------------
 	case 2:
-		// Don't think this slot is getting used. Reinsert if needed.
+		sprite_index = sprite_get("skullhurt");
+		image_index = state_timer / 4;
+		if (hitstop <= 0) {
+			vsp += 0.4;
+			if (state_timer > 20) {
+				state = 1;
+				state_timer = 0;
+			}
+		}
+		
+		// The wall detection of all time
+		if (hsp == 0 && !moving_vertically) {
+			state = 1;
+			state_timer = 0;
+			sprite_index = sprite_get("skullidle");
+			image_index = 0;
+			spr_dir *= -1;
+			hsp = old_hsp * -1;
+		}
+		
+		// Ground bounce detection (backup)
+		if (!free) {
+			state = 1;
+			state_timer = 0;
+			sprite_index = sprite_get("skullidle");
+			image_index = 0;
+			vsp = old_vsp * -1;
+			hsp = old_hsp;
+		}
+		
+		old_hsp = hsp;
+		old_vsp = vsp;
+		
 		break;
 	//#endregion
 		
@@ -289,6 +338,8 @@ switch (state) {
 	
 	//#region State 5: Respawning ----------------------------------------------
 	case 5:
+		
+		health = max_health;
 		
 		// not dealing with this quite yet~
 		state = 0;
@@ -475,16 +526,16 @@ switch (state) {
 //#endregion
 
 
-//#region Make time progress
+//#region Make time progress + run hit detection
 if (hitstop <= 0) {
 	state_timer++;
 	window_timer++;
 	hitstop = 0;
 }
-else hitstop = floor(hitstop);	
+else hitstop = floor(hitstop);
 //#endregion
 
-#define read_inputs()
+#define read_inputs() // Old function. Consider removing.
 	if (player_id.state_cat != SC_GROUND_COMMITTED && player_id.state_cat != SC_AIR_COMMITTED) return;
 	if ((player_id.state == PS_ATTACK_GROUND || player_id.state == PS_ATTACK_AIR) && player_id.attack == AT_NSPECIAL) return;
 	if (player_id.state == PS_PRATFALL || player_id.state == PS_PRATLAND) return;
@@ -528,6 +579,7 @@ else hitstop = floor(hitstop);
 	var _xdist = abs(x-player_id.x);
 	var _ydist = abs(y-(player_id.y-24));
 	return _xdist <= 12 && _ydist <= 28
+
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
