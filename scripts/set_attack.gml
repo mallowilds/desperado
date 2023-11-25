@@ -7,6 +7,15 @@ switch attack {
     case AT_JAB:
         //attack = AT_INTRO //just used to test the intro lol
         break;
+        
+    // Skullless Normals
+    case AT_DATTACK:
+        if (head_obj.state != 0) attack = AT_EXTRA_2;
+        break;
+    case AT_FSTRONG:
+        if (head_obj.state != 0) attack = AT_FSTRONG_2;
+        break;
+    
     // Empowered BAir
     case AT_BAIR:
         if (num_bullets >= 4) attack = AT_EXTRA_1;
@@ -15,5 +24,6 @@ switch attack {
     case AT_FSPECIAL:
         if (head_obj.state != 0) attack = AT_FSPECIAL_2;
         break;
+        
     
 }
