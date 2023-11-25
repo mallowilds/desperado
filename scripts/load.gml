@@ -48,6 +48,8 @@ sprite_change_offset("airdodge_downback", 150, 194)
 sprite_change_offset("airdodge_back", 150, 194)
 sprite_change_offset("airdodge_upback", 150, 194)
 sprite_change_offset("dattack", 150, 194)
+sprite_change_offset("dattack_skulless", 150, 194)
+
 sprite_change_offset("waveland", 150, 194)
 sprite_change_offset("tech", 150, 194)
 sprite_change_offset("walljump", 150, 194)

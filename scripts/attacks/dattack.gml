@@ -2,7 +2,7 @@
 
 make_attack(AT_DATTACK,
     AG_SPRITE, sprite_get("dattack"),
-    AG_NUM_WINDOWS, 6,
+    AG_NUM_WINDOWS, 5,
     AG_AIR_SPRITE, sprite_get("dattack"),
     AG_HURTBOX_SPRITE, sprite_get("dattack_hurt"),
     
@@ -47,7 +47,7 @@ make_window(AT_DATTACK, 4,
 make_window(AT_DATTACK, 5,
     
     AG_WINDOW_LENGTH, 16,
-    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_ANIM_FRAMES, 3,
     AG_WINDOW_ANIM_FRAME_START, 5,
     AG_WINDOW_HAS_WHIFFLAG, 1,
     AG_WINDOW_CUSTOM_GROUND_FRICTION, 3,

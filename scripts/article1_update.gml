@@ -580,7 +580,6 @@ else hitstop = floor(hitstop);
 	var _ydist = abs(y-(player_id.y-24));
 	return _xdist <= 12 && _ydist <= 28
 
-
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
 // Write NO-INJECT in a comment above this area to disable injection.
