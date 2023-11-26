@@ -487,7 +487,7 @@ switch (state) {
 				with player_id {
 					for (var i = 1; i <= 3; i++) {
 						if (get_hitbox_value(42, i, HG_WINDOW_CREATION_FRAME) == other.window_timer) {
-							hitbox = create_hitbox(42, i, other.x+get_hitbox_value(42, i, HG_HITBOX_X)*spr_dir, other.y+get_hitbox_value(42, i, HG_HITBOX_Y));
+							hitbox = create_hitbox(42, i, other.x+get_hitbox_value(42, i, HG_HITBOX_X)*other.spr_dir, other.y+get_hitbox_value(42, i, HG_HITBOX_Y));
 							hitbox.spr_dir = other.spr_dir;
 							hitbox.head_obj = other;
 							for (var j = 0; j < 20; j++) {
