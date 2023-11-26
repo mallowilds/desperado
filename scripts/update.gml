@@ -96,9 +96,8 @@ with oPlayer {
 if (head_obj.state != 0 && char_height > 50) char_height -= 2;
 else if (head_obj.state == 0 && char_height < 70) char_height++;
 
-// Lock out commands if head is in a busy state
-if (head_lockout) {
-    move_cooldown[AT_FSPECIAL] = 2;
+// Lock out commands if head is in a busy state (technically redundant but improves responsiveness)
+if (!head_obj.can_fspecial) {
     move_cooldown[AT_FSPECIAL_2] = 2;
 }
 

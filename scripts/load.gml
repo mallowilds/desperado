@@ -135,6 +135,7 @@ sprite_change_offset("skullidle", 150, 194)
 sprite_change_offset("skullactive", 150, 194)
 sprite_change_offset("skullhurt", 150, 194)
 sprite_change_offset("skulldie", 150, 194)
+sprite_change_offset("skullnair", 150, 194)
 
 sprite_change_offset("skull_hud_arrow", 7, 10)
 sprite_change_offset("skull_hud_health", 5, 8)

@@ -26,6 +26,9 @@ max_health = 3;
 last_attack = [noone, noone, noone, noone, noone];
 hittable_hitpause_mult = 1;
 
+can_fspecial = false;
+can_sync_attack = false;
+
 //Terrain behavior
 can_be_grounded = false;                            //Determines if the article follows platforms when free == false.
 ignores_walls = false;                              //Determines if the article goes through walls.

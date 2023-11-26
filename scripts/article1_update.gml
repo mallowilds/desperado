@@ -23,7 +23,6 @@
 */
 
 ignores_walls = false;
-player_id.head_lockout = false;
 follow_player = false;
 
 //#region Hittability handling
@@ -95,7 +94,6 @@ if (getting_bashed && !unbashable) {
 
 //#endregion
 
-print_debug(state);
 
 switch (state) {
 	
@@ -106,6 +104,8 @@ switch (state) {
 	    vsp = 0;
 	    hsp = 0;
 	    window = 1;
+	    can_fspecial = false;
+		can_sync_attack = false;
 	    break;
 	//#endregion
 	
@@ -118,38 +118,12 @@ switch (state) {
 		vsp *= 0.9;
 	    
 	    has_hit = false;
+	    can_fspecial = true;
+		can_sync_attack = true;
 	    
 	    if (!free) y--;
-	    
-	    /*
-	    // USpecial reattach
-	    if (in_reattach_range() && player_in_attack(AT_USPECIAL) && player_id.window = 2) {
-	    	state = 0;
-			state_timer = 0;
-			sprite_index = sprite_get("null");
-	    }*/
-	    
-	    /* Movement with left stick. This felt awful
-	    var is_mobile = player_id.state_cat == SC_GROUND_NEUTRAL
-	    	|| player_id.state_cat == SC_AIR_NEUTRAL
-	    	|| player_id.state == PS_DASH_START
-	    	|| player_id.state == PS_DASH
-	    	|| player_id.state == PS_DASH_STOP
-	    	|| player_id.state == PS_DASH_TURN;
-	    
-	    if (state_timer == 1) hsp = 0;
-		if (is_mobile && player_id.left_down) {
-			if (hsp == -3) hsp = -4;
-			else if (hsp > -3) hsp -= 2;
-		} else if (is_mobile && player_id.right_down) {
-			if (hsp == 3) hsp = 4;
-			if (hsp < 4) hsp += 2;
-		} else if (hsp > 0) hsp--;
-		else if (hsp < 0) hsp++;
-		*/
 		
 	    window = 1;
-	    //read_inputs();
 	    
 	    break;
 	//#endregion
@@ -158,6 +132,10 @@ switch (state) {
 	case 2:
 		sprite_index = sprite_get("skullhurt");
 		image_index = state_timer / 4;
+		can_fspecial = false;
+		can_sync_attack = false;
+		
+		
 		if (hitstop <= 0) {
 			vsp += 0.4;
 			if (state_timer > 20) {
@@ -196,7 +174,8 @@ switch (state) {
 	case 3:
 		visible = true;
 	    
-	    player_id.head_lockout = true;
+	    can_fspecial = false;
+		can_sync_attack = false;
 		
 		switch (window) {
 			
@@ -322,7 +301,8 @@ switch (state) {
 	
 		// Visibility inherited by whatever passed it here
 		sprite_index = sprite_get("skulldie");
-		player_id.head_lockout = true;
+		can_fspecial = false;
+		can_sync_attack = false;
 		
 		image_index = state_timer / 5;
 		if (image_index >= 6) {
@@ -341,6 +321,9 @@ switch (state) {
 		
 		health = max_health;
 		
+		can_fspecial = false;
+		can_sync_attack = false;
+		
 		// not dealing with this quite yet~
 		state = 0;
 		state_timer = 0;
@@ -353,11 +336,12 @@ switch (state) {
 		
 	//#region Attacks ----------------------------------------------------------
 	
-	//#region Attack: AT_FSPECIAL ----------------------------------------------
+	//#region Command Attack: AT_FSPECIAL --------------------------------------
 	case AT_FSPECIAL:
 		visible = true;
 	    sprite_index = sprite_get("skullactive");
-	    player_id.head_lockout = true;
+	    can_fspecial = false;
+		can_sync_attack = false;
 		
 		switch (window) {
 			
@@ -387,8 +371,7 @@ switch (state) {
 					hitbox.head_obj = self;
 				}
 				
-				// TODO: if this stays, change to a separate FSpecial lockout
-				player_id.head_lockout = (window_timer < 30);
+				can_fspecial = (window_timer >= 30);
 				
 				// End just before hitting ground (or if it takes too long)
 				var offset = (vsp > 4 ? 40 : 6.66*vsp + 10);
@@ -464,15 +447,78 @@ switch (state) {
 			
 		}
 		
-	    break;
+		break;
 	//#endregion
 	
-	//#region Attack: AT_USTRONG -----------------------------------------------
+	//#region Sync Attack: AT_NAIR ---------------------------------------------
+	case AT_NAIR:
+		
+		visible = true;
+	    sprite_index = sprite_get("skullnair");
+	    can_fspecial = false;
+		can_sync_attack = false;
+		
+		hsp *= 0.9;
+		vsp *= 0.9;
+		
+		switch window {
+			case 1:
+				if (window_timer == 1) {
+					has_hit = false;
+					can_hit = array_create(20, true);
+				}
+				image_index = (window_timer > 7);
+				if (window_timer > 10) {
+					window = 2;
+					window_timer = 0;
+				}
+				break;
+			
+			case 2:
+				print_debug(can_hit);
+			
+				image_index = 2 + (window_timer / 2);
+				if (window_timer > 8) {
+					window = 3;
+					window_timer = 0;
+				}
+				
+				if (hitstop > 0) break;
+				with player_id {
+					for (var i = 1; i <= 3; i++) {
+						if (get_hitbox_value(42, i, HG_WINDOW_CREATION_FRAME) == other.window_timer) {
+							hitbox = create_hitbox(42, i, other.x+get_hitbox_value(42, i, HG_HITBOX_X)*spr_dir, other.y+get_hitbox_value(42, i, HG_HITBOX_Y));
+							hitbox.spr_dir = other.spr_dir;
+							hitbox.head_obj = other;
+							for (var j = 0; j < 20; j++) {
+								if (!other.can_hit[j]) hitbox.can_hit[j] = false;
+							}
+						}
+					}
+				}
+				
+				break;
+			
+			case 3:
+				image_index = 6;
+				if (window_timer > 7 * (has_hit ? 1 : 1.5)) {
+					state = 1;
+					state_timer = 0;
+				}
+				break;
+		}
+		
+		break;
+		
+	//#endregion
+	
+	//#region Unused Attack: AT_USTRONG ----------------------------------------
 	case AT_USTRONG:
 		visible = true;
 		ignores_walls = true;
 	    sprite_index = sprite_get("head_ustrong");
-	    player_id.head_lockout = true;
+	    can_fspecial = false;
+		can_sync_attack = false;
 	    
 	    if (hsp > 0) hsp--;
 		else if (hsp < 0) hsp++;
@@ -535,35 +581,8 @@ if (hitstop <= 0) {
 else hitstop = floor(hitstop);
 //#endregion
 
-#define read_inputs() // Old function. Consider removing.
-	if (player_id.state_cat != SC_GROUND_COMMITTED && player_id.state_cat != SC_AIR_COMMITTED) return;
-	if ((player_id.state == PS_ATTACK_GROUND || player_id.state == PS_ATTACK_AIR) && player_id.attack == AT_NSPECIAL) return;
-	if (player_id.state == PS_PRATFALL || player_id.state == PS_PRATLAND) return;
-	with player_id {
-		if (special_pressed && joy_pad_idle && state != 3) {
-			other.state = AT_NSPECIAL;
-			other.state_timer = 0;
-			other.window = 1;
-			other.window_timer = 1;
-			other.hsp = 0;
-			other.vsp = 0;
-			other.follow_player = false;
-			if (left_down) other.spr_dir = -1;
-			if (right_down) other.spr_dir = 1;
-		}
-		else if (up_strong_pressed) {
-			other.state = AT_USTRONG;
-			other.state_timer = 0;
-			other.window = 1;
-			other.window_timer = 1;
-			other.hsp = 0;
-			other.vsp = 0;
-			other.follow_player = false;
-			if (left_down) other.spr_dir = -1;
-			if (right_down) other.spr_dir = 1;
-		}
-	}
-	return;
+
+
 	
 #define set_head_state(new_state)
 	state = new_state;

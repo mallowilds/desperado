@@ -67,14 +67,8 @@ nspec_shot_list = ds_list_create();     // similar particle manager for nspecial
 
 dairs_used = 0;                         // dairs used per airtime
 
-
-
-
-
 //Article
 head_obj = instance_create(x, y, "obj_article1");
-hit_cancel = false;
-head_lockout = false;
 
 anim_list = [
     "idle",
@@ -135,7 +129,7 @@ anim_list = [
     ];
 
 
-
+// Tampered with in update.gml
 char_height = 70 // 36 – 74. Purely aesthetic. Used for centering things on the character, placing the overhead HUD, etc
 
 
