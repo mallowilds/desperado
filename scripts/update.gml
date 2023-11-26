@@ -101,6 +101,21 @@ if (!head_obj.can_fspecial) {
     move_cooldown[AT_FSPECIAL_2] = 2;
 }
 
+
+
+
+if (skull_stored_attack != noone) {
+    if (!attack_down && !is_attack_pressed(DIR_ANY)) {
+        skull_stored_attack = noone;
+        if (head_obj.can_sync_attack) set_head_state(AT_NAIR);
+    }
+}
+
+
+
+
+
+
 if (!instance_exists(head_obj)) {
     head_obj = instance_create(x, y, "obj_article1");
     print_debug("------------------------------------------------------------------------------------");
@@ -112,6 +127,13 @@ if (!instance_exists(head_obj)) {
 //#endregion
 
 
+
+#define set_head_state(new_state)
+    head_obj.state = new_state;
+    head_obj.state_timer = 0;
+    head_obj.window = 1;
+    head_obj.window_timer = 1;
+    return;
 
 #define spawn_sparkle(seed1, seed2)
     var sparkle_type = random_func_2(seed1, 3, true);

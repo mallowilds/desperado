@@ -67,6 +67,8 @@ nspec_shot_list = ds_list_create();     // similar particle manager for nspecial
 
 dairs_used = 0;                         // dairs used per airtime
 
+skull_stored_attack = noone;
+
 //Article
 head_obj = instance_create(x, y, "obj_article1");
 

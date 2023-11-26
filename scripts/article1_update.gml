@@ -466,16 +466,21 @@ switch (state) {
 				if (window_timer == 1) {
 					has_hit = false;
 					can_hit = array_create(20, true);
+					sound_play(asset_get("sfx_swipe_weak1"));
 				}
-				image_index = (window_timer > 7);
-				if (window_timer > 10) {
+				image_index = (window_timer > 11);
+				
+				if (window_timer == 13) {
+					sound_play(asset_get("sfx_swipe_medium1"));
+				}
+				
+				if (window_timer > 14) {
 					window = 2;
 					window_timer = 0;
 				}
 				break;
 			
 			case 2:
-				print_debug(can_hit);
 			
 				image_index = 2 + (window_timer / 2);
 				if (window_timer > 8) {

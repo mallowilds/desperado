@@ -63,13 +63,12 @@ switch (attack) {
     //#region Aerials ----------------------------------------------------------
     	
     case AT_NAIR:
-    	if (window == 1 && window_time_is(1)) {
-    		if (head_obj.can_sync_attack) set_head_state(AT_NAIR);
-    	}
+
         if window == 3 {
             if attack_pressed || (window_timer > 5 && attack_down) {
                 window = 4
                 window_timer = 1
+                skull_stored_attack = AT_NAIR;
             }
             if window_timer == get_window_value(AT_NAIR, 3, AG_WINDOW_LENGTH) && !hitpause{
                 attack_end();
@@ -79,9 +78,7 @@ switch (attack) {
     	break;
 
 	case AT_FAIR:
-		if (window == 1 && window_time_is(1)) {
-    		if (head_obj.can_sync_attack) set_head_state(AT_NAIR);
-    	}
+
         if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
            sound_play(sound_get("desp_breathsmall"))
         }
@@ -89,25 +86,17 @@ switch (attack) {
 
 	case AT_BAIR: 
     case AT_EXTRA_1: // empowered bair 
-    	if (window == 1 && window_time_is(1)) {
-    		if (head_obj.can_sync_attack) set_head_state(AT_NAIR);
-    	}
+
         if (window == 1 && window_time_is(1)) {
             sound_play(sound_get("desp_whip"), 0, noone, .8, 1 );
         }
     	break;    
     
     case AT_UAIR:
-    	if (window == 1 && window_time_is(1)) {
-    		if (head_obj.can_sync_attack) set_head_state(AT_NAIR);
-    	}
+
     	break;
     
     case AT_DAIR:
-        
-        if (window == 1 && window_time_is(1)) {
-    		if (head_obj.can_sync_attack) set_head_state(AT_NAIR);
-    	}
         
         can_wall_jump = true;
         can_move = false;

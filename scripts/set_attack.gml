@@ -11,6 +11,7 @@ switch attack {
     // Skullless Normals
     case AT_DATTACK:
         if (head_obj.state != 0) attack = AT_EXTRA_2;
+        skull_stored_attack = AT_NAIR;
         break;
     case AT_FSTRONG:
         if (head_obj.state != 0) attack = AT_FSTRONG_2;
@@ -19,6 +20,14 @@ switch attack {
     // Empowered BAir
     case AT_BAIR:
         if (num_bullets >= 4) attack = AT_EXTRA_1;
+    
+    case AT_UAIR:
+    case AT_DAIR:
+    case AT_FAIR:
+    case AT_FTILT:
+    case AT_DTILT:
+    case AT_UTILT:
+        skull_stored_attack = AT_NAIR;
         break;
     
     case AT_FSPECIAL:
