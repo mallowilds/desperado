@@ -463,14 +463,14 @@ switch (state) {
 		
 		switch window {
 			case 1:
-				if (window_timer == 1) {
+				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					has_hit = false;
 					can_hit = array_create(20, true);
 					sound_play(asset_get("sfx_swipe_weak1"));
 				}
 				image_index = (window_timer > 11);
 				
-				if (window_timer == 13) {
+				if (window_timer == 13) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					sound_play(asset_get("sfx_swipe_medium1"));
 				}
 				

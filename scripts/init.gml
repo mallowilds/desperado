@@ -218,7 +218,7 @@ double_jump_time = 40 // 24 – 40. The number of frames to play the double jump
 // Crouch Animation Frames
 crouch_startup_frames = 4 // The number of animation frames during crouch’s startup
 crouch_active_frames = 2 // The number of animation frames during crouch's active frameslan
-crouch_recovery_frames = 2 // The number of animation frames during crouch’s recovery
+crouch_recovery_frames = 3 // The number of animation frames during crouch’s recovery
 // Crouch Animation Start/End Customization by @SupersonicNK
 crouch_start_time = 16; // time in frames it takes for crouch start to stop.
 crouch_end_time = 18; // time in frames it takes for crouch stop to stop. interruptable.

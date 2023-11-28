@@ -18,4 +18,3 @@ if (attack == AT_DSPECIAL && hit_priority == 0) {
         
     }
 }
-

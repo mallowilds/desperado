@@ -12,7 +12,7 @@ make_attack(AT_NAIR,
 make_window(AT_NAIR, 1, //startup 1
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
-    AG_WINDOW_ANIM_FRAMES, 1,
+    AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
     AG_WINDOW_SFX_FRAME, 4,
@@ -22,7 +22,7 @@ make_window(AT_NAIR, 2, //active 2
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 2,
     AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 1,
+    AG_WINDOW_ANIM_FRAME_START, 2,
 
 )
 
@@ -30,7 +30,7 @@ make_window(AT_NAIR, 3, //endlag 1
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 16,
     AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_ANIM_FRAME_START, 2,
+    AG_WINDOW_ANIM_FRAME_START, 3,
    // AG_WINDOW_HAS_WHIFFLAG, 1,
 )
 
@@ -38,7 +38,7 @@ make_window(AT_NAIR, 4, //startup 2
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
     AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 4,
+    AG_WINDOW_ANIM_FRAME_START, 5,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium2"),
     AG_WINDOW_SFX_FRAME, 4,
@@ -48,15 +48,15 @@ make_window(AT_NAIR, 5, //active 2
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 2,
     AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 5,
+    AG_WINDOW_ANIM_FRAME_START, 6,
 
 )
 
 make_window(AT_NAIR, 6, //endlag 1
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 16,
-    AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_ANIM_FRAME_START, 6,
+    AG_WINDOW_ANIM_FRAMES, 3,
+    AG_WINDOW_ANIM_FRAME_START, 7,
     AG_WINDOW_HAS_WHIFFLAG, 1,
 )
 

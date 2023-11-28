@@ -46,7 +46,7 @@ make_window(AT_EXTRA_2, 4,
 )
 make_window(AT_EXTRA_2, 5,
     
-    AG_WINDOW_LENGTH, 16,
+    AG_WINDOW_LENGTH, 12,
     AG_WINDOW_ANIM_FRAMES, 3,
     AG_WINDOW_ANIM_FRAME_START, 5,
     AG_WINDOW_HAS_WHIFFLAG, 1,
@@ -57,11 +57,11 @@ set_num_hitboxes(AT_EXTRA_2, 2)
 
 make_hitbox(AT_EXTRA_2, 1,
     HG_WINDOW, 2,
-    HG_LIFETIME, 3,
+    HG_LIFETIME, 2,
 
-    HG_HITBOX_X, 45,
+    HG_HITBOX_X, 20,
     HG_HITBOX_Y, -10,
-    HG_WIDTH, 80,
+    HG_WIDTH, 60,
     HG_HEIGHT, 20,
     HG_SHAPE, 2,
 
@@ -84,11 +84,12 @@ make_hitbox(AT_EXTRA_2, 2,
     HG_LIFETIME, 3,
     HG_HITBOX_GROUP, -1,
     
-    HG_HITBOX_X, 45,
-    HG_HITBOX_Y, -10,
-    HG_WIDTH, 80,
-    HG_HEIGHT, 20,
-    HG_SHAPE, 2,
+    
+    HG_HITBOX_X, 30,
+    HG_HITBOX_Y, -30,
+    HG_WIDTH, 60,
+    HG_HEIGHT, 60,
+
 
 
     HG_PRIORITY, 2,
