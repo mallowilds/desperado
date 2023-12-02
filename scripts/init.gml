@@ -287,6 +287,9 @@ has_intro = true; //change to false if you don't have one/don't want it active
 hfx_bone_large = hit_fx_create(sprite_get("vfx_bone_large"), 28)
 hfx_null = hit_fx_create(sprite_get("null"), 0)
 vfx_flash = hit_fx_create(sprite_get("nspecflash"), 16)
+vfx_bullseye = hit_fx_create(sprite_get("vfx_1"), 32)
+vfx_bullseye_small = hit_fx_create(sprite_get("vfx_2"), 23)
+
 //Sprites
 // spr_nspecial_proj = sprite_get("nspecial_proj")
 

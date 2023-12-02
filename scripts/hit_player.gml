@@ -68,6 +68,7 @@ if atk == AT_NSPECIAL {
 	}
 	if hbox == 2 {
 		sound_play(sound_get("desp_heavy_hit"))
+		sound_play(asset_get("sfx_mol_bat_whack"))
 	}
 }
 //#endregion
@@ -78,6 +79,9 @@ with hit_fx_obj {
 	if player_id == other.id {
         if hit_fx == other.hfx_bone_large {
             depth = other.depth-1
+        }
+        if hit_fx == other.vfx_bullseye {
+           // depth = other.depth-1
         }
     }
 }

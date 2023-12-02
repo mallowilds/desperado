@@ -93,14 +93,24 @@ switch (attack) {
     	break;    
     
     case AT_UAIR:
-
     	break;
     
     case AT_DAIR:
         
         can_wall_jump = true;
         can_move = false;
+        if state_timer == 1 {
+        	if fast_falling {
+        		vsp = 9.20
+        	}
+        }
         
+        if window == 2 && has_hit && !hitpause {
+        	window = 4;
+        	window_timer = 0;
+        	vsp = -8
+        }
+        /*
         // Landing lag
         if (!free && window != 4 && !hitpause) {
             window = 4;
@@ -159,7 +169,7 @@ switch (attack) {
                 }
             }
             
-        }
+        }*/
         break;
     	
     //#endregion
