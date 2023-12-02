@@ -56,6 +56,9 @@ switch (attack) {
     case AT_DSTRONG:
         if (attack_down) num_bullets = 6; // Temp debugging utility
         break;
+    case AT_FSTRONG:
+	//
+    	break;
     
     //#endregion
     

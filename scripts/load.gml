@@ -160,7 +160,7 @@ sprite_change_offset("nspec_blast_smoke", 4, 8);
 //not done
 
 
-sprite_change_offset("fstrong", 64, 94)
+sprite_change_offset("fstrong", 156, 194)
 sprite_change_offset("dstrong", 64, 94)
 sprite_change_offset("nspecial", 156, 194)
 sprite_change_offset("taunt", 64, 94)

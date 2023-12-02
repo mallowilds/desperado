@@ -289,7 +289,7 @@ hfx_null = hit_fx_create(sprite_get("null"), 0)
 vfx_flash = hit_fx_create(sprite_get("nspecflash"), 16)
 vfx_bullseye = hit_fx_create(sprite_get("vfx_1"), 32)
 vfx_bullseye_small = hit_fx_create(sprite_get("vfx_2"), 23)
-
+vfx_whatheblast = hit_fx_create(sprite_get("fstrongblast"), 12)
 //Sprites
 // spr_nspecial_proj = sprite_get("nspecial_proj")
 
