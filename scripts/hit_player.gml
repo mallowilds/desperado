@@ -56,8 +56,6 @@ if (atk == AT_DAIR && hbox == 1) {
 	hit_player_obj.y = y + 40;
 	
 }
-
-
 //#endregion
 
 

@@ -16,4 +16,7 @@ if ((prev_state == PS_ATTACK_AIR || prev_state == PS_ATTACK_GROUND) && attack ==
 }
 
 
-// holding_bullet stuff is in update. The game doesn't seem to like create_hitbox operations in here
+if (prev_state == PS_ATTACK_GROUND && attack == AT_FSTRONG_2) {
+    sound_stop(sound_get("desp_spin"));
+    if (window <= 2) num_bullets--;
+}

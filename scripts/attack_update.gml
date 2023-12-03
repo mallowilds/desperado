@@ -56,8 +56,26 @@ switch (attack) {
     case AT_DSTRONG:
         if (attack_down) num_bullets = 6; // Temp debugging utility
         break;
+        
     case AT_FSTRONG:
-	//
+    	break;
+    case AT_FSTRONG_2:
+		if (window == 1 && window_time_is(1)) {
+			sound_play(sound_get("desp_spin"));
+		}
+		if (window == 3 && window_time_is(1)) {
+			sound_stop(sound_get("desp_spin"));
+			sound_play(asset_get("sfx_mol_distant_explode"), false, noone, 2);
+			num_bullets--;
+		}
+		if (window == 3 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
+			fstrong_blast_obj = spawn_hit_fx(x+(70*spr_dir), y-50, vfx_fstrong_blast);
+			fstrong_blast_obj.spr_dir = spr_dir;
+		}
+		
+		if (hitpause && instance_exists(fstrong_blast_obj)) {
+			fstrong_blast_obj.step_timer--; // manual hitpause
+		}
     	break;
     
     //#endregion
@@ -73,7 +91,7 @@ switch (attack) {
                 window_timer = 1
                 skull_stored_attack = AT_NAIR;
             }
-            if window_timer == get_window_value(AT_NAIR, 3, AG_WINDOW_LENGTH) && !hitpause{
+            if window_timer == get_window_value(AT_NAIR, 3, AG_WINDOW_LENGTH) && !hitpause {
                 attack_end();
                 set_state(PS_IDLE_AIR)
             }
@@ -103,9 +121,14 @@ switch (attack) {
         
         can_wall_jump = true;
         can_move = false;
+        
+        if (window == 1) {
+        	if (vsp > -1.5) vsp = -1.5;
+        }
+        
         if (window == 2 && window_timer == 1 && !hitpause) {
         	hsp = 5 * spr_dir;
-        	vsp = fast_falling ? 8 : 10;
+        	vsp = fast_falling ? 9 : 11;
         }
         
         if (window == 2 && !hitpause) do_skull_grabbox(4);

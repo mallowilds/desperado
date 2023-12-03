@@ -5,7 +5,7 @@ make_attack(AT_EXTRA_1,
   AG_SPRITE, sprite_get("bair"),
   AG_HAS_LANDING_LAG, 1,
   AG_LANDING_LAG, 10,
-  AG_MUNO_ATTACK_NAME, "Empowered BAir",
+  AG_MUNO_ATTACK_NAME, "BAir (High Heat)",
   AG_NUM_WINDOWS, 3,
   AG_HURTBOX_SPRITE, sprite_get("bair_hurt"))
 

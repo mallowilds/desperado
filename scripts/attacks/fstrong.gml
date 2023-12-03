@@ -6,6 +6,7 @@ make_attack(AT_FSTRONG,
     AG_HAS_LANDING_LAG, 3,
     AG_STRONG_CHARGE_WINDOW, 1,
     AG_HURTBOX_SPRITE, sprite_get("fstrong_hurt"),
+    AG_MUNO_ATTACK_NAME, "FStrong (No Bullets)",
 )
 
 make_window(AT_FSTRONG, 1,
@@ -43,10 +44,10 @@ make_window(AT_FSTRONG, 5,
 
 )
 
-set_num_hitboxes(AT_FSTRONG, 3)
+set_num_hitboxes(AT_FSTRONG, 1)
 
 
-make_hitbox(AT_FSTRONG, 2,
+make_hitbox(AT_FSTRONG, 1,
     HG_WINDOW, 4,
     HG_LIFETIME, 3,
 

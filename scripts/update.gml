@@ -130,6 +130,9 @@ if (!instance_exists(head_obj)) {
 
 
 
+
+
+
 #define set_head_state(new_state)
     head_obj.state = new_state;
     head_obj.state_timer = 0;

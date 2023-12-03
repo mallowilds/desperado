@@ -13,8 +13,13 @@ switch attack {
         if (head_obj.state != 0) attack = AT_EXTRA_2;
         skull_stored_attack = AT_NAIR;
         break;
+    case AT_USTRONG:
+        if (head_obj.state != 0) attack = AT_USTRONG_2;
+        break;
+    
+    // Empowered FStrong
     case AT_FSTRONG:
-        if (head_obj.state != 0) attack = AT_FSTRONG_2;
+        if (num_bullets > 0) attack = AT_FSTRONG_2;
         break;
     
     // Empowered BAir

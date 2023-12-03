@@ -25,7 +25,25 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
             
         }
     }
-    if (attack == AT_NSPECIAL) {
+    
+    else if (attack == AT_FSTRONG_2) {
+        switch window {
+            case 1:
+                frame = floor(2*window_timer/5);
+                if (frame >= 3) frame = 3 + ((window_timer+strong_charge)/3)%2;
+                break;
+            case 2:
+                frame = 3 + ((window_timer+strong_charge)/3)%2;
+                break;
+            case 3:
+                frame = 5 + floor(window_timer/2);
+                if (frame >= 9) frame = 0;
+                break;
+            
+        }
+    }
+    
+    else if (attack == AT_NSPECIAL) {
         switch window {
             case 2:
             case 3:

@@ -15,9 +15,6 @@ make_window(AT_DAIR, 1,
     AG_WINDOW_LENGTH, 9,
     AG_WINDOW_ANIM_FRAMES, 2,
     
-    AG_WINDOW_HSPEED, -0.5,
-    AG_WINDOW_VSPEED, -1.5,
-    
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium2"),
     AG_WINDOW_SFX_FRAME, 8,
@@ -28,16 +25,14 @@ make_window(AT_DAIR, 2, //down
     AG_WINDOW_LENGTH, 8,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 2,
-    // speeds set in attack_update.gml
     AG_WINDOW_HAS_CUSTOM_FRICTION, 1,
     AG_WINDOW_CUSTOM_AIR_FRICTION, 0.4,
-    AG_WINDOW_CUSTOM_GRAVITY, -0.1,
+    AG_WINDOW_CUSTOM_GRAVITY, 0,
 )
 make_window(AT_DAIR, 3, 
     AG_WINDOW_LENGTH, 12,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 4,
-    // Nope, handling this movement manually (attack_update.gml)
     AG_WINDOW_HAS_WHIFFLAG, 1,
     AG_WINDOW_CUSTOM_GRAVITY, 0,
 )
@@ -46,11 +41,9 @@ make_window(AT_DAIR, 4, //hitgrab
     AG_WINDOW_LENGTH, 26,
     AG_WINDOW_ANIM_FRAMES, 6,
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, sound_get("sfx_swipe_medium"),
+    AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
     AG_WINDOW_SFX_FRAME, 3,
     AG_WINDOW_ANIM_FRAME_START, 6,
-    //AG_WINDOW_VSPEED, -20,
-    AG_WINDOW_VSPEED_TYPE, 2,
     AG_WINDOW_HAS_WHIFFLAG, 1,
     AG_WINDOW_HAS_CUSTOM_FRICTION, 1,
     AG_WINDOW_CUSTOM_GROUND_FRICTION, 0.6,
