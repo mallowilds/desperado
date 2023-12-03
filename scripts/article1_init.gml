@@ -1,4 +1,3 @@
-// CAUTION: This is an unedited placeholder. Some things will not work as expected.
 
 // article1_init - runs once, when the article is created
 // Desperado's skull.

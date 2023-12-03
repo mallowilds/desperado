@@ -1,9 +1,8 @@
-// CAUTION: This is an unedited placeholder. Some things will not work as expected.
 
 // article1_update - runs every frame the article exists
 // Desperado's skull.
 
-/*STATE LIST (outdated lmao)
+/*STATE LIST
 
 - 0: Inactive
 - 1: Idle
