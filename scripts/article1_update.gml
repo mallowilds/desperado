@@ -576,7 +576,7 @@ switch (state) {
 //#endregion
 
 
-//#region Make time progress + run hit detection
+//#region Make time progress
 if (hitstop <= 0) {
 	state_timer++;
 	window_timer++;

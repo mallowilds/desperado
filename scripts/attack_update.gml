@@ -89,7 +89,6 @@ switch (attack) {
             if attack_pressed || (window_timer > 5 && attack_down) {
                 window = 4
                 window_timer = 1
-                skull_stored_attack = AT_NAIR;
             }
             if window_timer == get_window_value(AT_NAIR, 3, AG_WINDOW_LENGTH) && !hitpause {
                 attack_end();
