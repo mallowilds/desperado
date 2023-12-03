@@ -69,6 +69,11 @@ dairs_used = 0;                         // dairs used per airtime
 
 skull_stored_attack = noone;
 
+
+// Training mode assets
+draw_skull_grabbox = 0;
+
+
 //Article
 head_obj = instance_create(x, y, "obj_article1");
 

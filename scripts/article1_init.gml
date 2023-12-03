@@ -26,6 +26,8 @@ max_health = 3;
 last_attack = [noone, noone, noone, noone, noone];
 hittable_hitpause_mult = 1;
 
+can_fspecial = false;
+can_sync_attack = false;
 skull_stored_attack = noone;
 
 //Terrain behavior

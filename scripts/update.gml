@@ -113,6 +113,8 @@ if (skull_stored_attack != noone) {
 
 
 
+// Script order reliant.
+draw_skull_grabbox = clamp(draw_skull_grabbox-1, 0, draw_skull_grabbox)
 
 
 

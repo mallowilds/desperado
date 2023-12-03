@@ -46,6 +46,21 @@ if (atk == 42 && my_hitboxID.orig_player == player) { // Sync attacks
 //#endregion
 
 
+//#region Grab management
+if (atk == AT_DAIR && hbox == 1) {
+	
+	can_fast_fall = false;
+	fast_falling = false;
+	
+	hit_player_obj.x = x + (50*spr_dir);
+	hit_player_obj.y = y + 40;
+	
+}
+
+
+//#endregion
+
+
 
 //#region SFX management
 if atk == AT_EXTRA_1 && hbox == 3 {

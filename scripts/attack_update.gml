@@ -98,82 +98,32 @@ switch (attack) {
     case AT_UAIR:
     	break;
     
+    //#region AT_DAIR
     case AT_DAIR:
         
         can_wall_jump = true;
         can_move = false;
-        if state_timer == 1 {
-        	if fast_falling {
-        		vsp = 9.20
-        	}
+        if (window == 2 && window_timer == 1 && !hitpause) {
+        	hsp = 5 * spr_dir;
+        	vsp = fast_falling ? 8 : 10;
         }
         
-        if window == 2 && has_hit && !hitpause {
+        if (window == 2 && !hitpause) do_skull_grabbox(4);
+        
+        if (window < 4 && has_hit && !hitpause) {
         	window = 4;
         	window_timer = 0;
-        	vsp = -8
-        }
-        /*
-        // Landing lag
-        if (!free && window != 4 && !hitpause) {
-            window = 4;
-            window_timer = 0;
-            destroy_hitboxes();
+        	destroy_hitboxes();
         }
         
-        if (free && window == 4 && !hitpause) {
-            attack_end();
-            set_state(PS_IDLE_AIR);
-            hsp = clamp(hsp, leave_ground_max*-1, leave_ground_max);
+        if (window == 4) {
+        	can_fast_fall = false;
+        	fast_falling = false;
+        	if (window_timer == 0 && !hitpause) vsp = -8
         }
-        
-        if (window == 1 && !hitpause) {
-            can_move = false;
-            if (window_time_is(1)) {
-                stored_fast_fall = false;
-                dairs_used++;
-            }
-            
-            if (fast_falling) {
-                fast_falling = false;
-                can_fast_fall = false;
-                stored_fast_fall = true;
-                vsp = get_window_value(attack, window, AG_WINDOW_VSPEED);
-            }
-            
-        }
-        
-        if (window == 2 && (fast_falling || stored_fast_fall) && !hitpause) {
-            vsp = 9;
-            stored_fast_fall = false;
-        }
-        
-        if (window == 3) {
-            
-            // Version C: Pause and jump back
-            if (!hitpause) {
-                if (window_timer == 1) {
-                    start_hsp = hsp;
-                    start_vsp = vsp;
-                }
-                if (window_timer < 3) {
-                    can_fast_fall = false;
-                    hsp = lerp(start_hsp, 2*spr_dir, window_timer/4);
-                    vsp = lerp(start_vsp, 0, window_timer/4);
-                }
-                else if (window_timer == 3) {
-                    hsp = 2*spr_dir;
-                    vsp = -7*(1/dairs_used);
-                }
-                else {
-                    vsp += gravity_speed;
-                    if (left_down)  hsp -= 0.1
-                    if (right_down) hsp += 0.1
-                }
-            }
-            
-        }*/
+
         break;
+    //#endregion
     	
     //#endregion
     
@@ -325,18 +275,8 @@ switch (attack) {
     		case 2:
     			// move_cooldown[AT_USPECIAL] = 999;
     			// Hitbox rendered in debug_draw
+    			do_skull_grabbox(4);
     			
-    			var _x = get_window_value(AT_USPECIAL, 2, AG_WINDOW_SKULL_GRABBOX_X);
-    			var _y = get_window_value(AT_USPECIAL, 2, AG_WINDOW_SKULL_GRABBOX_Y);
-    			var _w = get_window_value(AT_USPECIAL, 2, AG_WINDOW_SKULL_GRABBOX_W);
-    			var _h = get_window_value(AT_USPECIAL, 2, AG_WINDOW_SKULL_GRABBOX_H);
-    			
-    			if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false)) {
-		        	set_head_state(0);
-		        	window = 4;
-		        	window_timer = 0;
-		        	destroy_hitboxes();
-		        }
 		        break;
 		       
     		case 4:
@@ -407,6 +347,23 @@ switch (attack) {
     head_obj.window = 1;
     head_obj.window_timer = 1;
     return;
+
+
+
+#define do_skull_grabbox(target_window)
+	var _x = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_X);
+	var _y = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_Y);
+	var _w = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_W);
+	var _h = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_H);
+	
+	if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false)) {
+    	set_head_state(0);
+    	window = target_window;
+    	window_timer = 0;
+    	destroy_hitboxes();
+    }
+    
+    draw_skull_grabbox = 2;
 
 
 

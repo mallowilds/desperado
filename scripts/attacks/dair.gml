@@ -15,8 +15,8 @@ make_window(AT_DAIR, 1,
     AG_WINDOW_LENGTH, 9,
     AG_WINDOW_ANIM_FRAMES, 2,
     
-    AG_WINDOW_HSPEED, -2,
-    AG_WINDOW_VSPEED, -1,
+    AG_WINDOW_HSPEED, -0.5,
+    AG_WINDOW_VSPEED, -1.5,
     
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium2"),
@@ -28,15 +28,12 @@ make_window(AT_DAIR, 2, //down
     AG_WINDOW_LENGTH, 8,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 2,
-    AG_WINDOW_VSPEED_TYPE, 2,
-    AG_WINDOW_HSPEED_TYPE, 0,
-    AG_WINDOW_HSPEED, 5,
-    AG_WINDOW_VSPEED, 8, // Fast-fall vspeed set in attack_update.gml
+    // speeds set in attack_update.gml
     AG_WINDOW_HAS_CUSTOM_FRICTION, 1,
     AG_WINDOW_CUSTOM_AIR_FRICTION, 0.4,
     AG_WINDOW_CUSTOM_GRAVITY, -0.1,
 )
-make_window(AT_DAIR, 3, //up (endlag)
+make_window(AT_DAIR, 3, 
     AG_WINDOW_LENGTH, 12,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 4,
@@ -60,49 +57,54 @@ make_window(AT_DAIR, 4, //hitgrab
     AG_WINDOW_CUSTOM_GRAVITY, 1.5,
 )
 
-set_num_hitboxes(AT_DAIR, 1)
+set_num_hitboxes(AT_DAIR, 2)
 
 make_hitbox(AT_DAIR, 1,
     HG_WINDOW, 2,
     HG_LIFETIME, 8,
+    HG_HITBOX_GROUP, 1,
     
-    HG_HITBOX_X, 0,
-    HG_HITBOX_Y, -13,
-    HG_WIDTH, 50,
+    HG_HITBOX_X, 36,
+    HG_HITBOX_Y, 0,
+    HG_WIDTH, 75,
     HG_HEIGHT, 75,
     
     HG_PRIORITY, 2,
-    HG_DAMAGE, 6,
-    HG_ANGLE, -50,
-    HG_BASE_KNOCKBACK, 5,
-    HG_KNOCKBACK_SCALING, 0.6,
-    HG_BASE_HITPAUSE, 8,
-    HG_HITPAUSE_SCALING, 0.7,
+    HG_DAMAGE, 3,
+    HG_ANGLE, 55,
+    HG_BASE_KNOCKBACK, 9,
+    HG_KNOCKBACK_SCALING, 0,
+    HG_BASE_HITPAUSE, 6,
+    HG_HITPAUSE_SCALING, 0.5,
     HG_HITSTUN_MULTIPLIER, 0.8,
-    HG_VISUAL_EFFECT, 304,
+    
+    HG_TECHABLE, 1,
 
-    HG_HIT_SFX, asset_get("sfx_blow_heavy2"),
+    HG_HIT_SFX, asset_get("sfx_blow_medium3"),
 
 )
 
 make_hitbox(AT_DAIR, 2,
-    HG_WINDOW, 2,
-    HG_LIFETIME, 13,
-    HG_WINDOW_CREATION_FRAME, 3,
-    HG_HITBOX_X, 0,
-    HG_HITBOX_Y, -13,
+    HG_WINDOW, 4,
+    HG_LIFETIME, 4,
+    HG_HITBOX_GROUP, 2,
+    
+    HG_WINDOW_CREATION_FRAME, 5,
+    HG_HITBOX_X, 30,
+    HG_HITBOX_Y, -24,
     HG_WIDTH, 50,
-    HG_HEIGHT, 75,
+    HG_HEIGHT, 90,
     
     HG_PRIORITY, 2,
-    HG_DAMAGE, 4,
+    HG_DAMAGE, 5,
     HG_ANGLE, 361,
-    HG_BASE_KNOCKBACK, 5,
-    HG_KNOCKBACK_SCALING, 0.5,
-    HG_BASE_HITPAUSE, 6,
-    HG_HITPAUSE_SCALING, 0.5,
-
-    HG_HIT_SFX, asset_get("sfx_blow_medium3"),
+    HG_BASE_KNOCKBACK, 7,
+    HG_KNOCKBACK_SCALING, 0.7,
+    HG_BASE_HITPAUSE, 8,
+    HG_HITPAUSE_SCALING, 0.7,
+    HG_VISUAL_EFFECT, 304,
+    
+    HG_HIT_SFX, asset_get("sfx_blow_heavy2"),
 
 )
 

@@ -83,7 +83,7 @@ set_num_hitboxes(AT_USPECIAL, 5);
 make_hitbox(AT_USPECIAL, 1,
     HG_HITBOX_TYPE, 1,
     HG_WINDOW, 2,
-    HG_LIFETIME, 12,
+    HG_LIFETIME, 10,
 
     HG_HITBOX_X, 36,
     HG_HITBOX_Y, -60,
