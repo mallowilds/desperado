@@ -49,6 +49,7 @@ sprite_change_offset("airdodge_back", 156, 194)
 sprite_change_offset("airdodge_upback", 156, 194)
 sprite_change_offset("dattack", 156, 194)
 sprite_change_offset("dattack_skulless", 156, 194)
+sprite_change_offset("dstrong", 156, 194)
 
 sprite_change_offset("waveland", 156, 194)
 sprite_change_offset("tech", 156, 194)
@@ -145,9 +146,7 @@ sprite_change_offset("skull_hud_health", 5, 8)
 sprite_change_offset("fire1", 10, 10);
 sprite_change_offset("fire2", 10, 10);
 sprite_change_offset("fire3", 10, 10);
-
 sprite_change_offset("bullet", 3, 6); // Non-even offset to enable spinning
-sprite_change_offset("bullet_mask", 4, 4);
 
 sprite_change_offset("nspec_beam_segment", 0, 16);
 sprite_change_offset("nspec_beam_end", 0, 30);
@@ -164,7 +163,6 @@ sprite_change_offset("fstrongblast", 96, 150);
 
 
 sprite_change_offset("fstrong", 156, 194)
-sprite_change_offset("dstrong", 64, 94)
 sprite_change_offset("nspecial", 156, 194)
 sprite_change_offset("taunt", 64, 94)
 

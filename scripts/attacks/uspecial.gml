@@ -149,5 +149,12 @@ make_hitbox(AT_USPECIAL, 1,
             _attack_name, _index, argument[i], argument[i+1]
         )
     }
+
+#macro GRAB_FRAMES 4
+#define _get_grab_frames()
+    return GRAB_FRAMES
+#macro GRAB_FRAME_START 6
+#define _get_grab_frame_start()
+    return GRAB_FRAME_START
 // DANGER: Write your code ABOVE the LIBRARY DEFINES AND MACROS header or it will be overwritten!
 // #endregion

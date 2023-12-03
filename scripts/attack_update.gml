@@ -119,8 +119,9 @@ switch (attack) {
     //#region AT_DAIR
     case AT_DAIR:
         
+        can_wall_jump = true;
         can_move = false;
-        
+        move_cooldown[AT_DAIR] = 10;
         if (window == 1) {
         	if (vsp > -1.5) vsp = -1.5;
         }
@@ -132,8 +133,6 @@ switch (attack) {
         
         if (window == 2 && !hitpause) do_skull_grabbox(4);
         
-        if (window == 3) can_wall_jump = true;
-        
         if (window < 4 && has_hit && !hitpause) {
         	window = 4;
         	window_timer = 0;
@@ -144,10 +143,6 @@ switch (attack) {
         	can_fast_fall = false;
         	fast_falling = false;
         	if (window_timer == 0 && !hitpause) vsp = -8
-        	if (window_timer >= 10) {
-        		can_move = true;
-        		can_fast_fall = true;
-        	}
         }
 
         break;
@@ -353,12 +348,7 @@ switch (attack) {
             //sound_stop(sound_get("desp_whisper"))
             
             if (num_bullets < 6) num_bullets++;
-            else { // Wasted bullet visual
-            	var bullet_casing = instance_create(x-(6*spr_dir), y-6, "obj_article3");
-            	bullet_casing.state = 00;
-            	bullet_casing.hsp = -2*spr_dir;
-            	bullet_casing.vsp = -4;
-            }
+            else create_hitbox(AT_DSPECIAL, 1, x-(4*spr_dir), y-6); // Wasted bullet visual
         }
         
         if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause && !free) {

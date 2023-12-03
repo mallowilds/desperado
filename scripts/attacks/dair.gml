@@ -28,11 +28,6 @@ make_window(AT_DAIR, 2, //down
     AG_WINDOW_HAS_CUSTOM_FRICTION, 1,
     AG_WINDOW_CUSTOM_AIR_FRICTION, 0.4,
     AG_WINDOW_CUSTOM_GRAVITY, 0,
-    
-    AG_WINDOW_SKULL_GRABBOX_X, 36,
-    AG_WINDOW_SKULL_GRABBOX_Y, 0,
-    AG_WINDOW_SKULL_GRABBOX_W, 48,
-    AG_WINDOW_SKULL_GRABBOX_H, 20,
 )
 make_window(AT_DAIR, 3, 
     AG_WINDOW_LENGTH, 12,
@@ -43,7 +38,7 @@ make_window(AT_DAIR, 3,
 )
 
 make_window(AT_DAIR, 4, //hitgrab 
-    AG_WINDOW_LENGTH, 26,
+    AG_WINDOW_LENGTH, 17,
     AG_WINDOW_ANIM_FRAMES, 6,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
@@ -63,9 +58,9 @@ make_hitbox(AT_DAIR, 1,
     HG_HITBOX_GROUP, 1,
     
     HG_HITBOX_X, 36,
-    HG_HITBOX_Y, -6,
-    HG_WIDTH, 64,
-    HG_HEIGHT, 50,
+    HG_HITBOX_Y, 0,
+    HG_WIDTH, 75,
+    HG_HEIGHT, 75,
     
     HG_PRIORITY, 2,
     HG_DAMAGE, 3,
@@ -95,11 +90,11 @@ make_hitbox(AT_DAIR, 2,
     
     HG_PRIORITY, 2,
     HG_DAMAGE, 5,
-    HG_ANGLE, 361,
-    HG_BASE_KNOCKBACK, 7,
+    HG_ANGLE, 60,
+    HG_BASE_KNOCKBACK, 5,
     HG_KNOCKBACK_SCALING, 0.4,
-    HG_BASE_HITPAUSE, 8,
-    HG_HITPAUSE_SCALING, 0.7,
+    HG_BASE_HITPAUSE, 6,
+    HG_HITPAUSE_SCALING, 0.4,
     HG_VISUAL_EFFECT, 304,
     
     HG_HIT_SFX, asset_get("sfx_blow_heavy2"),
