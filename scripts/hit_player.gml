@@ -84,6 +84,9 @@ if atk == AT_NSPECIAL {
 		sound_play(asset_get("sfx_mol_bat_whack"))
 	}
 }
+if atk == AT_FSTRONG_2 && hbox == 2 {
+	sound_play(sound_get("desp_LOUDhit"), 0, noone, .4, .98)	
+}
 //#endregion
 
 

@@ -65,7 +65,9 @@ switch (attack) {
 		}
 		if (window == 3 && window_time_is(1)) {
 			sound_stop(sound_get("desp_spin"));
-			sound_play(asset_get("sfx_mol_distant_explode"), false, noone, 2);
+			sound_play(sound_get("desp_blast_fstrong"), 0, noone, .8, 1)	
+			sound_play(sound_get("desp_coin"), false, noone, .5)
+			
 			num_bullets--;
 		}
 		if (window == 3 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
