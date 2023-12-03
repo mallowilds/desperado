@@ -22,7 +22,6 @@
 */
 
 ignores_walls = false;
-follow_player = false;
 
 //#region Hittability handling
 is_hittable = !(state = 0 || (state == 3 && window == 1) || state == 4 || state == 5);
@@ -444,6 +443,156 @@ switch (state) {
 				}
 				break;
 			
+		}
+		
+		break;
+	//#endregion
+	
+	//#region Command Attack: AT_FSPECIAL_2 ------------------------------------
+	case AT_FSPECIAL_2:
+		visible = true;
+	    sprite_index = sprite_get("skullactive");
+	    can_fspecial = false;
+		can_sync_attack = false;
+		
+		switch (window) {
+			
+			case 1:
+				image_index = 0;
+				hsp *= 0.8
+				vsp *= 0.8
+				if (window_timer == 12) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+					sound_play(asset_get("sfx_spin"));
+				} else if (window_timer >= 13) {
+					window = 2;
+					window_timer = 0;
+				}
+				break;
+				
+			case 2:
+				image_index = 1 + (window_timer/3)%4;
+				
+				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
+				
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+					hsp = 6*spr_dir;
+					vsp = -3.5;
+					
+					hitbox = create_hitbox(AT_FSPECIAL_2, 1, x, y);
+					hitbox.spr_dir = spr_dir;
+					hitbox.head_obj = self;
+				}
+				
+				can_fspecial = (window_timer >= 30);
+				
+				// End just before hitting ground (or if it takes too long)
+				var offset = (vsp > 4 ? 40 : 6.66*vsp + 10);
+				if ( window_timer >= 25 || ( vsp > 0 && (position_meeting(x, y+offset, asset_get("par_block")) || position_meeting(x, y+30, asset_get("par_jumpthrough"))) ) ) {
+					hitbox = null;
+					window = 3;
+					window_timer = 0;
+					if (vsp > 4) vsp = 4;
+					break;
+				}
+				
+				// Update hitbox
+				if (hitbox != null) {
+					hitbox.length++; // Lifetime extender
+					hitbox.x = x;
+					hitbox.y = y-30;
+					hitbox.hsp = hsp;
+					hitbox.vsp = vsp;
+				}
+				
+				// Bounce detections
+				if (hitstop <= 0) {
+					
+					// The wall detection of all time
+					if (hsp == 0) {
+						window = 3;
+						window_timer = 0;
+						spr_dir *= -1;
+						hsp = 1.5*spr_dir;
+					}
+					
+					// Enemy bounce detection
+					if (has_hit) {
+						window = 3;
+						window_timer = 0;
+						vsp = -3;
+						hsp = -4*spr_dir;
+						has_hit = false;
+					}
+					
+					// Ground bounce detection (backup)
+					if (!free) {
+						window = 3;
+						window_timer = 0;
+						vsp = -4;
+						hsp = 3*spr_dir;
+					}
+					
+				}
+				
+				break;
+			
+			// Slow down
+			case 3:
+				
+				// Update hitbox
+				if (hitbox != null) {
+					hitbox.length++; // Lifetime extender
+					hitbox.x = x;
+					hitbox.y = y-30;
+					hitbox.hsp = hsp;
+					hitbox.vsp = vsp;
+				}
+				
+				image_index = 1 + (window_timer/3)%4;
+				hsp *= 0.85;
+				vsp *= 0.85;
+				
+				if (window_timer >= 12) {
+					window = 4;
+					window_timer = 0;
+					hitbox = null;
+				}
+				break;
+			
+			
+			// Return
+			case 4:
+			
+				image_index = 1 + (window_timer/3)%4;
+				
+				var target_sp = 0.65*ln(60*x+1); // https://www.desmos.com/calculator/bzx0uh3hor
+				
+				if (window_timer == 1) angle_change = clamp((player_id.x-x)/10, -50, 50);
+				else if (angle_change > 0) angle_change = clamp(angle_change-0.5, 0, angle_change);
+				else if (angle_change < 0) angle_change = clamp(angle_change+0.5, angle_change, 0);
+				
+				if (point_distance(x, y, player_id.x, player_id.y-36) < target_sp) move_speed = point_distance(x, y, player_id.x, player_id.y-50);
+				else move_speed = target_sp;
+				move_angle = point_direction(x, y, player_id.x, player_id.y-36);
+				
+				hsp = lengthdir_x(move_speed, move_angle+angle_change);
+				vsp = lengthdir_y(move_speed, move_angle+angle_change);
+				
+				if (point_distance(x, y, player_id.x, player_id.y-36) < 10) {
+					state = 0;
+					state_timer = 0;
+				}
+				
+				// 1.5 seconds in: just kill off the skull, it's probably trapped
+				if (state_timer > 120) {
+					state = 4;
+					state_timer = 0;
+					sprite_index = sprite_get("skullidle");
+					image_index = 0;
+					vsp = -4;
+					hsp = 3*spr_dir;
+				}
+				
 		}
 		
 		break;

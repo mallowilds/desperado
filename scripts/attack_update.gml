@@ -244,12 +244,12 @@ switch (attack) {
 				if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) - 2 {
 					sound_play(asset_get("sfx_spin"));
 				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
-					set_head_state(AT_FSPECIAL);
+					set_head_state(AT_FSPECIAL_2);
 					head_obj.window = 2;
 					head_obj.window_timer = 1;
 					head_obj.spr_dir = spr_dir;
 					head_obj.x = x+(48*spr_dir);
-					head_obj.y = y-16;
+					head_obj.y = y-10;
 				}
 				break;
 			case 2:
@@ -266,7 +266,7 @@ switch (attack) {
 		switch(window){
 			case 1:
 				if (window_time_is(1) && head_obj.can_fspecial) {
-					set_head_state(AT_FSPECIAL);
+					set_head_state(AT_FSPECIAL_2);
 					head_obj.spr_dir = spr_dir;
 				}
 				if !free {

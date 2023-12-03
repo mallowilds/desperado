@@ -102,15 +102,14 @@ if (!head_obj.can_fspecial) {
 }
 
 
-
-
+/* Sync attacks (scrapped)
 if (skull_stored_attack != noone) {
     if (!attack_down && !is_attack_pressed(DIR_ANY)) {
         skull_stored_attack = noone;
         if (head_obj.can_sync_attack) set_head_state(AT_NAIR);
     }
 }
-
+*/
 
 
 // Script order reliant.

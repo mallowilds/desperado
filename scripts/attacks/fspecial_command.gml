@@ -35,7 +35,37 @@ make_window(AT_FSPECIAL_2, 3,
     AG_WINDOW_ANIM_FRAME_START, 3,
 )
 
-set_num_hitboxes(AT_FSPECIAL_2, 0);
+set_num_hitboxes(AT_FSPECIAL_2, 1);
+
+make_hitbox(AT_FSPECIAL_2, 1,
+    HG_HITBOX_TYPE, 2,
+    HG_LIFETIME, 2,
+    HG_WIDTH, 50,
+    HG_HEIGHT, 50,
+    HG_PRIORITY, 2,
+    HG_DAMAGE, 6,
+    HG_ANGLE, 70,
+    HG_BASE_KNOCKBACK, 8,
+    HG_KNOCKBACK_SCALING, .3,
+    HG_HITSTUN_MULTIPLIER, .7,
+
+    HG_BASE_HITPAUSE, 6,
+    HG_HITPAUSE_SCALING, .3,
+
+    HG_HIT_SFX, asset_get("sfx_blow_medium3"),
+    
+    HG_PROJECTILE_SPRITE, sprite_get("null"),
+    HG_PROJECTILE_DESTROY_EFFECT, hfx_null,
+    HG_PROJECTILE_MASK, -1,
+    HG_PROJECTILE_IS_TRANSCENDENT, 1,
+    HG_PROJECTILE_ENEMY_BEHAVIOR, 1,
+    HG_PROJECTILE_GROUND_BEHAVIOR, 1,
+    HG_PROJECTILE_WALL_BEHAVIOR, 1,
+    HG_PROJECTILE_UNBASHABLE, 1,
+    HG_PROJECTILE_DOES_NOT_REFLECT, 1,
+    HG_PROJECTILE_PARRY_STUN, 1,
+    HG_EXTENDED_PARRY_STUN, 1,
+)
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
@@ -65,6 +95,21 @@ set_num_hitboxes(AT_FSPECIAL_2, 0);
     var _index = argument[1];
     for(var i=2; i<=argument_count-1; i+=2) {
         set_window_value(
+            _attack_name, _index, argument[i], argument[i+1]
+        )
+    }
+
+#define make_hitbox // Version 0
+    // make_hitbox(_attack_name, _index, (value_name, value)... )
+    // Sets hitbox values for the given hitbox.
+    // e.g. make_hitbox(AT_BAIR, 1,
+    //         HG_PARENT_HITBOX, 1,
+    //         HG_HITBOX_TYPE, 1
+    //     );
+    var _attack_name = argument[0];
+    var _index = argument[1];
+    for(var i=2; i<=argument_count-1; i+=2) {
+        set_hitbox_value(
             _attack_name, _index, argument[i], argument[i+1]
         )
     }
