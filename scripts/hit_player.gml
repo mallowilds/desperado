@@ -52,12 +52,19 @@ if (atk == AT_DAIR && hbox == 1) {
 	can_fast_fall = false;
 	fast_falling = false;
 	
-	hit_player_obj.x = x + (50*spr_dir);
-	hit_player_obj.y = y + 40;
+	if (!hit_player_obj.super_armor) {
+		hit_player_obj.x = x + (50*spr_dir);
+		hit_player_obj.y = y + 40;
+	}
 	
 }
 
-if (atk == AT_FSTRONG && hbox == 1) {
+if (atk == AT_USPECIAL && hbox == 1 && !hit_player_obj.super_armor) {
+	grabbed_player_obj = hit_player_obj;
+	my_hitboxID.destroyed = true;
+}
+
+if (atk == AT_FSTRONG && hbox == 1 && !hit_player_obj.super_armor) {
 	
 	hit_player_obj.x += 8*spr_dir;
 	hit_player_obj.y += y;

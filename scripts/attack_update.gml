@@ -132,6 +132,7 @@ switch (attack) {
         move_cooldown[AT_DAIR] = 10;
         if (window == 1) {
         	if (vsp > -1.5) vsp = -1.5;
+        	skull_grabbed = false;
         }
         
         if (window == 2 && window_timer == 1 && !hitpause) {
@@ -139,7 +140,14 @@ switch (attack) {
         	vsp = fast_falling ? 9 : 11;
         }
         
-        if (window == 2 && !hitpause) do_skull_grabbox(4);
+        if (window == 2 && !hitpause) {
+        	do_skull_grabbox();
+        	if (skull_grabbed) {
+        		window = 4;
+		    	window_timer = 0;
+		    	destroy_hitboxes();
+        	}
+        }
         
         if (window < 4 && has_hit && !hitpause) {
         	window = 4;
@@ -306,19 +314,46 @@ switch (attack) {
     	
     	switch window {
     		
+    		case 1:
+    			grabbed_player_obj = noone;
+    			skull_grabbed = false;
+    			break;
+    		
     		case 2:
-    			// move_cooldown[AT_USPECIAL] = 999;
-    			// Hitbox rendered in debug_draw
-    			do_skull_grabbox(4);
+    			do_skull_grabbox();
+    			
+    			if (instance_exists(grabbed_player_obj)) {
+    				grabbed_player_obj.x = x + (36*spr_dir) + hsp;
+    				grabbed_player_obj.y = y - 54 + vsp;
+    				grabbed_player_obj.fall_through = true;
+    				grabbed_player_obj.hitstop++;
+    			}
+    			
+    			if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)) && (instance_exists(grabbed_player_obj) || skull_grabbed)) {
+					window = 4;
+					window_timer = 0;
+				}
     			
 		        break;
 		       
     		case 4:
+    			
+    			if (instance_exists(grabbed_player_obj)) {
+    				grabbed_player_obj.x += x - (44*spr_dir) + hsp;
+    				grabbed_player_obj.x /= 2;
+    				grabbed_player_obj.y += y - 20 + vsp;
+    				grabbed_player_obj.y /= 2;
+    				grabbed_player_obj.hitstop++;
+    				grabbed_player_obj.fall_through = true;
+    			}
+    			
     			if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH)) {
     				window = 5;
     				window_timer = 0;
     				hsp = get_window_value(attack, 5, AG_WINDOW_HSPEED) * spr_dir;
     				vsp = get_window_value(attack, 5, AG_WINDOW_VSPEED);
+    				grabbed_player_obj.x = x + (38*spr_dir) + hsp;
+    				grabbed_player_obj.y = y - 20 + vsp;
     			}
     			break;
     		
@@ -392,7 +427,8 @@ switch (attack) {
 
 
 
-#define do_skull_grabbox(target_window)
+// Precondition: skull_grabbed is set to false at start of attack
+#define do_skull_grabbox()
 	var _x = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_X);
 	var _y = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_Y);
 	var _w = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_W);
@@ -400,9 +436,7 @@ switch (attack) {
 	
 	if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false)) {
     	set_head_state(0);
-    	window = target_window;
-    	window_timer = 0;
-    	destroy_hitboxes();
+    	skull_grabbed = true;
     }
     
     draw_skull_grabbox = 2;
