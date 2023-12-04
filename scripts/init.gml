@@ -99,12 +99,12 @@ anim_list = [
     "jumpstart",
     "jump",
     "doublejump",
-    "jab",
+    //"jab",
     "fair",
-    "bair",
+    //"bair",
     "roll_forward",
     "roll_backward",
-    "uspecial",
+    //"uspecial",
     "dtilt",
     "airdodge_forward",
     "airdodge_up",
@@ -125,10 +125,10 @@ anim_list = [
     "ustrong",
     "parry",
     "dspecial",
-    "utilt",
+   // "utilt",
     "ftilt",
-    "uair",
-    "dair",
+   // "uair",
+    //"dair",
     "pratfall",
     "landinglag",
     "land",
@@ -141,7 +141,7 @@ char_height = 70 // 36 – 74. Purely aesthetic. Used for centering things on th
 
 
 //Lightweight, slightly lower than average friction. Falls slowly.
-knockback_adj = 1.15 //.9 – 1.2. The multiplier to knockback dealt to you: 1 = default value higher values = lighter character lower values = heavier character
+knockback_adj = 1.10 //.9 – 1.2. The multiplier to knockback dealt to you: 1 = default value higher values = lighter character lower values = heavier character
 
 // MOVEMENT
 

@@ -95,12 +95,12 @@ make_hitbox(AT_NSPECIAL, 2,
     HG_DAMAGE, 4,
     HG_ANGLE, 45,
     //HG_ANGLE_FLIPPER, 6,
-    HG_BASE_KNOCKBACK, 8, // Tampered with in attack_update
+    HG_BASE_KNOCKBACK, 9, // Tampered with in attack_update
     HG_KNOCKBACK_SCALING, .7, // Tampered with in attack_update
     HG_BASE_HITPAUSE, 10,
     HG_HITPAUSE_SCALING, .9,
     HG_EXTRA_HITPAUSE, 5,
-    HG_HITSTUN_MULTIPLIER, .8,
+    //HG_HITSTUN_MULTIPLIER, .8,
 
     HG_VISUAL_EFFECT, vfx_bullseye,
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
