@@ -352,8 +352,10 @@ switch (attack) {
     				window_timer = 0;
     				hsp = get_window_value(attack, 5, AG_WINDOW_HSPEED) * spr_dir;
     				vsp = get_window_value(attack, 5, AG_WINDOW_VSPEED);
-    				grabbed_player_obj.x = x + (38*spr_dir) + hsp;
-    				grabbed_player_obj.y = y - 20 + vsp;
+    				if (instance_exists(grabbed_player_obj)) {
+    					grabbed_player_obj.x = x + (38*spr_dir) + hsp;
+    					grabbed_player_obj.y = y - 20 + vsp;
+    				}
     			}
     			break;
     		
