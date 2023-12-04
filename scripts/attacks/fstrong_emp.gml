@@ -49,7 +49,7 @@ set_num_hitboxes(AT_FSTRONG_2, 2)
 
 make_hitbox(AT_FSTRONG_2, 1,
     HG_WINDOW, 4,
-    HG_LIFETIME, 3,
+    HG_LIFETIME, 2,
 
     HG_WIDTH, 60,
     HG_HEIGHT, 50,
@@ -57,35 +57,37 @@ make_hitbox(AT_FSTRONG_2, 1,
     HG_HITBOX_Y, -25,
 
     HG_PRIORITY, 1,
-    HG_ANGLE, 361,
-    HG_BASE_KNOCKBACK, 10,
-    HG_KNOCKBACK_SCALING, 1.2,
-    HG_DAMAGE, 8,
-    HG_BASE_HITPAUSE, 10,
-    HG_HITPAUSE_SCALING, 1,
+    HG_ANGLE, 40,
+    HG_BASE_KNOCKBACK, 8,
+    HG_KNOCKBACK_SCALING, 0.1,
+    HG_DAMAGE, 2,
+    HG_BASE_HITPAUSE, 9,
+    HG_HITPAUSE_SCALING, .4,
+    HG_EXTRA_HITPAUSE, -3,
 
     HG_VISUAL_EFFECT, 304,
     HG_VISUAL_EFFECT_X_OFFSET, 20,
     HG_VISUAL_EFFECT_X_OFFSET, 5,
-    HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+    HG_HIT_SFX, asset_get("sfx_blow_medium1"),
 
     HG_HITBOX_GROUP, 1,
 )
 
 make_hitbox(AT_FSTRONG_2, 2,
     HG_WINDOW, 4,
+    HG_WINDOW_CREATION_FRAME, 1,
     HG_LIFETIME, 3,
 
     HG_WIDTH, 110,
     HG_HEIGHT, 70,
-    HG_HITBOX_X, 128,
+    HG_HITBOX_X, 122,
     HG_HITBOX_Y, -30,
 
     HG_PRIORITY, 1,
     HG_ANGLE, 361,
     HG_BASE_KNOCKBACK, 10,
     HG_KNOCKBACK_SCALING, 1.2,
-    HG_DAMAGE, 8,
+    HG_DAMAGE, 7,
     HG_BASE_HITPAUSE, 10,
     HG_HITPAUSE_SCALING, 1,
 
@@ -94,7 +96,7 @@ make_hitbox(AT_FSTRONG_2, 2,
     HG_VISUAL_EFFECT_X_OFFSET, 5,
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
 
-    HG_HITBOX_GROUP, 1,
+    HG_HITBOX_GROUP, 2,
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

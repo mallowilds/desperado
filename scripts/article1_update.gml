@@ -24,7 +24,7 @@
 ignores_walls = false;
 
 //#region Hittability handling
-is_hittable = !(state = 0 || (state == 3 && window == 1) || state == 4 || state == 5);
+is_hittable = !(state = 0 || state == 3 || state == 4 || state == 5);
 can_be_hit[player] = 3;
 
 with oPlayer {
@@ -80,14 +80,13 @@ if (state != 4 && state != 5) {
 
 //#region Bash handling
 
-unbashable = !(state = 0 || state == 4 || state == 5);
+unbashable = (state = 0 || state == 4 || state == 5);
 if (getting_bashed && !unbashable) {
 	state = 3;
 	state_timer = 0;
 	window = 1;
 	window_timer = 1;
-	orig_player = player;
-	orig_player_id = player_id;
+	has_hit = false;
 }
 
 //#endregion
@@ -175,6 +174,9 @@ switch (state) {
 	    can_fspecial = false;
 		can_sync_attack = false;
 		
+		player = orig_player;
+		player_id = orig_player_id;
+
 		switch (window) {
 			
 			case 1:
@@ -185,21 +187,16 @@ switch (state) {
 			    	spr_dir = bashed_id.spr_dir;
 			    }
 			    
-			    player = orig_player;
-				player_id = orig_player_id;
-			    
 				if (!getting_bashed) {
 					window = 2;
 					window_timer = 0;
-					player = orig_player;
-					player_id = orig_player_id;
 				}
 				
 				break;
 				
 			case 2:
+				
 				sprite_index = sprite_get("skullactive");
-				mask_index = sprite_get("skullhurtbox");
 				image_index = 1 + (window_timer/3)%4;
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
@@ -229,8 +226,8 @@ switch (state) {
 					hitbox.length++; // Lifetime extender
 					hitbox.x = x;
 					hitbox.y = y-30;
-					hitbox.hsp = hsp;
-					hitbox.vsp = vsp;
+					hitbox.hsp = hitstop <= 0 ? hsp : 0;
+					hitbox.vsp = hitstop <= 0 ? vsp : 0;
 					hitbox.player = bashed_id.player;
 				}
 				
@@ -239,20 +236,18 @@ switch (state) {
 					
 					// The wall detection of all time
 					if (hsp == 0 && !moving_vertically) {
-						state = 1;
-						state_timer = 0;
-						sprite_index = sprite_get("skullidle");
-						image_index = 0;
+						hitbox = null;
+						window = 3;
+						window_timer = 0;
 						spr_dir *= -1;
 						hsp = 5*spr_dir;
 					}
 					
 					// Enemy bounce detection
 					if (has_hit) {
-						state = 1;
-						state_timer = 0;
-						sprite_index = sprite_get("skullidle");
-						image_index = 0;
+						hitbox = null;
+						window = 3;
+						window_timer = 0;
 						vsp = -3;
 						hsp = moving_vertically ? 0 : -4*spr_dir;
 						has_hit = false;
@@ -260,10 +255,9 @@ switch (state) {
 					
 					// Ground bounce detection (backup)
 					if (!free) {
-						state = 1;
-						state_timer = 0;
-						sprite_index = sprite_get("skullidle");
-						image_index = 0;
+						hitbox = null;
+						window = 3;
+						window_timer = 0;
 						vsp = -4;
 						hsp = moving_vertically ? 0 : 3*spr_dir;
 					}
@@ -277,12 +271,12 @@ switch (state) {
 				
 				hitbox = null;
 				
-				image_index = 5;
+				image_index = window_timer > 11 ? 5 : 1 + (window_timer/3)%4;
 				hsp *= 0.9;
 				vsp *= 0.9;
 				
-				if (window_timer >= 5) {
-					state = 1;
+				if (window_timer >= 15) {
+					state = 4;
 					state_timer = 0;
 				}
 				break;
@@ -332,124 +326,10 @@ switch (state) {
 	//#endregion
 	
 		
-	//#region Attacks ----------------------------------------------------------
+	//#region Attacks ---------------------------------------------------------
 	
-	//#region Command Attack: AT_FSPECIAL --------------------------------------
+	//#region Command Attack: AT_FSPECIAL ------------------------------------
 	case AT_FSPECIAL:
-		visible = true;
-	    sprite_index = sprite_get("skullactive");
-	    can_fspecial = false;
-		can_sync_attack = false;
-		
-		switch (window) {
-			
-			case 1:
-				image_index = 0;
-				hsp *= 0.8
-				vsp *= 0.8
-				if (window_timer == 12) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					sound_play(asset_get("sfx_spin"));
-				} else if (window_timer >= 13) {
-					window = 2;
-					window_timer = 0;
-				}
-				break;
-				
-			case 2:
-				image_index = 1 + (window_timer/3)%4;
-				
-				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
-				
-				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					hsp = 5.5*spr_dir;
-					vsp = -3;
-					
-					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
-					hitbox.spr_dir = spr_dir;
-					hitbox.head_obj = self;
-				}
-				
-				can_fspecial = (window_timer >= 30);
-				
-				// End just before hitting ground (or if it takes too long)
-				var offset = (vsp > 4 ? 40 : 6.66*vsp + 10);
-				if ( window_timer >= 45 || ( vsp > 0 && (position_meeting(x, y+offset, asset_get("par_block")) || position_meeting(x, y+30, asset_get("par_jumpthrough"))) ) ) {
-					hitbox = null;
-					window = 3;
-					window_timer = 0;
-					if (vsp > 4) vsp = 4;
-					break;
-				}
-				
-				// Update hitbox
-				if (hitbox != null) {
-					hitbox.length++; // Lifetime extender
-					hitbox.x = x;
-					hitbox.y = y-30;
-					hitbox.hsp = hsp;
-					hitbox.vsp = vsp;
-				}
-				
-				// Bounce detections
-				if (hitstop <= 0) {
-					
-					// The wall detection of all time
-					if (hsp == 0) {
-						state = 1;
-						state_timer = 0;
-						sprite_index = sprite_get("skullidle");
-						image_index = 0;
-						spr_dir *= -1;
-						hsp = 1.5*spr_dir;
-					}
-					
-					// Enemy bounce detection
-					if (has_hit) {
-						state = 1;
-						state_timer = 0;
-						sprite_index = sprite_get("skullidle");
-						image_index = 0;
-						vsp = -3;
-						hsp = -4*spr_dir;
-						has_hit = false;
-					}
-					
-					// Ground bounce detection (backup)
-					if (!free) {
-						state = 1;
-						state_timer = 0;
-						sprite_index = sprite_get("skullidle");
-						image_index = 0;
-						vsp = -4;
-						hsp = 3*spr_dir;
-					}
-					
-				}
-				
-				break;
-			
-			// Slow down
-			case 3:
-				
-				hitbox = null;
-				
-				image_index = 5;
-				hsp *= 0.9;
-				vsp *= 0.9;
-				
-				if (window_timer >= 5) {
-					state = 1;
-					state_timer = 0;
-				}
-				break;
-			
-		}
-		
-		break;
-	//#endregion
-	
-	//#region Command Attack: AT_FSPECIAL_2 ------------------------------------
-	case AT_FSPECIAL_2:
 		visible = true;
 	    sprite_index = sprite_get("skullactive");
 	    can_fspecial = false;
@@ -478,7 +358,7 @@ switch (state) {
 					hsp = 6*spr_dir;
 					vsp = -3.5;
 					
-					hitbox = create_hitbox(AT_FSPECIAL_2, 1, x, y);
+					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
 					hitbox.spr_dir = spr_dir;
 					hitbox.head_obj = self;
 				}
@@ -734,8 +614,6 @@ if (hitstop <= 0) {
 }
 else hitstop = floor(hitstop);
 //#endregion
-
-
 
 	
 #define set_head_state(new_state)

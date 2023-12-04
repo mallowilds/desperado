@@ -62,6 +62,7 @@ switch (attack) {
     case AT_FSTRONG_2:
 		if (window == 1 && window_time_is(1)) {
 			sound_play(sound_get("desp_spin"));
+			fstrong_blast_obj = noone;
 		}
 		if (window == 3 && window_time_is(1)) {
 			sound_stop(sound_get("desp_spin"));
@@ -70,8 +71,8 @@ switch (attack) {
 			
 			num_bullets--;
 		}
-		if (window == 3 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
-			fstrong_blast_obj = spawn_hit_fx(x+(70*spr_dir), y-50, vfx_fstrong_blast);
+		if (window == 4 && window_time_is(1)) {
+			fstrong_blast_obj = spawn_hit_fx(x+(64*spr_dir), y-50, vfx_fstrong_blast);
 			fstrong_blast_obj.spr_dir = spr_dir;
 		}
 		
@@ -244,7 +245,7 @@ switch (attack) {
 				if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) - 2 {
 					sound_play(asset_get("sfx_spin"));
 				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
-					set_head_state(AT_FSPECIAL_2);
+					set_head_state(AT_FSPECIAL);
 					head_obj.window = 2;
 					head_obj.window_timer = 1;
 					head_obj.spr_dir = spr_dir;
@@ -266,7 +267,7 @@ switch (attack) {
 		switch(window){
 			case 1:
 				if (window_time_is(1) && head_obj.can_fspecial) {
-					set_head_state(AT_FSPECIAL_2);
+					set_head_state(AT_FSPECIAL);
 					head_obj.spr_dir = spr_dir;
 				}
 				if !free {

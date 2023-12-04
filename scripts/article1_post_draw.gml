@@ -5,7 +5,7 @@
 
 if (state != 0) {
     
-    draw_sprite_ext(sprite_get("skull_hud_arrow"), 0, x+(5*spr_dir), y-60, 1, 1, 0, get_player_hud_color(player), 1);
+    draw_sprite_ext(hud_arrow, 0, x, y-64, 1, 1, 0, get_player_hud_color(orig_player), 1);
     
     /*
     for (var i = 0; i < max_health; i++) {

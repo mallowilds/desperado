@@ -34,3 +34,8 @@ can_be_grounded = false;                            //Determines if the article 
 ignores_walls = false;                              //Determines if the article goes through walls.
 free = true;                                        //Whether the article is in the air or not.
 hit_wall = false;                                   //If the article moves into a wall on its own, this variable will be true.
+
+//Ownership management (ori really likes stealing this :( )
+orig_player = player;
+orig_player_id = player_id;
+hud_arrow = sprite_get("skull_hud_arrow");
