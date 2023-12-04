@@ -515,6 +515,7 @@ switch (state) {
 						hsp = 1.5*spr_dir;
 					}
 					
+					/*
 					// Enemy bounce detection
 					if (has_hit) {
 						window = 3;
@@ -522,7 +523,7 @@ switch (state) {
 						vsp = -3;
 						hsp = -4*spr_dir;
 						has_hit = false;
-					}
+					}*/
 					
 					// Ground bounce detection (backup)
 					if (!free) {
