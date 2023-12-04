@@ -317,8 +317,10 @@ switch (state) {
 		can_sync_attack = false;
 		
 		// not dealing with this quite yet~
-		state = 0;
-		state_timer = 0;
+		if (state_timer > 50) {
+			state = 0;
+			state_timer = 0;
+		}
 		
 		// TODO: add sfx
 		
@@ -362,8 +364,6 @@ switch (state) {
 					hitbox.spr_dir = spr_dir;
 					hitbox.head_obj = self;
 				}
-				
-				can_fspecial = (window_timer >= 30);
 				
 				// End just before hitting ground (or if it takes too long)
 				var offset = (vsp > 4 ? 40 : 6.66*vsp + 10);
@@ -419,6 +419,8 @@ switch (state) {
 			
 			// Slow down
 			case 3:
+			
+				can_fspecial = true;
 				
 				// Update hitbox
 				if (hitbox != null) {
@@ -445,6 +447,7 @@ switch (state) {
 			case 4:
 			
 				image_index = 1 + (window_timer/3)%4;
+				can_fspecial = true;
 				
 				var target_sp = 2.25*ln(0.9*window_timer+1); // https://www.desmos.com/calculator/d2byh0mgnk
 				
@@ -462,6 +465,7 @@ switch (state) {
 				if (point_distance(x, y, player_id.x, player_id.y-26) < 10) {
 					state = 0;
 					state_timer = 0;
+					can_fspecial = false;
 				}
 				
 				// 3 seconds in: just kill off the skull, it's probably trapped
@@ -472,11 +476,81 @@ switch (state) {
 					image_index = 0;
 					vsp = -4;
 					hsp = 3*spr_dir;
+					can_fspecial = false;
 				}
 				
 		}
 		
 		break;
+	//#endregion
+	
+	//#region Command Attack: AT_FSPECIAL_2 ---------------------------------------------
+	case AT_FSPECIAL_2:
+		
+		visible = true;
+	    can_fspecial = false;
+		can_sync_attack = false;
+		
+		hsp *= 0.9;
+		vsp *= 0.9;
+		
+		switch window {
+			case 1:
+				sprite_index = sprite_get("skullatk");
+				image_index = (window_timer > 6);
+				
+				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+					sound_play(asset_get("sfx_swipe_weak1"));
+				}
+				
+				if (window_timer == 13) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+					sound_play(asset_get("sfx_swipe_medium1"));
+				}
+				
+				if (window_timer > 10) {
+					window = 2;
+					window_timer = 0;
+				}
+				break;
+			
+			case 2:
+			
+				image_index = 2 + (window_timer / 3);
+				if (hitstop > 0) break;
+				
+				if (window_timer == 1) {
+					hbox = create_hitbox(AT_FSPECIAL_2, 1, x, y-40);
+					hbox.spr_dir = spr_dir;
+					hbox.head_obj = self;
+				}
+				if (window_timer == 3) {
+					hbox = create_hitbox(AT_FSPECIAL_2, 2, x, y-40);
+					hbox.spr_dir = spr_dir;
+					hbox.head_obj = self;
+				}
+				
+				if (window_timer > 9) {
+					window = 3;
+					window_timer = 0;
+				}
+				
+				//spawn hitbox
+				
+				break;
+			
+			case 3:
+				image_index = 5 + (window_timer / 3);
+				if (window_timer > 8) {
+					visible = false;
+					state = 4;
+					state_timer = 0;
+					if (has_hit && player_id.num_bullets < 6) player_id.num_bullets++;
+				}
+				break;
+		}
+		
+		break;
+		
 	//#endregion
 	
 	//#region Sync Attack: AT_NAIR ---------------------------------------------

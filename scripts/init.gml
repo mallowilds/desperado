@@ -80,7 +80,6 @@ head_obj = instance_create(x, y, "obj_article1");
 anim_list = [
     "idle",
     "desp_hurt",
-    "hurt",
     "uphurt",
     "downhurt",
     "bighurt",
@@ -90,6 +89,7 @@ anim_list = [
     "desp_hitstun_hurt",
     "crouch",
     "desp_crouch_hurt",
+    "hurt",
     "walk",
     "walkturn",
     "dash",

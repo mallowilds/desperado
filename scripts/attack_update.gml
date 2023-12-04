@@ -269,7 +269,8 @@ switch (attack) {
 		switch(window){
 			case 1:
 				if (window_time_is(1) && head_obj.can_fspecial) {
-					set_head_state(AT_FSPECIAL);
+					set_head_state(AT_FSPECIAL_2);
+					head_obj.has_hit = false;
 					head_obj.spr_dir = spr_dir;
 				}
 				if !free {
