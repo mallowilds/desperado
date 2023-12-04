@@ -53,6 +53,12 @@ else if (state == PS_WALL_JUMP) {
 //#endregion
 
 
+//#region Nametag hud management
+if (nametag_white_flash > 0) nametag_white_flash -= 0.1;
+if (num_bullets >= 4 && nametag_flame_alpha < 1) nametag_flame_alpha += 0.2;
+else if (num_bullets < 4 && nametag_flame_alpha > 0) nametag_flame_alpha -= 0.2;
+
+
 //#region Flame management (drawn in post_draw.gml, added by update/attack_update.gml)
 for (var i = 0; i < ds_list_size(sparkle_list); i++) {
     var sp = ds_list_find_value(sparkle_list, i);

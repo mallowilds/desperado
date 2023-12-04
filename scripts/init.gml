@@ -61,6 +61,8 @@ bullet_mult = 0.125;                    // multiplier per bullet. Constant value
 with oPlayer {
     u_mult_damage_buffer = 0;           // buffer for fractional multiplier damage
 }
+nametag_white_flash = 0;
+nametag_flame_alpha = 0;
 
 sparkle_list = ds_list_create();        // particle list. implementation is taken from aur, hence the name
 nspec_shot_list = ds_list_create();     // similar particle manager for nspecial shots.

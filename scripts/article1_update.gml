@@ -334,7 +334,7 @@ switch (state) {
 	case AT_FSPECIAL:
 		visible = true;
 	    sprite_index = sprite_get("skullactive");
-	    can_fspecial = false;
+	    can_fspecial = true;
 		can_sync_attack = false;
 		
 		switch (window) {
@@ -419,8 +419,6 @@ switch (state) {
 			
 			// Slow down
 			case 3:
-			
-				can_fspecial = true;
 				
 				// Update hitbox
 				if (hitbox != null) {
@@ -447,7 +445,6 @@ switch (state) {
 			case 4:
 			
 				image_index = 1 + (window_timer/3)%4;
-				can_fspecial = true;
 				
 				var target_sp = 2.25*ln(0.9*window_timer+1); // https://www.desmos.com/calculator/d2byh0mgnk
 				
@@ -544,7 +541,10 @@ switch (state) {
 					visible = false;
 					state = 4;
 					state_timer = 0;
-					if (has_hit && player_id.num_bullets < 6) player_id.num_bullets++;
+					if (has_hit && player_id.num_bullets < 6) {
+						player_id.num_bullets++;
+						player_id.nametag_white_flash = 1;
+					}
 				}
 				break;
 		}

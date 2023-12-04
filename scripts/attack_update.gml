@@ -54,7 +54,10 @@ switch (attack) {
         }
     	break;
     case AT_DSTRONG:
-        if (attack_down) num_bullets = 6; // Temp debugging utility
+        if (attack_down) {
+        	num_bullets = 6; // Temp debugging utility
+        	nametag_white_flash = 1;
+        }
         break;
         
     case AT_FSTRONG:
@@ -72,6 +75,7 @@ switch (attack) {
 			
 			bullet_lost = true;
 			num_bullets--;
+			nametag_white_flash = 1;
 		}
 		if (window == 4 && window_time_is(1)) {
 			fstrong_blast_obj = spawn_hit_fx(x+(64*spr_dir), y-50, vfx_fstrong_blast);
@@ -194,6 +198,7 @@ switch (attack) {
             }
             else {
                 num_bullets--;
+                nametag_white_flash = 1;
                 if (num_bullets <= 0) {
                     sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1);
                     window = 3;
@@ -213,6 +218,7 @@ switch (attack) {
             sound_play(sound_get("desp_shot"))
             
             num_bullets--;
+            nametag_white_flash = 1;
             if (num_bullets > 0) {
                 window = 2;
                 window_timer = 0;
@@ -352,7 +358,10 @@ switch (attack) {
             sound_play(sound_get("desp_click"))
             //sound_stop(sound_get("desp_whisper"))
             
-            if (num_bullets < 6) num_bullets++;
+            if (num_bullets < 6) {
+            	num_bullets++;
+            	nametag_white_flash = 1;
+            }
             else { // Wasted bullet visual
             	var bullet_casing = instance_create(x-(10*spr_dir), y-8, "obj_article3");
             	bullet_casing.state = 00;

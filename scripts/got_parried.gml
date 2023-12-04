@@ -32,5 +32,7 @@ if (num_bullets >= 1) {
     bullet_casing.state = 00;
     bullet_casing.hsp = -2*spr_dir;
     bullet_casing.vsp = -7;
+    
+    nametag_white_flash = 1;
 }
 num_bullets = clamp(num_bullets-2, 0, 6);
