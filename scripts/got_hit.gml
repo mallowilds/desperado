@@ -18,7 +18,7 @@ if ((prev_state == PS_ATTACK_AIR || prev_state == PS_ATTACK_GROUND) && attack ==
 
 if (prev_state == PS_ATTACK_GROUND && attack == AT_FSTRONG_2) {
     sound_stop(sound_get("desp_spin"));
-    if (window <= 2) {
+    if (!bullet_lost) {
         num_bullets--;
         var bullet_casing = instance_create(x, y-10, "obj_article3");
         bullet_casing.state = 00;
