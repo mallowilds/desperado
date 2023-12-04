@@ -518,12 +518,12 @@ switch (state) {
 				image_index = 2 + (window_timer / 3);
 				if (hitstop > 0) break;
 				
-				if (window_timer == 1) {
+				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hbox = create_hitbox(AT_FSPECIAL_2, 1, x, y-40);
 					hbox.spr_dir = spr_dir;
 					hbox.head_obj = self;
 				}
-				if (window_timer == 3) {
+				if (window_timer == 3) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hbox = create_hitbox(AT_FSPECIAL_2, 2, x, y-40);
 					hbox.spr_dir = spr_dir;
 					hbox.head_obj = self;

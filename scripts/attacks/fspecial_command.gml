@@ -132,7 +132,7 @@ make_hitbox(AT_FSPECIAL_2, 2,
             _attack_name, _index, argument[i], argument[i+1]
         )
     }
-    
+
 #define make_hitbox // Version 0
     // make_hitbox(_attack_name, _index, (value_name, value)... )
     // Sets hitbox values for the given hitbox.
