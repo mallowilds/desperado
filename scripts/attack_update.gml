@@ -54,7 +54,7 @@ switch (attack) {
         }
     	break;
     case AT_DSTRONG:
-        if (attack_down) {
+        if (attack_down && get_match_setting(SET_PRACTICE)) {
         	num_bullets = 6; // Temp debugging utility
         	nametag_white_flash = 1;
         }
@@ -263,6 +263,7 @@ switch (attack) {
 					sound_play(asset_get("sfx_spin"));
 				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
 					set_head_state(AT_FSPECIAL);
+					head_obj.visible = true;
 					head_obj.window = 2;
 					head_obj.window_timer = 1;
 					head_obj.spr_dir = spr_dir;
