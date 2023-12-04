@@ -20,8 +20,8 @@ hsp = 0;                                            //The horizontal speed of th
 vsp = 0;                                            //The vertical speed of the article.
 has_hit = false;
 
-health = 3;
-max_health = 3;
+health = 1;
+max_health = 1;
 last_attack = [noone, noone, noone, noone, noone];
 hittable_hitpause_mult = 1;
 

@@ -549,10 +549,10 @@ switch (state) {
 				}
 				
 				image_index = 1 + (window_timer/3)%4;
-				hsp *= 0.85;
-				vsp *= 0.85;
+				hsp *= 0.91;
+				vsp *= 0.91;
 				
-				if (window_timer >= 12) {
+				if (window_timer >= 36) {
 					window = 4;
 					window_timer = 0;
 					hitbox = null;
@@ -565,26 +565,26 @@ switch (state) {
 			
 				image_index = 1 + (window_timer/3)%4;
 				
-				var target_sp = 0.65*ln(60*x+1); // https://www.desmos.com/calculator/bzx0uh3hor
+				var target_sp = 2.25*ln(0.9*window_timer+1); // https://www.desmos.com/calculator/d2byh0mgnk
 				
 				if (window_timer == 1) angle_change = clamp((player_id.x-x)/10, -50, 50);
 				else if (angle_change > 0) angle_change = clamp(angle_change-0.5, 0, angle_change);
 				else if (angle_change < 0) angle_change = clamp(angle_change+0.5, angle_change, 0);
 				
-				if (point_distance(x, y, player_id.x, player_id.y-36) < target_sp) move_speed = point_distance(x, y, player_id.x, player_id.y-50);
+				if (point_distance(x, y, player_id.x, player_id.y-26) < target_sp) move_speed = point_distance(x, y, player_id.x, player_id.y-50);
 				else move_speed = target_sp;
-				move_angle = point_direction(x, y, player_id.x, player_id.y-36);
+				move_angle = point_direction(x, y, player_id.x, player_id.y-26);
 				
 				hsp = lengthdir_x(move_speed, move_angle+angle_change);
 				vsp = lengthdir_y(move_speed, move_angle+angle_change);
 				
-				if (point_distance(x, y, player_id.x, player_id.y-36) < 10) {
+				if (point_distance(x, y, player_id.x, player_id.y-26) < 10) {
 					state = 0;
 					state_timer = 0;
 				}
 				
-				// 1.5 seconds in: just kill off the skull, it's probably trapped
-				if (state_timer > 120) {
+				// 3 seconds in: just kill off the skull, it's probably trapped
+				if (state_timer > 180) {
 					state = 4;
 					state_timer = 0;
 					sprite_index = sprite_get("skullidle");
