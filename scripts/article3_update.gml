@@ -23,8 +23,8 @@ switch state {
         mask_index = sprite_get("bullet_mask");
         depth = player_id.depth-1;
         proj_angle = random_func_2(3, 360, false);
-        old_vsp = 0;
-        old_hsp = 0;
+        old_vsp = vsp;
+        old_hsp = hsp;
         // HSP and VSP are set by spawning object
         state = 01;
         break;

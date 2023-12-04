@@ -14,8 +14,8 @@ mask_index = sprite_get("bullet_mask");     // Fallback mask
 state = -1;
 state_timer = 0;
 hitstop = 0;
-hsp = 0;
-vsp = 0;
+//hsp = 0;
+//vsp = 0;
 
 //Terrain behavior
 can_be_grounded = true;
