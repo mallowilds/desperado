@@ -61,6 +61,7 @@ switch (attack) {
     	break;
     case AT_FSTRONG_2:
 		if (window == 1 && window_time_is(1)) {
+			bullet_lost = false;
 			sound_play(sound_get("desp_spin"));
 			fstrong_blast_obj = noone;
 		}
@@ -69,6 +70,7 @@ switch (attack) {
 			sound_play(sound_get("desp_blast_fstrong"), 0, noone, .8, 1)	
 			sound_play(sound_get("desp_coin"), false, noone, .5)
 			
+			bullet_lost = true;
 			num_bullets--;
 		}
 		if (window == 4 && window_time_is(1)) {
