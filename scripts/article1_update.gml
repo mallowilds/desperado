@@ -24,8 +24,11 @@
 ignores_walls = false;
 
 //#region Hittability handling
-is_hittable = !(state = 0 || state == 3 || state == 4 || state == 5);
+is_hittable = !(state = 0 || state == 3 || state == 4 || state == 5); // WILL BE DEPRECATED SOON - use below hittable var for checks
 can_be_hit[player] = 3;
+hittable = !(state = 0 || state == 3 || state == 4 || state == 5);
+
+if (state != AT_NSPECIAL) shots_absorbed = 0;
 
 with oPlayer {
 	if (!clone && state != PS_ATTACK_AIR && state != PS_ATTACK_GROUND) {
@@ -553,127 +556,23 @@ switch (state) {
 		
 	//#endregion
 	
-	//#region Sync Attack: AT_NAIR ---------------------------------------------
-	case AT_NAIR:
+	//#region Reactive Attack: AT_NSPECIAL ---------------------------------------------
+	case AT_NSPECIAL:
 		
-		visible = true;
-	    sprite_index = sprite_get("skullnair");
-	    can_fspecial = false;
-		can_sync_attack = false;
-		
-		hsp *= 0.9;
-		vsp *= 0.9;
+		// Unimplemented lmao
 		
 		switch window {
+			
 			case 1:
-				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					has_hit = false;
-					can_hit = array_create(20, true);
-					sound_play(asset_get("sfx_swipe_weak1"));
-				}
-				image_index = (window_timer > 11);
-				
-				if (window_timer == 13) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					sound_play(asset_get("sfx_swipe_medium1"));
-				}
-				
-				if (window_timer > 14) {
-					window = 2;
-					window_timer = 0;
-				}
-				break;
-			
-			case 2:
-			
-				image_index = 2 + (window_timer / 2);
-				if (window_timer > 8) {
-					window = 3;
-					window_timer = 0;
-				}
-				
-				if (hitstop > 0) break;
-				with player_id {
-					for (var i = 1; i <= 3; i++) {
-						if (get_hitbox_value(42, i, HG_WINDOW_CREATION_FRAME) == other.window_timer) {
-							hitbox = create_hitbox(42, i, other.x+get_hitbox_value(42, i, HG_HITBOX_X)*other.spr_dir, other.y+get_hitbox_value(42, i, HG_HITBOX_Y));
-							hitbox.spr_dir = other.spr_dir;
-							hitbox.head_obj = other;
-							for (var j = 0; j < 20; j++) {
-								if (!other.can_hit[j]) hitbox.can_hit[j] = false;
-							}
-						}
-					}
-				}
-				
-				break;
-			
-			case 3:
-				image_index = 6;
-				if (window_timer > 7 * (has_hit ? 1 : 1.5)) {
+				if (window_timer == 1) {
 					state = 1;
 					state_timer = 0;
 				}
-				break;
+			
 		}
 		
 		break;
-		
-	//#endregion
 	
-	//#region Unused Attack: AT_USTRONG ----------------------------------------
-	case AT_USTRONG:
-		visible = true;
-		ignores_walls = true;
-	    sprite_index = sprite_get("head_ustrong");
-	    can_fspecial = false;
-		can_sync_attack = false;
-	    
-	    if (hsp > 0) hsp--;
-		else if (hsp < 0) hsp++;
-		
-		switch (window) {
-			
-			case 1:
-				image_index = 0;
-				if (window_timer == 13) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					sound_play(asset_get("sfx_swipe_heavy2"));
-				} else if (window_timer >= 15) {
-					window = 2;
-					window_timer = 0;
-				}
-				break;
-				
-			
-			case 2:
-				image_index = 1;
-				
-				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					hitbox = create_hitbox(AT_USTRONG, 2, x+(10*spr_dir), y-62);
-					hitbox.spr_dir = spr_dir;
-				}
-				
-				if (window_timer >= 4 - 1) {
-					window = 3;
-					window_timer = 0;
-				}
-				break;
-				
-			case 3:
-				image_index = 2 + (window_timer*2/20);
-				
-				if (window_timer > 19) {
-					state = 1;
-					state_timer = 0;
-					sprite_index = sprite_get("head_idle");
-	    			image_index = state_timer * player_id.idle_anim_speed;
-	    			y -= 72;
-				}
-				
-				break;
-			
-		}
-		
-	    break;
 	//#endregion
 	
 }

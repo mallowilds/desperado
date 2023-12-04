@@ -20,6 +20,7 @@ hsp = 0;                                            //The horizontal speed of th
 vsp = 0;                                            //The vertical speed of the article.
 has_hit = false;
 
+hittable = false;
 health = 1;
 max_health = 1;
 last_attack = [noone, noone, noone, noone, noone];
@@ -28,6 +29,10 @@ hittable_hitpause_mult = 1;
 can_fspecial = false;
 can_sync_attack = false;
 skull_stored_attack = noone;
+
+shots_absorbed = 0;
+redir_angle = 0;
+redir_target_obj = noone;
 
 //Terrain behavior
 can_be_grounded = false;                            //Determines if the article follows platforms when free == false.

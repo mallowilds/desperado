@@ -39,8 +39,8 @@ switch (attack) {
     //#region Grounded Normals / Strongs ---------------------------------------
     
     case AT_DTILT:
-        down_down = true;			// huh?
-        move_cooldown[AT_DTILT] = 1 // ????
+        down_down = true;			// Force uncrouch after endlag...
+        move_cooldown[AT_DTILT] = 1	// ...and make sure this doesn't break the buffer
     	break;
     case AT_FTILT:
     	if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
@@ -130,6 +130,7 @@ switch (attack) {
         can_wall_jump = true;
         can_move = false;
         move_cooldown[AT_DAIR] = 10;
+        
         if (window == 1) {
         	if (vsp > -1.5) vsp = -1.5;
         	skull_grabbed = false;
@@ -483,7 +484,13 @@ switch (attack) {
         shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);        
     }
     
-    shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);
+    //Check if collision was triggered by skull
+    if (shot_collides == 2) {
+    	set_head_state(AT_NSPECIAL);
+    	head_obj.shots_absorbed++;
+    }
+    
+    // Refine shot collision
     while (shot_collides && shot_hb_w > 0) {
     	shot_hb_w -= 2;
     	shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);
@@ -529,6 +536,7 @@ switch (attack) {
 
 // Helper function for above
 #define shot_collision(_x, _y, _w, _h)
+	if (centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false) && head_obj.hittable) return 2; // Note: GML treats 2 as true
 	return centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("par_block"), false) || centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("plasma_field_obj"), true);
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
