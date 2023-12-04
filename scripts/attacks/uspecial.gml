@@ -114,9 +114,9 @@ make_hitbox(AT_USPECIAL, 2,
     HG_LIFETIME, 1,
 
     HG_HITBOX_X, 22,
-    HG_HITBOX_Y, -61,
+    HG_HITBOX_Y, -31,
     HG_WIDTH, 93,
-    HG_HEIGHT, 88,
+    HG_HEIGHT, 50,
     HG_SHAPE, 0,
 
     HG_PRIORITY, 1,

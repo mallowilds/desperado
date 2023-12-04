@@ -325,6 +325,8 @@ switch (attack) {
     			if (instance_exists(grabbed_player_obj)) {
     				grabbed_player_obj.x = x + (36*spr_dir) + hsp;
     				grabbed_player_obj.y = y - 54 + vsp;
+    				grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
+    				grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
     				grabbed_player_obj.fall_through = true;
     				grabbed_player_obj.hitstop++;
     			}
@@ -339,10 +341,12 @@ switch (attack) {
     		case 4:
     			
     			if (instance_exists(grabbed_player_obj)) {
-    				grabbed_player_obj.x += x - (44*spr_dir) + hsp;
+    				grabbed_player_obj.x += x - (40*spr_dir) + hsp;
     				grabbed_player_obj.x /= 2;
     				grabbed_player_obj.y += y - 20 + vsp;
     				grabbed_player_obj.y /= 2;
+    				grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
+    				grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
     				grabbed_player_obj.hitstop++;
     				grabbed_player_obj.fall_through = true;
     			}
@@ -353,8 +357,10 @@ switch (attack) {
     				hsp = get_window_value(attack, 5, AG_WINDOW_HSPEED) * spr_dir;
     				vsp = get_window_value(attack, 5, AG_WINDOW_VSPEED);
     				if (instance_exists(grabbed_player_obj)) {
-    					grabbed_player_obj.x = x + (38*spr_dir) + hsp;
-    					grabbed_player_obj.y = y - 20 + vsp;
+    					grabbed_player_obj.x = x + (58*spr_dir) + hsp;
+    					grabbed_player_obj.y = y - 26 + vsp;
+    					grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
+    					grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
     				}
     			}
     			break;
