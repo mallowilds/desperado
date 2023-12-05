@@ -439,7 +439,7 @@ switch (attack) {
     case AT_TAUNT_2:
     	
     	if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)-1)) {
-    		if (instance_exists(signpost_obj)) {
+    		if (num_bullets > 0 && instance_exists(signpost_obj)) {
     			signpost_obj.state = 14; // dying
     			signpost_obj.state_timer = 0;
     			signpost_obj = noone;

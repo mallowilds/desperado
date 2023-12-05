@@ -107,18 +107,21 @@ switch state {
     case 11:
         sprite_index = sprite_get("sign");
         image_index = 0;
-        with oPlayer {
-            var desp_dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND);
-            var desp_dash_dir = hsp < 0 ? -1 : 1;
-            if (other.dasher_in_range[player] != 0 && other.dasher_in_range[player] != desp_dash_dir) {
-                if (!desp_dashing || !place_meeting(x, y, other)) other.dasher_in_range[player] = 0;
-            }
-            else if (desp_dashing && place_meeting(x, y, other)) {
-                other.dasher_in_range[player] = desp_dash_dir;
-                other.state = (desp_dash_dir*other.spr_dir == -1 ? 12 : 13);
-                other.state_timer = 0;
-            }
+        
+        // Detect dashes
+        var dash_dir = signpost_detect_dashes();
+        if (dash_dir != 0) {
+            state = (dash_dir*spr_dir == -1 ? 12 : 13);
+            state_timer = 0;
         }
+        
+        // Detect hitboxes
+        if (signpost_detect_hitboxes()) {
+            state = 14;
+            state_timer = 0;
+        }
+        
+        // Detect airborne-ness
         if (free) {
             state = 14;
             state_timer = 0;
@@ -134,20 +137,22 @@ switch state {
             state = 11;
             state_timer = 0;
         }
-        with oPlayer {
-            var desp_dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND);
-            var desp_dash_dir = hsp < 0 ? -1 : 1;
-            if (other.dasher_in_range[player] != 0 && other.dasher_in_range[player] != desp_dash_dir) {
-                if (!desp_dashing || !place_meeting(x, y, other)) other.dasher_in_range[player] = 0;
-            }
-            else if (desp_dashing && place_meeting(x, y, other)) {
-                other.dasher_in_range[player] = desp_dash_dir;
-            }
+        
+        // Update dash tracker
+        signpost_detect_dashes();
+        
+        // Detect hitboxes
+        if (signpost_detect_hitboxes()) {
+            state = 14;
+            state_timer = 0;
         }
+        
+        // Detect airborne-ness
         if (free) {
             state = 14;
             state_timer = 0;
         }
+        
         break;
     
     // Sway right
@@ -159,20 +164,22 @@ switch state {
             state = 11;
             state_timer = 0;
         }
-        with oPlayer {
-            var desp_dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND);
-            var desp_dash_dir = hsp < 0 ? -1 : 1;
-            if (other.dasher_in_range[player] != 0 && other.dasher_in_range[player] != desp_dash_dir) {
-                if (!desp_dashing || !place_meeting(x, y, other)) other.dasher_in_range[player] = 0;
-            }
-            else if (desp_dashing && place_meeting(x, y, other)) {
-                other.dasher_in_range[player] = desp_dash_dir;
-            }
+        
+        // Update dash tracker
+        signpost_detect_dashes();
+        
+        // Detect hitboxes
+        if (signpost_detect_hitboxes()) {
+            state = 14;
+            state_timer = 0;
         }
+        
+        // Detect airborne-ness
         if (free) {
             state = 14;
             state_timer = 0;
         }
+        
         break;
     
     // Death
@@ -202,3 +209,44 @@ switch state {
 
 // Make time progress
 state_timer++;
+
+
+
+#define signpost_detect_dashes()
+    // Returns 0 for none detected, -1 for left dash, 1 for right dash
+    var out = 0;
+    with oPlayer {
+            var dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND);
+            var dash_dir = hsp < 0 ? -1 : 1;
+            if (other.dasher_in_range[player] != 0 && other.dasher_in_range[player] != dash_dir) {
+                if (!dashing || !place_meeting(x, y, other)) other.dasher_in_range[player] = 0;
+            }
+            else if (dashing && place_meeting(x, y, other)) {
+                other.dasher_in_range[player] = dash_dir;
+                out = dash_dir;
+            }
+        }
+    return out;
+
+#define signpost_detect_hitboxes()
+    // It doesn't matter much which specific hitbox hits, so a naive approach is used for simplicity/lightweight-ness
+    var hbox = instance_place(x, y, pHitBox);
+    if (hbox != noone && hbox.hit_priority > 0) {
+        hitstop = floor(hbox.hitpause + hbox.extra_hitpause);
+        if (hbox.type == 1) with (hbox.player_id) {
+            if (!hitpause) {
+                old_hsp = hsp;
+                old_vsp = vsp;
+            }
+            hitpause = true;
+            has_hit = true; // mixed feelings but also letting kragg jump-cancel off of the signpost is Really Funny so
+            if (hitstop < hbox.hitpause) {
+                hitstop = hbox.hitpause;
+                hitstop_full = hbox.hitpause;
+            }
+        }
+        sound_play(hbox.sound_effect);
+        spawn_hit_fx((x+hbox.x)/2+(hbox.spr_dir*hbox.hit_effect_x), (y-30+hbox.y)/2+(hbox.hit_effect_y), HFX_SYL_WOOD_SMALL);
+        return true;
+    }
+    return false;
