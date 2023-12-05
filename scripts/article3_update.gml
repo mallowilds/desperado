@@ -20,7 +20,6 @@ TAUNT SIGNPOST
 
 */
 
-
 switch state {
     
     
@@ -111,6 +110,7 @@ switch state {
         // Detect dashes
         var dash_dir = signpost_detect_dashes();
         if (dash_dir != 0) {
+            sprite_index = sprite_get((dash_dir*spr_dir == -1) ? "sign_move_l" : "sign_move_r");
             state = (dash_dir*spr_dir == -1 ? 12 : 13);
             state_timer = 0;
         }
@@ -133,7 +133,7 @@ switch state {
         sprite_index = sprite_get("sign_move_l");
         image_index = state_timer / 7;
         if (image_index >= 4) {
-            sprite_index = sprite_get("sign")
+            sprite_index = sprite_get("sign");
             state = 11;
             state_timer = 0;
         }
@@ -216,16 +216,13 @@ state_timer++;
     // Returns 0 for none detected, -1 for left dash, 1 for right dash
     var out = 0;
     with oPlayer {
-            var dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND);
-            var dash_dir = hsp < 0 ? -1 : 1;
-            if (other.dasher_in_range[player] != 0 && other.dasher_in_range[player] != dash_dir) {
-                if (!dashing || !place_meeting(x, y, other)) other.dasher_in_range[player] = 0;
-            }
-            else if (dashing && place_meeting(x, y, other)) {
-                other.dasher_in_range[player] = dash_dir;
-                out = dash_dir;
-            }
+        var dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND) && place_meeting(x, y, other);
+        var dash_dir = dashing ? (hsp < 0 ? -1 : 1) : 0;
+        if (dash_dir != other.dasher_in_range[player]) {
+            other.dasher_in_range[player] = dash_dir;
+            if (dash_dir != 0) out = dash_dir;
         }
+    }
     return out;
 
 #define signpost_detect_hitboxes()
