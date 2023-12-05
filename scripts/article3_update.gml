@@ -71,16 +71,19 @@ switch state {
     
     
     //#region Taunt Signpost
+    // Init
     case 10:
         sprite_index = sprite_get("sign");
         mask_index = sprite_get("sign_mask");
         y += 1 // honestly idk
         
+        dasher_in_range = [noone, 0, 0, 0, 0];
+        
         //get highest-damage opponent icon
         top_damage = -1;
         icon_spr = get_char_info(player, INFO_ICON) // default to desp if things fail
         icon_image = 0;
-        icon_scale = 1;
+        icon_scale = 2;
         with oPlayer {
             if (player == other.player || get_player_team(player) == get_player_team(other.player) || get_player_damage(player) <= other.top_damage) continue;
             other.top_damage = get_player_damage(player);
@@ -95,21 +98,93 @@ switch state {
                 other.icon_scale = 2;
             }
         }
-        for (var i = 1; i <= 4; i++) {
-            if (i != player && get_player_damage(i) > top_damage) {
-                get_char_info(i, INFO)
-                top_damage = get_player_damage(i)
-                icon_spr = get_char_info(i, INFO_ICON);
-            }
-        }
         
         state = 11;
         state_timer = 0;
         break;
     
+    // Idle
     case 11:
+        sprite_index = sprite_get("sign");
+        image_index = 0;
+        with oPlayer {
+            var desp_dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND);
+            var desp_dash_dir = hsp < 0 ? -1 : 1;
+            if (other.dasher_in_range[player] != 0 && other.dasher_in_range[player] != desp_dash_dir) {
+                if (!desp_dashing || !place_meeting(x, y, other)) other.dasher_in_range[player] = 0;
+            }
+            else if (desp_dashing && place_meeting(x, y, other)) {
+                other.dasher_in_range[player] = desp_dash_dir;
+                other.state = (desp_dash_dir*other.spr_dir == -1 ? 12 : 13);
+                other.state_timer = 0;
+            }
+        }
+        if (free) {
+            state = 14;
+            state_timer = 0;
+        }
         break;
     
+    // Sway left
+    case 12:
+        sprite_index = sprite_get("sign_move_l");
+        image_index = state_timer / 7;
+        if (image_index >= 4) {
+            sprite_index = sprite_get("sign")
+            state = 11;
+            state_timer = 0;
+        }
+        with oPlayer {
+            var desp_dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND);
+            var desp_dash_dir = hsp < 0 ? -1 : 1;
+            if (other.dasher_in_range[player] != 0 && other.dasher_in_range[player] != desp_dash_dir) {
+                if (!desp_dashing || !place_meeting(x, y, other)) other.dasher_in_range[player] = 0;
+            }
+            else if (desp_dashing && place_meeting(x, y, other)) {
+                other.dasher_in_range[player] = desp_dash_dir;
+            }
+        }
+        if (free) {
+            state = 14;
+            state_timer = 0;
+        }
+        break;
+    
+    // Sway right
+    case 13:
+        sprite_index = sprite_get("sign_move_r");
+        image_index = state_timer / 7;
+        if (image_index >= 4) {
+            sprite_index = sprite_get("sign")
+            state = 11;
+            state_timer = 0;
+        }
+        with oPlayer {
+            var desp_dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND);
+            var desp_dash_dir = hsp < 0 ? -1 : 1;
+            if (other.dasher_in_range[player] != 0 && other.dasher_in_range[player] != desp_dash_dir) {
+                if (!desp_dashing || !place_meeting(x, y, other)) other.dasher_in_range[player] = 0;
+            }
+            else if (desp_dashing && place_meeting(x, y, other)) {
+                other.dasher_in_range[player] = desp_dash_dir;
+            }
+        }
+        if (free) {
+            state = 14;
+            state_timer = 0;
+        }
+        break;
+    
+    // Death
+    case 14:
+        sprite_index = sprite_get("sign_die");
+        image_index = 1+(state_timer / 7);
+        if (image_index >= 5) {
+            if (player_id.signpost_obj == self) player_id.signpost_obj = noone;
+            instance_destroy();
+            exit;
+        }
+        break;
     
     
     //#endregion

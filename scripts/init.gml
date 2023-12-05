@@ -71,6 +71,7 @@ dairs_used = 0;                         // dairs used per airtime
 
 skull_stored_attack = noone;
 
+signpost_obj = noone;                   // taunt
 
 // Training mode assets
 draw_skull_grabbox = 0;

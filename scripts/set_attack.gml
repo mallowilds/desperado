@@ -28,6 +28,10 @@ switch attack {
     case AT_FSPECIAL:
         if (head_obj.state != 0) attack = AT_FSPECIAL_2;
         break;
-        
+    
+    // Taunt 2 / destroy signpost
+    case AT_TAUNT:
+        if (instance_exists(signpost_obj)) attack = AT_TAUNT_2;
+        break;
     
 }
