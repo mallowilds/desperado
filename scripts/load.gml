@@ -50,6 +50,8 @@ sprite_change_offset("airdodge_upback", 156, 194)
 sprite_change_offset("dattack", 156, 194)
 sprite_change_offset("dattack_skulless", 156, 194)
 sprite_change_offset("dstrong", 156, 194)
+sprite_change_offset("taunt", 156, 194)
+sprite_change_offset("taunt_2", 156, 194)
 
 sprite_change_offset("waveland", 156, 194)
 sprite_change_offset("tech", 156, 194)
@@ -160,12 +162,18 @@ sprite_change_offset("nspec_blast_smoke", 4, 8);
 
 sprite_change_offset("fstrongblast", 96, 150);
 
+sprite_change_offset("sign", 60, 114);
+sprite_change_offset("sign_move_l", 60, 114);
+sprite_change_offset("sign_move_r", 60, 114);
+sprite_change_offset("sign_die", 60, 114);
+sprite_change_offset("sign_mask", 60, 114);
+
 //not done
 
 
 sprite_change_offset("fstrong", 156, 194)
 sprite_change_offset("nspecial", 156, 194)
-sprite_change_offset("taunt", 64, 94)
+
 
 sprite_change_offset("plat", 64, 94)
 

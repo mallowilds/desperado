@@ -135,6 +135,8 @@ anim_list = [
     "landinglag",
     "land",
     "nspecial",
+    //"taunt",
+    //"taunt_2",
     ];
 
 

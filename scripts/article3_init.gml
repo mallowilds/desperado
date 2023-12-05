@@ -8,7 +8,7 @@ sprite_index = sprite_get("null");
 image_index = 0;
 spr_dir = player_id.spr_dir;
 uses_shader = true;
-mask_index = sprite_get("bullet_mask");     // Fallback mask
+mask_index = sprite_get("null");
 
 //State
 state = -1;
