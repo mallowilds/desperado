@@ -6,7 +6,7 @@ make_attack(AT_FSPECIAL,
     AG_NUM_WINDOWS, 3,
     AG_HAS_LANDING_LAG, 4,
     AG_AIR_SPRITE, sprite_get("fspecial"),
-    AG_HURTBOX_SPRITE, sprite_get("fspecial_hurt"),
+    AG_HURTBOX_SPRITE, sprite_get("desp_hurt"),
 )
 
 make_window(AT_FSPECIAL, 1,

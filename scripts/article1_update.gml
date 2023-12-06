@@ -564,7 +564,7 @@ switch (state) {
 		switch window {
 			
 			case 1:
-				if (window_timer == 1) {
+				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					state = 1;
 					state_timer = 0;
 				}

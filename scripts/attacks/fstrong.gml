@@ -5,7 +5,7 @@ make_attack(AT_FSTRONG,
     AG_NUM_WINDOWS, 7,
     AG_HAS_LANDING_LAG, 3,
     AG_STRONG_CHARGE_WINDOW, 1,
-    AG_HURTBOX_SPRITE, sprite_get("fstrong_hurt"),
+    AG_HURTBOX_SPRITE, sprite_get("desp_hurt"),
     AG_MUNO_ATTACK_NAME, "FStrong (No Bullets)",
 )
 

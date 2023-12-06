@@ -5,7 +5,7 @@ make_attack(AT_DSTRONG,
     AG_NUM_WINDOWS, 4,
     AG_HAS_LANDING_LAG, 3,
     AG_STRONG_CHARGE_WINDOW, 1,
-    AG_HURTBOX_SPRITE, sprite_get("dstrong_hurt"),
+    AG_HURTBOX_SPRITE, sprite_get("desp_hurt"),
     AG_CATEGORY, 0
 );
 
