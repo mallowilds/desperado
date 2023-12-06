@@ -29,7 +29,6 @@ make_window(AT_TAUNT_2, 2,
     AG_WINDOW_ANIM_FRAME_START, 4,
 )
 
-
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
 // Write NO-INJECT in a comment above this area to disable injection.

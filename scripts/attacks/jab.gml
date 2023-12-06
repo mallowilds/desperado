@@ -9,7 +9,6 @@ make_attack(AT_JAB,
 make_window(AT_JAB, 1,
     AG_WINDOW_LENGTH, 4,
     AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 1,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_weak1"),
     AG_WINDOW_SFX_FRAME, 1,
@@ -19,15 +18,15 @@ make_window(AT_JAB, 1,
 make_window(AT_JAB, 2,
     AG_WINDOW_LENGTH, 3,
     AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 2,
+    AG_WINDOW_ANIM_FRAME_START, 1,
 
     AG_WINDOW_HSPEED, 2,
 )
 
 make_window(AT_JAB, 3,
     AG_WINDOW_LENGTH, 13,
-    AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 3,
+    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_ANIM_FRAME_START, 2,
     AG_WINDOW_CANCEL_TYPE, 1,
     AG_WINDOW_CANCEL_FRAME, 5,
 )
@@ -73,9 +72,10 @@ make_window(AT_JAB, 8,
 )
 
 make_window(AT_JAB, 9,
-    AG_WINDOW_LENGTH, 16,
+    AG_WINDOW_LENGTH, 26,
     AG_WINDOW_ANIM_FRAMES, 3,
     AG_WINDOW_ANIM_FRAME_START, 9,
+    AG_WINDOW_HAS_WHIFFLAG, 1
 )
 
 set_num_hitboxes(AT_JAB, 3);
@@ -148,11 +148,10 @@ make_hitbox(AT_JAB, 3,
     HG_BASE_HITPAUSE, 8,
     HG_HITPAUSE_SCALING, 0.8,
         
-    HG_VISUAL_EFFECT, hfx_bone_large,
+    //HG_VISUAL_EFFECT, hfx_bone_large,
     HG_HIT_SFX, asset_get("sfx_blow_heavy2"),
     HG_EXTRA_CAMERA_SHAKE, 2,
-    HG_IGNORES_PROJECTILES, 1,
-    HG_HIT_PARTICLE_NUM, -1
+
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
