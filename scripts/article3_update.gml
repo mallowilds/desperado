@@ -113,6 +113,7 @@ switch state {
             sprite_index = sprite_get((dash_dir*spr_dir == -1) ? "sign_move_l" : "sign_move_r");
             state = (dash_dir*spr_dir == -1 ? 12 : 13);
             state_timer = 0;
+            sound_play(asset_get("sfx_holy_grass"), false, noone, 0.7, 0.75+(0.35*random_func(12, 1, false)));
         }
         
         // Detect hitboxes
@@ -131,7 +132,7 @@ switch state {
     // Sway left
     case 12:
         sprite_index = sprite_get("sign_move_l");
-        image_index = state_timer / 7;
+        image_index = state_timer / 5;
         if (image_index >= 4) {
             sprite_index = sprite_get("sign");
             state = 11;
@@ -158,7 +159,7 @@ switch state {
     // Sway right
     case 13:
         sprite_index = sprite_get("sign_move_r");
-        image_index = state_timer / 7;
+        image_index = state_timer / 5;
         if (image_index >= 4) {
             sprite_index = sprite_get("sign")
             state = 11;
