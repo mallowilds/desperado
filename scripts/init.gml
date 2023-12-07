@@ -53,7 +53,7 @@ AG_WINDOW_SKULL_GRABBOX_Y = 42;
 AG_WINDOW_SKULL_GRABBOX_W = 43;
 AG_WINDOW_SKULL_GRABBOX_H = 44;
 AG_MUNO_ATTACK_NAME = 70; // Woodcock compat, can be freely changed
-
+AG_MUNO_ATTACK_MISC = 71
 
 // Character-specific assets
 num_bullets = 0;                        // 0-6

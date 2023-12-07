@@ -5,18 +5,19 @@ make_attack(AT_EXTRA_1,
   AG_SPRITE, sprite_get("bair"),
   AG_HAS_LANDING_LAG, 1,
   AG_LANDING_LAG, 10,
-  AG_MUNO_ATTACK_NAME, "BAir (High Heat)",
+  AG_MUNO_ATTACK_NAME, "Scorching BAir",
+  AG_MUNO_ATTACK_MISC, "With more than 4 bullets, this move becomes larger and gains a tipper.",
   AG_NUM_WINDOWS, 3,
   AG_HURTBOX_SPRITE, sprite_get("bair_hurt"))
 
 make_window(AT_EXTRA_1, 1,
-  AG_WINDOW_LENGTH, 14,
+  AG_WINDOW_LENGTH, 16,
   AG_WINDOW_ANIM_FRAMES, 4,
   AG_WINDOW_ANIM_FRAME_START, 9,
   AG_WINDOW_VSPEED, -1,
   AG_WINDOW_HAS_SFX, 1,
   AG_WINDOW_SFX, asset_get("sfx_swipe_heavy1"),
-  AG_WINDOW_SFX_FRAME, 13)
+  AG_WINDOW_SFX_FRAME, 15)
 
 make_window(AT_EXTRA_1, 2,
   AG_WINDOW_LENGTH, 3,

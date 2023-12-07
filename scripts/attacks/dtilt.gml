@@ -30,6 +30,8 @@ make_window(AT_DTILT, 3,
 set_num_hitboxes(AT_DTILT, 1)
 
 make_hitbox(AT_DTILT, 1,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 2,
     HG_LIFETIME, 3,
 

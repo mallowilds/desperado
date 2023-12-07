@@ -63,6 +63,8 @@ make_window(AT_NAIR, 6, //endlag 1
 set_num_hitboxes(AT_NAIR, 3);
 
 make_hitbox(AT_NAIR, 1,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 2,
     HG_LIFETIME, 2,
 
@@ -85,6 +87,8 @@ make_hitbox(AT_NAIR, 1,
 );
 
 make_hitbox(AT_NAIR, 2,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 2,
     HG_LIFETIME, 2,
 
@@ -109,6 +113,8 @@ make_hitbox(AT_NAIR, 2,
 
 
 make_hitbox(AT_NAIR, 3,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 5,
     HG_LIFETIME, 2,
     

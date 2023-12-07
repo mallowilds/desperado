@@ -6,15 +6,16 @@ make_attack(AT_BAIR,
   AG_HAS_LANDING_LAG, 1,
   AG_LANDING_LAG, 10,
   AG_NUM_WINDOWS, 3,
+  AG_MUNO_ATTACK_MISC, "With more than 4 bullets, this move becomes larger and gains a tipper.",
   AG_HURTBOX_SPRITE, sprite_get("bair_hurt"))
 
 make_window(AT_BAIR, 1,
-  AG_WINDOW_LENGTH, 13,
+  AG_WINDOW_LENGTH, 16,
   AG_WINDOW_ANIM_FRAMES, 4,
   AG_WINDOW_VSPEED, -1,
   AG_WINDOW_HAS_SFX, 1,
   AG_WINDOW_SFX, asset_get("sfx_swipe_heavy2"),
-  AG_WINDOW_SFX_FRAME, 12)
+  AG_WINDOW_SFX_FRAME, 15)
 
 make_window(AT_BAIR, 2,
   AG_WINDOW_LENGTH, 3,

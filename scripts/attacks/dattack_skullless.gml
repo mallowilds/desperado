@@ -5,7 +5,7 @@ make_attack(AT_EXTRA_2,
     AG_NUM_WINDOWS, 5,
     AG_AIR_SPRITE, sprite_get("dattack_skulless"),
     AG_HURTBOX_SPRITE, sprite_get("dattack_skulless_hurt"),
-    AG_MUNO_ATTACK_NAME, "Skullless DAttack",
+    AG_MUNO_ATTACK_NAME, "Skulless DAttack",
 )
 
 make_window(AT_EXTRA_2, 1, //startup
@@ -56,6 +56,8 @@ make_window(AT_EXTRA_2, 5,
 set_num_hitboxes(AT_EXTRA_2, 2)
 
 make_hitbox(AT_EXTRA_2, 1,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 2,
     HG_LIFETIME, 2,
 
@@ -80,6 +82,8 @@ make_hitbox(AT_EXTRA_2, 1,
 )
 
 make_hitbox(AT_EXTRA_2, 2,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 4,
     HG_LIFETIME, 3,
     HG_HITBOX_GROUP, -1,

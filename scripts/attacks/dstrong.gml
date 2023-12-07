@@ -42,6 +42,8 @@ set_num_hitboxes(AT_DSTRONG, 1);
 
 
 make_hitbox(AT_DSTRONG, 1,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 3,
     HG_LIFETIME, 3,
 

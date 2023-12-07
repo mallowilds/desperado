@@ -7,6 +7,7 @@ make_attack(AT_FSTRONG_2,
     AG_STRONG_CHARGE_WINDOW, 1,
     AG_HURTBOX_SPRITE, sprite_get("fstrong_hurt"),
     AG_MUNO_ATTACK_NAME, "FStrong",
+    AG_MUNO_ATTACK_MISC, "Uses 1 bullet. Getting hit during startup loses it."
 )
 
 make_window(AT_FSTRONG_2, 1,
@@ -48,6 +49,7 @@ set_num_hitboxes(AT_FSTRONG_2, 2)
 
 
 make_hitbox(AT_FSTRONG_2, 1,
+    HG_HITBOX_TYPE, 1,
     HG_WINDOW, 4,
     HG_LIFETIME, 2,
 
@@ -74,6 +76,8 @@ make_hitbox(AT_FSTRONG_2, 1,
 )
 
 make_hitbox(AT_FSTRONG_2, 2,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 4,
     HG_WINDOW_CREATION_FRAME, 1,
     HG_LIFETIME, 3,

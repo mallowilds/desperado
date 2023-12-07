@@ -48,6 +48,8 @@ set_num_hitboxes(AT_FSTRONG, 1)
 
 
 make_hitbox(AT_FSTRONG, 1,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 4,
     HG_LIFETIME, 3,
 

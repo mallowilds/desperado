@@ -56,6 +56,8 @@ make_window(AT_DATTACK, 5,
 set_num_hitboxes(AT_DATTACK, 2)
 
 make_hitbox(AT_DATTACK, 1,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 2,
     HG_LIFETIME, 2,
 

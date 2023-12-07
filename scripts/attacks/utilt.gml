@@ -35,6 +35,8 @@ make_window(AT_UTILT, 3,
 set_num_hitboxes(AT_UTILT, 4)
 
 make_hitbox(AT_UTILT, 1,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 2,
     HG_HITBOX_GROUP, 1,
 
@@ -55,6 +57,8 @@ make_hitbox(AT_UTILT, 1,
 )
 
 make_hitbox(AT_UTILT, 2,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 2,
     HG_HITBOX_GROUP, 1,
 
@@ -76,6 +80,8 @@ make_hitbox(AT_UTILT, 2,
 
 
 make_hitbox(AT_UTILT, 3,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 2,
     HG_WINDOW_CREATION_FRAME, 3,
     HG_HITBOX_GROUP, 2,
@@ -99,6 +105,8 @@ make_hitbox(AT_UTILT, 3,
 )
 
 make_hitbox(AT_UTILT, 4,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 2,
     HG_HITBOX_GROUP, 2,
     HG_WINDOW_CREATION_FRAME, 3,
