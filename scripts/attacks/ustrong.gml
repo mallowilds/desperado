@@ -17,8 +17,8 @@ make_window(AT_USTRONG, 2,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 2,
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, sound_get("desp_swinglow_2"),
-    AG_WINDOW_SFX_FRAME, 1,
+    AG_WINDOW_SFX, asset_get("sfx_swipe_heavy2"),
+    AG_WINDOW_SFX_FRAME, 3,
 )
 
 make_window(AT_USTRONG, 3,

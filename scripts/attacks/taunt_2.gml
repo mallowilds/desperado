@@ -18,7 +18,7 @@ make_window(AT_TAUNT_2, 1,
     AG_WINDOW_LENGTH, 12,
     AG_WINDOW_ANIM_FRAMES, 4,
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, sound_get("desp_shot"),
+    AG_WINDOW_SFX, sound_get("desp_cartoonshot"),
     AG_WINDOW_SFX_FRAME, 10,
 ) 
 

@@ -75,8 +75,11 @@ if (atk == AT_FSTRONG && hbox == 1 && !hit_player_obj.super_armor) {
 
 
 
-//#region SFX management
-if atk == AT_EXTRA_1 && hbox == 3 {
+//#region SFX management 
+if atk == AT_BAIR || atk == AT_EXTRA_1 {
+	sound_play(sound_get("desp_gunhit"), 0, noone, .5)
+}
+if atk == AT_EXTRA_1 && hbox == 3 { //bair
 	sound_play(sound_get("desp_weirdhit"))
 }
 if atk == AT_FAIR && hbox != 4 {
@@ -87,8 +90,13 @@ if atk == AT_FAIR && hbox != 4 {
 if atk == AT_FAIR && hbox == 4 {
 	sound_play(sound_get("desp_cast_short"), 0, noone, 0.9, 1)
 }
-if atk == AT_UTILT {
-	//sound_play(sound_get("desp_cast_short"), 0, noone, 0.9, 1)
+if atk == AT_UAIR {
+	if hbox == 1 || hbox == 2 {
+		sound_play(asset_get("sfx_pom_slap2"), 0, noone, 0.9, 1)
+	}
+	if hbox == 3 {
+		sound_play(asset_get("sfx_pom_slap1"), 0, noone, 0.9, 1)
+	}
 }
 if atk == AT_NSPECIAL {
 	if hbox == 1 {

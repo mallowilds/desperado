@@ -13,8 +13,8 @@ switch (attack) {
 	
 	//#region Intro ------------------------------------------------------------
     case 2: //intro
-        if window == 1 && (window_timer == 39 || window_timer == 55) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-            sound_play(asset_get("sfx_kragg_spike"), 0, noone, .3, 1.1)
+        if window == 1 && (window_timer == 39) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+            sound_play(sound_get("desp_rockbreak"))
         }
         if window == 2 {
             switch (window_timer) {
@@ -47,10 +47,17 @@ switch (attack) {
     		sound_play(sound_get("sfx_snb_clothes"))
     	}
     	break;
-    
+    case AT_UTILT:
+    	if window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)) {
+    		sound_play(sound_get("desp_smogswing2"))
+    	}
+    	break;
     case AT_USTRONG:
         if (window > 1 && (window < 5 && window_timer < 17)) {
             hud_offset = 60;
+        }
+        if window == 2 && window_timer == 3 && !hitpause {
+        	sound_play(sound_get("desp_heavyswing"), 0, noone, .4, .95)
         }
     	break;
     case AT_DSTRONG:
@@ -59,7 +66,7 @@ switch (attack) {
         	nametag_white_flash = 1;
         }
         break;
-        
+
     case AT_FSTRONG:
     	break;
     case AT_FSTRONG_2:
@@ -114,14 +121,23 @@ switch (attack) {
     	break;
 
 	case AT_BAIR: 
-    case AT_EXTRA_1: // empowered bair 
-
         if (window == 1 && window_time_is(1)) {
             sound_play(sound_get("desp_whip"), 0, noone, .8, 1 );
         }
-    	break;    
+    	break;
+    case AT_EXTRA_1: 
+    	if (window == 1 && window_time_is(1)) {
+            sound_play(sound_get("desp_whip"), 0, noone, .8, 1 );
+        }
+    	if window == 1 && window_timer == get_window_value(AT_BAIR, 1, AG_WINDOW_LENGTH) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+    		sound_play(sound_get("desp_firebair"), 0, noone, .4, 1)
+    	}
+    	break;
     
     case AT_UAIR:
+    	if window == 1 && window_time_is(7) {
+    		sound_play(sound_get("desp_smogswing"), 0, noone, .8, .9)	
+    	}
     	break;
     
     //#region AT_DAIR
@@ -381,6 +397,7 @@ switch (attack) {
     //#region Down Special -----------------------------------------------------
     case AT_DSPECIAL:
         move_cooldown[AT_DSPECIAL] = 70;
+        can_move = false
     
         set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
         if (window != 3) {
