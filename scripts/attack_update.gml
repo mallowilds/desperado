@@ -183,7 +183,14 @@ switch (attack) {
         if (window == 4) {
         	can_fast_fall = false;
         	fast_falling = false;
-        	if (window_timer == 0 && !hitpause) vsp = -8
+        	if (window_time_is(0)) vsp = -8;
+        	if (skull_grabbed && window_time_is(5)) {
+				set_head_state(AT_UTHROW);
+				head_obj.x = x + (46*spr_dir);
+				head_obj.y = y - 24;
+				head_obj.spr_dir = spr_dir;
+				head_obj.visible = true;
+			}
         }
 
         break;
@@ -395,9 +402,10 @@ switch (attack) {
     			move_cooldown[AT_FSPECIAL] = 30;
     			if (skull_grabbed && window_time_is(1)) {
     				set_head_state(AT_FTHROW);
-    				head_obj.x = x + (20*spr_dir);
+    				head_obj.x = x + (36*spr_dir);
     				head_obj.y = y - 20;
     				head_obj.spr_dir = spr_dir;
+    				head_obj.visible = true;
     			}
     			break;
     		

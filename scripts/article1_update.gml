@@ -518,7 +518,7 @@ switch (state) {
 				state = 4;
 				state_timer = 0;
 				respawn_penalty = false;
-				create_hitbox(AT_FSPECIAL_2, 1, x, y);
+				create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
 				break;
 		}
 		
@@ -582,7 +582,72 @@ switch (state) {
 				state = 4;
 				state_timer = 0;
 				respawn_penalty = false;
-				create_hitbox(AT_FSPECIAL_2, 1, x, y);
+				create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				break;
+			
+		}
+		
+		break;	
+	
+	//#endregion
+	
+	//#region Command Attack: AT_UTHROW ------------------------------------------------
+	case AT_UTHROW:
+		visible = true;
+	    sprite_index = sprite_get("skullactive");
+	    can_fspecial = false;
+		can_sync_attack = false;
+		
+		switch (window) {
+				
+			case 1:
+				image_index = 1 + (window_timer/3)%4;
+				
+				if (hitstop <= 0) vsp = clamp(vsp+0.4, vsp, 7);
+				
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+					hsp = 3*spr_dir;
+					vsp = -9;
+					
+					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
+					hitbox.spr_dir = spr_dir;
+					hitbox.head_obj = self;
+					
+					has_hit = false;
+				}
+				
+				// Update hitbox
+				if (hitbox != noone) {
+					hitbox.length++; // Lifetime extender
+					hitbox.x = x;
+					hitbox.y = y-30;
+					hitbox.hsp = hsp;
+					hitbox.vsp = vsp;
+				}
+				
+				// Explode detection
+				if (hitstop <= 0 && (window_timer > 25 || hsp == 0 || !free || has_hit)) {
+					window = 2;
+					window_timer = 0;
+				}
+				
+				break;
+				
+			case 2:
+				sprite_index = sprite_get("skullactive");
+				image_index = 0;
+				
+				if (window_timer > 6) {
+					window = 3;
+					window_timer = 0;
+				}
+			
+			case 3:
+				visible = false;
+				state = 4;
+				state_timer = 0;
+				respawn_penalty = false;
+				create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
 				break;
 			
 		}
