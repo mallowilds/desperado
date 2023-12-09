@@ -25,7 +25,7 @@ make_window(AT_UAIR, 2,
 )
     
 make_window(AT_UAIR, 3,
-    AG_WINDOW_LENGTH, 14,
+    AG_WINDOW_LENGTH, 10,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 5,
     AG_WINDOW_HAS_WHIFFLAG, 1,
