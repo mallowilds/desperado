@@ -38,7 +38,7 @@ set_color_profile_slot_range( 8, 1, 1, 1 );
 
 
 // ALTERNATE COLORS
-set_num_palettes( 15 );
+set_num_palettes( 16 );
 
 // dreadnought - hyu
 set_color_profile_slot( 1, 0, 209, 207, 255 ); //Bones
@@ -193,6 +193,17 @@ set_color_profile_slot( 14, 5, 86, 173, 97 ); //Fire
 set_color_profile_slot( 14, 6, 84, 255, 108 ); //Fireyellow
 set_color_profile_slot( 14, 7, 161, 205, 208 ); //Gun
 set_color_profile_slot( 14, 8, 179, 39, 54 ); //Firedark
+
+// guns and roses
+set_color_profile_slot( 15, 0, 221, 136, 136 ); //Bones
+set_color_profile_slot( 15, 1, 94, 50, 50 ); //Horns
+set_color_profile_slot( 15, 2, 163, 115, 115 ); //Smog
+set_color_profile_slot( 15, 3, 143, 24, 14 ); //Ash
+set_color_profile_slot( 15, 4, 94, 50, 50 ); //Coat
+set_color_profile_slot( 15, 5, 255, 43, 43 ); //Fire
+set_color_profile_slot( 15, 6, 255, 115, 33 ); //Fireyellow
+set_color_profile_slot( 15, 7, 196, 151, 151 ); //Gun
+set_color_profile_slot( 15, 8, 209, 0, 0 ); //Firedark
 
 
 /* This is a comment used by that one RoA colors.gml generator tool to store palette data. You can safely keep it in your colors.gml if you plan to re-use the tool later, or safely remove it if you don't.

@@ -47,6 +47,11 @@ switch (attack) {
     		sound_play(sound_get("sfx_snb_clothes"))
     	}
     	break;
+    case AT_EXTRA_3: //ftilt emp
+    	if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
+    		sound_play(asset_get("sfx_zetter_fireball_fire"), 0, noone, .7, .9)
+    	}
+    	break;
     case AT_UTILT:
     	if window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)) {
     		sound_play(sound_get("desp_smogswing2"))
@@ -77,12 +82,15 @@ switch (attack) {
 		}
 		if (window == 3 && window_time_is(1)) {
 			sound_stop(sound_get("desp_spin"));
-			sound_play(sound_get("desp_blast_fstrong"), 0, noone, .8, 1)	
-			sound_play(sound_get("desp_coin"), false, noone, .5)
-			
+			sound_play(sound_get("desp_cointoss"), false, noone, 1)
+
 			bullet_lost = true;
 			num_bullets--;
 			nametag_white_flash = 1;
+		}
+		if (window == 3 && window_time_is(11)){
+			sound_play(sound_get("desp_coin"), false, noone, .5)
+			sound_play(sound_get("desp_blast_fstrong"), 0, noone, .8, 1)	
 		}
 		if (window == 4 && window_time_is(1)) {
 			fstrong_blast_obj = spawn_hit_fx(x+(64*spr_dir), y-50, vfx_fstrong_blast);

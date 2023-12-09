@@ -1,11 +1,8 @@
 // init.gml
-//note to shear:
-//sorry normals are kinda wacky rn. nair has no visual cus i deleted the sketch layer, a lot of the normals are weird fucked up terrible zetterburn ones because the rivals assistant template has them lke that for some reason and i was too lazy to change them.
-//lol
 
 
 //...And so he left, with his pyrrhic plunder.
-//Desperado, the Ashes' Ultimatum
+//Desperado, the Remnant of Ash
 
 //lore:
 //Desperado was one of the first mechanics, working with another man, using gunpowder and ash to create what are known today as guns. At the front of the gold rush, he was there, innovating and pushing his craft.
@@ -175,13 +172,13 @@ techroll_speed = 10 // 8 – 11. The speed during techroll’s movement
 land_time = 4 // 4 – 6. The number of frames in your normal landing state
 prat_land_time = 15 // 3 – 24. The number of frames in your prat land state
 wave_land_time = 12 // 6 – 12 usually 8. The number of frames your waveland state lasts
-wave_land_adj = 1.1 // 1.2 – 1.5. The multiplier to your initial hsp when wavelanding. Usually greater than 1
+wave_land_adj = 1.2 // 1.2 – 1.5. The multiplier to your initial hsp when wavelanding. Usually greater than 1
 wave_friction = 0.15 // 0 – .15. Grounded deceleration when wavelanding
 
 // Air Movement
 air_dodge_speed = 7.5 // 7.5 – 8	The speed during airdodge’s movement
 
-air_accel = .43 // .2 – .4. The hsp acceleration applied when you hold left or right in a normal aerial state
+air_accel = .45 // .2 – .4. The hsp acceleration applied when you hold left or right in a normal aerial state
 prat_fall_accel = .85 // .4 – 1.5.	A multiplier to your normal horizontal aerial acceleration: 1 = normal 0 = no acceleration
 air_friction = .02 // .02 – .07. Natural deceleration applied while in the air. Also applies while in hitstun, increasing survivability
 
@@ -201,7 +198,7 @@ djump_accel_end_time = 0 // The duration that djump_accel is applied.
 
 leave_ground_max = 7 // 4 – 8. The maximum hsp you can have when you go from grounded to aerial without jumping
 max_jump_hsp = 6.5 // 4 – 8. The maximum hsp you can have when jumping from the ground
-air_max_speed = 4 //3 – 7. The maximum hsp you can accelerate to when in a normal aerial state
+air_max_speed = 5 //3 – 7. The maximum hsp you can accelerate to when in a normal aerial state
 
 jump_start_time = 5 // 5 for all characters. The number of frames of jumpsquat minus one
 jump_change = 3 // 3 for all characters. The hsp applied if left or right is held when jumping. Will not slow you down if you’re already going faster. When reversing your momentum with a double jump, this is the maximum hsp you can have

@@ -23,6 +23,9 @@ switch attack {
     case AT_BAIR:
         if (num_bullets >= 4) attack = AT_EXTRA_1;
         break;
+    case AT_FTILT:
+        if (num_bullets >= 4) attack = AT_EXTRA_3;
+        break;
     
     // FSpecial command
     case AT_FSPECIAL:

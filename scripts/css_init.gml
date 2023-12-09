@@ -18,6 +18,7 @@ alt_name[11]  = "Desperate Outlaw      ";
 alt_name[12]  = "In the Blood";
 alt_name[13]  = "Hunted";
 alt_name[14]  = "Blasted";
+alt_ame[15]   = "Guns 'n Roses";
 
 
 bulletcoordmain = [10, 120]
