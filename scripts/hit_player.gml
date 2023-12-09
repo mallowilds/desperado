@@ -44,7 +44,9 @@ if (atk == 42 && my_hitboxID.orig_player == player) { // Sync attacks
 	}
 }
 if (atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // Skull explosion
-	num_bullets++; // temp until something nicer can get set up
+	if (num_bullets < 6) num_bullets++; // temp until something nicer can get set up
+	my_hitboxID.hitstop_timer = hit_player_obj.hitstop;
+	my_hitboxID.parent_hitbox.hitstop_timer = my_hitboxID.hitstop_timer;
 }
 //#endregion
 

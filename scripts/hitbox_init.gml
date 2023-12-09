@@ -10,7 +10,7 @@ if (attack == AT_FSPECIAL_2) {
             child_hitbox = noone;
         
         case 2:
-            //hitpau
+            hitstop_timer = 0;
             break;
         
         
