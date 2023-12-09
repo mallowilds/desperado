@@ -1,7 +1,7 @@
 // fstrong.gml
 
 make_attack(AT_FSTRONG,
-    AG_SPRITE, sprite_get("fstrong"),
+    AG_SPRITE, sprite_get("fstrong_nul"),
     AG_NUM_WINDOWS, 7,
     AG_HAS_LANDING_LAG, 3,
     AG_STRONG_CHARGE_WINDOW, 2,

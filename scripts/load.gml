@@ -176,6 +176,10 @@ sprite_change_offset("sign_mask", 60, 114);
 
 
 sprite_change_offset("fstrong", 156, 194)
+sprite_change_offset("fstrong_nul", 156, 194)
+sprite_change_offset("fstrong_skull", 156, 194)
+sprite_change_offset("fstrong_nul_skull", 156, 194)
+
 sprite_change_offset("nspecial", 156, 194)
 
 
