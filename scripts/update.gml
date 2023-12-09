@@ -57,7 +57,7 @@ else if (state == PS_WALL_JUMP) {
 if (nametag_white_flash > 0) nametag_white_flash -= 0.1;
 if (num_bullets >= 4 && nametag_flame_alpha < 1) nametag_flame_alpha += 0.2;
 else if (num_bullets < 4 && nametag_flame_alpha > 0) nametag_flame_alpha -= 0.2;
-
+//#endregion
 
 //#region Flame management (drawn in post_draw.gml, added by update/attack_update.gml)
 for (var i = 0; i < ds_list_size(sparkle_list); i++) {
@@ -133,7 +133,11 @@ if (!instance_exists(head_obj)) {
 
 //#endregion
 
-
+// One more failsafe for good measure
+if (num_bullets > 6 || num_bullets < 0) {
+    print_debug("ERROR: bad bullet count (" +num_bullets + "). Resetting.");
+    num_bullets = clamp(num_bullets, 0, 6);
+}
 
 
 
