@@ -28,7 +28,7 @@ if (my_hitboxID.damage + mult_damage_add > 3 && num_bullets >= 4) {
 
 
 //#region Skull hitbox management
-if (atk == AT_FSPECIAL || atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // FSpecial
+if (atk == AT_FSPECIAL && my_hitboxID.orig_player == player) { // FSpecial
 	my_hitboxID.head_obj.hitstop = hit_player_obj.hitstop;
 	my_hitboxID.head_obj.has_hit = true;
 }
@@ -42,6 +42,9 @@ if (atk == 42 && my_hitboxID.orig_player == player) { // Sync attacks
 			can_hit[other.hit_player+1] = false;
 		}
 	}
+}
+if (atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // Skull explosion
+	num_bullets++; // temp until something nicer can get set up
 }
 //#endregion
 

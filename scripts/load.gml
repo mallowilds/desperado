@@ -145,7 +145,7 @@ sprite_change_offset("skullactive", 156, 194)
 sprite_change_offset("skullhurt", 156, 194)
 sprite_change_offset("skulldie", 156, 194)
 sprite_change_offset("skullnair", 156, 194)
-sprite_change_offset("skullatk", 156, 194)
+sprite_change_offset("skullatk", 160, 162) // This one's a separate projectile
 
 sprite_change_offset("skull_hud_arrow", 7, 10)
 sprite_change_offset("skull_hud_health", 5, 8)

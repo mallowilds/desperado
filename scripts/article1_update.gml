@@ -44,6 +44,7 @@ if (state != 4 && state != 5) {
 	if (health <= 0 && state != 2) {
 		state = 4;
 		state_timer = 0;
+		respawn_penalty = true;
 	}
 	
 	else if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
@@ -51,6 +52,7 @@ if (state != 4 && state != 5) {
 		state_timer = 0;
 		visible = false;
 		y = get_stage_data(SD_BOTTOM_BLASTZONE_Y) - 1;
+		respawn_penalty = true;
 		// might be cute to have a mini-death-explosion-slash-poof-of-smoke-vfx? also might be too much work lmao
 		// todo: sfx
 	}
@@ -60,6 +62,7 @@ if (state != 4 && state != 5) {
 		state_timer = 0;
 		visible = false;
 		x = get_stage_data(SD_LEFT_BLASTZONE_X) + 1;
+		respawn_penalty = true;
 		// todo: sfx
 	}
 	
@@ -68,12 +71,14 @@ if (state != 4 && state != 5) {
 		state_timer = 0;
 		visible = false;
 		x = get_stage_data(SD_RIGHT_BLASTZONE_X) - 1;
+		respawn_penalty = true;
 		// todo: sfx
 	}
 	
 	if (place_meeting(x, y, asset_get("plasma_field_obj")) && state != 0) {
 		state = 4;
 		state_timer = 0;
+		respawn_penalty = true;
 		sound_play(asset_get("sfx_clairen_hit_med"));
 	}
 	
@@ -320,9 +325,10 @@ switch (state) {
 		can_sync_attack = false;
 		
 		// not dealing with this quite yet~
-		if (state_timer > 50) {
+		if (state_timer > respawn_delay + (respawn_penalty ? penalty_delay : 0)) {
 			state = 0;
 			state_timer = 0;
+			if (!respawn_penalty) create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
 		}
 		
 		// TODO: add sfx
@@ -472,6 +478,7 @@ switch (state) {
 				if (state_timer > 180) {
 					state = 4;
 					state_timer = 0;
+					respawn_penalty = true;
 					sprite_index = sprite_get("skullidle");
 					image_index = 0;
 					vsp = -4;
@@ -487,7 +494,7 @@ switch (state) {
 	//#region Command Attack: AT_FSPECIAL_2 ---------------------------------------------
 	case AT_FSPECIAL_2:
 		
-		visible = true;
+		//visible = true;
 	    can_fspecial = false;
 		can_sync_attack = false;
 		
@@ -495,60 +502,23 @@ switch (state) {
 		vsp *= 0.9;
 		
 		switch window {
+			
 			case 1:
-				sprite_index = sprite_get("skullatk");
-				image_index = (window_timer > 6);
+				visible = true;
+				sprite_index = sprite_get("skullactive");
+				image_index = 0;
 				
-				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					sound_play(asset_get("sfx_swipe_weak1"));
+				if (window_timer > 6) {
+					state = 2;
+					state_timer = 0;
 				}
-				
-				if (window_timer == 13) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					sound_play(asset_get("sfx_swipe_medium1"));
-				}
-				
-				if (window_timer > 10) {
-					window = 2;
-					window_timer = 0;
-				}
-				break;
 			
 			case 2:
-			
-				image_index = 2 + (window_timer / 3);
-				if (hitstop > 0) break;
-				
-				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					hbox = create_hitbox(AT_FSPECIAL_2, 1, x, y-40);
-					hbox.spr_dir = spr_dir;
-					hbox.head_obj = self;
-				}
-				if (window_timer == 3) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					hbox = create_hitbox(AT_FSPECIAL_2, 2, x, y-40);
-					hbox.spr_dir = spr_dir;
-					hbox.head_obj = self;
-				}
-				
-				if (window_timer > 9) {
-					window = 3;
-					window_timer = 0;
-				}
-				
-				//spawn hitbox
-				
-				break;
-			
-			case 3:
-				image_index = 5 + (window_timer / 3);
-				if (window_timer > 8) {
-					visible = false;
-					state = 4;
-					state_timer = 0;
-					if (has_hit && player_id.num_bullets < 6) {
-						player_id.num_bullets++;
-						player_id.nametag_white_flash = 1;
-					}
-				}
+				visible = false;
+				state = 4;
+				state_timer = 0;
+				respawn_penalty = false;
+				create_hitbox(AT_FSPECIAL_2, 1, x, y);
 				break;
 		}
 		

@@ -26,6 +26,10 @@ max_health = 1;
 last_attack = [noone, noone, noone, noone, noone];
 hittable_hitpause_mult = 1;
 
+respawn_penalty = true;                             // If set to false, removes penalty delay and spawns a hitbox on return
+respawn_delay = 60;
+penalty_delay = 30;
+
 can_fspecial = false;
 can_sync_attack = false;
 skull_stored_attack = noone;
