@@ -222,7 +222,7 @@ switch (state) {
 				
 				// End if it takes too long
 				if ( window_timer >= 45 ) {
-					hitbox = null;
+					hitbox = noone;
 					window = 3;
 					window_timer = 0;
 					if (vsp > 4) vsp = 4;
@@ -230,7 +230,7 @@ switch (state) {
 				}
 				
 				// Update hitbox
-				if (hitbox != null) {
+				if (hitbox != noone) {
 					hitbox.length++; // Lifetime extender
 					hitbox.x = x;
 					hitbox.y = y-30;
@@ -244,7 +244,7 @@ switch (state) {
 					
 					// The wall detection of all time
 					if (hsp == 0 && !moving_vertically) {
-						hitbox = null;
+						hitbox = noone;
 						window = 3;
 						window_timer = 0;
 						spr_dir *= -1;
@@ -253,7 +253,7 @@ switch (state) {
 					
 					// Enemy bounce detection
 					if (has_hit) {
-						hitbox = null;
+						hitbox = noone;
 						window = 3;
 						window_timer = 0;
 						vsp = -3;
@@ -263,7 +263,7 @@ switch (state) {
 					
 					// Ground bounce detection (backup)
 					if (!free) {
-						hitbox = null;
+						hitbox = noone;
 						window = 3;
 						window_timer = 0;
 						vsp = -4;
@@ -277,7 +277,7 @@ switch (state) {
 			// Slow down
 			case 3:
 				
-				hitbox = null;
+				hitbox = noone;
 				
 				image_index = window_timer > 11 ? 5 : 1 + (window_timer/3)%4;
 				hsp *= 0.9;
@@ -328,7 +328,6 @@ switch (state) {
 		if (state_timer > respawn_delay + (respawn_penalty ? penalty_delay : 0)) {
 			state = 0;
 			state_timer = 0;
-			if (!respawn_penalty) create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
 		}
 		
 		// TODO: add sfx
@@ -377,7 +376,7 @@ switch (state) {
 				// End just before hitting ground (or if it takes too long)
 				var offset = (vsp > 4 ? 40 : 6.66*vsp + 10);
 				if ( window_timer >= 25 || ( vsp > 0 && (position_meeting(x, y+offset, asset_get("par_block")) || position_meeting(x, y+30, asset_get("par_jumpthrough"))) ) ) {
-					hitbox = null;
+					hitbox = noone;
 					window = 3;
 					window_timer = 0;
 					if (vsp > 4) vsp = 4;
@@ -385,7 +384,7 @@ switch (state) {
 				}
 				
 				// Update hitbox
-				if (hitbox != null) {
+				if (hitbox != noone) {
 					hitbox.length++; // Lifetime extender
 					hitbox.x = x;
 					hitbox.y = y-30;
@@ -430,7 +429,7 @@ switch (state) {
 			case 3:
 				
 				// Update hitbox
-				if (hitbox != null) {
+				if (hitbox != noone) {
 					hitbox.length++; // Lifetime extender
 					hitbox.x = x;
 					hitbox.y = y-30;
@@ -445,7 +444,7 @@ switch (state) {
 				if (window_timer >= 36) {
 					window = 4;
 					window_timer = 0;
-					hitbox = null;
+					hitbox = noone;
 				}
 				break;
 			
@@ -472,6 +471,7 @@ switch (state) {
 					state = 0;
 					state_timer = 0;
 					can_fspecial = false;
+					create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
 				}
 				
 				// 3 seconds in: just kill off the skull, it's probably trapped
@@ -526,6 +526,69 @@ switch (state) {
 		
 	//#endregion
 	
+	//#region Command Attack: AT_FTHROW ------------------------------------------------
+	case AT_FTHROW:
+		visible = true;
+	    sprite_index = sprite_get("skullactive");
+	    can_fspecial = false;
+		can_sync_attack = false;
+		
+		switch (window) {
+				
+			case 1:
+				image_index = 1 + (window_timer/3)%4;
+				
+				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
+				
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+					hsp = 6*spr_dir;
+					vsp = -3.5;
+					
+					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
+					hitbox.spr_dir = spr_dir;
+					hitbox.head_obj = self;
+				}
+				
+				// Update hitbox
+				if (hitbox != noone) {
+					hitbox.length++; // Lifetime extender
+					hitbox.x = x;
+					hitbox.y = y-30;
+					hitbox.hsp = hsp;
+					hitbox.vsp = vsp;
+				}
+				
+				// Explode detection
+				if (hitstop <= 0 && (window_timer > 25 || hsp == 0 || !free || has_hit)) {
+					window = 2;
+					window_timer = 0;
+				}
+				
+				break;
+				
+			case 2:
+				sprite_index = sprite_get("skullactive");
+				image_index = 0;
+				
+				if (window_timer > 6) {
+					window = 3;
+					window_timer = 0;
+				}
+			
+			case 3:
+				visible = false;
+				state = 4;
+				state_timer = 0;
+				respawn_penalty = false;
+				create_hitbox(AT_FSPECIAL_2, 1, x, y);
+				break;
+			
+		}
+		
+		break;	
+	
+	//#endregion
+	
 	//#region Reactive Attack: AT_NSPECIAL ---------------------------------------------
 	case AT_NSPECIAL:
 		
@@ -542,6 +605,8 @@ switch (state) {
 		}
 		
 		break;
+	
+	break;
 	
 	//#endregion
 	
