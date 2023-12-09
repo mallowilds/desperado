@@ -547,6 +547,8 @@ switch (state) {
 					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
 					hitbox.spr_dir = spr_dir;
 					hitbox.head_obj = self;
+					
+					has_hit = false;
 				}
 				
 				// Update hitbox
