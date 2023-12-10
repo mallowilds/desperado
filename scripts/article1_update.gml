@@ -30,7 +30,7 @@ hittable = !(state = 0 || state == 3 || state == 4 || state == 5);
 
 if (state != AT_NSPECIAL) shots_absorbed = 0;
 
-with oPlayer {
+with player_id.object_index {
 	if (!clone && state != PS_ATTACK_AIR && state != PS_ATTACK_GROUND) {
 		other.last_attack[player] = noone;
 	}
@@ -47,40 +47,45 @@ if (state != 4 && state != 5) {
 		respawn_penalty = true;
 	}
 	
-	else if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
-		state = 4;
-		state_timer = 0;
-		visible = false;
-		y = get_stage_data(SD_BOTTOM_BLASTZONE_Y) - 1;
-		respawn_penalty = true;
-		// might be cute to have a mini-death-explosion-slash-poof-of-smoke-vfx? also might be too much work lmao
-		// todo: sfx
-	}
-	
-	else if (x < get_stage_data(SD_LEFT_BLASTZONE_X)) {
-		state = 4;
-		state_timer = 0;
-		visible = false;
-		x = get_stage_data(SD_LEFT_BLASTZONE_X) + 1;
-		respawn_penalty = true;
-		// todo: sfx
-	}
-	
-	else if (x > get_stage_data(SD_RIGHT_BLASTZONE_X)) {
-		state = 4;
-		state_timer = 0;
-		visible = false;
-		x = get_stage_data(SD_RIGHT_BLASTZONE_X) - 1;
-		respawn_penalty = true;
-		// todo: sfx
-	}
-	
-	if (place_meeting(x, y, asset_get("plasma_field_obj")) && state != 0) {
+	else if (place_meeting(x, y, asset_get("plasma_field_obj")) && state != 0) {
 		state = 4;
 		state_timer = 0;
 		respawn_penalty = true;
 		sound_play(asset_get("sfx_clairen_hit_med"));
 	}
+	
+	else if (player_id.object_index == oPlayer) {
+		
+		if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+			state = 4;
+			state_timer = 0;
+			visible = false;
+			y = get_stage_data(SD_BOTTOM_BLASTZONE_Y) - 1;
+			respawn_penalty = true;
+			// might be cute to have a mini-death-explosion-slash-poof-of-smoke-vfx? also might be too much work lmao
+			// todo: sfx
+		}
+		
+		else if (x < get_stage_data(SD_LEFT_BLASTZONE_X)) {
+			state = 4;
+			state_timer = 0;
+			visible = false;
+			x = get_stage_data(SD_LEFT_BLASTZONE_X) + 1;
+			respawn_penalty = true;
+			// todo: sfx
+		}
+		
+		else if (x > get_stage_data(SD_RIGHT_BLASTZONE_X)) {
+			state = 4;
+			state_timer = 0;
+			visible = false;
+			x = get_stage_data(SD_RIGHT_BLASTZONE_X) - 1;
+			respawn_penalty = true;
+			// todo: sfx
+		}
+		
+	}
+	
 	
 }
 
@@ -471,7 +476,7 @@ switch (state) {
 					state = 0;
 					state_timer = 0;
 					can_fspecial = false;
-					create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
+					if (player_id.state != PS_HITSTUN && player_id.state != PS_HITSTUN_LAND) create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
 				}
 				
 				// 3 seconds in: just kill off the skull, it's probably trapped

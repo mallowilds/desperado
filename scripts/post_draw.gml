@@ -48,6 +48,12 @@ if (head_obj.state == 0) {
             gpu_set_fog(false, c_white, 0, 1);
         }
         
+        if (smash_charging && strong_charge % 10 < 5) {
+            gpu_set_fog(true, c_yellow, 0, 1);
+            draw_sprite_ext(sprite_get(_s), image_index, x, y, spr_dir, 1, 0, c_white, 0.5);
+            gpu_set_fog(false, c_yellow, 0, 1);
+        }
+        
         if (state == PS_PRATFALL || state == PS_PRATLAND) {
             draw_sprite_ext(sprite_get(_s), image_index, x, y, spr_dir, 1, 0, c_black, 0.5);
         }

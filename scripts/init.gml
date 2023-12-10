@@ -55,9 +55,8 @@ AG_MUNO_ATTACK_MISC = 71
 // Character-specific assets
 num_bullets = 0;                        // 0-6
 bullet_mult = 0.125;                    // multiplier per bullet. Constant value
-with oPlayer {
-    u_mult_damage_buffer = 0;           // buffer for fractional multiplier damage
-}
+u_mult_damage_buffer = 0;               // see also: other_init.gml
+
 nametag_white_flash = 0;
 nametag_flame_alpha = 0;
 

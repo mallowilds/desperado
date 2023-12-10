@@ -216,7 +216,7 @@ state_timer++;
 #define signpost_detect_dashes()
     // Returns 0 for none detected, -1 for left dash, 1 for right dash
     var out = 0;
-    with oPlayer {
+    with player_id.object_index {
         var dashing = hsp != 0 && (state == PS_DASH_START || state == PS_DASH || state == PS_WAVELAND) && place_meeting(x, y, other);
         var dash_dir = dashing ? (hsp < 0 ? -1 : 1) : 0;
         if (dash_dir != other.dasher_in_range[player]) {

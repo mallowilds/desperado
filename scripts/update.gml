@@ -89,7 +89,7 @@ if (!hitpause || state == PS_HITSTUN) { // Should still advance on enemy hitpaus
 
 
 //#region Reset fractional damage on enemy death
-with oPlayer {
+with object_index {
     if (!clone && (state == PS_DEAD || state == PS_RESPAWN)) {
         u_mult_damage_buffer = 0;
     }
@@ -120,7 +120,6 @@ if (skull_stored_attack != noone) {
 
 // Script order reliant.
 draw_skull_grabbox = clamp(draw_skull_grabbox-1, 0, draw_skull_grabbox)
-
 
 
 if (!instance_exists(head_obj)) {
