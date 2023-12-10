@@ -23,6 +23,9 @@ if (!hit_player_obj.clone) {
 if (my_hitboxID.damage + mult_damage_add > 3 && num_bullets >= 4) {
 	sound_play(sound_get("desp_knock"));
 }
+if atk == AT_JAB && hbox == 3 {
+		if (num_bullets < 6) num_bullets++; // temp until something nicer can get set up
+}
 
 //#endregion
 
