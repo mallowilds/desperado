@@ -1,11 +1,15 @@
 // init_shader.gml
 // https://rivalslib.com/workshop_guide/programming/reference/scripts/init_and_attack_scripts.html#initializing-graphics
 
+// Online CSS safety check (courtesy of https://rivalswsmanual.miraheze.org/wiki/Init_shader.gml)
+var real_player = (room == asset_get("network_char_select") && object_index != oTestPlayer) ? 0 : player;
+var alt_palette = get_player_color( real_player );
+
 // Reset article color slots
-for (var i = 0; i <= 7; i++) set_article_color_slot(i, get_color_profile_slot_r(get_player_color(player), i), get_color_profile_slot_g(get_player_color(player), i), get_color_profile_slot_b(get_player_color(player), i), 1);
+for (var i = 0; i <= 7; i++) set_article_color_slot(i, get_color_profile_slot_r(alt_palette, i), get_color_profile_slot_g(alt_palette, i), get_color_profile_slot_b(alt_palette, i), 1);
 
 
-switch get_player_color(player) {
+switch alt_palette {
     
     case 0:
         set_character_color_slot( 1, 221, 157, 136);

@@ -570,6 +570,8 @@ switch (attack) {
     //Check if collision was triggered by skull
     if (shot_collides == 2) {
     	set_head_state(AT_NSPECIAL);
+    	var vfx = spawn_hit_fx(head_obj.x, head_obj.y-30, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_VISUAL_EFFECT))
+    	vfx.depth = head_obj.depth-1;
     	head_obj.shots_absorbed++;
     }
     

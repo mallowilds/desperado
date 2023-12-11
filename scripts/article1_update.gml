@@ -664,15 +664,62 @@ switch (state) {
 	//#region Reactive Attack: AT_NSPECIAL ---------------------------------------------
 	case AT_NSPECIAL:
 		
-		// Unimplemented lmao
-		
 		switch window {
 			
 			case 1:
-				if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				
+				can_fspecial = false;
+				can_sync_attack = false;
+				
+				hsp = 0;
+				vsp = 0;
+				
+				if (window_timer >= 10) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+					target_id = get_max_damage_player(false);
+					window = 2;
+					window_timer = 0;
+					
+					reticle_angle = (target_id != noone ? point_direction(x, y, target_id.x, target_id.y-target_id.char_height/2) : 90-60*spr_dir);
+					reticle_offset_angle = 50;
+					reticle_alpha = 0;
+					reticle_flash = 0;
+					reticle_flash_peaked = false;
+				}
+				break;
+			
+			case 2:
+				if (target_id.state == PS_RESPAWN) target_id = noone;
+				
+				if (target_id != noone) reticle_angle = point_direction(x, y, target_id.x, target_id.y-target_id.char_height/2);
+				reticle_offset_angle -= (50/90); // denominator is window duration in frames
+				if (reticle_alpha < 0.8) reticle_alpha = window_timer/90;
+				if (reticle_offset_angle <= 0) {
+					reticle_offset_angle = 0;
+					window = 3;
+					window_timer = 0;
+				}
+				
+				break;
+			
+			case 3:
+			
+				hittable = false; // TODO: remove after transition to Supersonic hit template
+				is_hittable = false;
+			
+				if (!reticle_flash_peaked) {
+					reticle_flash = clamp(reticle_flash+0.3, 0, 1);
+					if (reticle_flash == 1) reticle_flash_peaked = true;
+				}
+				else if (reticle_flash > 0) {
+					reticle_flash -= 0.1;
+					reticle_alpha = 0;
+				}
+				
+				if (window_timer >= 30) {
 					state = 1;
 					state_timer = 0;
 				}
+				break;
 			
 		}
 		
@@ -695,7 +742,11 @@ if (hitstop <= 0) {
 else hitstop = floor(hitstop);
 //#endregion
 
-	
+
+
+
+
+
 #define set_head_state(new_state)
 	state = new_state;
 	state_timer = 0;
@@ -703,13 +754,20 @@ else hitstop = floor(hitstop);
 	window_timer = 1;
 	return;
 
-#define player_in_attack(_index)
-	return (player_id.state == PS_ATTACK_GROUND || player_id.state == PS_ATTACK_AIR) && player_id.attack == _index;
+#define player_in_attack(attack_index)
+	return (player_id.state == PS_ATTACK_GROUND || player_id.state == PS_ATTACK_AIR) && player_id.attack == attack_index;
 
-#define in_reattach_range()
-	var _xdist = abs(x-player_id.x);
-	var _ydist = abs(y-(player_id.y-24));
-	return _xdist <= 12 && _ydist <= 28
+#define get_max_damage_player(include_self)
+	var max_damage = -1;
+	var max_player_id = noone;
+	with player_id.object_index {
+		if (get_player_damage(player) > max_damage && (include_self || player != other.player)) {
+			max_damage = get_player_damage(player);
+			max_player_id = self;
+		}
+	}
+	return max_player_id;
+	
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
