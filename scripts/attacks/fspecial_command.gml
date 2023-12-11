@@ -40,7 +40,7 @@ set_num_hitboxes(AT_FSPECIAL_2, 2);
 // Visual
 make_hitbox(AT_FSPECIAL_2, 1,
     HG_HITBOX_TYPE, 2,
-    HG_LIFETIME, 18,
+    HG_LIFETIME, 12,
     
     HG_WIDTH, 0,
     HG_HEIGHT, 0,
@@ -56,7 +56,7 @@ make_hitbox(AT_FSPECIAL_2, 1,
     HG_HIT_SFX, asset_get("sfx_blow_medium1"),
     
     HG_PROJECTILE_SPRITE, sprite_get("skullatk"),
-    HG_PROJECTILE_ANIM_SPEED, 1/3,
+    HG_PROJECTILE_ANIM_SPEED, 1/2,
     HG_PROJECTILE_DESTROY_EFFECT, hfx_null,
     HG_PROJECTILE_MASK, -1,
     HG_PROJECTILE_IS_TRANSCENDENT, 1,

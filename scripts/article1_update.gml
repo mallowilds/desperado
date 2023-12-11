@@ -695,7 +695,7 @@ switch (state) {
 				if (target_id != noone && target_id.state == PS_RESPAWN) target_id = noone;
 				
 				if (target_id != noone) reticle_angle = point_direction(x, y, target_id.x, target_id.y-target_id.char_height/2);
-				reticle_offset_angle -= (50/90); // denominator is window duration in frames
+				reticle_offset_angle -= (50/60); // denominator is window duration in frames
 				if (reticle_alpha < 0.8) reticle_alpha = window_timer/90;
 				if (reticle_offset_angle <= 0) {
 					reticle_offset_angle = 0;
