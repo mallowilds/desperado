@@ -54,6 +54,7 @@ if (atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // Skull explos
 if (atk == AT_NSPECIAL && hbox == 3) {
 	my_hitboxID.head_obj.hitstop = hit_player_obj.hitstop;
 	my_hitboxID.head_obj.has_hit = true;
+	sound_play(asset_get("sfx_mol_bat_bombhit"))
 }
 //#endregion
 

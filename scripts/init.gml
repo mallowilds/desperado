@@ -177,19 +177,19 @@ wave_friction = 0.15 // 0 – .15. Grounded deceleration when wavelanding
 // Air Movement
 air_dodge_speed = 7.5 // 7.5 – 8	The speed during airdodge’s movement
 
-air_accel = .45 // .2 – .4. The hsp acceleration applied when you hold left or right in a normal aerial state
+air_accel = .5 // .2 – .4. The hsp acceleration applied when you hold left or right in a normal aerial state
 prat_fall_accel = .85 // .4 – 1.5.	A multiplier to your normal horizontal aerial acceleration: 1 = normal 0 = no acceleration
 air_friction = .02 // .02 – .07. Natural deceleration applied while in the air. Also applies while in hitstun, increasing survivability
 
 max_fall = 9 // 8 – 11. The maximum vsp you can accelerate to while falling normally
-fast_fall = 12 // 11 – 16. The vsp applied when fastfalling
+fast_fall = 11.5 // 11 – 16. The vsp applied when fastfalling
 gravity_speed = .4// .3 – .6. The gravitational acceleration applied in non-hitstun aerial states
 hitstun_grav = .4// .45 – .525. The gravitational acceleration applied in hitstun. Changes to this have large consequences to your character's survivibility
 
 // Jumping
 max_djumps = 1 // The max number of double jumps you can use.
 
-short_hop_speed = 5.5 // 4 – 7.4	The vsp applied when shorthopping
+short_hop_speed = 6 // 4 – 7.4	The vsp applied when shorthopping
 jump_speed = 9 //7.6 – 12. The vsp applied when fullhopping
 djump_speed = 10 // 8 – 12 (-1 for Absa). The vsp applied when double jumping
 djump_accel = 0 // 0 (-1 for Absa). Requires djump_accel_end_time to be set

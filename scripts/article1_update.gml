@@ -695,11 +695,12 @@ switch (state) {
 				
 				charge_time = 75 - 5*shots_absorbed
 				
-				if (window_timer >= 10) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (window_timer >= 10) {
 					target_id = get_max_damage_player(false);
 					window = 2;
 					window_timer = 0;
 					sprite_index = sprite_get("null");
+					sound_play(sound_get("desp_skullcharge"), 0, noone, 1, .8)
 					
 					reticle_angle = (target_id != noone ? point_direction(x, y, target_id.x, target_id.y-target_id.char_height/2) : 90-60*spr_dir);
 					reticle_offset_angle = 50;
@@ -719,7 +720,7 @@ switch (state) {
 				if (reticle_angle > 90 && reticle_angle < 270) spr_dir = -1;
 				else if (reticle_angle != 90 && reticle_angle != 270) spr_dir = 1;
 				reticle_offset_angle -= (50/charge_time); // denominator is window duration in frames
-				if (reticle_alpha < 0.8) reticle_alpha = window_timer/90;
+				if (reticle_alpha < 0.8) reticle_alpha = window_timer/90; // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 				if (reticle_offset_angle <= 0) {
 					reticle_offset_angle = 0;
 					window = 3;
@@ -745,7 +746,7 @@ switch (state) {
 					reticle_alpha = 0;
 				}
 				
-				if (window_timer == 1 && hitstop <= 0) {
+				if (window_timer == 1 && hitstop <= 0) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					var vflash = spawn_hit_fx(x, y+24, player_id.vfx_flash)
 	        		vflash.depth = depth - 1;
 	        		vflash.spr_dir = spr_dir;
@@ -758,8 +759,8 @@ switch (state) {
 					
 					with player_id {
 						set_hitbox_value(AT_NSPECIAL, 3, HG_DAMAGE, 5 + (1 * other.shots_absorbed));
-	    				set_hitbox_value(AT_NSPECIAL, 3, HG_BASE_KNOCKBACK, 6 + (0.2 * other.shots_absorbed));
-	        			set_hitbox_value(AT_NSPECIAL, 3, HG_KNOCKBACK_SCALING, 0.5 + (0.05 * other.shots_absorbed));
+	    				set_hitbox_value(AT_NSPECIAL, 3, HG_BASE_KNOCKBACK, 8 + (0.2 * other.shots_absorbed));
+	        			set_hitbox_value(AT_NSPECIAL, 3, HG_KNOCKBACK_SCALING, 0.8 + (0.05 * other.shots_absorbed));
 					}
 					
 					create_reflected_shot(x+lengthdir_x(18, reticle_angle), y-30+lengthdir_y(18, reticle_angle), reticle_angle, AT_NSPECIAL, 3, 6, 24, -2)
@@ -777,7 +778,7 @@ switch (state) {
 				}
 				
 				// Death. I'd prefer to have this be incorporated into the nspec animation and jump straight to state 5.
-				if (window_timer == 20) {
+				if (window_timer == 20) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					state = 4;
 					state_timer = 0;
 					sprite_index = sprite_get("skulldie");

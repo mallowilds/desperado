@@ -52,7 +52,6 @@ set_num_hitboxes(AT_DSPECIAL, 0);
 
 set_attack_value(AT_DSPECIAL, AG_MUNO_ATTACK_MISC, "Loads a bullet on frame " + string(1+get_window_value(AT_DSPECIAL, 1, AG_WINDOW_LENGTH)+get_window_value(AT_DSPECIAL, 2, AG_WINDOW_LENGTH)) + ".");
 
-
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
 // Write NO-INJECT in a comment above this area to disable injection.
@@ -81,21 +80,6 @@ set_attack_value(AT_DSPECIAL, AG_MUNO_ATTACK_MISC, "Loads a bullet on frame " + 
     var _index = argument[1];
     for(var i=2; i<=argument_count-1; i+=2) {
         set_window_value(
-            _attack_name, _index, argument[i], argument[i+1]
-        )
-    }
-
-#define make_hitbox // Version 0
-    // make_hitbox(_attack_name, _index, (value_name, value)... )
-    // Sets hitbox values for the given hitbox.
-    // e.g. make_hitbox(AT_BAIR, 1,
-    //         HG_PARENT_HITBOX, 1,
-    //         HG_HITBOX_TYPE, 1
-    //     );
-    var _attack_name = argument[0];
-    var _index = argument[1];
-    for(var i=2; i<=argument_count-1; i+=2) {
-        set_hitbox_value(
             _attack_name, _index, argument[i], argument[i+1]
         )
     }

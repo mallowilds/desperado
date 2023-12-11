@@ -74,6 +74,8 @@ sprite_change_offset("vfx_1", 156, 156)
 sprite_change_offset("vfx_2", 156, 156)
 
 sprite_change_offset("fspecial", 156, 194)
+sprite_change_offset("fspec_2", 156, 194)
+
 
 
 sprite_change_offset("idle_skull", 156, 194)
@@ -136,6 +138,7 @@ sprite_change_offset("pratland_skull", 156, 194)
 sprite_change_offset("land_skull", 156, 194)
 
 sprite_change_offset("fspecial_skull", 156, 194)
+
 sprite_change_offset("nspecial_skull", 156, 194)
 
 

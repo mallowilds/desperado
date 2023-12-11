@@ -2,37 +2,37 @@
 
 make_attack(AT_FSPECIAL_2,
     AG_CATEGORY, 2,
-    AG_SPRITE, sprite_get("fspecial"),
+    AG_SPRITE, sprite_get("fspec_2"),
     AG_NUM_WINDOWS, 3,
     AG_HAS_LANDING_LAG, 4,
-    AG_AIR_SPRITE, sprite_get("fspecial"),
+    AG_AIR_SPRITE, sprite_get("fspec_2"),
     AG_HURTBOX_SPRITE, sprite_get("fspecial_hurt"),
 )
 
 make_window(AT_FSPECIAL_2, 1,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 10,
-    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_LENGTH, 6,
+    AG_WINDOW_ANIM_FRAMES, 1,
 
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
-    AG_WINDOW_SFX_FRAME, 8,
+    AG_WINDOW_SFX, sound_get("desp_snap"),
+    AG_WINDOW_SFX_FRAME, 5,
 )
 
 make_window(AT_FSPECIAL_2, 2,
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
     AG_WINDOW_ANIM_FRAMES, 1,
-    AG_WINDOW_ANIM_FRAME_START, 2,
+    AG_WINDOW_ANIM_FRAME_START, 1,
     AG_WINDOW_VSPEED_TYPE, 1,
     AG_WINDOW_VSPEED, -3,
 )
 
 make_window(AT_FSPECIAL_2, 3,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 16,
+    AG_WINDOW_LENGTH, 13,
     AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_ANIM_FRAME_START, 3,
+    AG_WINDOW_ANIM_FRAME_START, 2,
 )
 
 set_num_hitboxes(AT_FSPECIAL_2, 2);
