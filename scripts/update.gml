@@ -134,7 +134,7 @@ if (!instance_exists(head_obj)) {
 
 // One more failsafe for good measure
 if (num_bullets > 6 || num_bullets < 0) {
-    print_debug("ERROR: bad bullet count (" +num_bullets + "). Resetting.");
+    print_debug("ERROR: bad bullet count (" + string(num_bullets) + "). Resetting.");
     num_bullets = clamp(num_bullets, 0, 6);
 }
 

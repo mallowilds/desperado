@@ -7,7 +7,7 @@ make_attack(AT_FSTRONG_2,
     AG_STRONG_CHARGE_WINDOW, 1,
     AG_HURTBOX_SPRITE, sprite_get("fstrong_hurt"),
     AG_MUNO_ATTACK_NAME, "FStrong",
-    AG_MUNO_ATTACK_MISC, "Uses 1 bullet. Getting hit during startup loses it."
+    AG_MUNO_ATTACK_MISC, "Uses 1 bullet. Getting hit during startup still loses it."
 )
 
 make_window(AT_FSTRONG_2, 1,

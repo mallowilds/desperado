@@ -38,6 +38,22 @@ switch (attack) {
     
     //#region Grounded Normals / Strongs ---------------------------------------
     
+    case AT_JAB:
+    	if (window == 9 && window_time_is(18*(has_hit?1:1.5))) {
+    		if (num_bullets < 6) {
+    			num_bullets++;
+    			nametag_white_flash = 1;
+    		}
+    		else { // Wasted bullet visual
+            	var bullet_casing = instance_create(x-(50*spr_dir), y-18, "obj_article3");
+            	bullet_casing.state = 00;
+            	bullet_casing.hsp = -2*spr_dir;
+            	bullet_casing.vsp = -4;
+            }
+    		
+    		sound_play(sound_get("desp_click"));
+    	}
+    	break;
     case AT_DTILT:
         down_down = true;			// Force uncrouch after endlag...
         move_cooldown[AT_DTILT] = 1	// ...and make sure this doesn't break the buffer
@@ -232,8 +248,8 @@ switch (attack) {
             //print(get_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING))
             //print(get_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK))
             
-            if (num_bullets <= 0) { // temp override. TODO: replace with proper fail fire
-                window = 4;
+            if (num_bullets <= 0) {
+                window = 9;
                 window_timer = 0;
             }
             else {

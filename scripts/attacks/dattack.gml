@@ -61,18 +61,18 @@ make_hitbox(AT_DATTACK, 1,
     HG_WINDOW, 2,
     HG_LIFETIME, 2,
 
-    HG_HITBOX_X, 20,
+    HG_HITBOX_X, 22,
     HG_HITBOX_Y, -10,
-    HG_WIDTH, 80,
+    HG_WIDTH, 76,
     HG_HEIGHT, 20,
     HG_SHAPE, 2,
 
 
     HG_PRIORITY, 2,
     HG_DAMAGE, 3,
-    HG_ANGLE, 45,
+    HG_ANGLE, 40,
     //HG_ANGLE_FLIPPER, 6,
-    HG_BASE_KNOCKBACK, 4,
+    HG_BASE_KNOCKBACK, 7,
     HG_BASE_HITPAUSE, 3,
     HG_KNOCKBACK_SCALING, 0,
 
