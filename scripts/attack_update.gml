@@ -412,7 +412,7 @@ switch (attack) {
     			break;
     		
     		case 5:
-    			move_cooldown[AT_FSPECIAL] = 30;
+    		//	move_cooldown[AT_FSPECIAL] = 30;
     			if (skull_grabbed && window_time_is(1)) {
     				set_head_state(AT_FTHROW);
     				head_obj.x = x + (36*spr_dir);
