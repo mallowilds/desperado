@@ -18,6 +18,7 @@ make_attack(AT_DSPECIAL,
     AG_HURTBOX_SPRITE, sprite_get("dspecial_hurt"),
     AG_USES_CUSTOM_GRAVITY, 1, // Tampered with in attack_update
     AG_OFF_LEDGE, 0,
+    // AG_MUNO_ATTACK_MISC set below for ease of patching
 )
 
 make_window(AT_DSPECIAL, 1, //start
@@ -48,29 +49,9 @@ make_window(AT_DSPECIAL, 3, //loop
 
 set_num_hitboxes(AT_DSPECIAL, 0);
 
-make_hitbox(AT_DSPECIAL, 1,
-  HG_HITBOX_TYPE, 2,
-  HG_LIFETIME, 120,
-  HG_PROJECTILE_SPRITE, sprite_get("bullet"),
-  HG_PROJECTILE_MASK, -1,
-  HG_WIDTH, 6,
-  HG_HEIGHT, 6,
-  HG_PROJECTILE_GRAVITY, 0.35,
-  HG_PROJECTILE_VSPEED, -4,
-  HG_PROJECTILE_HSPEED, -2,
-  HG_PROJECTILE_AIR_FRICTION, 0.01,
-  HG_PROJECTILE_DESTROY_EFFECT, -1,
 
-  HG_WIDTH, 1,
-  HG_HEIGHT, 1,
-  HG_PRIORITY, 0,
-  
-  HG_DAMAGE, 0,
-  HG_ANGLE, 0,
-  HG_BASE_KNOCKBACK, 1,
-  HG_KNOCKBACK_SCALING, .1,
-  
-)
+set_attack_value(AT_DSPECIAL, AG_MUNO_ATTACK_MISC, "Loads a bullet on frame " + string(1+get_window_value(AT_DSPECIAL, 1, AG_WINDOW_LENGTH)+get_window_value(AT_DSPECIAL, 2, AG_WINDOW_LENGTH)) + ".");
+
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.

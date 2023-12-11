@@ -77,7 +77,7 @@ if (atk == AT_USPECIAL && hbox == 1 && !hit_player_obj.super_armor) {
 //#endregion
 
 
-//#region Lerps
+//#region Lerps and corrections
 if (atk == AT_FSTRONG && hbox == 1 && !hit_player_obj.super_armor) {
 	
 	hit_player_obj.x += 8*spr_dir;
@@ -96,6 +96,13 @@ if ((atk == AT_DATTACK || attack == AT_EXTRA_2) && hbox == 1 && !hit_player_obj.
 		hit_player_obj.hurtboxID.x = hit_player_obj.x;
 	}
 	
+}
+
+if (atk == AT_UTILT && hbox <= 2 && !hit_player_obj.super_armor) {
+	if (hit_player_obj.y < y-88) {
+		hit_player_obj.y = y-88;
+		hit_player_obj.hurtboxID.y = hit_player_obj.y;
+	}
 }
 //#endregion
 

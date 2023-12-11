@@ -4,6 +4,7 @@ make_attack(AT_JAB,
     AG_SPRITE, sprite_get("jab"),
     AG_NUM_WINDOWS, 9,
     AG_HURTBOX_SPRITE, sprite_get("jab_hurt"),
+    AG_MUNO_ATTACK_MISC, "During the endlag of Jab 3, this move loads a bullet.",
 )
 
 make_window(AT_JAB, 1,

@@ -4,6 +4,7 @@ make_attack(AT_FTILT,
     AG_SPRITE, sprite_get("ftilt"),
     AG_NUM_WINDOWS, 4,
     AG_HURTBOX_SPRITE, sprite_get("ftilt_hurt"),
+    AG_MUNO_ATTACK_MISC, "With more than 4 bullets, this move becomes a multihit.",
 )
 
 make_window(AT_FTILT, 1,
