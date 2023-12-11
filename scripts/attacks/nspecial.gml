@@ -45,6 +45,16 @@ make_window(AT_NSPECIAL, 4,
     AG_WINDOW_CUSTOM_GRAVITY, gravity_speed,
 )
 
+// No bullets window (needlessly high just in case something needs added)
+make_window(AT_NSPECIAL, 9,
+    AG_WINDOW_TYPE, 1,
+    AG_WINDOW_LENGTH, 24,
+    AG_WINDOW_ANIM_FRAMES, 5,
+    AG_WINDOW_ANIM_FRAME_START, 14,
+    AG_WINDOW_CUSTOM_GRAVITY, gravity_speed,
+)
+
+
 set_num_hitboxes(AT_NSPECIAL, 2);
 
 make_hitbox(AT_NSPECIAL, 1,

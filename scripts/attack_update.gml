@@ -232,8 +232,8 @@ switch (attack) {
             //print(get_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING))
             //print(get_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK))
             
-            if (num_bullets <= 0) { // temp override. TODO: replace with proper fail fire
-                window = 4;
+            if (num_bullets <= 0) {
+                window = 9;
                 window_timer = 0;
             }
             else {

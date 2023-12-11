@@ -63,6 +63,8 @@ if (atk == AT_DAIR && hbox == 1) {
 	if (!hit_player_obj.super_armor) {
 		hit_player_obj.x = x + (50*spr_dir);
 		hit_player_obj.y = y + 40;
+		hit_player_obj.hurtboxID.x = hit_player_obj.x;
+		hit_player_obj.hurtboxID.y = hit_player_obj.y;
 	}
 	
 }
@@ -72,15 +74,30 @@ if (atk == AT_USPECIAL && hbox == 1 && !hit_player_obj.super_armor) {
 	my_hitboxID.destroyed = true;
 }
 
+//#endregion
+
+
+//#region Lerps
 if (atk == AT_FSTRONG && hbox == 1 && !hit_player_obj.super_armor) {
 	
 	hit_player_obj.x += 8*spr_dir;
 	hit_player_obj.y += y;
 	hit_player_obj.y /= 2;
+	hit_player_obj.hurtboxID.x = hit_player_obj.x;
+	hit_player_obj.hurtboxID.y = hit_player_obj.y;
+	
+}
+
+if ((atk == AT_DATTACK || attack == AT_EXTRA_2) && hbox == 1 && !hit_player_obj.super_armor) {
+	
+	if (spr_dir*(hit_player_obj.x-x-(40*spr_dir))<0) { // i.e. not in front of desp
+		hit_player_obj.x += 3*(x+(40*spr_dir));
+		hit_player_obj.x /= 4;
+		//hit_player_obj.hurtboxID.x = hit_player_obj.x;
+	}
 	
 }
 //#endregion
-
 
 
 //#region SFX management 
