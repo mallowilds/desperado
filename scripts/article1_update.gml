@@ -668,6 +668,10 @@ switch (state) {
 			
 			case 1:
 				
+				sprite_index = sprite_get("null");
+				draw_x = 0;
+				draw_y = 0;
+				
 				can_fspecial = false;
 				can_sync_attack = false;
 				
@@ -688,7 +692,7 @@ switch (state) {
 				break;
 			
 			case 2:
-				if (target_id.state == PS_RESPAWN) target_id = noone;
+				if (target_id != noone && target_id.state == PS_RESPAWN) target_id = noone;
 				
 				if (target_id != noone) reticle_angle = point_direction(x, y, target_id.x, target_id.y-target_id.char_height/2);
 				reticle_offset_angle -= (50/90); // denominator is window duration in frames
@@ -715,6 +719,11 @@ switch (state) {
 					reticle_alpha = 0;
 				}
 				
+				if (window_timer == 1 && hitstop <= 0) {
+					var vflash = spawn_hit_fx(x, y+24, player_id.vfx_flash)
+	        		vflash.depth = depth - 1;
+	        		sound_play(sound_get("desp_sharpen"))
+				}
 				if (window_timer >= 30) {
 					state = 1;
 					state_timer = 0;

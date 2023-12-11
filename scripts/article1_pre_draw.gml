@@ -29,7 +29,7 @@ if (state == AT_NSPECIAL) {
         
         draw_set_alpha(1);
         
-        
+        with (player_id) shader_start();
         
     }
     
