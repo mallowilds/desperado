@@ -13,7 +13,6 @@ if (attack == AT_FSPECIAL_2) {
             if (hitbox_timer == 2 && hitstop_timer <= 0) {
                 child_hitbox = create_hitbox(AT_FSPECIAL_2, 2, x, y);
                 child_hitbox.parent_hitbox = self;
-                child_hitbox.depth = depth-1; // for the sake of hitbox visibility
             }
         
         case 2:

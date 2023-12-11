@@ -11,6 +11,7 @@ if (attack == AT_FSPECIAL_2) {
         
         case 2:
             hitstop_timer = 0;
+            depth--;
             break;
         
         

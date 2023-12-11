@@ -55,8 +55,9 @@ make_window(AT_NSPECIAL, 9,
 )
 
 
-set_num_hitboxes(AT_NSPECIAL, 2);
+set_num_hitboxes(AT_NSPECIAL, 3);
 
+// NSpec multihit
 make_hitbox(AT_NSPECIAL, 1,
     HG_HITBOX_TYPE, 1,
     //HG_WINDOW, 2,
@@ -88,6 +89,7 @@ make_hitbox(AT_NSPECIAL, 1,
     HG_HIT_SFX, asset_get("sfx_blow_weak1"),
 )
 
+// NSpec finisher
 make_hitbox(AT_NSPECIAL, 2,
     HG_HITBOX_TYPE, 1,
     //HG_WINDOW, 3,
@@ -114,6 +116,48 @@ make_hitbox(AT_NSPECIAL, 2,
 
     HG_VISUAL_EFFECT, vfx_bullseye,
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+)
+
+// NSpec reflection
+make_hitbox(AT_NSPECIAL, 3,
+    HG_HITBOX_TYPE, 2,
+    //HG_WINDOW, 3,
+    //HG_WINDOW_CREATION_FRAME, 0,
+    HG_LIFETIME, 3,
+
+    //HG_HITBOX_X, 106,
+    //HG_HITBOX_Y, -60,
+    HG_WIDTH, 52,
+    HG_HEIGHT, 52,
+    HG_SHAPE, 0,
+
+    HG_PRIORITY, 2,
+    HG_DAMAGE, 4,
+    HG_ANGLE, 45,
+    //HG_ANGLE_FLIPPER, 6,
+    HG_BASE_KNOCKBACK, 9, // Tampered with in article1_update
+    HG_KNOCKBACK_SCALING, .7, // Tampered with in article1_update
+    HG_BASE_HITPAUSE, 10,
+    HG_HITPAUSE_SCALING, .9,
+    HG_EXTRA_HITPAUSE, 5,
+    HG_HITSTUN_MULTIPLIER, .7,
+    HG_HIT_LOCKOUT, 3,
+
+    HG_VISUAL_EFFECT, vfx_bullseye,
+    HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+    
+    HG_PROJECTILE_SPRITE, sprite_get("null"),
+    HG_PROJECTILE_DESTROY_EFFECT, hfx_null,
+    HG_PROJECTILE_MASK, -1,
+    HG_PROJECTILE_IS_TRANSCENDENT, 1,
+    HG_PROJECTILE_ENEMY_BEHAVIOR, 1,
+    HG_PROJECTILE_GROUND_BEHAVIOR, 1,
+    HG_PROJECTILE_WALL_BEHAVIOR, 1,
+    HG_PROJECTILE_UNBASHABLE, 1,
+    HG_PROJECTILE_DOES_NOT_REFLECT, 1,
+    HG_PROJECTILE_PARRY_STUN, 1,
+    HG_EXTENDED_PARRY_STUN, 1,
+    
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

@@ -68,7 +68,6 @@ if (shot_visual != noone) {
         cur_x += lengthdir_x(sprite_get_width(shot_visual.sp_start_index), shot_visual.sp_angle);
         cur_y += lengthdir_y(sprite_get_width(shot_visual.sp_start_index), shot_visual.sp_angle);
         
-        print_debug(sprite_get_width(shot_visual.sp_tile_index)+shot_visual.sp_edge_width);
         while (sprite_get_width(shot_visual.sp_tile_index)+shot_visual.sp_edge_width < length_remaining) {
             draw_sprite_ext(shot_visual.sp_tile_index, shot_image_index, cur_x, cur_y, 1, 1, shot_visual.sp_angle, c_white, 1);
             length_remaining -= sprite_get_width(shot_visual.sp_tile_index);

@@ -41,7 +41,7 @@ with player_id.object_index {
 //#region NSpecial blast drawing --------------------------------------------------------
 
 if (shot_visual != noone) {
-	shot_visual.sp_lifetime++;
+	if (hitstop <= 0 || state != AT_NSPECIAL) shot_visual.sp_lifetime++;
     if (shot_visual.sp_lifetime >= shot_visual.sp_shot_lifetime + shot_visual.sp_smoke_time_offset + shot_visual.sp_smoke_lifetime) {
         shot_visual = noone;
     }
@@ -751,9 +751,16 @@ switch (state) {
 	        		vflash.spr_dir = spr_dir;
 	        		sound_play(sound_get("desp_sharpen"))
 				}
-				if (window_timer >= 30) {
+				if (window_timer >= 20) {
 					window = 4;
 					window_timer = 0;
+					recoil_speed = -8
+					
+					with player_id {
+						set_hitbox_value(AT_NSPECIAL, 3, HG_DAMAGE, 5 + (1 * other.shots_absorbed));
+	    				set_hitbox_value(AT_NSPECIAL, 3, HG_BASE_KNOCKBACK, 6 + (0.2 * other.shots_absorbed));
+	        			set_hitbox_value(AT_NSPECIAL, 3, HG_KNOCKBACK_SCALING, 0.5 + (0.05 * other.shots_absorbed));
+					}
 					
 					create_reflected_shot(x+lengthdir_x(18, reticle_angle), y-30+lengthdir_y(18, reticle_angle), reticle_angle, AT_NSPECIAL, 3, 6, 24, -2)
 					sound_play(sound_get("desp_shot"), 0, noone, 1, 1);
@@ -762,12 +769,12 @@ switch (state) {
 				break;
 			
 			case 4:
-				// oh god it's the laser
 				
-				if (window_timer = 1) recoil_speed = -8;
-				if (recoil_speed < 0) recoil_speed += 0.5;
-				hsp = lengthdir_x(recoil_speed, reticle_angle);
-				vsp = lengthdir_y(recoil_speed, reticle_angle);
+				if (hitstop <= 0) {
+					if (recoil_speed < 0) recoil_speed += 0.5;
+					hsp = lengthdir_x(recoil_speed, reticle_angle);
+					vsp = lengthdir_y(recoil_speed, reticle_angle);
+				}
 				
 				// Death. I'd prefer to have this be incorporated into the nspec animation and jump straight to state 5.
 				if (window_timer == 20) {
@@ -834,7 +841,7 @@ else hitstop = floor(hitstop);
 	var edge_width = 38;
 	var smoke_index = sprite_get("nspec_blast_smoke");
 	
-	var shot_length = 800; // no collision yet
+	var shot_length = 1600; // no collision yet
 	
 	shot_visual = {
         sp_x : _x,
@@ -852,6 +859,18 @@ else hitstop = floor(hitstop);
         sp_lifetime : 0,
         sp_spr_dir : spr_dir,
     };
+    
+   	with player_id var hbox_rad = floor(get_hitbox_value(attack_index, hbox_num, HG_WIDTH)/2);
+	var dist_so_far = hbox_rad;
+	var cur_x = _x + lengthdir_x(hbox_rad, angle);
+	var cur_y = _y + lengthdir_y(hbox_rad, angle);
+	while(dist_so_far+hbox_rad < shot_length) {
+		var hbox = create_hitbox(attack_index, hbox_num, round(cur_x), round(cur_y));
+		hbox.head_obj = self;
+		dist_so_far += 2*hbox_rad;
+		cur_x = cur_x + lengthdir_x(2*hbox_rad, angle);
+		cur_y = cur_y + lengthdir_y(2*hbox_rad, angle);
+	}
 	
 	return;
 
