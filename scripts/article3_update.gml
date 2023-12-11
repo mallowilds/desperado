@@ -227,9 +227,16 @@ state_timer++;
     return out;
 
 #define signpost_detect_hitboxes()
-    // It doesn't matter much which specific hitbox hits, so a naive approach is used for simplicity/lightweight-ness
-    var hbox = instance_place(x, y, pHitBox);
-    if (hbox != noone && hbox.hit_priority > 0) {
+    var hbox = noone;
+    with pHitBox {
+        if (place_meeting(x, y, other) && (hit_priority > 0) && player != other.player) {
+            if (hbox == noone || type == 1 && hbox.type == 2 || hit_priority > hbox.hit_priority) {
+                hbox = self;
+            }
+        }
+    }
+    
+    if (hbox != noone) {
         hitstop = floor(hbox.hitpause + hbox.extra_hitpause);
         if (hbox.type == 1) with (hbox.player_id) {
             if (!hitpause) {

@@ -93,7 +93,7 @@ if ((atk == AT_DATTACK || attack == AT_EXTRA_2) && hbox == 1 && !hit_player_obj.
 	if (spr_dir*(hit_player_obj.x-x-(40*spr_dir))<0) { // i.e. not in front of desp
 		hit_player_obj.x += 3*(x+(40*spr_dir));
 		hit_player_obj.x /= 4;
-		//hit_player_obj.hurtboxID.x = hit_player_obj.x;
+		hit_player_obj.hurtboxID.x = hit_player_obj.x;
 	}
 	
 }
