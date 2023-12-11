@@ -331,11 +331,6 @@ switch (attack) {
 		can_fast_fall = false;
 		switch(window){
 			case 1:
-				if (window_time_is(1) && head_obj.can_fspecial) {
-					set_head_state(AT_FSPECIAL_2);
-					head_obj.has_hit = false;
-					head_obj.spr_dir = spr_dir;
-				}
 				if !free {
 					set_window_value(AT_FSPECIAL_2, 2, AG_WINDOW_VSPEED, 0)
 				} else {
@@ -343,9 +338,11 @@ switch (attack) {
 				}
 				break;
 			case 2:
-
-				break;
-			case 3:
+				if (window_time_is(1) && head_obj.can_fspecial) {
+					set_head_state(AT_FSPECIAL_2);
+					head_obj.has_hit = false;
+					head_obj.spr_dir = spr_dir;
+				}
 				break;
 		}
 		break;
