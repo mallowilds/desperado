@@ -18,7 +18,13 @@ if (state != 0) {
 }
 
 if (state == AT_NSPECIAL) {
-    if (window <= 3) {
-        draw_sprite_ext(sprite_get("skullhurt"), 2, x+draw_x, y+draw_y, spr_dir, 1, 0, c_white, 1);
+    switch window {
+        case 2:
+        case 3:
+            draw_sprite_ext(sprite_get("skullhurt"), 2, x+draw_x, y+draw_y, spr_dir, 1, 0, c_white, 1);
+            break;
+        case 4:
+            draw_sprite_ext(sprite_get("skullhurt"), 2, x+draw_x, y+draw_y, spr_dir, 1, 0, c_white, 1);
+            break;
     }
 }

@@ -164,6 +164,11 @@ sprite_change_offset("nspec_blast_segment", 0, 18);
 sprite_change_offset("nspec_blast_wall", 0, 34);
 sprite_change_offset("nspec_blast_smoke", 4, 8);
 
+sprite_change_offset("nspec_blast_close_ash", 0, 52);
+sprite_change_offset("nspec_blast_segment_ash", 0, 30);
+sprite_change_offset("nspec_blast_wall_ash", 0, 38);
+
+
 sprite_change_offset("fstrongblast", 96, 150);
 
 sprite_change_offset("sign", 60, 114);

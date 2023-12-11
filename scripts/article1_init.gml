@@ -37,6 +37,7 @@ skull_stored_attack = noone;
 shots_absorbed = 0;
 redir_angle = 0;
 redir_target_obj = noone;
+shot_visual = noone;
 
 //Terrain behavior
 can_be_grounded = false;                            //Determines if the article follows platforms when free == false.

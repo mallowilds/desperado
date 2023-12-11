@@ -23,7 +23,7 @@
 
 ignores_walls = false;
 
-//#region Hittability handling
+//#region Hittability handling --------------------------------------------------------
 is_hittable = !(state = 0 || state == 3 || state == 4 || state == 5); // WILL BE DEPRECATED SOON - use below hittable var for checks
 can_be_hit[player] = 3;
 hittable = !(state = 0 || state == 3 || state == 4 || state == 5);
@@ -37,7 +37,20 @@ with player_id.object_index {
 }
 //#endregion
 
-//#region Death / blast zone / clairen field handling
+
+//#region NSpecial blast drawing --------------------------------------------------------
+
+if (shot_visual != noone) {
+	shot_visual.sp_lifetime++;
+    if (shot_visual.sp_lifetime >= shot_visual.sp_shot_lifetime + shot_visual.sp_smoke_time_offset + shot_visual.sp_smoke_lifetime) {
+        shot_visual = noone;
+    }
+}
+
+//#endregion
+
+
+//#region Death / blast zone / clairen field handling ------------------------------------
 
 if (state != 4 && state != 5) {
 	
@@ -91,7 +104,8 @@ if (state != 4 && state != 5) {
 
 //#endregion
 
-//#region Bash handling
+
+//#region Bash handling --------------------------------------------------------
 
 unbashable = (state = 0 || state == 4 || state == 5);
 if (getting_bashed && !unbashable) {
@@ -668,7 +682,8 @@ switch (state) {
 			
 			case 1:
 				
-				sprite_index = sprite_get("null");
+				sprite_index = sprite_get("skullhurt");
+				
 				draw_x = 0;
 				draw_y = 0;
 				
@@ -678,10 +693,13 @@ switch (state) {
 				hsp = 0;
 				vsp = 0;
 				
+				charge_time = 75 - 5*shots_absorbed
+				
 				if (window_timer >= 10) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					target_id = get_max_damage_player(false);
 					window = 2;
 					window_timer = 0;
+					sprite_index = sprite_get("null");
 					
 					reticle_angle = (target_id != noone ? point_direction(x, y, target_id.x, target_id.y-target_id.char_height/2) : 90-60*spr_dir);
 					reticle_offset_angle = 50;
@@ -694,8 +712,13 @@ switch (state) {
 			case 2:
 				if (target_id != noone && target_id.state == PS_RESPAWN) target_id = noone;
 				
+				draw_x = clamp(draw_x-2+random_func(2*player, 4, false), -6+(window_timer*6/charge_time), 6-(window_timer*6/charge_time));
+				draw_y = clamp(draw_y-2+random_func(2*player+1, 4, false), -6+(window_timer*6/charge_time), 6-(window_timer*6/charge_time));
+				
 				if (target_id != noone) reticle_angle = point_direction(x, y, target_id.x, target_id.y-target_id.char_height/2);
-				reticle_offset_angle -= (50/60); // denominator is window duration in frames
+				if (reticle_angle > 90 && reticle_angle < 270) spr_dir = -1;
+				else if (reticle_angle != 90 && reticle_angle != 270) spr_dir = 1;
+				reticle_offset_angle -= (50/charge_time); // denominator is window duration in frames
 				if (reticle_alpha < 0.8) reticle_alpha = window_timer/90;
 				if (reticle_offset_angle <= 0) {
 					reticle_offset_angle = 0;
@@ -709,7 +732,10 @@ switch (state) {
 			
 				hittable = false; // TODO: remove after transition to Supersonic hit template
 				is_hittable = false;
-			
+				
+				draw_x = 0;
+				draw_y = 0;
+				
 				if (!reticle_flash_peaked) {
 					reticle_flash = clamp(reticle_flash+0.3, 0, 1);
 					if (reticle_flash == 1) reticle_flash_peaked = true;
@@ -722,12 +748,35 @@ switch (state) {
 				if (window_timer == 1 && hitstop <= 0) {
 					var vflash = spawn_hit_fx(x, y+24, player_id.vfx_flash)
 	        		vflash.depth = depth - 1;
+	        		vflash.spr_dir = spr_dir;
 	        		sound_play(sound_get("desp_sharpen"))
 				}
 				if (window_timer >= 30) {
-					state = 1;
-					state_timer = 0;
+					window = 4;
+					window_timer = 0;
+					
+					create_reflected_shot(x+lengthdir_x(18, reticle_angle), y-30+lengthdir_y(18, reticle_angle), reticle_angle, AT_NSPECIAL, 3, 6, 24, -2)
+					sound_play(sound_get("desp_shot"), 0, noone, 1, 1);
+					sound_play(asset_get("sfx_mol_huge_explode"), 0, noone, 1, 1);
 				}
+				break;
+			
+			case 4:
+				// oh god it's the laser
+				
+				if (window_timer = 1) recoil_speed = -8;
+				if (recoil_speed < 0) recoil_speed += 0.5;
+				hsp = lengthdir_x(recoil_speed, reticle_angle);
+				vsp = lengthdir_y(recoil_speed, reticle_angle);
+				
+				// Death. I'd prefer to have this be incorporated into the nspec animation and jump straight to state 5.
+				if (window_timer == 20) {
+					state = 4;
+					state_timer = 0;
+					sprite_index = sprite_get("skulldie");
+					image_index = 0;
+				}
+				
 				break;
 			
 		}
@@ -777,6 +826,34 @@ else hitstop = floor(hitstop);
 	}
 	return max_player_id;
 	
+#define create_reflected_shot(_x, _y, angle, attack_index, hbox_num, shot_lifetime, smoke_lifetime, smoke_time_offset) 
+	
+	var start_index = sprite_get("nspec_blast_close_ash");
+	var tile_index = sprite_get("nspec_blast_segment_ash");
+	var edge_index = sprite_get("nspec_blast_wall_ash");
+	var edge_width = 38;
+	var smoke_index = sprite_get("nspec_blast_smoke");
+	
+	var shot_length = 800; // no collision yet
+	
+	shot_visual = {
+        sp_x : _x,
+        sp_y : _y,
+        sp_angle : angle,
+        sp_length : shot_length,
+        sp_start_index : start_index,
+        sp_tile_index : tile_index,
+        sp_edge_index : edge_index,
+        sp_edge_width : edge_width,
+        sp_shot_lifetime : shot_lifetime,
+        sp_smoke_index : smoke_index,
+        sp_smoke_time_offset : smoke_time_offset,
+        sp_smoke_lifetime : smoke_lifetime,
+        sp_lifetime : 0,
+        sp_spr_dir : spr_dir,
+    };
+	
+	return;
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.

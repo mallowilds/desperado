@@ -34,3 +34,56 @@ if (state == AT_NSPECIAL) {
     }
     
 }
+
+if (shot_visual != noone) {
+    
+    // Draw smoke
+    var length_remaining = shot_visual.sp_length;
+    var cur_x = shot_visual.sp_x;
+    var cur_y = shot_visual.sp_y;
+    var smoke_start_time = shot_visual.sp_smoke_time_offset + shot_visual.sp_shot_lifetime
+    var smoke_image_index = (shot_visual.sp_lifetime-smoke_start_time) * (sprite_get_number(shot_visual.sp_smoke_index) / shot_visual.sp_smoke_lifetime);
+    
+    if (shot_visual.sp_lifetime >= smoke_start_time) {
+        while (sprite_get_width(shot_visual.sp_smoke_index) < length_remaining) {
+            draw_sprite_ext(shot_visual.sp_smoke_index, smoke_image_index, cur_x, cur_y, 1, 1, shot_visual.sp_angle, c_white, 1);
+            length_remaining -= sprite_get_width(shot_visual.sp_smoke_index);
+            cur_x += lengthdir_x(sprite_get_width(shot_visual.sp_smoke_index), shot_visual.sp_angle);
+            cur_y += lengthdir_y(sprite_get_width(shot_visual.sp_smoke_index), shot_visual.sp_angle);
+        }
+        var part_x_adj = lengthdir_x(sprite_get_xoffset(shot_visual.sp_smoke_index), shot_visual.sp_angle) + lengthdir_x(sprite_get_yoffset(shot_visual.sp_smoke_index), shot_visual.sp_angle+90);
+        var part_y_adj = lengthdir_y(sprite_get_xoffset(shot_visual.sp_smoke_index), shot_visual.sp_angle) + lengthdir_y(sprite_get_yoffset(shot_visual.sp_smoke_index), shot_visual.sp_angle+90);
+        draw_sprite_general(shot_visual.sp_smoke_index, smoke_image_index, 0, 0, length_remaining, sprite_get_height(shot_visual.sp_smoke_index), cur_x+part_x_adj, cur_y+part_y_adj, 1, 1, shot_visual.sp_angle, c_white, c_white, c_white, c_white, 1);
+    }
+    
+    // Draw blast
+    var length_remaining = shot_visual.sp_length;
+    var cur_x = shot_visual.sp_x;
+    var cur_y = shot_visual.sp_y;
+    var shot_image_index = shot_visual.sp_lifetime * (sprite_get_number(shot_visual.sp_tile_index) / shot_visual.sp_shot_lifetime);
+    
+    if (shot_visual.sp_lifetime < shot_visual.sp_shot_lifetime) {
+        draw_sprite_ext(shot_visual.sp_start_index, shot_image_index, cur_x, cur_y, 1, 1, shot_visual.sp_angle, c_white, 1);
+        length_remaining -= sprite_get_width(shot_visual.sp_start_index);
+        cur_x += lengthdir_x(sprite_get_width(shot_visual.sp_start_index), shot_visual.sp_angle);
+        cur_y += lengthdir_y(sprite_get_width(shot_visual.sp_start_index), shot_visual.sp_angle);
+        
+        print_debug(sprite_get_width(shot_visual.sp_tile_index)+shot_visual.sp_edge_width);
+        while (sprite_get_width(shot_visual.sp_tile_index)+shot_visual.sp_edge_width < length_remaining) {
+            draw_sprite_ext(shot_visual.sp_tile_index, shot_image_index, cur_x, cur_y, 1, 1, shot_visual.sp_angle, c_white, 1);
+            length_remaining -= sprite_get_width(shot_visual.sp_tile_index);
+            cur_x += lengthdir_x(sprite_get_width(shot_visual.sp_tile_index), shot_visual.sp_angle);
+            cur_y += lengthdir_y(sprite_get_width(shot_visual.sp_tile_index), shot_visual.sp_angle);
+        }
+        
+        var part_x_adj = lengthdir_x(sprite_get_xoffset(shot_visual.sp_tile_index), shot_visual.sp_angle) + lengthdir_x(sprite_get_yoffset(shot_visual.sp_tile_index), shot_visual.sp_angle+90);
+        var part_y_adj = lengthdir_y(sprite_get_xoffset(shot_visual.sp_tile_index), shot_visual.sp_angle) + lengthdir_y(sprite_get_yoffset(shot_visual.sp_tile_index), shot_visual.sp_angle+90);
+        draw_sprite_general(shot_visual.sp_tile_index, shot_image_index, 0, 0, length_remaining-shot_visual.sp_edge_width, sprite_get_height(shot_visual.sp_tile_index), cur_x+part_x_adj, cur_y+part_y_adj, 1, 1, shot_visual.sp_angle, c_white, c_white, c_white, c_white, 1);
+        
+        cur_x += lengthdir_x(length_remaining-shot_visual.sp_edge_width, shot_visual.sp_angle);
+        cur_y += lengthdir_y(length_remaining-shot_visual.sp_edge_width, shot_visual.sp_angle);
+        draw_sprite_ext(shot_visual.sp_edge_index, shot_image_index, cur_x, cur_y, 1, 1, shot_visual.sp_angle, c_white, 1);
+        
+    }
+    
+}
