@@ -212,11 +212,23 @@ switch state {
         
         if (instance_exists(signpost_obj)) {
 
-            if (x*spr_dir <= signpost_obj.x*spr_dir) { // i.e. signpost is in front
+            if (x*spr_dir <= signpost_obj.x*spr_dir && signpost_obj.state != 14) { // i.e. signpost is in front
+                if (point_distance(x, y, signpost_obj.x, signpost_obj.y-50) < 160) {
+                    signpost_obj.state_timer = 0;
+                    signpost_obj.state = 14;
+                    instance_destroy();
+                    exit;
+                }
                 move_angle = point_direction(x, y, signpost_obj.x, signpost_obj.y-50);
                 screen_wrap = false;
             }
             else {
+                if (point_distance(x, y, signpost_obj.x, signpost_obj.y-50) < 30 && signpost_obj.state != 14) {
+                    signpost_obj.state_timer = 0;
+                    signpost_obj.state = 14;
+                    instance_destroy();
+                    exit;
+                }
                 var sim_x_distance = spr_dir * (view_get_wview() - abs(x-signpost_obj.x));
                 move_angle = point_direction(0, y, sim_x_distance, signpost_obj.y-50);
                 screen_wrap = true;
@@ -249,9 +261,10 @@ switch state {
         }
         
         if (collision_line(x, y, x+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false)) {
-            instance_destroy(signpost_obj);
-            player_id.signpost_obj = noone;
-            state_timer = 61;
+            if (signpost_obj.state != 14) signpost_obj.state_timer = 0;
+            signpost_obj.state = 14;
+            instance_destroy();
+            exit;
         }
         
         if (state_timer > 60) {

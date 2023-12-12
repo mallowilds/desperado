@@ -21,10 +21,10 @@ if (state == AT_NSPECIAL) {
     switch window {
         case 2:
         case 3:
-            draw_sprite_ext(sprite_get("skullhurt"), 2, x+draw_x, y+draw_y, spr_dir, 1, 0, c_white, 1);
+            draw_sprite_ext(sprite_get("skullnspec"), 0, x+(4*spr_dir)+draw_x, y-32+draw_y, spr_dir, 1, reticle_angle-180*(spr_dir==-1), c_white, 1);
             break;
         case 4:
-            draw_sprite_ext(sprite_get("skullhurt"), 2, x+draw_x, y+draw_y, spr_dir, 1, 0, c_white, 1);
+            draw_sprite_ext(sprite_get("skullnspec"), 2+(window_timer/4), x+(4*spr_dir), y-32, spr_dir, 1, reticle_angle-180*(spr_dir==-1), c_white, 1);
             break;
     }
 }
