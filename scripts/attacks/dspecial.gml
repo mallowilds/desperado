@@ -39,7 +39,7 @@ make_window(AT_DSPECIAL, 2, //loop
     AG_WINDOW_CUSTOM_GRAVITY, 0.3,
 )
 
-make_window(AT_DSPECIAL, 3, //loop
+make_window(AT_DSPECIAL, 3, 
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 42,
     AG_WINDOW_ANIM_FRAMES, 3,

@@ -23,9 +23,6 @@ if (!hit_player_obj.clone) {
 if (my_hitboxID.damage + mult_damage_add > 3 && num_bullets >= 4) {
 	sound_play(sound_get("desp_knock"));
 }
-if atk == AT_JAB && hbox == 3 {
-		if (num_bullets < 6) num_bullets++; // temp until something nicer can get set up
-}
 
 //#endregion
 
@@ -47,7 +44,12 @@ if (atk == 42 && my_hitboxID.orig_player == player) { // Sync attacks
 	}
 }
 if (atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // Skull explosion
-	if (num_bullets < 6) num_bullets++; // temp until something nicer can get set up
+	if (num_bullets < 6) { // temp until something nicer can get set up
+		num_bullets++;
+		nametag_white_flash = 1;
+		reload_anim_timer = 0;
+		sound_play(sound_get("desp_click"));
+	}
 	my_hitboxID.hitstop_timer = hit_player_obj.hitstop;
 	my_hitboxID.parent_hitbox.hitstop_timer = my_hitboxID.hitstop_timer;
 	sound_play(asset_get("sfx_mol_bat_bombhit"))

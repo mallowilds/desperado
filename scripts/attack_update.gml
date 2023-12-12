@@ -43,6 +43,7 @@ switch (attack) {
     		if (num_bullets < 6) {
     			num_bullets++;
     			nametag_white_flash = 1;
+    			reload_anim_timer = 0;
     		}
     		else { // Wasted bullet visual
             	var bullet_casing = instance_create(x-(50*spr_dir), y-18, "obj_article3");
@@ -82,10 +83,6 @@ switch (attack) {
         }
     	break;
     case AT_DSTRONG:
-        if (attack_down && get_match_setting(SET_PRACTICE)) {
-        	num_bullets = 6; // Temp debugging utility
-        	nametag_white_flash = 1;
-        }
         if window == 2 && window_timer == 2 && !hitpause {
         	sound_play(sound_get("desp_hiss"), 0, noone, 1.5)
         }
@@ -444,36 +441,77 @@ switch (attack) {
         can_move = false
     
         set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
-        if (window != 3) {
-            if (vsp > 3) vsp = 3;
-            hsp = clamp (hsp, -2.5, 2.5);
-            can_fast_fall = false;
+        
+        if (get_match_setting(SET_PRACTICE) && taunt_pressed) training_mode_refill = true;
+        
+        switch window {
+        	
+        	case 1:
+        		if window_time_is(1) {
+        			if (vsp > 0) vsp = 0;
+        			training_mode_refill = get_match_setting(SET_PRACTICE) && taunt_pressed;
+        		}
+        		
+        		if (vsp > 3) vsp = 3;
+	            hsp = clamp (hsp, -2.5, 2.5);
+	            can_fast_fall = false;
+	            
+	            break;
+			
+			case 2:
+				if (window_time_is(1)) sound_play(sound_get("desp_whisper"))
+				
+				if (vsp > 3) vsp = 3;
+	            hsp = clamp (hsp, -2.5, 2.5);
+	            can_fast_fall = false;
+	            
+	            break;
+			
+			case 3:
+				if (window_time_is(1)) {
+					sound_stop(sound_get("desp_spin"))
+		            sound_play(sound_get("desp_click"))
+		            //sound_stop(sound_get("desp_whisper"))
+		            
+		            if (num_bullets < 6) {
+		            	num_bullets++;
+		            	nametag_white_flash = 1;
+		            }
+		            else { // Wasted bullet visual
+		            	var bullet_casing = instance_create(x-(10*spr_dir), y-8, "obj_article3");
+		            	bullet_casing.state = 00;
+		            	bullet_casing.hsp = -2*spr_dir;
+		            	bullet_casing.vsp = -4;
+		            }
+				}
+				
+				// Training mode refill
+				if (training_mode_refill && num_bullets < 6 && window_time_is(2)) {
+					window = 2;
+					window_timer = 20;
+				}
+				
+				// Loop
+				if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)) && special_down && (down_down || down_stick_down) && !free) {
+		            window = 1;
+		            window_timer = 4;
+		        }
+				
+				break;
+        	
         }
         
-        if (window == 1 && window_time_is(1)) {
-        	if (vsp > 0) vsp = 0;
-        }
+
         
-        else if (window == 2 && window_time_is(1)) {
-            sound_play(sound_get("desp_whisper"))
+        
+        
+        if (window == 2 && window_time_is(1)) {
+            
 
         }
         
         else if (window == 3 && window_time_is(1)) {
-            sound_stop(sound_get("desp_spin"))
-            sound_play(sound_get("desp_click"))
-            //sound_stop(sound_get("desp_whisper"))
             
-            if (num_bullets < 6) {
-            	num_bullets++;
-            	nametag_white_flash = 1;
-            }
-            else { // Wasted bullet visual
-            	var bullet_casing = instance_create(x-(10*spr_dir), y-8, "obj_article3");
-            	bullet_casing.state = 00;
-            	bullet_casing.hsp = -2*spr_dir;
-            	bullet_casing.vsp = -4;
-            }
         }
         
         if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause && !free) {

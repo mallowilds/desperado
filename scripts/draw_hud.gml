@@ -7,8 +7,15 @@
 if ("num_bullets" not in self) exit; // Cull error messages on reload
 
 
-// Gun anim frame management
+//#region Gun anim frame management
 var frame = 0;
+
+// Async animation (will be overridden by synced animations as needed)
+if (reload_anim_timer < 8) {
+    frame = 5 + (reload_anim_timer/2)
+}
+
+// Synced animation
 if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
     if (attack == AT_DSPECIAL) {
         switch window {
@@ -57,9 +64,11 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
     }
     
 }
+//#endregion
 
-// Draw gun
-// TODO: fix outline color for GB alt, add color processing on 6 bullets
+
+//#region Draw gun
+// TODO: fix outline color for GB alt
 var player_color = get_player_color(player);
 var gun_sprite = sprite_get("desp_hud");
 
@@ -74,6 +83,7 @@ for (var i = 0; i < num_bullets; i++) {
 shader_start();
 draw_sprite(gun_sprite, frame, temp_x, temp_y-98);
 shader_end();
+//#endregion
 
 
 // Reset article color slots

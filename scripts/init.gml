@@ -57,6 +57,8 @@ num_bullets = 0;                        // 0-6
 bullet_mult = 0.125;                    // multiplier per bullet. Constant value
 u_mult_damage_buffer = 0;               // see also: other_init.gml
 
+reload_anim_timer = 999;
+
 nametag_white_flash = 0;
 nametag_flame_alpha = 0;
 
@@ -64,8 +66,6 @@ sparkle_list = ds_list_create();        // particle list. implementation is take
 nspec_shot_list = ds_list_create();     // similar particle manager for nspecial shots.
 
 dairs_used = 0;                         // dairs used per airtime
-
-skull_stored_attack = noone;
 
 signpost_obj = noone;                   // taunt
 

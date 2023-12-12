@@ -53,11 +53,20 @@ else if (state == PS_WALL_JUMP) {
 //#endregion
 
 
-//#region Nametag hud management
+//#region HUD management
+
+// Nametag
 if (nametag_white_flash > 0) nametag_white_flash -= 0.1;
 if (num_bullets >= 4 && nametag_flame_alpha < 1) nametag_flame_alpha += 0.2;
 else if (num_bullets < 4 && nametag_flame_alpha > 0) nametag_flame_alpha -= 0.2;
+
+
+// Async reload anim
+if (reload_anim_timer < 8) reload_anim_timer++;
+
 //#endregion
+
+
 
 //#region Flame management (drawn in post_draw.gml, added by update/attack_update.gml)
 for (var i = 0; i < ds_list_size(sparkle_list); i++) {
@@ -106,17 +115,6 @@ else if (head_obj.state == 0 && char_height < 70) char_height++;
 if (!head_obj.can_fspecial) {
     move_cooldown[AT_FSPECIAL_2] = 2;
 }
-
-
-/* Sync attacks (scrapped)
-if (skull_stored_attack != noone) {
-    if (!attack_down && !is_attack_pressed(DIR_ANY)) {
-        skull_stored_attack = noone;
-        if (head_obj.can_sync_attack) set_head_state(AT_NAIR);
-    }
-}
-*/
-
 
 // Script order reliant.
 draw_skull_grabbox = clamp(draw_skull_grabbox-1, 0, draw_skull_grabbox)
