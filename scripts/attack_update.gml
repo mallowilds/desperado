@@ -86,6 +86,9 @@ switch (attack) {
         	num_bullets = 6; // Temp debugging utility
         	nametag_white_flash = 1;
         }
+        if window == 2 && window_timer == 2 && !hitpause {
+        	sound_play(sound_get("desp_hiss"), 0, noone, 1.5)
+        }
         break;
 
     case AT_FSTRONG:
