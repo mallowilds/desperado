@@ -77,8 +77,10 @@ switch state {
     // Init
     case 10:
         sprite_index = sprite_get("sign");
-        mask_index = sprite_get("sign_mask");
-        y += 1 // honestly idk
+        mask_index = sprite_get("sign_ground_mask");
+        vsp = 3;
+        
+        spr_dir = 1;
         
         dasher_in_range = [noone, 0, 0, 0, 0];
         
@@ -126,11 +128,13 @@ switch state {
             state_timer = 0;
         }
         
-        // Detect airborne-ness
-        if (free) {
-            state = 14;
-            state_timer = 0;
+        // Apply gravity
+        if (free) vsp += 0.4;
+        if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+            instance_destroy();
+            exit;
         }
+        
         break;
     
     // Sway left
@@ -152,10 +156,11 @@ switch state {
             state_timer = 0;
         }
         
-        // Detect airborne-ness
-        if (free) {
-            state = 14;
-            state_timer = 0;
+        // Apply gravity
+        vsp += 0.4;
+        if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+            instance_destroy();
+            exit;
         }
         
         break;
@@ -179,10 +184,11 @@ switch state {
             state_timer = 0;
         }
         
-        // Detect airborne-ness
-        if (free) {
-            state = 14;
-            state_timer = 0;
+        // Apply gravity
+        vsp += 0.4;
+        if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+            instance_destroy();
+            exit;
         }
         
         break;
@@ -210,12 +216,15 @@ switch state {
         ignores_walls = true;
         signpost_obj = player_id.signpost_obj;
         
-        if (instance_exists(signpost_obj)) {
+        if (instance_exists(signpost_obj) && signpost_obj.state != 14) {
 
-            if (x*spr_dir <= signpost_obj.x*spr_dir && signpost_obj.state != 14) { // i.e. signpost is in front
+            if (x*spr_dir <= signpost_obj.x*spr_dir) { // i.e. signpost is in front
                 if (point_distance(x, y, signpost_obj.x, signpost_obj.y-50) < 160) {
                     signpost_obj.state_timer = 0;
                     signpost_obj.state = 14;
+                    sound_play(asset_get("sfx_syl_ustrong_part3"))
+                    sound_play(asset_get("sfx_ell_drill_stab"))
+                    spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, HFX_SYL_WOOD_SMALL);
                     instance_destroy();
                     exit;
                 }
@@ -223,9 +232,12 @@ switch state {
                 screen_wrap = false;
             }
             else {
-                if (point_distance(x, y, signpost_obj.x, signpost_obj.y-50) < 30 && signpost_obj.state != 14) {
+                if (point_distance(x, y, signpost_obj.x, signpost_obj.y-50) < 30) {
                     signpost_obj.state_timer = 0;
                     signpost_obj.state = 14;
+                    sound_play(asset_get("sfx_syl_ustrong_part3"))
+                    sound_play(asset_get("sfx_ell_drill_stab"))
+                    spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, HFX_SYL_WOOD_SMALL);
                     instance_destroy();
                     exit;
                 }
@@ -260,12 +272,21 @@ switch state {
             }
         }
         
-        if (collision_line(x, y, x+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false)) {
-            if (signpost_obj.state != 14) signpost_obj.state_timer = 0;
-            signpost_obj.state = 14;
-            instance_destroy();
-            exit;
+        if (instance_exists(signpost_obj)) {
+            var old_mask = signpost_obj.mask_index;
+            signpost_obj.mask_index = sprite_get("sign_mask");
+            if (signpost_obj.state != 14 && collision_line(x, y, x+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false)) {
+                signpost_obj.state = 14;
+                signpost_obj.state_timer = 0;
+                sound_play(asset_get("sfx_syl_ustrong_part3"))
+                sound_play(asset_get("sfx_ell_drill_stab"))
+                spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, HFX_SYL_WOOD_SMALL);
+                instance_destroy();
+                exit;
+            }
+            signpost_obj.mask_index = old_mask;
         }
+        
         
         if (state_timer > 60) {
             instance_destroy();
@@ -307,6 +328,10 @@ state_timer++;
     return out;
 
 #define signpost_detect_hitboxes()
+
+    var old_mask = mask_index;
+    mask_index = sprite_get("sign_mask");
+
     var hbox = noone;
     with pHitBox {
         if (place_meeting(x, y, other) && (hit_priority > 0) && player != other.player) {
@@ -332,6 +357,13 @@ state_timer++;
         }
         sound_play(hbox.sound_effect);
         spawn_hit_fx((x+hbox.x)/2+(hbox.spr_dir*hbox.hit_effect_x), (y-50+hbox.y)/2+(hbox.hit_effect_y), HFX_SYL_WOOD_SMALL);
+        
+        mask_index = old_mask;
         return true;
     }
+    
+    mask_index = old_mask;
     return false;
+    
+    
+    
