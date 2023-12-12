@@ -250,11 +250,11 @@ switch state {
         vsp = lengthdir_y(120, move_angle);
         
         if (screen_wrap) {
-            if (spr_dir == -1 && x+hsp < view_get_xview()) {
+            if (spr_dir == -1 && x+hsp < view_get_xview()) { // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
                 x += view_get_wview();
                 screen_wrap = false;
             }
-            else if (spr_dir == 1 && x+hsp > view_get_xview()+view_get_wview()) {
+            else if (spr_dir == 1 && x+hsp > view_get_xview()+view_get_wview()) { // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
                 x -= view_get_wview();
                 screen_wrap = false;
             }

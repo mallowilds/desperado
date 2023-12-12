@@ -15,18 +15,18 @@ make_attack(AT_TAUNT,
 
 make_window(AT_TAUNT, 1,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 6,
-    AG_WINDOW_ANIM_FRAMES, 3,
+    AG_WINDOW_LENGTH, 8,
+    AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, asset_get("sfx_blow_medium2"),
-    AG_WINDOW_SFX_FRAME, 5,
+    AG_WINDOW_SFX, asset_get("sfx_zetter_downb"),
+    AG_WINDOW_SFX_FRAME, 7,
 ) 
 
 make_window(AT_TAUNT, 2,
     AG_WINDOW_TYPE, 2,
-    AG_WINDOW_LENGTH, 10,
-    AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_ANIM_FRAME_START, 3,
+    AG_WINDOW_LENGTH, 23,
+    AG_WINDOW_ANIM_FRAMES, 3,
+    AG_WINDOW_ANIM_FRAME_START, 2,
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
