@@ -120,7 +120,12 @@ switch (attack) {
 			fstrong_blast_obj.step_timer--; // manual hitpause
 		}
     	break;
-    
+    	case AT_DATTACK:
+    	case AT_EXTRA_2:
+    		if window < 4 && has_hit {
+    			can_ustrong = true;
+    		}
+    	break;
     //#endregion
     
     

@@ -364,6 +364,3 @@ state_timer++;
     
     mask_index = old_mask;
     return false;
-    
-    
-    
