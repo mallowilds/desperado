@@ -18,6 +18,10 @@ TAUNT SIGNPOST
 - 13: Sway right
 - 14: Death
 
+TAUNT GUNSHOT
+- 20: Initialization
+- 21: Moving
+
 */
 
 switch state {
@@ -69,7 +73,7 @@ switch state {
     
     
     
-    //#region Taunt Signpost
+    //#region Taunt signpost
     // Init
     case 10:
         sprite_index = sprite_get("sign");
@@ -198,6 +202,69 @@ switch state {
     //#endregion
     
     
+    
+    //#region Taunt gunshot
+    case 20:
+        sprite_index = sprite_get("null"); // rotation-reliant - see article3post_draw.gml
+        can_be_grounded = false;
+        ignores_walls = true;
+        signpost_obj = player_id.signpost_obj;
+        
+        if (instance_exists(signpost_obj)) {
+
+            if (x*spr_dir <= signpost_obj.x*spr_dir) { // i.e. signpost is in front
+                move_angle = point_direction(x, y, signpost_obj.x, signpost_obj.y-50);
+                screen_wrap = false;
+            }
+            else {
+                var sim_x_distance = spr_dir * (view_get_wview() - abs(x-signpost_obj.x));
+                move_angle = point_direction(0, y, sim_x_distance, signpost_obj.y-50);
+                screen_wrap = true;
+            }
+            
+        }
+        else {
+            move_angle = 90 - (90*spr_dir);
+            screen_wrap = false;
+        }
+        
+        state = 21;
+        state_timer = 0;
+        break;
+    
+    case 21:
+        
+        hsp = lengthdir_x(120, move_angle);
+        vsp = lengthdir_y(120, move_angle);
+        
+        if (screen_wrap) {
+            if (spr_dir == -1 && x+hsp < view_get_xview()) {
+                x += view_get_wview();
+                screen_wrap = false;
+            }
+            else if (spr_dir == 1 && x+hsp > view_get_xview()+view_get_wview()) {
+                x -= view_get_wview();
+                screen_wrap = false;
+            }
+        }
+        
+        if (collision_line(x, y, x+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false)) {
+            instance_destroy(signpost_obj);
+            player_id.signpost_obj = noone;
+            state_timer = 61;
+        }
+        
+        if (state_timer > 60) {
+            instance_destroy();
+            exit;
+        }
+        
+        break;
+    
+    //#endregion
+    
+    
+    
     //#region Failed initialization
     default:
         print_debug("Error: article 3 was not properly initialized")
@@ -251,7 +318,7 @@ state_timer++;
             }
         }
         sound_play(hbox.sound_effect);
-        spawn_hit_fx((x+hbox.x)/2+(hbox.spr_dir*hbox.hit_effect_x), (y-30+hbox.y)/2+(hbox.hit_effect_y), HFX_SYL_WOOD_SMALL);
+        spawn_hit_fx((x+hbox.x)/2+(hbox.spr_dir*hbox.hit_effect_x), (y-50+hbox.y)/2+(hbox.hit_effect_y), HFX_SYL_WOOD_SMALL);
         return true;
     }
     return false;
