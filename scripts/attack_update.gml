@@ -316,6 +316,7 @@ switch (attack) {
 					head_obj.spr_dir = spr_dir;
 					head_obj.x = x+(48*spr_dir);
 					head_obj.y = y-10;
+					head_obj.throw_dir = (-1*up_down) + (1*down_down);
 				}
 				break;
 			case 2:

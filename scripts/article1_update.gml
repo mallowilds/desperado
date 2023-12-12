@@ -384,8 +384,8 @@ switch (state) {
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
 				if (hitstop <= 0 && window_timer == 1) {
-					hsp = 6*spr_dir;
-					vsp = -3.5;
+					hsp = (6+throw_dir) *spr_dir;
+					vsp = -3.5 + 3*throw_dir;
 					
 					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
 					hitbox.spr_dir = spr_dir;
@@ -689,6 +689,7 @@ switch (state) {
 				
 				can_fspecial = false;
 				can_sync_attack = false;
+				has_hit = false;
 				
 				hsp = 0;
 				vsp = 0;
@@ -767,19 +768,18 @@ switch (state) {
 					sound_play(sound_get("desp_shot"), 0, noone, 1, 1);
 					sound_play(asset_get("sfx_mol_huge_explode"), 0, noone, 1, 1);
 					
+					shake_camera(2+shots_absorbed/2, 3+shots_absorbed/2);
 				}
 				break;
 			
 			case 4:
-				
 				if (hitstop <= 0) {
-					if (window_timer == 1) shake_camera(6+shots_absorbed, 3+3*shots_absorbed);
 					if (recoil_speed < 0) recoil_speed += 0.5;
 					hsp = lengthdir_x(recoil_speed, reticle_angle);
 					vsp = lengthdir_y(recoil_speed, reticle_angle);
 				}
 				
-				if (window_timer >= 23) {
+				if (window_timer >= 35) {
 					state = 5;
 					state_timer = 0;
 				}

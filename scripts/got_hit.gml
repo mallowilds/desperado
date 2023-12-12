@@ -3,7 +3,6 @@
 // Called when you get hit
 
 
-
 // Reset anti-stall checks
 dairs_used = 0;
 move_cooldown[AT_DSPECIAL] = 0;
