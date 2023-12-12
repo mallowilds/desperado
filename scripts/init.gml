@@ -219,7 +219,7 @@ pratfall_anim_speed = .25 //The speed of your pratfall animation in anim frames 
 crouch_anim_speed = .1 //	The speed of your (held) crouch animation in anim frames per gameplay frame
 
 // Jump
-double_jump_time = 40 // 24 – 40. The number of frames to play the double jump animation. Most characters have a value of 32 so that the double jump animation transitions into the falling portion of the normal jump animation 
+double_jump_time = 32 // 24 – 40. The number of frames to play the double jump animation. Most characters have a value of 32 so that the double jump animation transitions into the falling portion of the normal jump animation 
 
 // Crouch Animation Frames
 crouch_startup_frames = 4 // The number of animation frames during crouch’s startup

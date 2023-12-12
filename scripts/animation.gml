@@ -3,6 +3,8 @@
 // Called each frame. For manually changing your sprite_index and image_index.
 
 if state == PS_IDLE_AIR && prev_state == PS_FIRST_JUMP && djumps == 1 image_index = image_number-1;
+if state == PS_IDLE_AIR && prev_state == PS_DOUBLE_JUMP image_index = image_number-1;
+
 if state == PS_IDLE_AIR && prev_state == PS_ATTACK_AIR image_index = image_number-1;
 if state == PS_IDLE_AIR && prev_state == PS_WALL_JUMP image_index = image_number-1;
 
