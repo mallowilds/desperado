@@ -580,7 +580,7 @@ switch (state) {
 				}
 				
 				// Explode detection
-				if (hitstop <= 0 && (window_timer > 25 || hsp == 0 || !free || has_hit)) {
+				if (hitstop <= 0 && (window_timer > 32 || hsp == 0 || !free || has_hit)) {
 					window = 2;
 					window_timer = 0;
 				}
@@ -645,7 +645,7 @@ switch (state) {
 				}
 				
 				// Explode detection
-				if (hitstop <= 0 && (window_timer > 25 || hsp == 0 || !free || has_hit)) {
+				if (hitstop <= 0 && (window_timer > 40 || hsp == 0 || !free || has_hit)) {
 					window = 2;
 					window_timer = 0;
 				}
