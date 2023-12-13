@@ -15,8 +15,8 @@ if (attack == AT_FSPECIAL_2) {
                 child_hitbox.parent_hitbox = self;
             }
             if (image_index >= 2 && image_index <= 5 && hitstop_timer <= 0) {
-                spawn_ash(6*player, 6*player+1);
-                spawn_ash(6*player+3, 6*player+4);
+                spawn_ash_particle(6*player, 6*player+1);
+                spawn_ash_particle(6*player+3, 6*player+4);
             }
         
         case 2:
@@ -30,7 +30,7 @@ if (attack == AT_FSPECIAL_2) {
 
 
 
-#define spawn_ash(seed1, seed2)
+#define spawn_ash_particle(seed1, seed2)
     var ash_type = "ashpart_" + string(1+random_func_2(seed1, 3, true));
     spawn_particle_random(ash_type, 15, seed2);
 
@@ -49,6 +49,7 @@ if (attack == AT_FSPECIAL_2) {
         sp_sprite_index : sprite_get(in_sprite),
         sp_max_lifetime : lifetime,
         sp_lifetime : 0,
-        sp_spr_dir : spr_dir
+        sp_spr_dir : spr_dir,
+        sp_skull_owned : 0,
     };
     ds_list_add(player_id.sparkle_list, sparkle);

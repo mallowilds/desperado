@@ -68,7 +68,7 @@ if (reload_anim_timer < 8) reload_anim_timer++;
 
 
 
-//#region Flame management (drawn in post_draw.gml, added by update/attack_update.gml)
+//#region Sparkle management (Added by update.gml, hitbox_update.gml, and article1_update.gml, drawn in post_draw and article1_pre_draw)
 for (var i = 0; i < ds_list_size(sparkle_list); i++) {
     var sp = ds_list_find_value(sparkle_list, i);
     sp.sp_lifetime++;
@@ -166,6 +166,7 @@ if (num_bullets > 6 || num_bullets < 0) {
         sp_sprite_index : sprite_get(in_sprite),
         sp_max_lifetime : lifetime,
         sp_lifetime : 0,
-        sp_spr_dir : spr_dir
+        sp_spr_dir : spr_dir,
+        sp_skull_owned : 0,
     };
     ds_list_add(sparkle_list, sparkle);

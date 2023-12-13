@@ -1,3 +1,6 @@
+
+if ("alt_timer" not in self) exit;
+
 //get cursor pos
 alt_timer++;
 css_timer++;

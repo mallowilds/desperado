@@ -402,7 +402,7 @@ switch (state) {
 					hitbox.hsp = hsp;
 					hitbox.vsp = vsp;
 					
-					spawn_ash_particle();
+					spawn_ash_particle(player*3, player*3+1);
 				}
 				
 				// Bounce detections
@@ -449,7 +449,7 @@ switch (state) {
 					hitbox.hsp = hsp;
 					hitbox.vsp = vsp;
 					
-					spawn_ash_particle();
+					spawn_ash_particle(player*3, player*3+1);
 				}
 				
 				image_index = (4*(hitbox==noone)) + (window_timer/3)%4;
@@ -523,7 +523,7 @@ switch (state) {
 				sprite_index = sprite_get("skullactive");
 				image_index = 4;
 				
-				spawn_ash_particle();
+				spawn_ash_particle(player*3, player*3+1);
 				
 				if (window_timer > 6) {
 					state = 2;
@@ -532,7 +532,7 @@ switch (state) {
 			
 			case 2:
 				visible = false;
-				spawn_ash_particle();
+				spawn_ash_particle(player*3, player*3+1);
 				state = 4;
 				state_timer = 0;
 				respawn_penalty = false;
@@ -578,7 +578,7 @@ switch (state) {
 					hitbox.vsp = vsp;
 				}
 				
-				spawn_ash_particle();
+				spawn_ash_particle(player*3, player*3+1);
 				
 				// Explode detection
 				if (hitstop <= 0 && (window_timer > 32 || hsp == 0 || !free || has_hit)) {
@@ -592,7 +592,7 @@ switch (state) {
 				sprite_index = sprite_get("skullactive");
 				image_index = 4 + (window_timer/3)%4;
 				
-				spawn_ash_particle();
+				spawn_ash_particle(player*3, player*3+1);
 				
 				if (window_timer > 6) {
 					window = 3;
@@ -647,7 +647,7 @@ switch (state) {
 					hitbox.vsp = vsp;
 				}
 				
-				spawn_ash_particle();
+				spawn_ash_particle(player*3, player*3+1);
 				
 				// Explode detection
 				if (hitstop <= 0 && (window_timer > 40 || hsp == 0 || !free || has_hit)) {
@@ -661,7 +661,7 @@ switch (state) {
 				sprite_index = sprite_get("skullactive");
 				image_index = 4 + (window_timer/3)%4;
 				
-				spawn_ash_particle();
+				spawn_ash_particle(player*3, player*3+1);
 				
 				if (window_timer > 6) {
 					window = 3;
@@ -880,9 +880,27 @@ else hitstop = floor(hitstop);
 	}
 	
 	return;
-	
-#define spawn_ash_particle()
-	var ash_part = spawn_hit_fx(x-20-hsp+random_func(player*2, 40, false), y-70-vsp+random_func(player*2+1, 40, false), player_id.vfx_ash_1);
+
+
+#define spawn_ash_particle(seed1, seed2)
+    var ash_type = "ashpart_" + string(1+random_func_2(seed1, 3, true));
+    spawn_particle_random(ash_type, 18, seed2);
+
+
+#define spawn_particle_random(in_sprite, lifetime, seed)
+    var _x = x-20-hsp+random_func_2(seed, 40, false)
+    var _y = y-60-vsp+random_func_2(seed+1, 40, false)
+    var sparkle = {
+        sp_x : _x,
+        sp_y : _y,
+        sp_sprite_index : sprite_get(in_sprite),
+        sp_max_lifetime : lifetime,
+        sp_lifetime : 0,
+        sp_spr_dir : spr_dir,
+        sp_skull_owned : 1,
+    };
+    ds_list_add(player_id.sparkle_list, sparkle);
+
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.

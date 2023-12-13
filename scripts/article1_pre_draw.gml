@@ -4,7 +4,17 @@
 // This script can be created for any article index (1, 2, 3, solid, and platform)
 
 
+// Ash particle management (built off of sparkle system; see update.gml)
+for (var i = 0; i < ds_list_size(player_id.sparkle_list); i++) {
+    var sp = ds_list_find_value(player_id.sparkle_list, i);
+    if (sp.sp_skull_owned) {
+    	var sp_image_index = sp.sp_lifetime * (sprite_get_number(sp.sp_sprite_index) / sp.sp_max_lifetime);
+    	draw_sprite_ext(sp.sp_sprite_index, sp_image_index, sp.sp_x, sp.sp_y, sp.sp_spr_dir, 1, 0, c_white, 1 );
+    }
+}
 
+
+// NSpec shot management
 if (state == AT_NSPECIAL) {
     
     if (window == 2 || window == 3) {
