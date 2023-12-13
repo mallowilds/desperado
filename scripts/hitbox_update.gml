@@ -14,9 +14,9 @@ if (attack == AT_FSPECIAL_2) {
                 child_hitbox = create_hitbox(AT_FSPECIAL_2, 2, x, y);
                 child_hitbox.parent_hitbox = self;
             }
-            if (image_index >= 2 && image_index <= 4 && hitstop_timer <= 0) {
-                spawn_particle_random("ashpart_1", 18, 6*player);
-                spawn_particle_random("ashpart_1", 18, 6*player+2);
+            if (image_index >= 2 && image_index <= 5 && hitstop_timer <= 0) {
+                spawn_ash(6*player, 6*player+1);
+                spawn_ash(6*player+3, 6*player+4);
             }
         
         case 2:
@@ -30,9 +30,14 @@ if (attack == AT_FSPECIAL_2) {
 
 
 
+#define spawn_ash(seed1, seed2)
+    var ash_type = "ashpart_" + string(1+random_func_2(seed1, 3, true));
+    spawn_particle_random(ash_type, 15, seed2);
+
+
 #define spawn_particle_random(in_sprite, lifetime, seed)
-    var min_rad = 24;
-    var rad_range = 26;
+    var min_rad = 40;
+    var rad_range = 40;
     var y_offset = 0;
     var _rot = random_func_2(seed, 360, false);
     var _dist = min_rad + random_func_2(seed+1, rad_range, false);

@@ -184,6 +184,8 @@ sprite_change_offset("sign_ground_mask", 60, 114);
 sprite_change_offset("taunt_shot", 0, 2);
 
 sprite_change_offset("ashpart_1", 7, 7);
+sprite_change_offset("ashpart_2", 7, 7);
+sprite_change_offset("ashpart_3", 7, 7);
 //not done
 
 

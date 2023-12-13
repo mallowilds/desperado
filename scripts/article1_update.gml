@@ -775,7 +775,7 @@ switch (state) {
 					sound_play(sound_get("desp_shot"), 0, noone, 1, 1);
 					sound_play(asset_get("sfx_mol_huge_explode"), 0, noone, 1, 1);
 					
-					shake_camera(2+shots_absorbed/2, 3+shots_absorbed/2);
+					shake_camera(round(2+shots_absorbed/2), round(3+shots_absorbed/2));
 				}
 				break;
 			
