@@ -44,7 +44,7 @@ make_window(AT_DAIR, 3,
 )
 
 make_window(AT_DAIR, 4, //hitgrab 
-    AG_WINDOW_LENGTH, 17,
+    AG_WINDOW_LENGTH, 22,
     AG_WINDOW_ANIM_FRAMES, 6,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
@@ -62,6 +62,7 @@ make_hitbox(AT_DAIR, 1,
     HG_WINDOW, 2,
     HG_LIFETIME, 8,
     HG_HITBOX_GROUP, 1,
+    HG_HITBOX_TYPE, 1,
     
     HG_HITBOX_X, 36,
     HG_HITBOX_Y, 0,
@@ -87,6 +88,7 @@ make_hitbox(AT_DAIR, 2,
     HG_WINDOW, 4,
     HG_LIFETIME, 4,
     HG_HITBOX_GROUP, 2,
+    HG_HITBOX_TYPE, 1,
     
     HG_WINDOW_CREATION_FRAME, 5,
     HG_HITBOX_X, 30,
