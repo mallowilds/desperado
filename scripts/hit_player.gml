@@ -69,6 +69,8 @@ if (atk == AT_DAIR && hbox == 1) {
 	fast_falling = false;
 	
 	if (!hit_player_obj.super_armor) {
+		grabbed_player_obj = hit_player_obj;
+		my_hitboxID.destroyed = true;
 		hit_player_obj.x = x + (50*spr_dir);
 		hit_player_obj.y = y + 40;
 		hit_player_obj.hurtboxID.x = hit_player_obj.x;

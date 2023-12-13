@@ -367,19 +367,11 @@ switch (state) {
 		switch (window) {
 			
 			case 1:
-				image_index = 0;
-				hsp *= 0.8
-				vsp *= 0.8
-				if (window_timer == 12) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					sound_play(asset_get("sfx_spin"));
-				} else if (window_timer >= 13) {
-					window = 2;
-					window_timer = 0;
-				}
+				// Deprecated
 				break;
 				
 			case 2:
-				image_index = 1 + (window_timer/3)%4;
+				image_index = (window_timer/3)%4;
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
@@ -409,6 +401,8 @@ switch (state) {
 					hitbox.y = y-30;
 					hitbox.hsp = hsp;
 					hitbox.vsp = vsp;
+					
+					spawn_ash_particle();
 				}
 				
 				// Bounce detections
@@ -454,9 +448,11 @@ switch (state) {
 					hitbox.y = y-30;
 					hitbox.hsp = hsp;
 					hitbox.vsp = vsp;
+					
+					spawn_ash_particle();
 				}
 				
-				image_index = 1 + (window_timer/3)%4;
+				image_index = (4*(hitbox==noone)) + (window_timer/3)%4;
 				hsp *= 0.91;
 				vsp *= 0.91;
 				
@@ -471,7 +467,7 @@ switch (state) {
 			// Return
 			case 4:
 			
-				image_index = 1 + (window_timer/3)%4;
+				image_index = 4 + (window_timer/3)%4;
 				
 				var target_sp = 2.25*ln(0.9*window_timer+1); // https://www.desmos.com/calculator/d2byh0mgnk
 				
@@ -525,7 +521,9 @@ switch (state) {
 			case 1:
 				visible = true;
 				sprite_index = sprite_get("skullactive");
-				image_index = 0;
+				image_index = 4;
+				
+				spawn_ash_particle();
 				
 				if (window_timer > 6) {
 					state = 2;
@@ -534,6 +532,7 @@ switch (state) {
 			
 			case 2:
 				visible = false;
+				spawn_ash_particle();
 				state = 4;
 				state_timer = 0;
 				respawn_penalty = false;
@@ -555,7 +554,7 @@ switch (state) {
 		switch (window) {
 				
 			case 1:
-				image_index = 1 + (window_timer/3)%4;
+				image_index = (window_timer/3)%4;
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
@@ -579,6 +578,8 @@ switch (state) {
 					hitbox.vsp = vsp;
 				}
 				
+				spawn_ash_particle();
+				
 				// Explode detection
 				if (hitstop <= 0 && (window_timer > 32 || hsp == 0 || !free || has_hit)) {
 					window = 2;
@@ -589,7 +590,9 @@ switch (state) {
 				
 			case 2:
 				sprite_index = sprite_get("skullactive");
-				image_index = 0;
+				image_index = 4 + (window_timer/3)%4;
+				
+				spawn_ash_particle();
 				
 				if (window_timer > 6) {
 					window = 3;
@@ -620,7 +623,7 @@ switch (state) {
 		switch (window) {
 				
 			case 1:
-				image_index = 1 + (window_timer/3)%4;
+				image_index = (window_timer/3)%4;
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.4, vsp, 7);
 				
@@ -644,6 +647,8 @@ switch (state) {
 					hitbox.vsp = vsp;
 				}
 				
+				spawn_ash_particle();
+				
 				// Explode detection
 				if (hitstop <= 0 && (window_timer > 40 || hsp == 0 || !free || has_hit)) {
 					window = 2;
@@ -654,7 +659,9 @@ switch (state) {
 				
 			case 2:
 				sprite_index = sprite_get("skullactive");
-				image_index = 0;
+				image_index = 4 + (window_timer/3)%4;
+				
+				spawn_ash_particle();
 				
 				if (window_timer > 6) {
 					window = 3;
@@ -873,6 +880,9 @@ else hitstop = floor(hitstop);
 	}
 	
 	return;
+	
+#define spawn_ash_particle()
+	var ash_part = spawn_hit_fx(x-20-hsp+random_func(player*2, 40, false), y-70-vsp+random_func(player*2+1, 40, false), player_id.vfx_ash_1);
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.

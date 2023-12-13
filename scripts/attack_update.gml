@@ -176,44 +176,84 @@ switch (attack) {
         can_move = false;
         move_cooldown[AT_DAIR] = 10;
         
-        if (window == 1) {
-        	if (vsp > -1.5) vsp = -1.5;
-        	skull_grabbed = false;
+        switch window {
+        	
+        	case 1:
+        		set_attack_value(AT_DAIR, AG_NUM_WINDOWS, 3);
+	        	if (vsp > -1.5) vsp = -1.5;
+	        	skull_grabbed = false;
+	        	grabbed_player_obj = noone
+	        	// Accomodating for script order issues \/
+	        	if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) draw_skull_grabbox = 2;
+	        	
+	        	break;
+	        
+	        case 2:
+	        	if (window_time_is(1)) {
+	        		hsp = 5 * spr_dir;
+        			vsp = fast_falling ? 9 : 11;
+	        	}
+	        	
+	        	if (!hitpause) {
+	        		do_skull_grabbox();
+		        	if (skull_grabbed) {
+		        		set_attack_value(AT_DAIR, AG_NUM_WINDOWS, 6);
+		        		window = 4;
+				    	window_timer = 0;
+				    	vsp = -8;
+				    	destroy_hitboxes();
+		        	}
+	        	}
+	        	// no break
+	        
+	        case 3:
+	        	if (has_hit && !hitpause) {
+	        		set_attack_value(AT_DAIR, AG_NUM_WINDOWS, 6);
+		        	window = 4;
+		        	window_timer = 0;
+		        	vsp = -8;
+		        	destroy_hitboxes();
+	        	}
+	        	break;
+	        
+	        case 4:
+	        	can_fast_fall = false;
+        		fast_falling = false;
+        		
+        		if (instance_exists(grabbed_player_obj)) {
+    				grabbed_player_obj.x += x + (40*spr_dir) + hsp;
+    				grabbed_player_obj.x /= 2;
+    				grabbed_player_obj.y += y - 20 + vsp;
+    				grabbed_player_obj.y /= 2;
+    				grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
+    				grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
+    				grabbed_player_obj.hitstop++;
+    				grabbed_player_obj.fall_through = true;
+    			}
+        		
+        		break;
+        		
+        	case 5:
+	        	can_fast_fall = false;
+        		fast_falling = false;
+        		
+        		if (skull_grabbed && window_time_is(1)) {
+					set_head_state(AT_UTHROW);
+					head_obj.x = x + (46*spr_dir);
+					head_obj.y = y - 24;
+					head_obj.spr_dir = spr_dir;
+					head_obj.visible = true;
+				}
+			
+        		break;
+        		
+        	case 6:
+	        	can_fast_fall = false;
+        		fast_falling = false;
+        		break;
+        		
         }
-        
-        if (window == 2 && window_timer == 1 && !hitpause) {
-        	hsp = 5 * spr_dir;
-        	vsp = fast_falling ? 9 : 11;
-        }
-        
-        if (window == 2 && !hitpause) {
-        	do_skull_grabbox();
-        	if (skull_grabbed) {
-        		window = 4;
-		    	window_timer = 0;
-		    	destroy_hitboxes();
-        	}
-        }
-        
-        if (window < 4 && has_hit && !hitpause) {
-        	window = 4;
-        	window_timer = 0;
-        	destroy_hitboxes();
-        }
-        
-        if (window == 4) {
-        	can_fast_fall = false;
-        	fast_falling = false;
-        	if (window_time_is(0)) vsp = -8;
-        	if (skull_grabbed && window_time_is(5)) {
-				set_head_state(AT_UTHROW);
-				head_obj.x = x + (46*spr_dir);
-				head_obj.y = y - 24;
-				head_obj.spr_dir = spr_dir;
-				head_obj.visible = true;
-			}
-        }
-
+        	
         break;
     //#endregion
     	
@@ -367,8 +407,11 @@ switch (attack) {
     	switch window {
     		
     		case 1:
+    			set_attack_value(AT_USPECIAL, AG_NUM_WINDOWS, 3);
     			grabbed_player_obj = noone;
     			skull_grabbed = false;
+    			// Accomodating for script order issues \/
+        		if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) draw_skull_grabbox = 2;
     			break;
     		
     		case 2:
@@ -384,6 +427,7 @@ switch (attack) {
     			}
     			
     			if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)) && (instance_exists(grabbed_player_obj) || skull_grabbed)) {
+					set_attack_value(AT_USPECIAL, AG_NUM_WINDOWS, 5);
 					window = 4;
 					window_timer = 0;
 				}
@@ -404,8 +448,6 @@ switch (attack) {
     			}
     			
     			if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH)) {
-    				window = 5;
-    				window_timer = 0;
     				hsp = get_window_value(attack, 5, AG_WINDOW_HSPEED) * spr_dir;
     				vsp = get_window_value(attack, 5, AG_WINDOW_VSPEED);
     				if (instance_exists(grabbed_player_obj)) {
