@@ -232,6 +232,11 @@ switch state {
             instance_destroy();
             exit;
         }
+        
+        if (state_timer == 5) sound_play(sound_get("desp_scratch"), 0, noone, 1, 0.9);
+        else if (state_timer == 20) sound_play(sound_get("desp_scratch"), 0, noone, 1, 1);
+        else if (state_timer == 40) sound_play(asset_get("sfx_zetter_fireball_fire"), 0, noone, .7, .9)
+        
         break;
     
     //#endregion
