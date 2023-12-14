@@ -250,7 +250,7 @@ switch state {
         ignores_walls = true;
         signpost_obj = player_id.signpost_obj;
         
-        if (instance_exists(signpost_obj) && signpost_obj.state != 14) {
+        if (instance_exists(signpost_obj) && signpost_obj.state != 14 && signpost_obj.state != 15) {
 
             if (x*spr_dir <= signpost_obj.x*spr_dir) { // i.e. signpost is in front
                 if (point_distance(x, y, signpost_obj.x, signpost_obj.y-50) < 160) {
@@ -296,11 +296,11 @@ switch state {
         vsp = lengthdir_y(120, move_angle);
         
         if (screen_wrap) {
-            if (spr_dir == -1 && x+hsp < view_get_xview()) { // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
+            if (spr_dir == -1 && x+hsp < get_instance_x(asset_get("camera_obj"))) {
                 x += view_get_wview();
                 screen_wrap = false;
             }
-            else if (spr_dir == 1 && x+hsp > view_get_xview()+view_get_wview()) { // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
+            else if (spr_dir == 1 && x+hsp > get_instance_x(asset_get("camera_obj"))+view_get_wview()) {
                 x -= view_get_wview();
                 screen_wrap = false;
             }
@@ -309,7 +309,7 @@ switch state {
         if (instance_exists(signpost_obj)) {
             var old_mask = signpost_obj.mask_index;
             signpost_obj.mask_index = sprite_get("sign_mask");
-            if (signpost_obj.state != 14 && collision_line(x, y, x+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false)) {
+            if (signpost_obj.state != 14 && signpost_obj.state != 15 && collision_line(x, y, x+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false)) {
                 signpost_obj.state = 14;
                 signpost_obj.state_timer = 0;
                 sound_play(asset_get("sfx_syl_ustrong_part3"))

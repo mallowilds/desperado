@@ -63,6 +63,22 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
         }
     }
     
+    else if (attack == AT_JAB) {
+        print_debug(window_timer);
+        switch window {
+            case 7:
+                if (window_timer == 4) frame = 1;
+                break;
+            case 8:
+                var pre_frame = 1 + reload_anim_timer/2; // Since hitpause throws a wrench into things, we cheat and reuse the desync anim timer
+                frame = (pre_frame <= 2 ? pre_frame : 3 + (reload_anim_timer/3+1)%2); // If things advance too far, shift to the spinning loop
+                break;
+            case 9:
+                if (window_timer < floor(13*(has_hit?1:1.5))) frame = 3 + (window_timer/3)%2;
+                break;
+        }
+    }
+    
 }
 //#endregion
 

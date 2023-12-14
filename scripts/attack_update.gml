@@ -39,20 +39,24 @@ switch (attack) {
     //#region Grounded Normals / Strongs ---------------------------------------
     
     case AT_JAB:
-    	if (window == 9 && window_time_is(18*(has_hit?1:1.5))) {
+    	if (window == 7 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
+    		sound_play(sound_get("desp_spin"))
+    		reload_anim_timer = 0; // cheating to track time passage in hitpause: see draw_hud
+    	}
+    	if (window == 9 && window_time_is(floor(13*(has_hit?1:1.5)))) {
+    		sound_stop(sound_get("desp_spin"))
+    		sound_play(sound_get("desp_click"));
+    		reload_anim_timer = 0; // This one's a normal desync anim
     		if (num_bullets < 6) {
     			num_bullets++;
     			nametag_white_flash = 1;
-    			reload_anim_timer = 0;
     		}
     		else { // Wasted bullet visual
-            	var bullet_casing = instance_create(x-(50*spr_dir), y-18, "obj_article3");
+            	var bullet_casing = instance_create(x+(50*spr_dir), y-34, "obj_article3");
             	bullet_casing.state = 00;
             	bullet_casing.hsp = -2*spr_dir;
             	bullet_casing.vsp = -4;
             }
-    		
-    		sound_play(sound_get("desp_click"));
     	}
     	break;
     case AT_DTILT:
@@ -541,24 +545,6 @@ switch (attack) {
 				
 				break;
         	
-        }
-        
-
-        
-        
-        
-        if (window == 2 && window_time_is(1)) {
-            
-
-        }
-        
-        else if (window == 3 && window_time_is(1)) {
-            
-        }
-        
-        if (special_down && (down_down || down_stick_down) && window == 3 && window_timer = get_window_value(attack, window, AG_WINDOW_LENGTH) && !hitpause && !free) {
-            window = 1;
-            window_timer = 4;
         }
         
     	break;
