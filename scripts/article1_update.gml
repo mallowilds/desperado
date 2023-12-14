@@ -901,7 +901,6 @@ else hitstop = floor(hitstop);
     };
     ds_list_add(player_id.sparkle_list, sparkle);
 
-
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
 // Write NO-INJECT in a comment above this area to disable injection.
