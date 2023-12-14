@@ -70,7 +70,7 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
 //#region Draw gun
 // TODO: fix outline color for GB alt
 var player_color = get_player_color(player);
-var gun_sprite = sprite_get("desp_hud");
+var gun_sprite = sprite_get(player_color == 7 ? "desp_hud_ea" : "desp_hud");
 
 for (var i = 5; i >= num_bullets; i--) {
     set_article_color_slot(i, floor(get_color_profile_slot_r(player_color, 7)*0.75), floor(get_color_profile_slot_g(player_color, 7)*0.75), floor(get_color_profile_slot_b(player_color, 7)*0.75));

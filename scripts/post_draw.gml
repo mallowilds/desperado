@@ -33,7 +33,7 @@ if (head_obj.state == 0) {
 	    // Outline handling
 	    var s_outline_color = make_color_rgb(outline_color[0], outline_color[1], outline_color[2]);
 	    if (s_outline_color != c_black || perfect_dodging) {
-	    	print_debug(s_outline_color);
+	    	//print_debug(s_outline_color);
 	    	for (var i = 0; i <= 7; i++) set_article_color_slot(i, 0, 0, 0, 0); // Transparent-ify
 		    shader_start();
 		    draw_sprite_ext(sprite_get(_s), image_index, x, y, spr_dir, 1, 0, c_white, 1);

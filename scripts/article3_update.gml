@@ -17,6 +17,7 @@ TAUNT SIGNPOST
 - 12: Sway left
 - 13: Sway right
 - 14: Death
+- 15: Burn away
 
 TAUNT GUNSHOT
 - 20: Initialization
@@ -86,6 +87,7 @@ switch state {
         
         //get highest-damage opponent icon
         top_damage = -1;
+        wanted_target = player_id;
         icon_spr = get_char_info(player, INFO_ICON) // default to desp if things fail
         icon_image = 0;
         icon_scale = 2;
@@ -93,11 +95,13 @@ switch state {
             if (player == other.player || get_player_team(player) == get_player_team(other.player) || get_player_damage(player) <= other.top_damage) continue;
             other.top_damage = get_player_damage(player);
             if (!custom) with other {
+                wanted_target = other;
                 icon_spr = sprite_get("bc_icons");
                 icon_image = other.url;
                 icon_scale = 1;
             }
             else {
+                other.wanted_target = self;
                 other.icon_spr = get_char_info(player, INFO_ICON)
                 other.icon_image = 0;
                 other.icon_scale = 2;
@@ -125,6 +129,11 @@ switch state {
         // Detect hitboxes
         if (signpost_detect_hitboxes()) {
             state = 14;
+            state_timer = 0;
+        }
+        
+        else if (wanted_target.state == PS_RESPAWN) {
+            state = 15;
             state_timer = 0;
         }
         
@@ -156,6 +165,11 @@ switch state {
             state_timer = 0;
         }
         
+        else if (wanted_target.state == PS_RESPAWN) {
+            state = 15;
+            state_timer = 0;
+        }
+        
         // Apply gravity
         vsp += 0.4;
         if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
@@ -184,6 +198,11 @@ switch state {
             state_timer = 0;
         }
         
+        else if (wanted_target.state == PS_RESPAWN) {
+            state = 15;
+            state_timer = 0;
+        }
+        
         // Apply gravity
         vsp += 0.4;
         if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
@@ -204,6 +223,16 @@ switch state {
         }
         break;
     
+    // Burn away
+    case 15:
+        sprite_index = sprite_get("sign_burn");
+        image_index = state_timer / 5;
+        if (image_index >= 17) {
+            if (player_id.signpost_obj == self) player_id.signpost_obj = noone;
+            instance_destroy();
+            exit;
+        }
+        break;
     
     //#endregion
     
