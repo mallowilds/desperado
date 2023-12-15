@@ -67,7 +67,7 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
         print_debug(window_timer);
         switch window {
             case 7:
-                if (window_timer == 4) frame = 1;
+                if (window_timer == 4) frame = 1; // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
                 break;
             case 8:
                 var pre_frame = 1 + reload_anim_timer/2; // Since hitpause throws a wrench into things, we cheat and reuse the desync anim timer
@@ -104,3 +104,12 @@ shader_end();
 
 // Reset article color slots
 init_shader();
+
+// #region vvv LIBRARY DEFINES AND MACROS vvv
+// DANGER File below this point will be overwritten! Generated defines and macros below.
+// Write NO-INJECT in a comment above this area to disable injection.
+#define window_time_is(frame) // Version 0
+    // Returns if the current window_timer matches the frame AND the attack is not in hitpause
+    return window_timer == frame and !hitpause
+// DANGER: Write your code ABOVE the LIBRARY DEFINES AND MACROS header or it will be overwritten!
+// #endregion
