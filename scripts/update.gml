@@ -59,6 +59,42 @@ if (reload_anim_timer < 8) reload_anim_timer++;
 //#endregion
 
 
+//#region HUD reload anim management
+switch reload_anim_state {
+    case 0: // Idle
+        reload_anim_frame = 0;
+        break;
+    case 1: // Loop startup
+        reload_anim_frame = 1 + (reload_anim_timer / 2);
+        if (reload_anim_frame >= 3) {
+            reload_anim_state = 2;
+            reload_anim_timer = 0;
+        }
+        break;
+    case 2: // Loop
+        reload_anim_frame = 3+(reload_anim_timer/3)%2;
+        break;
+    case 3: // Click up
+        reload_anim_frame = 5 + floor(reload_anim_timer/3);
+        if (reload_anim_frame >= 10) {
+            reload_anim_state = 0;
+            reload_anim_timer = 0;
+            reload_anim_frame = 0;
+        }
+        break;
+    case 4: // Click in (fire)
+        reload_anim_frame = 10 + (reload_anim_timer / 2)
+        if (reload_anim_frame >= 14) {
+            reload_anim_state = 0;
+            reload_anim_timer = 0;
+            reload_anim_frame = 0;
+        }
+        break;
+        
+}
+reload_anim_timer++;
+//#endregion
+
 
 //#region Sparkle management (Added by update.gml, hitbox_update.gml, and article1_update.gml, drawn in post_draw and article1_pre_draw)
 for (var i = 0; i < ds_list_size(sparkle_list); i++) {

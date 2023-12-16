@@ -361,6 +361,7 @@ switch state {
         
         break;
     
+    // Active
     case 31:
         
         if (state_timer >= duration) {
@@ -368,6 +369,7 @@ switch state {
                 if (player_id.num_bullets < 6) {
                     player_id.num_bullets++;
                     player_id.nametag_white_flash = 1;
+                    player_id.reload_anim_state = 3;
                     player_id.reload_anim_timer = 0;
                     sound_play(sound_get("desp_click"));
                 }
@@ -378,6 +380,8 @@ switch state {
                     discard_visual.state = 00;
                     discard_visual.hsp = -3*(player_id.spr_dir);
                     discard_visual.vsp = -4;
+                    player_id.reload_anim_state = 3;
+                    player_id.reload_anim_timer = 0;
                     sound_play(asset_get("sfx_gus_land"));
                     
                     break;
@@ -414,9 +418,6 @@ switch state {
         }
         
         break;
-    
-    
-    //Active
     
     
     //#endregion

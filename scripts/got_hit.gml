@@ -20,3 +20,8 @@ if (prev_state == PS_ATTACK_GROUND && attack == AT_FSTRONG_2) {
         bullet_casing.vsp = -6;
     }
 }
+
+if (reload_anim_state == 1 || reload_anim_state == 2) {
+    reload_anim_state = 0;
+    reload_anim_timer = 0;
+}

@@ -974,18 +974,14 @@ sprite_index = sprite_get("skull_hurt");
 //These are the filters that check whether a hitbox should be able to hit the article.
 //Feel free to tweak this as necessary.
 with hbox {
-	print_debug("-")
-	print_debug(other.player_id.player);
     var player_equal = player == other.player_id.player;
     var team_equal = get_player_team(player) == get_player_team(other.player_id.player);
-    print_debug(player_equal);
-    print_debug(team_equal);
     
     return ("owner" not in self || owner != other) //check if the hitbox was created by this article
         && hit_priority != 0 && hit_priority <= 10
         && (groundedness == 0 || groundedness == 1+other.free)
         && (!player_equal) //uncomment to prevent the article from being hit by its owner.
-        //&& ( (get_match_setting(SET_TEAMS) && (get_match_setting(SET_TEAMATTACK) || !team_equal) ) || player_equal) //uncomment to prevent the article from being hit by its owner's team.
+        && ( (get_match_setting(SET_TEAMS) && (get_match_setting(SET_TEAMATTACK) || !team_equal) ) || player_equal) //uncomment to prevent the article from being hit by its owner's team.
 }
  
 #define create_article_hitbox(attack, hbox_num, _x, _y)
@@ -1026,10 +1022,8 @@ if num == 1 {
     if hit_variable not in hbox 
         if (group == -1 || ( group != -1 && hbox_group[@ hbox.orig_player-1][@ hbox.attack][@ group] == 0)) {
             if filters(hbox) {
-            	print_debug("y");
                 final_hbox = hbox;
             } else {
-            	print_debug("n");
                 //hitbox doesn't meet collision criteria. since this usually doesn't change, omit it.
                 variable_instance_set(hbox, hit_variable, true);
             }
@@ -1048,14 +1042,12 @@ if num == 1 {
             //group check
             if (group == -1 || ( group != -1 && hbox_group[@ hbox.orig_player-1][@ hbox.attack][@ group] == 0)) {
                 if filters(hbox) {
-                	print_debug("y");
                     if hbox.hit_priority > highest_priority {
                         highest_priority = hbox.hit_priority;
                         highest_priority_owner = hbox.player;
                         highest_priority_hbox = hbox;
                     }
                 } else {
-                	print_debug("n");
                     //hitbox doesn't meet collision criteria. since this usually doesn't change, omit it.
                     variable_instance_set(hbox, hit_variable, true);
                 }

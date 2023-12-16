@@ -57,7 +57,9 @@ num_bullets = 0;                        // 0-6
 bullet_mult = 0.125;                    // multiplier per bullet. Constant value
 u_mult_damage_buffer = 0;               // see also: other_init.gml
 
-reload_anim_timer = 999;
+reload_anim_state = 0;                  // See update.gml
+reload_anim_timer = 0;
+reload_anim_frame = 0;
 
 nametag_white_flash = 0;
 nametag_flame_alpha = 0;

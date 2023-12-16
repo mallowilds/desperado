@@ -41,12 +41,14 @@ switch (attack) {
     case AT_JAB:
     	if (window == 7 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
     		sound_play(sound_get("desp_spin"))
-    		reload_anim_timer = 0; // cheating to track time passage in hitpause: see draw_hud
+    		reload_anim_state = 1;
+        	reload_anim_timer = 0;
     	}
     	if (window == 9 && window_time_is(floor(13*(has_hit?1:1.5)))) {
     		sound_stop(sound_get("desp_spin"))
     		sound_play(sound_get("desp_click"));
-    		reload_anim_timer = 0; // This one's a normal desync anim
+    		reload_anim_state = 3;
+        	reload_anim_timer = 0;
     		if (num_bullets < 6) {
     			num_bullets++;
     			nametag_white_flash = 1;
@@ -97,16 +99,21 @@ switch (attack) {
     case AT_FSTRONG_2:
 		if (window == 1 && window_time_is(1)) {
 			bullet_lost = false;
+			reload_anim_state = 1;
+			reload_anim_timer = 0;
 			sound_play(sound_get("desp_spin"));
 			fstrong_blast_obj = noone;
 		}
 		if (window == 3 && window_time_is(1)) {
 			sound_stop(sound_get("desp_spin"));
 			sound_play(sound_get("desp_cointoss"), false, noone, 1)
-
+			
 			bullet_lost = true;
 			num_bullets--;
 			nametag_white_flash = 1;
+			
+			reload_anim_state = 3;
+			reload_anim_timer = 0;
 		}
 		if (window == 3 && window_time_is(11)){
 			sound_play(sound_get("desp_coin"), false, noone, .5)
@@ -304,6 +311,10 @@ switch (attack) {
             else {
                 num_bullets--;
                 nametag_white_flash = 1;
+                
+                reload_anim_state = 4;
+        		reload_anim_timer = 0;
+        		
                 if (num_bullets <= 0) {
                     sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1);
                     window = 3;
@@ -322,6 +333,9 @@ switch (attack) {
             
             sound_play(sound_get("desp_shot"))
             
+            reload_anim_state = 4;
+        	reload_anim_timer = 0;
+        	
             num_bullets--;
             nametag_white_flash = 1;
             if (num_bullets > 0) {
@@ -329,7 +343,6 @@ switch (attack) {
                 window_timer = 0;
                 attack_end();
                 create_nspec_shot(1, sprite_get("nspec_blast_close"), sprite_get("nspec_blast_segment"), sprite_get("nspec_blast_wall"), 38, 6, sprite_get("null"), 0, 0);
-
             }
             else { // Continuing to window 3
                 sound_play(sound_get("desp_weirdgun"), 0, noone, .8, 1);
@@ -496,6 +509,9 @@ switch (attack) {
         		if window_time_is(1) {
         			if (vsp > 0) vsp = 0;
         			training_mode_refill = get_match_setting(SET_PRACTICE) && taunt_pressed;
+        			
+        			reload_anim_state = 1;
+        			reload_anim_timer = 0;
         		}
         		
         		if (vsp > 3) vsp = 3;
@@ -518,6 +534,9 @@ switch (attack) {
 					sound_stop(sound_get("desp_spin"))
 		            sound_play(sound_get("desp_click"))
 		            //sound_stop(sound_get("desp_whisper"))
+		            
+		            reload_anim_state = 3;
+        			reload_anim_timer = 0;
 		            
 		            if (num_bullets < 6) {
 		            	num_bullets++;

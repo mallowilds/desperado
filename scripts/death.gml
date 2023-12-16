@@ -44,3 +44,9 @@ if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && !head_o
 
 // Reset anti-stall checks
 move_cooldown[AT_DSPECIAL] = 0;
+
+// Reset HUD
+if (reload_anim_state == 1 || reload_anim_state == 2) {
+    reload_anim_state = 0;
+    reload_anim_timer = 0;
+}
