@@ -72,7 +72,7 @@ if (state != 4 && state != 5) {
 		if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
 			state = 4;
 			state_timer = 0;
-			visible = false;
+			sprite_index = sprite_get("null");
 			y = get_stage_data(SD_BOTTOM_BLASTZONE_Y) - 1;
 			respawn_penalty = true;
 			// might be cute to have a mini-death-explosion-slash-poof-of-smoke-vfx? also might be too much work lmao
@@ -82,7 +82,7 @@ if (state != 4 && state != 5) {
 		else if (x < get_stage_data(SD_LEFT_BLASTZONE_X)) {
 			state = 4;
 			state_timer = 0;
-			visible = false;
+			sprite_index = sprite_get("null");
 			x = get_stage_data(SD_LEFT_BLASTZONE_X) + 1;
 			respawn_penalty = true;
 			// todo: sfx
@@ -91,7 +91,7 @@ if (state != 4 && state != 5) {
 		else if (x > get_stage_data(SD_RIGHT_BLASTZONE_X)) {
 			state = 4;
 			state_timer = 0;
-			visible = false;
+			sprite_index = sprite_get("null");
 			x = get_stage_data(SD_RIGHT_BLASTZONE_X) - 1;
 			respawn_penalty = true;
 			// todo: sfx
@@ -125,6 +125,7 @@ switch (state) {
 	case 0:
 		health = max_health;
 		sprite_index = sprite_get("null");
+		visible = false;
 	    vsp = 0;
 	    hsp = 0;
 	    window = 1;
@@ -317,9 +318,8 @@ switch (state) {
 	case 4:
 		hsp = 0;
 		vsp = 0;
-	
-		// Visibility inherited by whatever passed it here
-		sprite_index = sprite_get("skulldie");
+		
+		sprite_index = sprite_get("null");
 		can_fspecial = false;
 		can_sync_attack = false;
 		
@@ -327,7 +327,7 @@ switch (state) {
 		if (image_index >= 6) {
 			state = 5;
 			state_timer = 0;
-			visible = false;
+			sprite_index = sprite_get("wisp");
 		}
 		
 		// TODO: add sfx
@@ -339,14 +339,40 @@ switch (state) {
 	case 5:
 		
 		health = max_health;
+		visible = true;
+		sprite_index = sprite_get("wisp");
+		image_index = state_timer/10;
 		
 		can_fspecial = false;
 		can_sync_attack = false;
 		
-		// not dealing with this quite yet~
-		if (state_timer > respawn_delay + (respawn_penalty ? penalty_delay : 0)) {
+		if (state_timer == 1) {
+			wisp = noone;
+			wisp_duration = -1;
+		}
+		
+		if (wisp != noone) { // script order hack to get duration from wisp init
+			wisp_duration = wisp.duration;
+			wisp = noone;
+		}
+		
+		if (state_timer == respawn_delay + (respawn_penalty ? penalty_delay : 0)) {
+			for (var i = 0; i < 3; i++) {
+				wisp = instance_create(x, y, "obj_article3");
+				wisp.state = 30;
+				wisp.gives_bullet = false;
+				wisp.height = -35+(30*i);
+				wisp.y_target_offset = 50;
+			}
+		}
+		
+		if (wisp_duration != -1 && state_timer > wisp_duration + respawn_delay + (respawn_penalty ? penalty_delay : 0)) {
+			var regen_vfx = spawn_hit_fx(player_id.x+(4*player_id.spr_dir), player_id.y-56, player_id.vfx_bullseye_small);
+			regen_vfx.depth = player_id.depth-1;
+			sound_play(asset_get("sfx_mol_bombpop"));
 			state = 0;
 			state_timer = 0;
+			visible = false;
 		}
 		
 		// TODO: add sfx
@@ -509,7 +535,7 @@ switch (state) {
 	//#region Command Attack: AT_FSPECIAL_2 ---------------------------------------------
 	case AT_FSPECIAL_2:
 		
-		//visible = true;
+		visible = true;
 	    can_fspecial = false;
 		can_sync_attack = false;
 		
@@ -519,7 +545,6 @@ switch (state) {
 		switch window {
 			
 			case 1:
-				visible = true;
 				sprite_index = sprite_get("skullactive");
 				image_index = 4;
 				
@@ -531,10 +556,10 @@ switch (state) {
 				}
 			
 			case 2:
-				visible = false;
 				spawn_ash_particle(player*3, player*3+1);
 				state = 4;
 				state_timer = 0;
+				sprite_index = sprite_get("null");
 				respawn_penalty = false;
 				create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
 				break;
@@ -600,7 +625,7 @@ switch (state) {
 				}
 			
 			case 3:
-				visible = false;
+				sprite_index = sprite_get("null");
 				state = 4;
 				state_timer = 0;
 				respawn_penalty = false;
@@ -669,7 +694,7 @@ switch (state) {
 				}
 			
 			case 3:
-				visible = false;
+				sprite_index = sprite_get("null");
 				state = 4;
 				state_timer = 0;
 				respawn_penalty = false;
