@@ -29,6 +29,8 @@ BULLET WISP MANAGER
 
 */
 
+print_debug(state);
+
 switch state {
     
     
@@ -344,7 +346,7 @@ switch state {
     
     
     
-    //#region Bullet Wisp Manager
+    //#region Wisp Manager
     //Init
     case 30:
         var distance = point_distance(x, y, player_id.x, player_id.y-26);
@@ -357,36 +359,12 @@ switch state {
         state = 31;
         state_timer = 0;
         
-        if ("gives_bullet" not in self) gives_bullet = false;
-        
         break;
     
     // Active
     case 31:
         
         if (state_timer >= duration) {
-            if (gives_bullet) {
-                if (player_id.num_bullets < 6) {
-                    player_id.num_bullets++;
-                    player_id.nametag_white_flash = 1;
-                    player_id.reload_anim_state = 3;
-                    player_id.reload_anim_timer = 0;
-                    sound_play(sound_get("desp_click"));
-                }
-                else {
-                    var discard_visual = instance_create(player_id.x, player_id.y-26, "obj_article_3");
-                    discard_visual.x = player_id.x;         // yeah idk why this step is necessary but it is
-                    discard_visual.y = player_id.y-y_target_offset;
-                    discard_visual.state = 00;
-                    discard_visual.hsp = -3*(player_id.spr_dir);
-                    discard_visual.vsp = -4;
-                    player_id.reload_anim_state = 3;
-                    player_id.reload_anim_timer = 0;
-                    sound_play(asset_get("sfx_gus_land"));
-                    
-                    break;
-                }
-            }
             instance_destroy();
             exit;
         }

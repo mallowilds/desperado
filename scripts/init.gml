@@ -295,6 +295,7 @@ vfx_flash = hit_fx_create(sprite_get("nspecflash"), 16)
 vfx_bullseye = hit_fx_create(sprite_get("vfx_1"), 32)
 vfx_bullseye_small = hit_fx_create(sprite_get("vfx_2"), 23)
 vfx_fstrong_blast = hit_fx_create(sprite_get("fstrongblast"), 12)
+vfx_wisp_end = hit_fx_create(sprite_get("wispend"), 9);
 
 //Sprites
 // spr_nspecial_proj = sprite_get("nspecial_proj")

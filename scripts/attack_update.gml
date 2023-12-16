@@ -560,6 +560,9 @@ switch (attack) {
 				if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)) && special_down && (down_down || down_stick_down) && !free) {
 		            window = 1;
 		            window_timer = 4;
+		            
+		            reload_anim_state = 1;
+        			reload_anim_timer = 0;
 		        }
 				
 				break;

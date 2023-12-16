@@ -33,11 +33,9 @@ if (atk == AT_FSPECIAL && my_hitboxID.orig_player == player) { // FSpecial
 	my_hitboxID.head_obj.has_hit = true;
 }
 if (atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // Skull explosion
-	var wisp_manager = instance_create(round((my_hitboxID.x+hit_player_obj.x)/2), round((my_hitboxID.y+hit_player_obj.y)/2), "obj_article3");
-	wisp_manager.state = 30;
-	wisp_manager.gives_bullet = true;
 	my_hitboxID.hitstop_timer = hit_player_obj.hitstop;
 	my_hitboxID.parent_hitbox.hitstop_timer = my_hitboxID.hitstop_timer;
+	head_obj.respawn_give_bullet = true;
 	sound_play(asset_get("sfx_mol_bat_bombhit"))
 }
 if (atk == AT_NSPECIAL && hbox == 3) {

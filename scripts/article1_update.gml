@@ -308,7 +308,7 @@ switch (state) {
 		if (image_index >= 6) {
 			state = 5;
 			state_timer = 0;
-			sprite_index = sprite_get("wisp");
+			sprite_index = sprite_get("null");
 		}
 		
 		// TODO: add sfx
@@ -320,8 +320,11 @@ switch (state) {
 	case 5:
 		
 		visible = true;
-		sprite_index = sprite_get("wisp");
-		image_index = state_timer/10;
+		if (state_timer < 10) sprite_index = sprite_get("null");
+		else {
+			sprite_index = (state_timer < 16) ? sprite_get("wispstart") : sprite_get("wisp");
+			image_index = (state_timer < 16) ? (state_timer-10)/3 :(state_timer-16)/5;
+		}
 		
 		can_fspecial = false;
 		
@@ -337,9 +340,8 @@ switch (state) {
 		
 		if (state_timer == respawn_delay + (respawn_penalty ? penalty_delay : 0)) {
 			for (var i = 0; i < 3; i++) {
-				wisp = instance_create(x, y, "obj_article3");
+				wisp = instance_create(x, y-20, "obj_article3");
 				wisp.state = 30;
-				wisp.gives_bullet = false;
 				wisp.height = (-35+(30*i))*clamp(point_distance(x, y, player_id.x, player_id.y)/100, 1, 4);
 				wisp.y_target_offset = 50;
 			}
@@ -352,6 +354,31 @@ switch (state) {
 			state = 0;
 			state_timer = 0;
 			visible = false;
+			
+			var end_vfx = spawn_hit_fx(x, y, player_id.vfx_wisp_end);
+			end_vfx.depth = depth;
+			
+			if (respawn_give_bullet) {
+				if (player_id.num_bullets < 6) {
+                    player_id.num_bullets++;
+                    player_id.nametag_white_flash = 1;
+                    player_id.reload_anim_state = 3;
+                    player_id.reload_anim_timer = 0;
+                    sound_play(sound_get("desp_click"));
+                }
+                else {
+                    with (player_id) var discard_visual = instance_create(x, y-26, "obj_article_3");
+                    discard_visual.state = 00;
+                    discard_visual.hsp = -3*(player_id.spr_dir);
+                    discard_visual.vsp = -4;
+                    player_id.reload_anim_state = 3;
+                    player_id.reload_anim_timer = 0;
+                    sound_play(asset_get("sfx_gus_land"));
+                    
+                    break;
+                }
+                respawn_give_bullet = false;
+			}
 		}
 		
 		// TODO: add sfx
