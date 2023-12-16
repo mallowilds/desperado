@@ -65,8 +65,6 @@ nametag_flame_alpha = 0;
 sparkle_list = ds_list_create();        // particle list. implementation is taken from aur, hence the name
 nspec_shot_list = ds_list_create();     // similar particle manager for nspecial shots.
 
-dairs_used = 0;                         // dairs used per airtime
-
 signpost_obj = noone;                   // taunt
 
 // Training mode assets

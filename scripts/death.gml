@@ -43,6 +43,4 @@ if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && !head_o
 }
 
 // Reset anti-stall checks
-dairs_used = 0;
 move_cooldown[AT_DSPECIAL] = 0;
-move_cooldown[AT_USPECIAL] = 0;

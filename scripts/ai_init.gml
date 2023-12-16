@@ -6,6 +6,7 @@ far_down_attacks[0] = AT_DAIR
 
 far_side_attacks[0] = AT_NSPECIAL
 far_side_attacks[1] = AT_FSPECIAL
+far_side_attacks[2] = AT_DSPECIAL
 
 mid_side_attacks[0] = AT_FSTRONG
 mid_side_attacks[1] = AT_DATTACK
@@ -26,4 +27,3 @@ close_side_attacks[2] = AT_FTILT
 
 neutral_attacks[0] = AT_JAB
 neutral_attacks[1] = AT_NAIR
-neutral_attacks[2] = AT_DSPECIAL
