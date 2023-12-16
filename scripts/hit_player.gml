@@ -32,17 +32,6 @@ if (atk == AT_FSPECIAL && my_hitboxID.orig_player == player) { // FSpecial
 	my_hitboxID.head_obj.hitstop = hit_player_obj.hitstop;
 	my_hitboxID.head_obj.has_hit = true;
 }
-if (atk == 42 && my_hitboxID.orig_player == player) { // Sync attacks
-	my_hitboxID.head_obj.hitstop = hit_player_obj.hitstop;
-	my_hitboxID.head_obj.has_hit = true;
-	my_hitboxID.head_obj.can_hit[hit_player+1] = false;
-	
-	with pHitBox {
-		if ("head_obj" in self && head_obj == other.my_hitboxID.head_obj && attack == 42) {
-			can_hit[other.hit_player+1] = false;
-		}
-	}
-}
 if (atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // Skull explosion
 	var wisp_manager = instance_create(round((my_hitboxID.x+hit_player_obj.x)/2), round((my_hitboxID.y+hit_player_obj.y)/2), "obj_article3");
 	wisp_manager.state = 30;

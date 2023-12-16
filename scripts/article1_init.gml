@@ -21,17 +21,12 @@ vsp = 0;                                            //The vertical speed of the 
 has_hit = false;
 
 hittable = false;
-health = 1;
-max_health = 1;
-last_attack = [noone, noone, noone, noone, noone];
-hittable_hitpause_mult = 1;
 
 respawn_penalty = true;                             // If set to false, removes penalty delay and spawns a hitbox on return
 respawn_delay = 60;
 penalty_delay = 30;
 
 can_fspecial = false;
-can_sync_attack = false;
 skull_stored_attack = noone;
 
 shots_absorbed = 0;
@@ -49,3 +44,32 @@ hit_wall = false;                                   //If the article moves into 
 orig_player = player;
 orig_player_id = player_id;
 hud_arrow = sprite_get("skull_hud_arrow");
+
+
+
+
+// Supersonic Hit Detection Template
+//make hbox_group array (the old version was really bad because the array actually affected all players no matter what lol)
+hbox_group = array_create(4,0);
+var i1 = 0;
+var i2 = 0;
+repeat(4) {
+    hbox_group[@i1] = array_create(50,0);
+    repeat(50) {
+        hbox_group[@i1][@i2] = array_create(10,0);
+        i2++;
+    }
+    i2 = 0;
+    i1++;
+}
+ 
+hitstun = 0;
+hitstun_full = 0;
+ 
+kb_adj = 1;
+kb_dir = 0;
+orig_knock = 0;
+ 
+hit_lockout = 0;
+ 
+article_should_lockout = true; //set to false if you don't want hit lockout.

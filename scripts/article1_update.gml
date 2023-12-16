@@ -24,17 +24,11 @@
 ignores_walls = false;
 
 //#region Hittability handling --------------------------------------------------------
-is_hittable = !(state = 0 || state == 3 || state == 4 || state == 5); // WILL BE DEPRECATED SOON - use below hittable var for checks
-can_be_hit[player] = 3;
 hittable = !(state = 0 || state == 3 || state == 4 || state == 5);
 
 if (state != AT_NSPECIAL) shots_absorbed = 0;
 
-with player_id.object_index {
-	if (!clone && state != PS_ATTACK_AIR && state != PS_ATTACK_GROUND) {
-		other.last_attack[player] = noone;
-	}
-}
+if (hittable) hit_detection();
 //#endregion
 
 
@@ -54,13 +48,7 @@ if (shot_visual != noone) {
 
 if (state != 4 && state != 5) {
 	
-	if (health <= 0 && state != 2) {
-		state = 4;
-		state_timer = 0;
-		respawn_penalty = true;
-	}
-	
-	else if (place_meeting(x, y, asset_get("plasma_field_obj")) && state != 0) {
+	if (place_meeting(x, y, asset_get("plasma_field_obj")) && state != 0) {
 		state = 4;
 		state_timer = 0;
 		respawn_penalty = true;
@@ -123,14 +111,12 @@ switch (state) {
 	
 	//#region State 0: Inactive	------------------------------------------------
 	case 0:
-		health = max_health;
 		sprite_index = sprite_get("null");
 		visible = false;
 	    vsp = 0;
 	    hsp = 0;
 	    window = 1;
 	    can_fspecial = false;
-		can_sync_attack = false;
 	    break;
 	//#endregion
 	
@@ -144,7 +130,6 @@ switch (state) {
 	    
 	    has_hit = false;
 	    can_fspecial = true;
-		can_sync_attack = true;
 	    
 	    if (!free) y--;
 		
@@ -158,13 +143,11 @@ switch (state) {
 		sprite_index = sprite_get("skullhurt");
 		image_index = state_timer / 4;
 		can_fspecial = false;
-		can_sync_attack = false;
-		
 		
 		if (hitstop <= 0) {
 			vsp += 0.4;
 			if (state_timer > 20) {
-				state = 1;
+				state = 4;
 				state_timer = 0;
 			}
 		}
@@ -200,7 +183,6 @@ switch (state) {
 		visible = true;
 	    
 	    can_fspecial = false;
-		can_sync_attack = false;
 		
 		player = orig_player;
 		player_id = orig_player_id;
@@ -209,7 +191,7 @@ switch (state) {
 			
 			case 1:
 			
-			    if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+			    if (window_timer == 1) {
 			    	sprite_index = sprite_get("skullhurt");
 			    	image_index = 0;
 			    	spr_dir = bashed_id.spr_dir;
@@ -229,7 +211,7 @@ switch (state) {
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (hitstop <= 0 && window_timer == 1) {
 					hsp *= 2/3
 					vsp *= 2/3
 					moving_vertically = (hsp == 0);
@@ -319,9 +301,8 @@ switch (state) {
 		hsp = 0;
 		vsp = 0;
 		
-		sprite_index = sprite_get("null");
+		sprite_index = sprite_get("skulldie");
 		can_fspecial = false;
-		can_sync_attack = false;
 		
 		image_index = state_timer / 5;
 		if (image_index >= 6) {
@@ -338,13 +319,11 @@ switch (state) {
 	//#region State 5: Respawning ----------------------------------------------
 	case 5:
 		
-		health = max_health;
 		visible = true;
 		sprite_index = sprite_get("wisp");
 		image_index = state_timer/10;
 		
 		can_fspecial = false;
-		can_sync_attack = false;
 		
 		if (state_timer == 1) {
 			wisp = noone;
@@ -388,7 +367,6 @@ switch (state) {
 		visible = true;
 	    sprite_index = sprite_get("skullactive");
 	    can_fspecial = true;
-		can_sync_attack = false;
 		
 		switch (window) {
 			
@@ -401,7 +379,7 @@ switch (state) {
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (hitstop <= 0 && window_timer == 1) {
 					hsp = (6+throw_dir) *spr_dir;
 					vsp = -3.5 + 3*throw_dir;
 					
@@ -497,7 +475,7 @@ switch (state) {
 				
 				var target_sp = 2.25*ln(0.9*window_timer+1); // https://www.desmos.com/calculator/d2byh0mgnk
 				
-				if (window_timer == 1) angle_change = clamp((player_id.x-x)/10, -50, 50); // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (window_timer == 1) angle_change = clamp((player_id.x-x)/10, -50, 50);
 				else if (angle_change > 0) angle_change = clamp(angle_change-0.5, 0, angle_change);
 				else if (angle_change < 0) angle_change = clamp(angle_change+0.5, angle_change, 0);
 				
@@ -537,7 +515,6 @@ switch (state) {
 		
 		visible = true;
 	    can_fspecial = false;
-		can_sync_attack = false;
 		
 		hsp *= 0.9;
 		vsp *= 0.9;
@@ -574,7 +551,6 @@ switch (state) {
 		visible = true;
 	    sprite_index = sprite_get("skullactive");
 	    can_fspecial = false;
-		can_sync_attack = false;
 		
 		switch (window) {
 				
@@ -583,7 +559,7 @@ switch (state) {
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (hitstop <= 0 && window_timer == 1) {
 					hsp = 6*spr_dir;
 					vsp = -3.5;
 					
@@ -643,7 +619,6 @@ switch (state) {
 		visible = true;
 	    sprite_index = sprite_get("skullactive");
 	    can_fspecial = false;
-		can_sync_attack = false;
 		
 		switch (window) {
 				
@@ -652,7 +627,7 @@ switch (state) {
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.4, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (hitstop <= 0 && window_timer == 1) {
 					hsp = 3*spr_dir;
 					vsp = -9;
 					
@@ -720,7 +695,6 @@ switch (state) {
 				draw_y = 0;
 				
 				can_fspecial = false;
-				can_sync_attack = false;
 				has_hit = false;
 				
 				hsp = 0;
@@ -753,7 +727,7 @@ switch (state) {
 				if (reticle_angle > 90 && reticle_angle < 270) spr_dir = -1;
 				else if (reticle_angle != 90 && reticle_angle != 270) spr_dir = 1;
 				reticle_offset_angle -= (50/charge_time); // denominator is window duration in frames
-				if (reticle_alpha < 0.8) reticle_alpha = window_timer/90; // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (reticle_alpha < 0.8) reticle_alpha = window_timer/90;
 				if (reticle_offset_angle <= 0) {
 					reticle_offset_angle = 0;
 					window = 3;
@@ -764,8 +738,7 @@ switch (state) {
 			
 			case 3:
 			
-				hittable = false; // TODO: remove after transition to Supersonic hit template
-				is_hittable = false;
+				hittable = false;
 				
 				draw_x = 0;
 				draw_y = 0;
@@ -779,7 +752,7 @@ switch (state) {
 					reticle_alpha = 0;
 				}
 				
-				if (window_timer == 1 && hitstop <= 0) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (window_timer == 1 && hitstop <= 0) {
 					var vflash = spawn_hit_fx(x, y+24, player_id.vfx_flash)
 	        		vflash.depth = depth - 1;
 	        		vflash.spr_dir = spr_dir;
@@ -925,6 +898,190 @@ else hitstop = floor(hitstop);
         sp_skull_owned : 1,
     };
     ds_list_add(player_id.sparkle_list, sparkle);
+
+
+
+//#region Supersonic Hit Detection
+
+#define on_hit(hbox)
+// This is the code the article should run on hit.
+// Edit this to have the desired functions when your article is hit by a hitbox.
+// hbox refers to the pHitBox object that hit the article.
+// hit_player_obj (usually) refers to the player that hit the article.
+// hit_player_num refers to the player's number that hit the article.
+ 
+hit_player_obj = hbox.player_id;
+hit_player_num = hbox.player;
+ 
+//Default Hitpause Calculation
+//You probably want this stuff because it makes the hit feel good.
+if hbox.type == 1 {
+    var desired_hitstop = clamp(hbox.hitpause + hbox.damage * hbox.hitpause_growth * 0.05, 0, 20);
+    with hit_player_obj {
+        if !hitpause {
+            old_vsp = vsp;
+            old_hsp = hsp;
+        }
+        hitpause = true;
+        has_hit = true;
+        if hitstop < desired_hitstop {
+            hitstop = desired_hitstop;
+            hitstop_full = desired_hitstop;
+        }
+    }
+}
+// This puts the ARTICLE in hitpause.
+// If your article does not already account for being in hitpause, either make it stop what it's doing in hitpause
+// or comment out the line below.
+hitstop = floor(desired_hitstop); 
+ 
+//Hit Lockout
+if article_should_lockout hit_lockout = hbox.no_other_hit;
+ 
+//Default Hitstun Calculation
+hitstun = (hbox.kb_value * 4 * ((kb_adj - 1) * 0.6 + 1) + hbox.damage * 0.12 * hbox.kb_scale * 4 * 0.65 * kb_adj) + 12;
+hitstun_full = hitstun;
+            
+//Default Knockback Calculation
+ 
+// if other.force_flinch && !other.free orig_knock = 0; //uncomment this line for grounded articles.
+if hbox.force_flinch orig_knock = 0.3; //comment out this line for grounded articles.
+else orig_knock = hbox.kb_value + hbox.damage * hbox.kb_scale * 0.12 * kb_adj;
+kb_dir = get_hitbox_angle(hbox);
+ 
+hsp = lengthdir_x(orig_knock, kb_dir);
+vsp = lengthdir_y(orig_knock, kb_dir);
+
+//Default hit stuff
+sound_play(hbox.sound_effect);
+//ty nart :p
+var fx_x = lerp(hbox.x, x, 0.5) + hbox.hit_effect_x*hbox.spr_dir;
+var fx_y = lerp(hbox.y, y, 0.5) + hbox.hit_effect_y;
+with hit_player_obj { // use a with so that it's shaded correctly
+    var temp_fx = spawn_hit_fx(fx_x, fx_y, hbox.hit_effect);
+    temp_fx.hit_angle = other.kb_dir;
+    temp_fx.kb_speed = other.orig_knock;
+}
+ 
+//State stuff
+state = 2;
+state_timer = 0;
+moving_vertically = (hsp == 0);
+sprite_index = sprite_get("skull_hurt");
+
+
+#define filters(hbox)
+//These are the filters that check whether a hitbox should be able to hit the article.
+//Feel free to tweak this as necessary.
+with hbox {
+	print_debug("-")
+	print_debug(other.player_id.player);
+    var player_equal = player == other.player_id.player;
+    var team_equal = get_player_team(player) == get_player_team(other.player_id.player);
+    print_debug(player_equal);
+    print_debug(team_equal);
+    
+    return ("owner" not in self || owner != other) //check if the hitbox was created by this article
+        && hit_priority != 0 && hit_priority <= 10
+        && (groundedness == 0 || groundedness == 1+other.free)
+        && (!player_equal) //uncomment to prevent the article from being hit by its owner.
+        //&& ( (get_match_setting(SET_TEAMS) && (get_match_setting(SET_TEAMATTACK) || !team_equal) ) || player_equal) //uncomment to prevent the article from being hit by its owner's team.
+}
+ 
+#define create_article_hitbox(attack, hbox_num, _x, _y)
+//Use this function to easily create hitboxes that ignore the article's hit detection.
+var hbox = create_hitbox(attack, hbox_num, floor(_x), floor(_y))
+hbox.owner = self;
+return hbox;
+ 
+#define hit_detection
+//Code by Supersonic#9999
+//DO NOT modify this function unless you know what you're doing. This does the actual detection, while
+//the other functions determine how and what the hit detection interacts with.
+//hbox group management
+with (oPlayer)
+    if state == clamp(state, 5, 6) && window == 1 && window_timer == 1 {
+        other.hbox_group[@ player-1][@ attack] = array_create(10,0);
+    }
+ 
+//hit lockout stuff
+if hit_lockout > 0 {
+    hit_lockout--;
+    return;
+}
+//get colliding hitboxes
+var hitbox_list = ds_list_create();
+ 
+var num = instance_place_list(floor(x), floor(y), pHitBox, hitbox_list, false);
+var final_hbox = noone;
+var hit_variable = `hit_article_${id}`;
+if num == 0 {
+    ds_list_destroy(hitbox_list);
+    return;
+}
+if num == 1 {
+    //no priority checks if only one hitbox is found
+    var hbox = hitbox_list[|0]
+    var group = hbox.hbox_group
+    if hit_variable not in hbox 
+        if (group == -1 || ( group != -1 && hbox_group[@ hbox.orig_player-1][@ hbox.attack][@ group] == 0)) {
+            if filters(hbox) {
+            	print_debug("y");
+                final_hbox = hbox;
+            } else {
+            	print_debug("n");
+                //hitbox doesn't meet collision criteria. since this usually doesn't change, omit it.
+                variable_instance_set(hbox, hit_variable, true);
+            }
+        } else {
+            //fake hit if group has already hit; optimization thing
+            variable_instance_set(hbox, hit_variable, true);
+        }
+} else {
+    var highest_priority = 0;
+    var highest_priority_owner = -1;
+    var highest_priority_hbox = noone;
+    for (var i = 0; i < ds_list_size(hitbox_list); i++) {
+        var hbox = hitbox_list[|i]
+        var group = hbox.hbox_group
+        if hit_variable not in hbox 
+            //group check
+            if (group == -1 || ( group != -1 && hbox_group[@ hbox.orig_player-1][@ hbox.attack][@ group] == 0)) {
+                if filters(hbox) {
+                	print_debug("y");
+                    if hbox.hit_priority > highest_priority {
+                        highest_priority = hbox.hit_priority;
+                        highest_priority_owner = hbox.player;
+                        highest_priority_hbox = hbox;
+                    }
+                } else {
+                	print_debug("n");
+                    //hitbox doesn't meet collision criteria. since this usually doesn't change, omit it.
+                    variable_instance_set(hbox, hit_variable, true);
+                }
+            } else {
+                //fake hit if group has already hit; optimization thing
+                variable_instance_set(hbox, hit_variable, true);
+            }
+    }
+    if highest_priority != 0 {
+        final_hbox = highest_priority_hbox;
+    }
+}
+ 
+if final_hbox != noone {
+    on_hit(final_hbox);
+    variable_instance_set(final_hbox, hit_variable, true);
+    if final_hbox.hbox_group != -1 hbox_group[@ final_hbox.orig_player-1][@ final_hbox.attack][@ final_hbox.hbox_group] = 1;
+}
+ 
+//clear hitbox list
+//ds_list_clear(hitbox_list)
+ds_list_destroy(hitbox_list);
+
+//#endregion
+
+
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
