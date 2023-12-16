@@ -361,7 +361,7 @@ switch (state) {
 				wisp = instance_create(x, y, "obj_article3");
 				wisp.state = 30;
 				wisp.gives_bullet = false;
-				wisp.height = -35+(30*i);
+				wisp.height = (-35+(30*i))*clamp(point_distance(x, y, player_id.x, player_id.y)/100, 1, 4);
 				wisp.y_target_offset = 50;
 			}
 		}
