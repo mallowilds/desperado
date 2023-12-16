@@ -132,7 +132,7 @@ make_hitbox(AT_FAIR, 4,
     HG_HITBOX_GROUP, 3,
 
     HG_PRIORITY, 2,
-    HG_DAMAGE, 3,
+    HG_DAMAGE, 2,
     HG_ANGLE, 40,
     //HG_ANGLE_FLIPPER, 6,
     HG_BASE_KNOCKBACK, 7,
