@@ -45,7 +45,7 @@ make_window(AT_USPECIAL, 3, //endlag
     AG_WINDOW_TYPE, 7,
     AG_WINDOW_LENGTH, 12,
     AG_WINDOW_ANIM_FRAME_START, 4,
-    AG_WINDOW_ANIM_FRAMES, 3,
+    AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_CUSTOM_GRAVITY, 2,
     
 )
@@ -53,7 +53,7 @@ make_window(AT_USPECIAL, 3, //endlag
 make_window(AT_USPECIAL, 4, // throw startup
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 8,
-    AG_WINDOW_ANIM_FRAMES, 1,
+    AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 6,
     AG_WINDOW_VSPEED_TYPE, 1,
     AG_WINDOW_VSPEED, -2,
@@ -67,13 +67,13 @@ make_window(AT_USPECIAL, 4, // throw startup
 
 make_window(AT_USPECIAL, 5, // throw
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 9,
+    AG_WINDOW_LENGTH, 14,
     AG_WINDOW_ANIM_FRAMES, 3,
-    AG_WINDOW_ANIM_FRAME_START, 7,
+    AG_WINDOW_ANIM_FRAME_START, 8,
     AG_WINDOW_VSPEED_TYPE, 0,
     AG_WINDOW_HSPEED_TYPE, 0,
     AG_WINDOW_VSPEED, -4,
-    AG_WINDOW_HSPEED, -1,
+    AG_WINDOW_HSPEED, 1,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_CUSTOM_GRAVITY, gravity_speed,
 )
@@ -179,7 +179,7 @@ make_hitbox(AT_USPECIAL, 2,
         )
     }
 
-#macro GRAB_FRAMES 4
+#macro GRAB_FRAMES 6
 #define _get_grab_frames()
     return GRAB_FRAMES
 #macro GRAB_FRAME_START 6

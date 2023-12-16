@@ -317,8 +317,8 @@ switch state {
             signpost_obj.mask_index = sprite_get("sign_mask");
             
             var collide = collision_line(x, y, x+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false);
-            if (screen_wrap && spr_dir == -1 && x+hsp < view_get_xview()) collide = collide || collision_line(x+xview, y, x+xview+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false);
-            else if (screen_wrap && spr_dir == 1 && x+hsp > view_get_xview()+view_get_wview()) collide = collide || collision_line(x-xview, y, x-xview+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false);
+            if (screen_wrap && spr_dir == -1 && x+hsp < view_get_xview()) collide = collide || collision_line(x+xview, y, x+xview+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false); // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
+            else if (screen_wrap && spr_dir == 1 && x+hsp > view_get_xview()+view_get_wview()) collide = collide || collision_line(x-xview, y, x-xview+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false); // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
             
             if (signpost_obj.state != 14 && signpost_obj.state != 15 && collide) {
                 signpost_obj.state = 14;

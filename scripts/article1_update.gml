@@ -191,7 +191,7 @@ switch (state) {
 			
 			case 1:
 			
-			    if (window_timer == 1) {
+			    if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 			    	sprite_index = sprite_get("skullhurt");
 			    	image_index = 0;
 			    	spr_dir = bashed_id.spr_dir;
@@ -211,7 +211,7 @@ switch (state) {
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) {
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hsp *= 2/3
 					vsp *= 2/3
 					moving_vertically = (hsp == 0);
@@ -379,7 +379,7 @@ switch (state) {
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) {
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hsp = (6+throw_dir) *spr_dir;
 					vsp = -3.5 + 3*throw_dir;
 					
@@ -475,7 +475,7 @@ switch (state) {
 				
 				var target_sp = 2.25*ln(0.9*window_timer+1); // https://www.desmos.com/calculator/d2byh0mgnk
 				
-				if (window_timer == 1) angle_change = clamp((player_id.x-x)/10, -50, 50);
+				if (window_timer == 1) angle_change = clamp((player_id.x-x)/10, -50, 50); // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 				else if (angle_change > 0) angle_change = clamp(angle_change-0.5, 0, angle_change);
 				else if (angle_change < 0) angle_change = clamp(angle_change+0.5, angle_change, 0);
 				
@@ -559,7 +559,7 @@ switch (state) {
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) {
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hsp = 6*spr_dir;
 					vsp = -3.5;
 					
@@ -627,7 +627,7 @@ switch (state) {
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.4, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) {
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hsp = 3*spr_dir;
 					vsp = -9;
 					
@@ -727,7 +727,7 @@ switch (state) {
 				if (reticle_angle > 90 && reticle_angle < 270) spr_dir = -1;
 				else if (reticle_angle != 90 && reticle_angle != 270) spr_dir = 1;
 				reticle_offset_angle -= (50/charge_time); // denominator is window duration in frames
-				if (reticle_alpha < 0.8) reticle_alpha = window_timer/90;
+				if (reticle_alpha < 0.8) reticle_alpha = window_timer/90; // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 				if (reticle_offset_angle <= 0) {
 					reticle_offset_angle = 0;
 					window = 3;
@@ -752,7 +752,7 @@ switch (state) {
 					reticle_alpha = 0;
 				}
 				
-				if (window_timer == 1 && hitstop <= 0) {
+				if (window_timer == 1 && hitstop <= 0) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					var vflash = spawn_hit_fx(x, y+24, player_id.vfx_flash)
 	        		vflash.depth = depth - 1;
 	        		vflash.spr_dir = spr_dir;
@@ -1080,8 +1080,6 @@ if final_hbox != noone {
 ds_list_destroy(hitbox_list);
 
 //#endregion
-
-
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.

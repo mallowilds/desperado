@@ -72,7 +72,7 @@ make_hitbox(AT_NSPECIAL, 1,
     HG_HITBOX_GROUP, 1,
 
     HG_PRIORITY, 2,
-    HG_DAMAGE, 3,
+    HG_DAMAGE, 2,
     HG_ANGLE, 90,
     HG_ANGLE_FLIPPER, 9,
     HG_BASE_KNOCKBACK, 3,
@@ -108,7 +108,7 @@ make_hitbox(AT_NSPECIAL, 2,
     HG_ANGLE, 45,
     //HG_ANGLE_FLIPPER, 6,
     HG_BASE_KNOCKBACK, 9, // Tampered with in attack_update
-    HG_KNOCKBACK_SCALING, .7, // Tampered with in attack_update
+    HG_KNOCKBACK_SCALING, .8, // Tampered with in attack_update
     HG_BASE_HITPAUSE, 10,
     HG_HITPAUSE_SCALING, .9,
     HG_EXTRA_HITPAUSE, 5,

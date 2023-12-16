@@ -292,7 +292,7 @@ switch (attack) {
             
             sound_play(sound_get("desp_shot"))
             
-            set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 6 + (0.25 * num_bullets));
+            set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 8 + (0.25 * num_bullets));
             set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.7 + (0.05 * num_bullets));
             //print(get_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING))
             //print(get_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK))
@@ -411,6 +411,9 @@ switch (attack) {
     	switch window {
     		
     		case 1:
+    			if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
+    				sound_play(sound_get("desp_grabswing"))
+    			}
     			set_attack_value(AT_USPECIAL, AG_NUM_WINDOWS, 3);
     			grabbed_player_obj = noone;
     			skull_grabbed = false;
@@ -440,6 +443,7 @@ switch (attack) {
 		       
     		case 4:
     			
+    			
     			if (instance_exists(grabbed_player_obj)) {
     				grabbed_player_obj.x += x - (40*spr_dir) + hsp;
     				grabbed_player_obj.x /= 2;
@@ -452,6 +456,7 @@ switch (attack) {
     			}
     			
     			if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH)) {
+    				sound_play(sound_get("desp_heavyswing"), 0, noone, .2, 1.05)
     				hsp = get_window_value(attack, 5, AG_WINDOW_HSPEED) * spr_dir;
     				vsp = get_window_value(attack, 5, AG_WINDOW_VSPEED);
     				if (instance_exists(grabbed_player_obj)) {
