@@ -44,12 +44,8 @@ if (atk == 42 && my_hitboxID.orig_player == player) { // Sync attacks
 	}
 }
 if (atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // Skull explosion
-	if (num_bullets < 6) { // temp until something nicer can get set up
-		num_bullets++;
-		nametag_white_flash = 1;
-		reload_anim_timer = 0;
-		sound_play(sound_get("desp_click"));
-	}
+	var wisp_manager = instance_create(round((my_hitboxID.x+hit_player_obj.x)/2), round((my_hitboxID.y+hit_player_obj.y)/2), "obj_article3");
+	wisp_manager.state = 30;
 	my_hitboxID.hitstop_timer = hit_player_obj.hitstop;
 	my_hitboxID.parent_hitbox.hitstop_timer = my_hitboxID.hitstop_timer;
 	sound_play(asset_get("sfx_mol_bat_bombhit"))

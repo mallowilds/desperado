@@ -23,7 +23,7 @@ TAUNT GUNSHOT
 - 20: Initialization
 - 21: Moving
 
-BULLET WISP
+BULLET WISP MANAGER
 - 30: Initialization
 - 31: Active
 
@@ -342,6 +342,73 @@ switch state {
     
     //#endregion
     
+    
+    
+    //#region Bullet Wisp Manager
+    //Init
+    case 30:
+        var distance = point_distance(x, y, player_id.x, player_id.y-26);
+        
+        if (x != player_id.x) spr_dir = (x < player_id.x ? 1 : -1);
+        duration = floor(distance / 10);
+        height = (distance > 400 ? 200 : distance/2)*spr_dir;
+        
+        state = 31;
+        state_timer = 0;
+        
+        break;
+    
+    case 31:
+        
+        if (state_timer >= duration) {
+            if (player_id.num_bullets < 6) {
+                player_id.num_bullets++;
+                player_id.nametag_white_flash = 1;
+                player_id.reload_anim_timer = 0;
+                sound_play(sound_get("desp_click"));
+            }
+            else {
+                var discard_visual = instance_create(player_id.x, player_id.y-26, "obj_article_3");
+                discard_visual.x = player_id.x;         // yeah idk why this step is necessary but it is
+                discard_visual.y = player_id.y-26;      // ty dan lol
+                discard_visual.state = 00;
+                discard_visual.hsp = -3*(player_id.spr_dir);
+                discard_visual.vsp = -4;
+                sound_play(asset_get("sfx_gus_land"));
+                
+                break;
+            }
+            instance_destroy();
+            exit;
+        }
+        
+        var angle = point_direction(x, y, player_id.x, player_id.y-26);
+        var progress = (state_timer / duration);
+        
+        var x_dist = progress*(player_id.x-x);
+        var y_dist = progress*(player_id.y-26-y);
+        var x_offset = lengthdir_x(-2*progress*(progress-1)*height, angle+90); // https://www.desmos.com/calculator/x54440men2
+        var y_offset = lengthdir_y(-2*progress*(progress-1)*height, angle+90);
+        
+        var ash_type = "ashpart_" + string(1+random_func_2(6*player, 3, true));
+        var sparkle = {
+            sp_x : x + x_dist + x_offset,
+            sp_y : y + y_dist + y_offset,
+            sp_sprite_index : sprite_get(ash_type),
+            sp_max_lifetime : 18,
+            sp_lifetime : 0,
+            sp_spr_dir : spr_dir,
+            sp_skull_owned : 0,
+        };
+        ds_list_add(player_id.sparkle_list, sparkle);
+        
+        break;
+    
+    
+    //Active
+    
+    
+    //#endregion
     
     
     //#region Failed initialization
