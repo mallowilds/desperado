@@ -64,7 +64,6 @@ if (state == PS_ATTACK_AIR || state == PS_ATTACK_GROUND) {
     }
     
     else if (attack == AT_JAB) {
-        print_debug(window_timer);
         switch window {
             case 7:
                 if (window_timer == 4) frame = 1; // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html

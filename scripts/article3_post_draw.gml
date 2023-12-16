@@ -37,10 +37,11 @@ switch state {
         break;
     
     case 21:
+        var xview = floor(get_instance_x(asset_get("camera_obj")) - 480);
         with (player_id) shader_start();
         draw_sprite_ext(sprite_get("taunt_shot"), 0, x, y, 1, 1, move_angle, c_white, 1);
-        if (screen_wrap && spr_dir == -1 && x+hsp < view_get_xview()) draw_sprite_ext(sprite_get("taunt_shot"), 0, x+view_get_wview(), y, 1, 1, move_angle, c_white, 1); // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
-        else if (screen_wrap && spr_dir == 1 && x+hsp > view_get_xview()+view_get_wview()) draw_sprite_ext(sprite_get("taunt_shot"), 0, x-view_get_wview(), y, 1, 1, move_angle, c_white, 1); // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
+        if (screen_wrap && spr_dir == -1 && x+hsp < xview) draw_sprite_ext(sprite_get("taunt_shot"), 0, x+view_get_wview(), y, 1, 1, move_angle, c_white, 1);
+        else if (screen_wrap && spr_dir == 1 && x+hsp > xview+view_get_wview()) draw_sprite_ext(sprite_get("taunt_shot"), 0, x-view_get_wview(), y, 1, 1, move_angle, c_white, 1);
         shader_end();
         break;
     

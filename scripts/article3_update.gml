@@ -23,6 +23,10 @@ TAUNT GUNSHOT
 - 20: Initialization
 - 21: Moving
 
+BULLET WISP
+- 30: Initialization
+- 31: Active
+
 */
 
 switch state {
@@ -291,16 +295,18 @@ switch state {
         break;
     
     case 21:
+    
+        var xview = floor(get_instance_x(asset_get("camera_obj")) - 480);
         
         hsp = lengthdir_x(120, move_angle);
         vsp = lengthdir_y(120, move_angle);
         
         if (screen_wrap) {
-            if (spr_dir == -1 && x+hsp < get_instance_x(asset_get("camera_obj"))) {
+            if (spr_dir == -1 && x+hsp < xview) {
                 x += view_get_wview();
                 screen_wrap = false;
             }
-            else if (spr_dir == 1 && x+hsp > get_instance_x(asset_get("camera_obj"))+view_get_wview()) {
+            else if (spr_dir == 1 && x+hsp > xview+view_get_wview()) {
                 x -= view_get_wview();
                 screen_wrap = false;
             }
@@ -309,7 +315,12 @@ switch state {
         if (instance_exists(signpost_obj)) {
             var old_mask = signpost_obj.mask_index;
             signpost_obj.mask_index = sprite_get("sign_mask");
-            if (signpost_obj.state != 14 && signpost_obj.state != 15 && collision_line(x, y, x+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false)) {
+            
+            var collide = collision_line(x, y, x+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false);
+            if (screen_wrap && spr_dir == -1 && x+hsp < view_get_xview()) collide = collide || collision_line(x+xview, y, x+xview+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false);
+            else if (screen_wrap && spr_dir == 1 && x+hsp > view_get_xview()+view_get_wview()) collide = collide || collision_line(x-xview, y, x-xview+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false);
+            
+            if (signpost_obj.state != 14 && signpost_obj.state != 15 && collide) {
                 signpost_obj.state = 14;
                 signpost_obj.state_timer = 0;
                 sound_play(asset_get("sfx_syl_ustrong_part3"))
