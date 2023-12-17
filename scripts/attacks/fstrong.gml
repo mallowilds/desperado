@@ -2,7 +2,7 @@
 
 make_attack(AT_FSTRONG,
     AG_SPRITE, sprite_get("fstrong_nul"),
-    AG_NUM_WINDOWS, 7,
+    AG_NUM_WINDOWS, 5,
     AG_HAS_LANDING_LAG, 3,
     AG_STRONG_CHARGE_WINDOW, 2,
     AG_HURTBOX_SPRITE, sprite_get("desp_hurt"),
@@ -37,7 +37,7 @@ make_window(AT_FSTRONG, 4,
 )
 
 make_window(AT_FSTRONG, 5,
-    AG_WINDOW_LENGTH, 24,
+    AG_WINDOW_LENGTH, 31,
     AG_WINDOW_HAS_WHIFFLAG, 1,
     AG_WINDOW_ANIM_FRAMES, 6,
     AG_WINDOW_ANIM_FRAME_START, 7,
