@@ -82,6 +82,7 @@ make_window(AT_JAB, 9,
 set_num_hitboxes(AT_JAB, 3);
 
 make_hitbox(AT_JAB, 1,
+    HG_HITBOX_TYPE, 1,
     HG_WINDOW, 2,
     HG_LIFETIME, 2,
 
@@ -107,6 +108,8 @@ make_hitbox(AT_JAB, 1,
 )
 
 make_hitbox(AT_JAB, 2,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 5,
     HG_LIFETIME, 2,
 
@@ -131,6 +134,8 @@ make_hitbox(AT_JAB, 2,
 )
 
 make_hitbox(AT_JAB, 3,
+    HG_HITBOX_TYPE, 1,
+
     HG_WINDOW, 8,
     HG_LIFETIME, 2,
 
