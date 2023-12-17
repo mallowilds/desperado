@@ -11,8 +11,10 @@ if (attack == AT_FSPECIAL_2) {
                 sound_play(asset_get("sfx_mol_norm_explode"));
             }
             if (hitbox_timer == 2 && hitstop_timer <= 0) {
-                child_hitbox = create_hitbox(AT_FSPECIAL_2, 2, x, y);
+                with player_id var ch_h = create_hitbox(AT_FSPECIAL_2, 2, x, y);
+                child_hitbox = ch_h;
                 child_hitbox.parent_hitbox = self;
+                child_hitbox.player = player;
             }
             if (image_index >= 2 && image_index <= 5 && hitstop_timer <= 0) {
                 spawn_ash_particle(6*player, 6*player+1);
@@ -36,6 +38,7 @@ if (attack == AT_FSPECIAL_2) {
 
 
 #define spawn_particle_random(in_sprite, lifetime, seed)
+    with player_id var spr = sprite_get(in_sprite); // for if someone else snags ownership
     var min_rad = 40;
     var rad_range = 40;
     var y_offset = 0;
@@ -46,7 +49,7 @@ if (attack == AT_FSPECIAL_2) {
     var sparkle = {
         sp_x : _x,
         sp_y : _y,
-        sp_sprite_index : sprite_get(in_sprite),
+        sp_sprite_index : spr,
         sp_max_lifetime : lifetime,
         sp_lifetime : 0,
         sp_spr_dir : spr_dir,

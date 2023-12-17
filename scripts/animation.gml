@@ -23,6 +23,7 @@ if adown {
     air_dodge_recovery_frames = 2
 }
 
+if (state == PS_ATTACK_AIR && (attack == AT_DAIR || attack == AT_USPECIAL) && window >= 4 && skull_grabbed) image_index += 6;
 
 
 custom_crouch() // run the custom crouch code

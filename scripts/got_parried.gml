@@ -6,7 +6,7 @@
 // Handling for parried/reflected stuff
 if (my_hitboxID.orig_player == player && my_hitboxID.player != player) {
     
-    if (attack == AT_FSPECIAL) {
+    if (attack == AT_FSPECIAL || attack == AT_FSPECIAL_2) {
         // Force parried state
         with my_hitboxID.head_obj.bashed_id {
             was_parried = true;

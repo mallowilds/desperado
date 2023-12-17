@@ -242,22 +242,18 @@ switch (attack) {
     				grabbed_player_obj.fall_through = true;
     			}
         		
-        		break;
-        		
-        	case 5:
-	        	can_fast_fall = false;
-        		fast_falling = false;
-        		
-        		if (skull_grabbed && window_time_is(1)) {
+        		if (skull_grabbed && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
 					set_head_state(AT_UTHROW);
 					head_obj.x = x + (46*spr_dir);
 					head_obj.y = y - 24;
 					head_obj.spr_dir = spr_dir;
 					head_obj.visible = true;
+					head_obj.sprite_index = sprite_get("skullactive");
 				}
-			
+        		
         		break;
         		
+        	case 5:
         	case 6:
 	        	can_fast_fall = false;
         		fast_falling = false;
@@ -373,6 +369,7 @@ switch (attack) {
 				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
 					set_head_state(AT_FSPECIAL);
 					head_obj.visible = true;
+					head_obj.sprite_index = sprite_get("skullactive");
 					head_obj.window = 2;
 					head_obj.window_timer = 1;
 					head_obj.spr_dir = spr_dir;
@@ -456,11 +453,10 @@ switch (attack) {
 		       
     		case 4:
     			
-    			
     			if (instance_exists(grabbed_player_obj)) {
-    				grabbed_player_obj.x += x - (40*spr_dir) + hsp;
+    				grabbed_player_obj.x += x - (48*spr_dir) + hsp;
     				grabbed_player_obj.x /= 2;
-    				grabbed_player_obj.y += y - 20 + vsp;
+    				grabbed_player_obj.y += y + 40 + vsp;
     				grabbed_player_obj.y /= 2;
     				grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
     				grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
@@ -478,18 +474,19 @@ switch (attack) {
     					grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
     					grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
     				}
+    				
+    				if (skull_grabbed) {
+	    				set_head_state(AT_FTHROW);
+	    				head_obj.x = x + (36*spr_dir);
+	    				head_obj.y = y - 20;
+	    				head_obj.spr_dir = spr_dir;
+	    				head_obj.visible = true;
+	    				head_obj.sprite_index = sprite_get("skullactive");
+	    			}
     			}
     			break;
     		
     		case 5:
-    		//	move_cooldown[AT_FSPECIAL] = 30;
-    			if (skull_grabbed && window_time_is(1)) {
-    				set_head_state(AT_FTHROW);
-    				head_obj.x = x + (36*spr_dir);
-    				head_obj.y = y - 20;
-    				head_obj.spr_dir = spr_dir;
-    				head_obj.visible = true;
-    			}
     			break;
     		
 		}
@@ -625,6 +622,7 @@ switch (attack) {
 	if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false)) {
     	set_head_state(0);
     	skull_grabbed = true;
+    	head_obj.visible = false;
     }
     
     draw_skull_grabbox = 2;

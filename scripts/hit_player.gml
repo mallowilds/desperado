@@ -35,7 +35,7 @@ if (atk == AT_FSPECIAL && my_hitboxID.orig_player == player) { // FSpecial
 if (atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // Skull explosion
 	my_hitboxID.hitstop_timer = hit_player_obj.hitstop;
 	my_hitboxID.parent_hitbox.hitstop_timer = my_hitboxID.hitstop_timer;
-	head_obj.respawn_give_bullet = true;
+	if (my_hitboxID.player == player) head_obj.respawn_give_bullet = true;
 	sound_play(asset_get("sfx_mol_bat_bombhit"))
 }
 if (atk == AT_NSPECIAL && hbox == 3) {

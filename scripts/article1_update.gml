@@ -52,7 +52,6 @@ if (state != 4 && state != 5) {
 		state = 4;
 		state_timer = 0;
 		respawn_penalty = true;
-		sound_play(asset_get("sfx_clairen_hit_med"));
 	}
 	
 	else if (player_id.object_index == oPlayer) {
@@ -154,9 +153,9 @@ switch (state) {
 		
 		// The wall detection of all time
 		if (hsp == 0 && !moving_vertically) {
-			state = 1;
+			state = 4;
 			state_timer = 0;
-			sprite_index = sprite_get("skullidle");
+			sprite_index = sprite_get("skulldie");
 			image_index = 0;
 			spr_dir *= -1;
 			hsp = old_hsp * -1;
@@ -164,9 +163,9 @@ switch (state) {
 		
 		// Ground bounce detection (backup)
 		if (!free) {
-			state = 1;
+			state = 4;
 			state_timer = 0;
-			sprite_index = sprite_get("skullidle");
+			sprite_index = sprite_get("skulldie");
 			image_index = 0;
 			vsp = old_vsp * -1;
 			hsp = old_hsp;
@@ -202,33 +201,25 @@ switch (state) {
 					window_timer = 0;
 				}
 				
+				has_hit = false;
+				
 				break;
 				
 			case 2:
-				
-				sprite_index = sprite_get("skullactive");
-				image_index = 1 + (window_timer/3)%4;
+				image_index = (window_timer/3)%4;
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					hsp *= 2/3
-					vsp *= 2/3
-					moving_vertically = (hsp == 0);
-					
+				if (hitstop <= 0 && window_timer == 1) {
 					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
 					hitbox.spr_dir = spr_dir;
 					hitbox.head_obj = self;
-					hitbox.projectile_parry_stun = false; // just handling this manually......
-				}
-				
-				// End if it takes too long
-				if ( window_timer >= 45 ) {
-					hitbox = noone;
-					window = 3;
-					window_timer = 0;
-					if (vsp > 4) vsp = 4;
-					break;
+					hitbox.player = bashed_id.player;
+					hitbox.head_obj = self;
+					hitbox.projectile_parry_stun = false;
+					
+					has_hit = false;
+					moving_vertically = (hsp == 0)
 				}
 				
 				// Update hitbox
@@ -236,59 +227,44 @@ switch (state) {
 					hitbox.length++; // Lifetime extender
 					hitbox.x = x;
 					hitbox.y = y-30;
-					hitbox.hsp = hitstop <= 0 ? hsp : 0;
-					hitbox.vsp = hitstop <= 0 ? vsp : 0;
-					hitbox.player = bashed_id.player;
+					hitbox.hsp = hsp;
+					hitbox.vsp = vsp;
+					
+					if (hitbox.has_hit == true) has_hit = true;
 				}
 				
-				// Bounce detections
-				if (hitstop <= 0) {
-					
-					// The wall detection of all time
-					if (hsp == 0 && !moving_vertically) {
-						hitbox = noone;
-						window = 3;
-						window_timer = 0;
-						spr_dir *= -1;
-						hsp = 5*spr_dir;
-					}
-					
-					// Enemy bounce detection
-					if (has_hit) {
-						hitbox = noone;
-						window = 3;
-						window_timer = 0;
-						vsp = -3;
-						hsp = moving_vertically ? 0 : -4*spr_dir;
-						has_hit = false;
-					}
-					
-					// Ground bounce detection (backup)
-					if (!free) {
-						hitbox = noone;
-						window = 3;
-						window_timer = 0;
-						vsp = -4;
-						hsp = moving_vertically ? 0 : 3*spr_dir;
-					}
-					
+				spawn_ash_particle(player*3, player*3+1);
+				
+				// Explode detection
+				if (hitstop <= 0 && (window_timer > 32 || hsp == 0 && !moving_vertically || !free || has_hit)) {
+					window = 3;
+					window_timer = 0;
 				}
 				
 				break;
-			
-			// Slow down
+				
 			case 3:
+				sprite_index = sprite_get("skullactive");
+				image_index = 4 + (window_timer/3)%4;
 				
-				hitbox = noone;
+				spawn_ash_particle(player*3, player*3+1);
 				
-				image_index = window_timer > 11 ? 5 : 1 + (window_timer/3)%4;
-				hsp *= 0.9;
-				vsp *= 0.9;
-				
-				if (window_timer >= 15) {
-					state = 4;
-					state_timer = 0;
+				if (window_timer > 6) {
+					window = 4;
+					window_timer = 0;
 				}
+			
+			case 4:
+				sprite_index = sprite_get("null");
+				state = 5;
+				state_timer = 0;
+				hsp = 0;
+				vsp = 0;
+				respawn_penalty = true;
+				var hbox = create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				hbox.player = bashed_id.player;
+				hbox.head_obj = self;
+				hbox.projectile_parry_stun = false;
 				break;
 			
 		}
@@ -562,11 +538,14 @@ switch (state) {
 			
 			case 2:
 				spawn_ash_particle(player*3, player*3+1);
-				state = 4;
+				state = 5;
 				state_timer = 0;
+				hsp = 0;
+				vsp = 0;
 				sprite_index = sprite_get("null");
 				respawn_penalty = false;
-				create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				var hbox = create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				hbox.head_obj = self;
 				break;
 		}
 		
@@ -630,10 +609,13 @@ switch (state) {
 			
 			case 3:
 				sprite_index = sprite_get("null");
-				state = 4;
+				state = 5;
 				state_timer = 0;
+				hsp = 0;
+				vsp = 0;
 				respawn_penalty = false;
-				create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				var hbox = create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				hbox.head_obj = self;
 				break;
 			
 		}
@@ -698,10 +680,13 @@ switch (state) {
 			
 			case 3:
 				sprite_index = sprite_get("null");
-				state = 4;
+				state = 5;
 				state_timer = 0;
+				hsp = 0;
+				vsp = 0;
 				respawn_penalty = false;
-				create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				var hbox = create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				hbox.head_obj = self;
 				break;
 			
 		}
@@ -815,6 +800,8 @@ switch (state) {
 				if (window_timer >= 35) {
 					state = 5;
 					state_timer = 0;
+					hsp = 0;
+					vsp = 0;
 				}
 				
 				break;
@@ -1009,7 +996,8 @@ with hbox {
         && hit_priority != 0 && hit_priority <= 10
         && (groundedness == 0 || groundedness == 1+other.free)
         && (!player_equal) //uncomment to prevent the article from being hit by its owner.
-        && ( (get_match_setting(SET_TEAMS) && (get_match_setting(SET_TEAMATTACK) || !team_equal) ) || player_equal) //uncomment to prevent the article from being hit by its owner's team.
+        && ( !get_match_setting(SET_TEAMS) || get_match_setting(SET_TEAMATTACK) || !team_equal ) //uncomment to prevent the article from being hit by its owner's team.
+        && (effect != 9) //filter polite hitboxes
 }
  
 #define create_article_hitbox(attack, hbox_num, _x, _y)
