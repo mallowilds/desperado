@@ -5,22 +5,20 @@
 // editor, where x is the character's center, and y is their foot level.
 
 
-sprite_change_offset("airdodge_backward_skulless", 156, 194);
-sprite_change_offset("airdodge_backward", 156, 194);
-sprite_change_offset("airdodge_back_skulless", 156, 194);
-sprite_change_offset("airdodge_back", 156, 194);
-sprite_change_offset("airdodge_downforward_skulless", 156, 194);
-sprite_change_offset("airdodge_downforward", 156, 194);
-sprite_change_offset("airdodge_down_skulless", 156, 194);
-sprite_change_offset("airdodge_down", 156, 194);
-sprite_change_offset("airdodge_forward_skulless", 156, 194);
-sprite_change_offset("airdodge_forward", 156, 194);
-sprite_change_offset("airdodge_upforward_skulless", 156, 194);
-sprite_change_offset("airdodge_upforward", 156, 194);
-sprite_change_offset("airdodge_up_skulless", 156, 194);
-sprite_change_offset("airdodge_up", 156, 194);
-sprite_change_offset("airdodge_skulless", 156, 194);
-sprite_change_offset("airdodge", 156, 194);
+sprite_change_offset("airdodge_back_skulless", 118, 128);
+sprite_change_offset("airdodge_back", 118, 128);
+sprite_change_offset("airdodge_downforward_skulless", 118, 128);
+sprite_change_offset("airdodge_downforward", 118, 128);
+sprite_change_offset("airdodge_down_skulless",118, 128);
+sprite_change_offset("airdodge_down", 118, 128);
+sprite_change_offset("airdodge_forward_skulless", 118, 128);
+sprite_change_offset("airdodge_forward", 118, 128);
+sprite_change_offset("airdodge_upforward_skulless", 118, 128);
+sprite_change_offset("airdodge_upforward", 118, 128);
+sprite_change_offset("airdodge_up_skulless", 118, 128);
+sprite_change_offset("airdodge_up", 118, 128);
+sprite_change_offset("airdodge_skulless",118, 128);
+sprite_change_offset("airdodge", 118, 128);
 sprite_change_offset("bair_skulless", 118, 122);
 sprite_change_offset("bair", 118, 122);
 sprite_change_offset("bighurt_skulless", 118, 122);
@@ -54,7 +52,7 @@ sprite_change_offset("fstrong_nul", 118, 122);
 sprite_change_offset("fstrong_skulless", 118, 122);
 sprite_change_offset("fstrong", 118, 122);
 sprite_change_offset("ftilt_emp_skulless", 118, 122);
-sprite_change_offset("ftilt_emp", 156, 194);                // !
+sprite_change_offset("ftilt_emp", 118, 122);       
 sprite_change_offset("ftilt_skulless", 118, 122);
 sprite_change_offset("ftilt", 118, 122);
 sprite_change_offset("hurtground_skulless", 118, 122);

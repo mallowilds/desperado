@@ -210,7 +210,7 @@ switch (state) {
 				
 				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
 				
-				if (hitstop <= 0 && window_timer == 1) {
+				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
 					hitbox.spr_dir = spr_dir;
 					hitbox.head_obj = self;
