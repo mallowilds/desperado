@@ -2,6 +2,7 @@
 // https://rivalslib.com/workshop_guide/programming/reference/scripts/hitbox_scripts.html#hitbox-update-gml
 // Called every frame for each of your character's hitboxes, from the hitbox's perspective.
 
+
 if (attack == AT_FSPECIAL_2) {
     
     switch hbox_num {
@@ -11,8 +12,7 @@ if (attack == AT_FSPECIAL_2) {
                 sound_play(asset_get("sfx_mol_norm_explode"));
             }
             if (hitbox_timer == 2 && hitstop_timer <= 0) {
-                with player_id var ch_h = create_hitbox(AT_FSPECIAL_2, 2, x, y);
-                child_hitbox = ch_h;
+                with player_id other.child_hitbox = create_hitbox(AT_FSPECIAL_2, 2, other.x, other.y);
                 child_hitbox.parent_hitbox = self;
                 child_hitbox.player = player;
             }
