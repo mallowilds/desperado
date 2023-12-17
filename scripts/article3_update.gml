@@ -264,7 +264,7 @@ switch state {
                     signpost_obj.state = 14;
                     sound_play(asset_get("sfx_syl_ustrong_part3"))
                     sound_play(asset_get("sfx_ell_drill_stab"))
-                    spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, HFX_SYL_WOOD_SMALL);
+                    spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, player_id.vfx_bullseye_small);
                     instance_destroy();
                     exit;
                 }
@@ -277,7 +277,7 @@ switch state {
                     signpost_obj.state = 14;
                     sound_play(asset_get("sfx_syl_ustrong_part3"))
                     sound_play(asset_get("sfx_ell_drill_stab"))
-                    spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, HFX_SYL_WOOD_SMALL);
+                    spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, player_id.vfx_bullseye_small);
                     instance_destroy();
                     exit;
                 }
@@ -327,7 +327,7 @@ switch state {
                 signpost_obj.state_timer = 0;
                 sound_play(asset_get("sfx_syl_ustrong_part3"))
                 sound_play(asset_get("sfx_ell_drill_stab"))
-                spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, HFX_SYL_WOOD_SMALL);
+                spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, player_id.vfx_bullseye_small);
                 instance_destroy();
                 exit;
             }
@@ -359,8 +359,6 @@ switch state {
         state = 31;
         state_timer = 0;
         
-        if ("is_ash" not in self) is_ash = true;
-        
         break;
     
     // Active
@@ -372,7 +370,7 @@ switch state {
         }
         
         var angle = point_direction(x, y, player_id.x, player_id.y-y_target_offset);
-        var freq = 1 + is_ash;
+        var freq = 2;
         
         for (var i = 0; i < freq; i++) {
             
@@ -383,8 +381,7 @@ switch state {
             var x_offset = lengthdir_x(-2*progress*(progress-1)*height, angle+90); // https://www.desmos.com/calculator/x54440men2
             var y_offset = lengthdir_y(-2*progress*(progress-1)*height, angle+90);
             
-            if (is_ash) var spr_type = "ashpart_" + string(1+random_func_2(6*player, 3, true));
-            else var spr_type = "null"
+            var spr_type = "ashpart_" + string(1+random_func_2(6*player, 3, true));
             var sparkle = {
                 sp_x : round((x + x_dist + x_offset)/2)*2, // Anti-mixels trick
                 sp_y : round((y + y_dist + y_offset)/2)*2,

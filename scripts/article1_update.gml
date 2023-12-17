@@ -116,6 +116,29 @@ switch (state) {
 	    hsp = 0;
 	    window = 1;
 	    can_fspecial = false;
+	    ignores_walls = false;
+	    
+	    if (respawn_give_bullet) {
+	    	if (player_id.num_bullets < 6) {
+                player_id.num_bullets++;
+                player_id.nametag_white_flash = 1;
+                player_id.reload_anim_state = 3;
+                player_id.reload_anim_timer = 0;
+                sound_play(sound_get("desp_click"));
+            }
+            else {
+                with (player_id) var discard_visual = instance_create(x, y-26, "obj_article3");
+                discard_visual.state = 00;
+                discard_visual.hsp = -3*(player_id.spr_dir);
+                discard_visual.vsp = -4;
+                player_id.reload_anim_state = 3;
+                player_id.reload_anim_timer = 0;
+                sound_play(asset_get("sfx_gus_land"));
+                
+                break;
+            }
+            respawn_give_bullet = false;
+	    }
 	    break;
 	//#endregion
 	
@@ -296,6 +319,7 @@ switch (state) {
 	case 5:
 		
 		visible = true;
+		ignores_walls = true;
 		if (state_timer < 10) sprite_index = sprite_get("null");
 		else {
 			sprite_index = (state_timer < 16) ? sprite_get("wispstart") : sprite_get("wisp");
@@ -304,27 +328,31 @@ switch (state) {
 		
 		can_fspecial = false;
 		
+		var delay_total = respawn_delay + (respawn_penalty ? penalty_delay : 0);
+		
 		if (state_timer == 1) {
-			wisp = noone;
-			wisp_duration = -1;
+			duration = -1;
+			respawn_init_x = x;
+			respawn_init_y = y;
 		}
 		
-		if (wisp != noone) { // script order hack to get duration from wisp init
-			wisp_duration = wisp.duration;
-			wisp = noone;
-		}
-		
-		if (state_timer == respawn_delay + (respawn_penalty ? penalty_delay : 0)) {
-			for (var i = 0; i < 3; i++) {
-				wisp = instance_create(x, y-20, "obj_article3");
+		if (state_timer == delay_total) {
+			if respawn_give_bullet for (var i = 0; i < 2; i++) {
+				var wisp = instance_create(x, y-20, "obj_article3");
 				wisp.state = 30;
-				wisp.height = (-35+(30*i))*clamp(point_distance(x, y, player_id.x, player_id.y)/100, 1, 4);
+				wisp.height = (-25+(50*i))*clamp(point_distance(x, y, player_id.x, player_id.y-26)/100, 1, 4);
 				wisp.y_target_offset = 50;
-				wisp.is_ash = respawn_give_bullet;
 			}
+			duration = point_distance(x, y, player_id.x, player_id.y-26)/10;
 		}
 		
-		if (wisp_duration != -1 && state_timer > wisp_duration + respawn_delay + (respawn_penalty ? penalty_delay : 0)) {
+		else if (state_timer > delay_total) {
+			x = respawn_init_x + (player_id.x-respawn_init_x)*(state_timer-delay_total)/duration;
+			y = respawn_init_y + (player_id.y-26-respawn_init_y)*(state_timer-delay_total)/duration;
+			if (state_timer%5 == 0) spawn_hit_fx(x, y, player_id.vfx_wisp_end)
+		}
+		
+		if (duration != -1 && state_timer > duration + delay_total) {
 			var regen_vfx = spawn_hit_fx(player_id.x+(4*player_id.spr_dir), player_id.y-56, player_id.vfx_bullseye_small);
 			regen_vfx.depth = player_id.depth-1;
 			sound_play(asset_get("sfx_mol_bombpop"));
@@ -335,27 +363,7 @@ switch (state) {
 			var end_vfx = spawn_hit_fx(x, y, player_id.vfx_wisp_end);
 			end_vfx.depth = depth;
 			
-			if (respawn_give_bullet) {
-				if (player_id.num_bullets < 6) {
-                    player_id.num_bullets++;
-                    player_id.nametag_white_flash = 1;
-                    player_id.reload_anim_state = 3;
-                    player_id.reload_anim_timer = 0;
-                    sound_play(sound_get("desp_click"));
-                }
-                else {
-                    with (player_id) var discard_visual = instance_create(x, y-26, "obj_article3");
-                    discard_visual.state = 00;
-                    discard_visual.hsp = -3*(player_id.spr_dir);
-                    discard_visual.vsp = -4;
-                    player_id.reload_anim_state = 3;
-                    player_id.reload_anim_timer = 0;
-                    sound_play(asset_get("sfx_gus_land"));
-                    
-                    break;
-                }
-                respawn_give_bullet = false;
-			}
+			// Respawn give bullet moved to inactive state
 		}
 		
 		// TODO: add sfx
@@ -802,6 +810,7 @@ switch (state) {
 					state_timer = 0;
 					hsp = 0;
 					vsp = 0;
+					respawn_penalty = false;
 				}
 				
 				break;
