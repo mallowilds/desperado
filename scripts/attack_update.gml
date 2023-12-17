@@ -228,6 +228,9 @@ switch (attack) {
 	        	break;
 	        
 	        case 4:
+	        	if window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)) {
+    				sound_play(sound_get("desp_heavyswing"), 0, noone, .2, 1.05)
+	        	}
 	        	can_fast_fall = false;
         		fast_falling = false;
         		

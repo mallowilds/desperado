@@ -51,7 +51,6 @@ make_hitbox(AT_DTILT, 1,
 
     //HG_VISUAL_EFFECT, hfx_bone_large,
     HG_HIT_SFX, asset_get("sfx_blow_medium3"),
-    HG_IGNORES_PROJECTILES, 1,
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
