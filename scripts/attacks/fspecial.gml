@@ -2,10 +2,10 @@
 
 make_attack(AT_FSPECIAL,
     AG_CATEGORY, 2,
-    AG_SPRITE, sprite_get("fspecial"),
+    AG_SPRITE, sprite_get("fspec"),
     AG_NUM_WINDOWS, 3,
     AG_HAS_LANDING_LAG, 4,
-    AG_AIR_SPRITE, sprite_get("fspecial"),
+    AG_AIR_SPRITE, sprite_get("fspec"),
     AG_HURTBOX_SPRITE, sprite_get("desp_hurt"),
 )
 
