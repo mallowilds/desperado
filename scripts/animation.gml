@@ -25,8 +25,33 @@ if adown {
 
 if (state == PS_ATTACK_AIR && (attack == AT_DAIR || attack == AT_USPECIAL) && window >= 4 && skull_grabbed) image_index += 6;
 
-
 custom_crouch() // run the custom crouch code
+
+
+
+//#region Skull-less-ness management
+
+if (head_obj.state != 0) {
+	
+	var _s = null;
+	
+	for (var i = 0; i < array_length(anim_list); i++) {
+		if (sprite_index == sprite_get(anim_list[i])) {
+			_s = anim_list[i];
+		}
+	}
+	
+	if (_s != null) {
+	    _s = _s + "_skulless";
+	    sprite_index = sprite_get(_s);
+	}
+	
+}
+
+//#endregion
+
+
+
 
 // Defines always go at the bottom of the file.
 #define custom_crouch()
