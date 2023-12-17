@@ -654,6 +654,7 @@ switch (attack) {
         set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_LIFETIME));
         set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HITBOX_X, shot_x);
         set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HITBOX_Y, shot_y);
+        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HITBOX_GROUP, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HITBOX_GROUP));
         
         shot_hbox = create_hitbox(attack, first_index+shot_loops, x+(shot_x*spr_dir), y+shot_y);
         
