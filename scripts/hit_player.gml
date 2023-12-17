@@ -105,7 +105,7 @@ if (atk == AT_UTILT && hbox <= 2 && !hit_player_obj.super_armor) {
 if atk == AT_BAIR || atk == AT_EXTRA_1 {
 	sound_play(sound_get("desp_gunhit"), 0, noone, .5)
 }
-if atk == AT_EXTRA_1 && hbox == 3 { //bair
+if atk == AT_EXTRA_1 && hbox == 4 { //bair
 	sound_play(sound_get("desp_weirdhit"))
 }
 if atk == AT_FAIR && hbox != 4 {

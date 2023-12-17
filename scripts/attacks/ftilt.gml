@@ -51,11 +51,11 @@ make_hitbox(AT_FTILT, 1,
     HG_WINDOW, 2,
     HG_LIFETIME, 2,
 
-    HG_HITBOX_X, 66,
+    HG_HITBOX_X, 58,
     HG_HITBOX_Y, -27,
     HG_WIDTH, 102,
     HG_HEIGHT, 61,
-    HG_SHAPE, 1,
+    HG_SHAPE, 2,
 
     HG_PRIORITY, 1,
     HG_HITBOX_GROUP, -1,
@@ -65,7 +65,7 @@ make_hitbox(AT_FTILT, 1,
     HG_BASE_KNOCKBACK, 7,
     HG_KNOCKBACK_SCALING, .5,
     HG_BASE_HITPAUSE, 7,
-    HG_HITPAUSE_SCALING, .6,
+    HG_HITPAUSE_SCALING, .7,
     HG_HIT_SFX, asset_get("sfx_blow_medium2"),
 )
 

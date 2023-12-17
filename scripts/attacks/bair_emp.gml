@@ -30,16 +30,17 @@ make_window(AT_EXTRA_1, 3,
   AG_WINDOW_ANIM_FRAME_START, 14,
   AG_WINDOW_HAS_WHIFFLAG, 4)
 
-set_num_hitboxes(AT_EXTRA_1, 3)
+set_num_hitboxes(AT_EXTRA_1, 4)
+
 
 make_hitbox(AT_EXTRA_1, 1,
   HG_HITBOX_TYPE, 1,
   HG_WINDOW, 2,
   HG_LIFETIME, 3,
 
-  HG_WIDTH, 58,
-  HG_HEIGHT, 54,
-  HG_HITBOX_Y, -8,
+  HG_WIDTH, 66,
+  HG_HEIGHT, 58,
+  HG_HITBOX_Y, -18,
   HG_HITBOX_X, -64,
 
 
@@ -47,14 +48,14 @@ make_hitbox(AT_EXTRA_1, 1,
   HG_DAMAGE, 6,
   HG_ANGLE, 140,
   //HG_ANGLE_FLIPPER, 5,
-  HG_BASE_KNOCKBACK, 6,
+  HG_BASE_KNOCKBACK, 7,
   HG_KNOCKBACK_SCALING, .6,
 
-  HG_BASE_HITPAUSE, 7,
-  HG_HITPAUSE_SCALING, .6,
+  HG_BASE_HITPAUSE, 8,
+  HG_HITPAUSE_SCALING, .8,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
-  HG_VISUAL_EFFECT, 304
+  HG_VISUAL_EFFECT, vfx_bullseye_small,
   
 )
 
@@ -63,10 +64,37 @@ make_hitbox(AT_EXTRA_1, 2,
   HG_WINDOW, 2,
   HG_LIFETIME, 3,
 
-  HG_WIDTH, 90,
-  HG_HEIGHT, 60,
-  HG_HITBOX_Y, -20,
-  HG_HITBOX_X, -30,
+  HG_WIDTH, 72,
+  HG_HEIGHT, 68,
+  HG_HITBOX_Y, -33,
+  HG_HITBOX_X, -35,
+
+
+  HG_PRIORITY, 1,
+  HG_DAMAGE, 6,
+  HG_ANGLE, 140,
+ // HG_ANGLE_FLIPPER, 5,
+  HG_BASE_KNOCKBACK, 7,
+  HG_KNOCKBACK_SCALING, .6,
+
+  HG_BASE_HITPAUSE, 8,
+  HG_HITPAUSE_SCALING, .8,
+
+  HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+  HG_VISUAL_EFFECT, vfx_bullseye_small,
+  
+)
+
+
+make_hitbox(AT_EXTRA_1, 3,
+  HG_HITBOX_TYPE, 1,
+  HG_WINDOW, 2,
+  HG_LIFETIME, 3,
+
+  HG_WIDTH, 81,
+  HG_HEIGHT, 69,
+  HG_HITBOX_Y, -49,
+  HG_HITBOX_X, -5,
 
 
   HG_PRIORITY, 1,
@@ -84,7 +112,8 @@ make_hitbox(AT_EXTRA_1, 2,
   
 )
 
-make_hitbox(AT_EXTRA_1, 3,
+
+make_hitbox(AT_EXTRA_1, 4,
   HG_HITBOX_TYPE, 1,
   HG_WINDOW, 2,
   HG_LIFETIME, 3,
