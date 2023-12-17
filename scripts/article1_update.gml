@@ -344,6 +344,7 @@ switch (state) {
 				wisp.state = 30;
 				wisp.height = (-35+(30*i))*clamp(point_distance(x, y, player_id.x, player_id.y)/100, 1, 4);
 				wisp.y_target_offset = 50;
+				wisp.is_ash = respawn_give_bullet;
 			}
 		}
 		
@@ -367,7 +368,7 @@ switch (state) {
                     sound_play(sound_get("desp_click"));
                 }
                 else {
-                    with (player_id) var discard_visual = instance_create(x, y-26, "obj_article_3");
+                    with (player_id) var discard_visual = instance_create(x, y-26, "obj_article3");
                     discard_visual.state = 00;
                     discard_visual.hsp = -3*(player_id.spr_dir);
                     discard_visual.vsp = -4;

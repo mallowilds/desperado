@@ -154,6 +154,7 @@ sprite_change_offset("skullatk", 160, 162) // This one's a separate projectile
 sprite_change_offset("wispstart", 166, 182);
 sprite_change_offset("wisp", 166, 182);
 sprite_change_offset("wispend", 166, 182);
+sprite_change_offset("wispmove", 30, 30);
 
 sprite_change_offset("skull_hud_arrow", 7, 10)
 sprite_change_offset("skull_hud_health", 5, 8)

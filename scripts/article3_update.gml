@@ -29,7 +29,7 @@ BULLET WISP MANAGER
 
 */
 
-print_debug(state);
+
 
 switch state {
     
@@ -359,6 +359,8 @@ switch state {
         state = 31;
         state_timer = 0;
         
+        if ("is_ash" not in self) is_ash = true;
+        
         break;
     
     // Active
@@ -370,7 +372,7 @@ switch state {
         }
         
         var angle = point_direction(x, y, player_id.x, player_id.y-y_target_offset);
-        var freq = 2;
+        var freq = 1 + is_ash;
         
         for (var i = 0; i < freq; i++) {
             
@@ -381,11 +383,12 @@ switch state {
             var x_offset = lengthdir_x(-2*progress*(progress-1)*height, angle+90); // https://www.desmos.com/calculator/x54440men2
             var y_offset = lengthdir_y(-2*progress*(progress-1)*height, angle+90);
             
-            var ash_type = "ashpart_" + string(1+random_func_2(6*player, 3, true));
+            if (is_ash) var spr_type = "ashpart_" + string(1+random_func_2(6*player, 3, true));
+            else var spr_type = "null"
             var sparkle = {
                 sp_x : round((x + x_dist + x_offset)/2)*2, // Anti-mixels trick
                 sp_y : round((y + y_dist + y_offset)/2)*2,
-                sp_sprite_index : sprite_get(ash_type),
+                sp_sprite_index : sprite_get(spr_type),
                 sp_max_lifetime : 15,
                 sp_lifetime : 0,
                 sp_spr_dir : spr_dir,
