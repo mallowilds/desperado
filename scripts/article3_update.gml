@@ -138,7 +138,7 @@ switch state {
             state_timer = 0;
         }
         
-        else if (!instance_exists(wanted_target) || wanted_target.state == PS_RESPAWN) {
+        else if (!instance_exists(wanted_target) || wanted_target.state == PS_RESPAWN || wanted_target.state == PS_DEAD) {
             state = 15;
             state_timer = 0;
         }
@@ -171,7 +171,7 @@ switch state {
             state_timer = 0;
         }
         
-        else if (!instance_exists(wanted_target) || wanted_target.state == PS_RESPAWN) {
+        else if (!instance_exists(wanted_target) || wanted_target.state == PS_RESPAWN || wanted_target.state == PS_DEAD) {
             state = 15;
             state_timer = 0;
         }
@@ -204,7 +204,7 @@ switch state {
             state_timer = 0;
         }
         
-        else if (!instance_exists(wanted_target) || wanted_target.state == PS_RESPAWN) {
+        else if (!instance_exists(wanted_target) || wanted_target.state == PS_RESPAWN || wanted_target.state == PS_DEAD) {
             state = 15;
             state_timer = 0;
         }
