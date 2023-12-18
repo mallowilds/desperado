@@ -134,8 +134,6 @@ switch (state) {
                 player_id.reload_anim_state = 3;
                 player_id.reload_anim_timer = 0;
                 sound_play(asset_get("sfx_gus_land"));
-                
-                break;
             }
             respawn_give_bullet = false;
 	    }
