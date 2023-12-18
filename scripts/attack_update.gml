@@ -206,12 +206,12 @@ switch (attack) {
 	        	}
 	        	
 	        	if (!hitpause) {
-	        		do_skull_grabbox();
+	        		do_skull_grabbox(get_hitbox_value(AT_DAIR, 1, HG_BASE_HITPAUSE), asset_get("sfx_blow_medium3"));
 		        	if (skull_grabbed) {
 		        		set_attack_value(AT_DAIR, AG_NUM_WINDOWS, 6);
 		        		window = 4;
 				    	window_timer = 0;
-				    	vsp = -8;
+				    	old_vsp = -8;
 				    	destroy_hitboxes();
 		        	}
 	        	}
@@ -435,7 +435,7 @@ switch (attack) {
     			break;
     		
     		case 2:
-    			do_skull_grabbox();
+    			do_skull_grabbox(get_hitbox_value(AT_USPECIAL, 1, HG_BASE_HITPAUSE), asset_get("sfx_blow_medium3"));
     			
     			if (instance_exists(grabbed_player_obj)) {
     				grabbed_player_obj.x = x + (36*spr_dir) + hsp;
@@ -616,7 +616,7 @@ switch (attack) {
 
 
 // Precondition: skull_grabbed is set to false at start of attack
-#define do_skull_grabbox()
+#define do_skull_grabbox(grab_hitstop, grab_sfx)
 	var _x = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_X);
 	var _y = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_Y);
 	var _w = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_W);
@@ -626,6 +626,15 @@ switch (attack) {
     	set_head_state(0);
     	skull_grabbed = true;
     	head_obj.visible = false;
+    	
+    	sound_play(grab_sfx);
+    	
+    	hitpause = true;
+    	if (grab_hitstop > hitstop_full) hitstop_full = grab_hitstop;
+    	if (grab_hitstop > hitstop) hitstop = grab_hitstop;
+    	old_hsp = hsp;
+    	old_vsp = vsp;
+    	
     }
     
     draw_skull_grabbox = 2;

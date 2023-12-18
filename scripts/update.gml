@@ -14,6 +14,10 @@ You can have up to 6 bullets, which have stacking effects on damage. I have the 
 
 */
 
+
+print_debug(string(hitpause) + " | " + string(hitstop) + " | " + string(hitstop_full));
+
+
 if (get_gameplay_time() == 4 && has_intro) set_attack(AT_INTRO);
 
 //#region SFX things
