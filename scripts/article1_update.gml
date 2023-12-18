@@ -984,6 +984,13 @@ with hit_player_obj { // use a with so that it's shaded correctly
     temp_fx.hit_angle = other.kb_dir;
     temp_fx.kb_speed = other.orig_knock;
 }
+
+// SK bounce for fun~
+if (hbox.player_id.url == CH_SHOVEL_KNIGHT && hbox.attack == AT_DAIR && hbox.type == 1) {
+    if (hbox.player_id.vsp > -5) hbox.player_id.vsp = -5;
+    if (hbox.player_id.old_vsp > -5) hbox.player_id.old_vsp = -5;
+    if (hbox.hbox_num == 3) sound_play(asset_get("sfx_shovel_hit_light1")); // idk why this one doesn't have sfx lol
+}
  
 //State stuff
 state = 2;

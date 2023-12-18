@@ -220,6 +220,7 @@ switch state {
     
     // Death
     case 14:
+        if (hitstop > 0) break;
         sprite_index = sprite_get("sign_die");
         image_index = 1+(state_timer / 7);
         if (image_index >= 5) {
@@ -459,6 +460,13 @@ state_timer++;
         }
         sound_play(hbox.sound_effect);
         spawn_hit_fx((x+hbox.x)/2+(hbox.spr_dir*hbox.hit_effect_x), (y-50+hbox.y)/2+(hbox.hit_effect_y), HFX_SYL_WOOD_SMALL);
+        
+        // SK bounce for fun~
+        if (hbox.player_id.url == CH_SHOVEL_KNIGHT && hbox.attack == AT_DAIR && hbox.type == 1) {
+            if (hbox.player_id.vsp > -5) hbox.player_id.vsp = -5;
+            if (hbox.player_id.old_vsp > -5) hbox.player_id.old_vsp = -5;
+            if (hbox.hbox_num == 3) sound_play(asset_get("sfx_shovel_hit_light1")); // idk why this one doesn't have sfx lol
+        }
         
         mask_index = old_mask;
         return true;
