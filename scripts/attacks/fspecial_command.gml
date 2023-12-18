@@ -99,6 +99,7 @@ make_hitbox(AT_FSPECIAL_2, 2,
     HG_EXTENDED_PARRY_STUN, 1,
     HG_PROJECTILE_PLASMA_SAFE, 1,
     HG_VISUAL_EFFECT, vfx_bullseye_small,
+    HG_HIT_PARTICLE_NUM, 1,
 
 )
 

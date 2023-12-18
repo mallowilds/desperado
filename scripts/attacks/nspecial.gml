@@ -87,6 +87,7 @@ make_hitbox(AT_NSPECIAL, 1,
     HG_VISUAL_EFFECT_X_OFFSET, 32,
     HG_VISUAL_EFFECT_Y_OFFSET, 5,
     HG_HIT_SFX, asset_get("sfx_blow_weak1"),
+    HG_HIT_PARTICLE_NUM, 1,
 )
 
 // NSpec finisher
@@ -116,6 +117,7 @@ make_hitbox(AT_NSPECIAL, 2,
 
     HG_VISUAL_EFFECT, vfx_bullseye,
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+    HG_HIT_PARTICLE_NUM, 1,
 )
 
 // NSpec reflection
@@ -145,6 +147,7 @@ make_hitbox(AT_NSPECIAL, 3,
 
     HG_VISUAL_EFFECT, vfx_bullseye,
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+    HG_HIT_PARTICLE_NUM, 1,
     
     HG_PROJECTILE_SPRITE, sprite_get("null"),
     HG_PROJECTILE_DESTROY_EFFECT, hfx_null,

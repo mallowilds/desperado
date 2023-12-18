@@ -53,6 +53,7 @@ make_hitbox(AT_BAIR, 1,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
   HG_VISUAL_EFFECT, vfx_bullseye_small,
+  HG_HIT_PARTICLE_NUM, 1,
   
 )
 
@@ -79,6 +80,7 @@ make_hitbox(AT_BAIR, 2,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
   HG_VISUAL_EFFECT, vfx_bullseye_small,
+  HG_HIT_PARTICLE_NUM, 1,
   
 )
 
@@ -106,6 +108,7 @@ make_hitbox(AT_BAIR, 3,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
   HG_VISUAL_EFFECT, vfx_bullseye_small,
+  HG_HIT_PARTICLE_NUM, 1,
   
 )
 

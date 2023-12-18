@@ -56,6 +56,7 @@ make_hitbox(AT_EXTRA_1, 1,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
   HG_VISUAL_EFFECT, vfx_bullseye_small,
+  HG_HIT_PARTICLE_NUM, 1,
   
 )
 
@@ -82,6 +83,7 @@ make_hitbox(AT_EXTRA_1, 2,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
   HG_VISUAL_EFFECT, vfx_bullseye_small,
+  HG_HIT_PARTICLE_NUM, 1,
   
 )
 
@@ -109,6 +111,7 @@ make_hitbox(AT_EXTRA_1, 3,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
   HG_VISUAL_EFFECT, vfx_bullseye_small,
+  HG_HIT_PARTICLE_NUM, 1,
   
 )
 
@@ -135,7 +138,8 @@ make_hitbox(AT_EXTRA_1, 4,
   HG_HITPAUSE_SCALING, 1,
 
   HG_HIT_SFX, asset_get("sfx_blow_heavy2"),
-  HG_VISUAL_EFFECT, vfx_bullseye
+  HG_VISUAL_EFFECT, vfx_bullseye,
+  HG_HIT_PARTICLE_NUM, 1,
   
 )
 

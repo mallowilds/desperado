@@ -100,6 +100,7 @@ make_hitbox(AT_FSTRONG_2, 2,
     HG_VISUAL_EFFECT_X_OFFSET, 20,
     HG_VISUAL_EFFECT_X_OFFSET, 5,
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
+    HG_HIT_PARTICLE_NUM, 1,
 
     HG_HITBOX_GROUP, 2,
 )
