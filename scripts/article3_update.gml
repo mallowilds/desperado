@@ -89,7 +89,7 @@ switch state {
         
         spr_dir = 1;
         
-        dasher_in_range = [noone, 0, 0, 0, 0];
+        dasher_in_range = array_create(20);
         
         //get highest-damage opponent icon
         top_damage = -1;
@@ -97,7 +97,7 @@ switch state {
         icon_spr = get_char_info(player, INFO_ICON) // default to desp if things fail
         icon_image = 0;
         icon_scale = 2;
-        with oPlayer {
+        with player_id.object_index {
             if (player == other.player || get_player_team(player) == get_player_team(other.player) || get_player_damage(player) <= other.top_damage) continue;
             other.top_damage = get_player_damage(player);
             if (!custom) with other {
@@ -138,14 +138,14 @@ switch state {
             state_timer = 0;
         }
         
-        else if (wanted_target.state == PS_RESPAWN) {
+        else if (!instance_exists(wanted_target) || wanted_target.state == PS_RESPAWN) {
             state = 15;
             state_timer = 0;
         }
         
         // Apply gravity
         if (free) vsp += 0.4;
-        if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+        if (player_id.object_index != oTestPlayer && y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
             instance_destroy();
             exit;
         }
@@ -171,14 +171,14 @@ switch state {
             state_timer = 0;
         }
         
-        else if (wanted_target.state == PS_RESPAWN) {
+        else if (!instance_exists(wanted_target) || wanted_target.state == PS_RESPAWN) {
             state = 15;
             state_timer = 0;
         }
         
         // Apply gravity
         vsp += 0.4;
-        if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+        if (player_id.object_index != oTestPlayer && y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
             instance_destroy();
             exit;
         }
@@ -204,14 +204,14 @@ switch state {
             state_timer = 0;
         }
         
-        else if (wanted_target.state == PS_RESPAWN) {
+        else if (!instance_exists(wanted_target) || wanted_target.state == PS_RESPAWN) {
             state = 15;
             state_timer = 0;
         }
         
         // Apply gravity
         vsp += 0.4;
-        if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+        if (player_id.object_index != oTestPlayer && y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
             instance_destroy();
             exit;
         }

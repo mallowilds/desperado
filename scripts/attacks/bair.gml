@@ -15,7 +15,7 @@ make_window(AT_BAIR, 1,
   AG_WINDOW_VSPEED, -1,
   AG_WINDOW_HAS_SFX, 1,
   AG_WINDOW_SFX, asset_get("sfx_swipe_heavy2"),
-  AG_WINDOW_SFX_FRAME, 15)
+  AG_WINDOW_SFX_FRAME, 13)
 
 make_window(AT_BAIR, 2,
   AG_WINDOW_LENGTH, 3,
