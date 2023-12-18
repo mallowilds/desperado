@@ -35,9 +35,9 @@ make_hitbox(AT_DTILT, 1,
     HG_WINDOW, 2,
     HG_LIFETIME, 3,
 
-    HG_HITBOX_X, 58,
+    HG_HITBOX_X, 52,
     HG_HITBOX_Y, -10,
-    HG_WIDTH, 120,
+    HG_WIDTH, 108,
     HG_HEIGHT, 20,
     HG_SHAPE, 2,
 

@@ -10,7 +10,7 @@ make_attack(AT_BAIR,
   AG_HURTBOX_SPRITE, sprite_get("bair_hurt"))
 
 make_window(AT_BAIR, 1,
-  AG_WINDOW_LENGTH, 16,
+  AG_WINDOW_LENGTH, 14,
   AG_WINDOW_ANIM_FRAMES, 4,
   AG_WINDOW_VSPEED, -1,
   AG_WINDOW_HAS_SFX, 1,

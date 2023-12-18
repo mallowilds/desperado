@@ -17,3 +17,13 @@ seer:
 -Nair's first hit could probably stand to have a bit more active time. It feels annoyingly stingy to get some times due to the low active time resulting in you missing it by just a hair, so adding a frame more active time would help make it less strict to get
 
 -Bair feels like it could be a bit faster to start up. It currently hits on frame 17, which is incredibly slow for an aerial (for context, outside of air strongs, all but 2 aerials in base /*#cast*/ are faster than that), and it isn't even especially strong to compensate for that slow speed (7 base, 0.6 scaling, angle 140 sourspot, 8 base, 0.75 scaling, angle 140 on the enhanced tipper). You could definitely get away with making it first active on frame 14 or 15, which is the same speed range for slower poking Bairs in base cast
+
+Changes:
++ Jab 1/2 lifetime 2 -> 3
+- DAttack startup 4 -> 9
+- DTilt's forward reach decreased to better match visual
++ Bulletless FStrong endlag 31(46) -> 18(27)
++ Standard FStrong endlag 31(46) -> 28(42)
++ NAir 1 lifetime 2 -> 4
++ NAir 1 angle 40 -> 50 (experimental, this is a major buff)
++ BAir startup 16 -> 14

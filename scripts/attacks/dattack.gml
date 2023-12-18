@@ -9,7 +9,7 @@ make_attack(AT_DATTACK,
 )
 
 make_window(AT_DATTACK, 1, //startup
-    AG_WINDOW_LENGTH, 4,
+    AG_WINDOW_LENGTH, 9,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
