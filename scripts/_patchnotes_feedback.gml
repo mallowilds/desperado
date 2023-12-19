@@ -18,6 +18,15 @@ seer:
 
 -Bair feels like it could be a bit faster to start up. It currently hits on frame 17, which is incredibly slow for an aerial (for context, outside of air strongs, all but 2 aerials in base /*#cast*/ are faster than that), and it isn't even especially strong to compensate for that slow speed (7 base, 0.6 scaling, angle 140 sourspot, 8 base, 0.75 scaling, angle 140 on the enhanced tipper). You could definitely get away with making it first active on frame 14 or 15, which is the same speed range for slower poking Bairs in base cast
 
+-nspecial gun home is really bad lol. needs to shoot way faster after the end of the home
+
+-fix plat offset
+
+-dspecial faster but doesnt stall you in the air //did half of this, dspecial is faster. shear if you see this maybe you could make it stall less in the air?
+//main idea is that the first one has stall + you can hold it in the air aswell, but after the first bullet you dont stall at all and just fall like a brick.
+
+-Fspecial longer cooldown (+ needs cooldown if you didnt explode it and it returns to you, probably should just make a wisp at the spot where it popped)
+
 Changes:
 + Jab 1/2 lifetime 2 -> 3
 - DAttack startup 4 -> 9

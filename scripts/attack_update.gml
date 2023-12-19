@@ -538,7 +538,7 @@ switch (attack) {
 				if (window_time_is(1)) {
 					sound_stop(sound_get("desp_spin"))
 		            sound_play(sound_get("desp_click"))
-		            //sound_stop(sound_get("desp_whisper"))
+		            sound_stop(sound_get("desp_whisper"))
 		            
 		            reload_anim_state = 3;
         			reload_anim_timer = 0;
@@ -562,7 +562,7 @@ switch (attack) {
 				}
 				
 				// Loop
-				if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)) && special_down && (down_down || down_stick_down) && !free) {
+				if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH) - 8) && special_down && (down_down || down_stick_down) && !free) {
 		            window = 1;
 		            window_timer = 4;
 		            
