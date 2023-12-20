@@ -22,9 +22,9 @@ has_hit = false;
 
 hittable = false;
 
-respawn_penalty = true;                             // If set to false, removes penalty delay and spawns a hitbox on return
-respawn_delay = 60;
-penalty_delay = 30;
+respawn_penalty = true;                             // Switches which respawn delay is used.
+respawn_delay = 75;                                 // Default respawn delay.
+penalty_delay = 120;                                // Altered respawn delay if the skull is killed or bashed.
 respawn_give_bullet = false;
 
 can_fspecial = false;

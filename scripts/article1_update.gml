@@ -326,7 +326,7 @@ switch (state) {
 		
 		can_fspecial = false;
 		
-		var delay_total = respawn_delay + (respawn_penalty ? penalty_delay : 0);
+		var delay_total =  (respawn_penalty ? penalty_delay : respawn_delay);
 		
 		if (state_timer == 1) {
 			duration = -1;
@@ -500,6 +500,7 @@ switch (state) {
 					state = 0;
 					state_timer = 0;
 					can_fspecial = false;
+					player_id.move_cooldown[AT_FSPECIAL] = 45;
 					if (player_id.state != PS_HITSTUN && player_id.state != PS_HITSTUN_LAND) create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
 				}
 				
@@ -777,7 +778,7 @@ switch (state) {
 	        		vflash.spr_dir = spr_dir;
 	        		sound_play(sound_get("desp_sharpen"));
 				}
-				if (window_timer >= 20) {
+				if (window_timer >= 10) {
 					window = 4;
 					window_timer = 0;
 					recoil_speed = -8
