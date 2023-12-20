@@ -419,11 +419,12 @@ switch (attack) {
     
     	can_fast_fall = false;
     	can_move = (window == 3);
-    	can_wall_jump = (window != 4);
-    	
+
     	switch window {
     		
     		case 1:
+    			can_wall_jump = true;
+    			
     			if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
     				sound_play(sound_get("desp_grabswing"))
     			}
@@ -435,6 +436,8 @@ switch (attack) {
     			break;
     		
     		case 2:
+    			can_wall_jump = !(instance_exists(grabbed_player_obj) || skull_grabbed);
+    			
     			do_skull_grabbox(get_hitbox_value(AT_USPECIAL, 1, HG_BASE_HITPAUSE), asset_get("sfx_blow_medium3"));
     			
     			if (instance_exists(grabbed_player_obj)) {
@@ -453,8 +456,13 @@ switch (attack) {
 				}
     			
 		        break;
-		       
+		    
+		    case 3:
+		    	can_wall_jump = true;
+		    	break;
+		    
     		case 4:
+    			can_wall_jump = false;
     			
     			if (instance_exists(grabbed_player_obj)) {
     				grabbed_player_obj.x += x - (48*spr_dir) + hsp;
@@ -492,6 +500,9 @@ switch (attack) {
     		case 5:
     			break;
     		
+    		case 6:
+    			break;
+    		
 		}
         
     	break;
@@ -502,7 +513,10 @@ switch (attack) {
     //#region Down Special -----------------------------------------------------
     case AT_DSPECIAL:
         move_cooldown[AT_DSPECIAL] = 70;
+        
         can_move = false
+        var dspec_air_drift = 0.2;
+        hsp = clamp(hsp-(dspec_air_drift*left_down)+(dspec_air_drift*right_down), -3, 3);
     
         set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
         
@@ -519,8 +533,8 @@ switch (attack) {
         			reload_anim_timer = 0;
         		}
         		
-        		if (vsp > 3) vsp = 3;
-	            hsp = clamp (hsp, -2.5, 2.5);
+        		if (vsp > 4) vsp = 4;
+	            
 	            can_fast_fall = false;
 	            
 	            break;
@@ -528,8 +542,7 @@ switch (attack) {
 			case 2:
 				if (window_time_is(1)) sound_play(sound_get("desp_whisper"))
 				
-				if (vsp > 3) vsp = 3;
-	            hsp = clamp (hsp, -2.5, 2.5);
+				if (vsp > 4) vsp = 4;
 	            can_fast_fall = false;
 	            
 	            break;
