@@ -55,7 +55,7 @@ make_hitbox(AT_FSPECIAL, 1,
     HG_HIT_SFX, asset_get("sfx_blow_medium3"),
     
     HG_PROJECTILE_SPRITE, sprite_get("null"),
-    HG_PROJECTILE_DESTROY_EFFECT, hfx_null,
+    HG_PROJECTILE_DESTROY_EFFECT, vfx_null,
     HG_PROJECTILE_MASK, -1,
     HG_PROJECTILE_IS_TRANSCENDENT, 1,
     HG_PROJECTILE_ENEMY_BEHAVIOR, 1,

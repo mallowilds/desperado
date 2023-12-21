@@ -142,7 +142,7 @@ if atk == AT_FSTRONG_2 && hbox == 2 {
 //#region Hit FX management
 with hit_fx_obj {
 	if player_id == other.id {
-        if hit_fx == other.hfx_bone_large {
+        if hit_fx == other.vfx_bone_large {
             depth = other.depth-1
         }
         if hit_fx == other.vfx_bullseye {

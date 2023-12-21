@@ -123,6 +123,7 @@ make_hitbox(AT_DAIR, 2,
     HG_VISUAL_EFFECT, 304,
     
     HG_HIT_SFX, asset_get("sfx_blow_heavy2"),
+    HG_VISUAL_EFFECT, vfx_bone_large,
 
 )
 

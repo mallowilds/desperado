@@ -53,6 +53,7 @@ make_hitbox(AT_UAIR, 1,
     HG_HITPAUSE_SCALING, .3,
 
     HG_HIT_SFX, asset_get("sfx_blow_medium3"),
+    HG_VISUAL_EFFECT, vfx_smog,
 )
 
 make_hitbox(AT_UAIR, 2,
@@ -74,6 +75,7 @@ make_hitbox(AT_UAIR, 2,
     HG_HITPAUSE_SCALING, .3,
     
     HG_HIT_SFX, asset_get("sfx_blow_medium3"),
+    HG_VISUAL_EFFECT, vfx_smog,
 )
 
 make_hitbox(AT_UAIR, 3,
@@ -95,6 +97,7 @@ make_hitbox(AT_UAIR, 3,
     HG_HITPAUSE_SCALING, .3,
     
     HG_HIT_SFX, asset_get("sfx_blow_medium2"),
+    HG_VISUAL_EFFECT, vfx_smog,
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

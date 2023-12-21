@@ -57,7 +57,7 @@ make_hitbox(AT_USTRONG_2, 1,
     HG_HITPAUSE_SCALING, 1,
     HG_EFFECT, 3,
 
-    HG_VISUAL_EFFECT, 304,
+    HG_VISUAL_EFFECT, vfx_bone_large,
     HG_VISUAL_EFFECT_Y_OFFSET, -10,
     HG_HIT_SFX, asset_get("sfx_blow_heavy2")
 )
@@ -84,7 +84,7 @@ make_hitbox(AT_USTRONG_2, 2,
     HG_HITPAUSE_SCALING, 1,
     HG_EFFECT, 3,
 
-    HG_VISUAL_EFFECT, 304,
+    HG_VISUAL_EFFECT, vfx_bone_large,
     HG_VISUAL_EFFECT_Y_OFFSET, -10,
     HG_HIT_SFX, asset_get("sfx_blow_heavy2"),
 )

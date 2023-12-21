@@ -119,18 +119,20 @@ sprite_change_offset("fspec_2", 118, 122);
 sprite_change_offset("dattack_skulless", 118, 122);
 sprite_change_offset("dattack", 118, 122);
 
-sprite_change_offset("vfx_1", 156, 156)
-sprite_change_offset("vfx_2", 156, 156)
+sprite_change_offset("vfx_1", 156, 156);
+sprite_change_offset("vfx_2", 156, 156);
+sprite_change_offset("vfx_bone_large", 134, 124);
+sprite_change_offset("vfx_smog_1", 150, 150);
 
 
-sprite_change_offset("skullhurtbox", 156, 194)
-sprite_change_offset("skullidle", 156, 194)
-sprite_change_offset("skullactive", 156, 194)
-sprite_change_offset("skullhurt", 156, 194)
-sprite_change_offset("skulldie",156, 194)
-sprite_change_offset("skullnair", 156, 194)
-sprite_change_offset("skullnspec", 160, 162) // This one needs to rotate
-sprite_change_offset("skullatk", 160, 162) // This one's a separate projectile
+sprite_change_offset("skullhurtbox", 156, 194);
+sprite_change_offset("skullidle", 156, 194);
+sprite_change_offset("skullactive", 156, 194);
+sprite_change_offset("skullhurt", 156, 194);
+sprite_change_offset("skulldie",156, 194);
+sprite_change_offset("skullnair", 156, 194);
+sprite_change_offset("skullnspec", 160, 162); // This one needs to rotate
+sprite_change_offset("skullatk", 160, 162); // This one's a separate projectile
 
 sprite_change_offset("wispstart", 166, 182);
 sprite_change_offset("wisp", 166, 182);

@@ -154,7 +154,7 @@ make_hitbox(AT_JAB, 3,
     HG_BASE_HITPAUSE, 8,
     HG_HITPAUSE_SCALING, 0.8,
         
-    //HG_VISUAL_EFFECT, hfx_bone_large,
+    //HG_VISUAL_EFFECT, vfx_bone_large,
     HG_HIT_SFX, asset_get("sfx_blow_heavy2"),
     HG_EXTRA_CAMERA_SHAKE, 2,
 
