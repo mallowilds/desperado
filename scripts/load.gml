@@ -121,7 +121,7 @@ sprite_change_offset("dattack", 118, 122);
 
 sprite_change_offset("vfx_1", 156, 156);
 sprite_change_offset("vfx_2", 156, 156);
-sprite_change_offset("vfx_bone_large", 134, 124);
+sprite_change_offset("vfx_bone_large", 156, 156);
 sprite_change_offset("vfx_smog_1", 150, 150);
 
 

@@ -174,7 +174,7 @@ make_hitbox(AT_DAIR, 2,
         )
     }
 
-#macro HIT_FRAMES 7
+#macro HIT_FRAMES 12
 #define _get_hit_frames()
     return HIT_FRAMES
 #macro HIT_FRAME_START 6
