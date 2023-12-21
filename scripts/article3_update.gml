@@ -83,7 +83,7 @@ switch state {
     //#region Taunt signpost
     // Init
     case 10:
-        sprite_index = sprite_get("sign");
+        sprite_index = sprite_get("sign_spawn"+(is_ea?"_ea":""));
         mask_index = sprite_get("sign_ground_mask");
         vsp = 3;
         
@@ -114,7 +114,7 @@ switch state {
             }
         }
         
-        state = 11;
+        state = 19;
         state_timer = 0;
         break;
     
@@ -302,7 +302,22 @@ switch state {
             exit;
         }
         break;
-        
+    
+    // Spawn in
+    case 19:
+        sprite_index = sprite_get("sign_spawn"+(is_ea?"_ea":""));
+        image_index = state_timer / 3;
+        if (player_id.state == PS_HITSTUN) { // taunt is interrupted
+            player_id.signpost_obj = noone;
+            instance_destroy();
+            exit;
+        }
+        if (image_index >= 3) {
+            state = 11;
+            state_timer = 0;
+            sprite_index = sprite_get("sign"+(is_ea?"_ea":""));
+        }
+        break;
     
     //#endregion
     

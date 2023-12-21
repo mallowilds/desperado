@@ -169,6 +169,7 @@ sprite_change_offset("sign_die", 60, 114);
 sprite_change_offset("sign_burn", 88, 180);
 sprite_change_offset("sign_burn_top", 88, 180);
 sprite_change_offset("sign_shoot", 88, 180);
+sprite_change_offset("sign_spawn", 88, 180);
 
 sprite_change_offset("sign_ea", 88, 180);
 sprite_change_offset("sign_move_l_ea", 88, 180);
@@ -177,6 +178,7 @@ sprite_change_offset("sign_die_ea", 88, 180);
 sprite_change_offset("sign_burn_ea", 88, 180);
 sprite_change_offset("sign_burn_top_ea", 88, 180);
 sprite_change_offset("sign_shoot_ea", 88, 180);
+sprite_change_offset("sign_spawn_ea", 88, 180);
 
 sprite_change_offset("sign_mask", 60, 114);
 sprite_change_offset("sign_ground_mask", 60, 114);

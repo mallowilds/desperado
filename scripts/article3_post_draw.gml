@@ -37,6 +37,11 @@ switch state {
         shader_end();
         break;
     
+    case 19: // intro
+        var _y = (image_index < 1 ? -58 : (image_index < 2 ? -82 : -78) )
+        draw_sprite_ext(icon_spr, icon_image, x-16, y+_y, icon_scale, icon_scale, 0, c_white, 1);
+        break;
+    
     case 21:
         var xview = floor(get_instance_x(asset_get("camera_obj")) - 480);
         with (player_id) shader_start();

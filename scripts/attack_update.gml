@@ -596,7 +596,7 @@ switch (attack) {
     
     case AT_TAUNT:
     	
-    	if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)-1)) {
+    	if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)-3)) {
     		signpost_obj = instance_create(x+(44*spr_dir), y, "obj_article3");
     		signpost_obj.state = 10;
     	}
