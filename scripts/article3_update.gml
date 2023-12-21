@@ -114,6 +114,14 @@ switch state {
             }
         }
         
+        //swap out icon for ea/game boy alt
+        if (is_ea) {
+            icon_spr = sprite_get("ea_sign_icons");
+            icon_scale = 2;
+            if (wanted_target.player < 1 || wanted_target.player > 4) icon_image = 4;
+            else icon_image = wanted_target.player - 1;
+        }
+        
         state = 19;
         state_timer = 0;
         break;

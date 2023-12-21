@@ -44,6 +44,9 @@ if (head_obj.state != 0) {
 	if (_s != null) {
 	    _s = _s + "_skulless";
 	    sprite_index = sprite_get(_s);
+	    
+	    if (_s == "dash_skulless") image_index = state_timer*dash_anim_speed;
+	    else if (_s == "walk_skulless") image_index = state_timer*walk_anim_speed;
 	}
 	
 }

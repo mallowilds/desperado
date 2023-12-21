@@ -516,7 +516,7 @@ switch (attack) {
         
         can_move = false
         var dspec_air_drift = 0.2;
-        hsp = clamp(hsp-(dspec_air_drift*left_down)+(dspec_air_drift*right_down), -3, 3);
+        if (free) hsp = clamp(hsp-(dspec_air_drift*left_down)+(dspec_air_drift*right_down), -3, 3);
     
         set_attack_value(attack, AG_USES_CUSTOM_GRAVITY, (vsp > 0));
         
