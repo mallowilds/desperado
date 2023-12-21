@@ -197,6 +197,8 @@ sprite_change_offset("ashpart_6", 7, 7);
 
 
 sprite_change_offset("desp_hurt", 28, 74);
+sprite_change_offset("desp_hurt_skulless", 28, 74);
 sprite_change_offset("desp_hitstun_hurt", 38, 82)
+sprite_change_offset("desp_hitstun_hurt_skulless", 38, 82)
 
 sprite_change_offset("plat", 40, 0)
