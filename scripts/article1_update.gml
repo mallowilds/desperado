@@ -538,10 +538,11 @@ switch (state) {
 				
 				spawn_ash_particle(player*3, player*3+1);
 				
-				if (window_timer > 6) {
-					state = 2;
-					state_timer = 0;
+				if (window_timer > 8) {
+					window = 2;
+					window_timer = 0;
 				}
+				break;
 			
 			case 2:
 				spawn_ash_particle(player*3, player*3+1);
