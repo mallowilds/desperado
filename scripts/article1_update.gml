@@ -500,6 +500,7 @@ switch (state) {
 					state = 0;
 					state_timer = 0;
 					can_fspecial = false;
+					visible = false;
 					player_id.move_cooldown[AT_FSPECIAL] = 45;
 					if (player_id.state != PS_HITSTUN && player_id.state != PS_HITSTUN_LAND) create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
 				}
