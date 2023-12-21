@@ -6,7 +6,7 @@ switch state {
     case 01:
     case 02:
         with (player_id) shader_start();
-        draw_sprite_ext(sprite_get("bullet"), 0, x, y, spr_dir, 1, proj_angle, c_white, 1);
+        draw_sprite_ext(sprite_get("bullet"+(get_player_color(player)==7?"_ea":"")), 0, x, y, spr_dir, 1, proj_angle, c_white, 1);
         shader_end();
         break;
     
