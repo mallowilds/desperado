@@ -144,6 +144,7 @@ sprite_change_offset("fire1", 10, 10);
 sprite_change_offset("fire2", 10, 10);
 sprite_change_offset("fire3", 10, 10);
 sprite_change_offset("bullet", 3, 6); // Non-even offset to enable spinning
+sprite_change_offset("bullet_ea", 3, 6);
 
 sprite_change_offset("nspec_beam_segment", 0, 16);
 sprite_change_offset("nspec_beam_end", 0, 30);
@@ -161,15 +162,29 @@ sprite_change_offset("nspec_blast_wall_ash", 0, 38);
 
 sprite_change_offset("fstrongblast", 96, 150);
 
+
 sprite_change_offset("sign", 60, 114);
 sprite_change_offset("sign_move_l", 60, 114);
 sprite_change_offset("sign_move_r", 60, 114);
 sprite_change_offset("sign_die", 60, 114);
-sprite_change_offset("sign_mask", 60, 114);
-sprite_change_offset("sign_ground_mask", 60, 114);
 sprite_change_offset("sign_burn", 88, 180);
 sprite_change_offset("sign_burn_top", 88, 180);
+sprite_change_offset("sign_shoot", 88, 180);
+sprite_change_offset("sign_spawn", 88, 180);
+
+sprite_change_offset("sign_ea", 88, 180);
+sprite_change_offset("sign_move_l_ea", 88, 180);
+sprite_change_offset("sign_move_r_ea", 88, 180);
+sprite_change_offset("sign_die_ea", 88, 180);
+sprite_change_offset("sign_burn_ea", 88, 180);
+sprite_change_offset("sign_burn_top_ea", 88, 180);
+sprite_change_offset("sign_shoot_ea", 88, 180);
+sprite_change_offset("sign_spawn_ea", 88, 180);
+
+sprite_change_offset("sign_mask", 60, 114);
+sprite_change_offset("sign_ground_mask", 60, 114);
 sprite_change_offset("taunt_shot", 0, 2);
+
 
 sprite_change_offset("ashpart_1", 7, 7);
 sprite_change_offset("ashpart_2", 7, 7);

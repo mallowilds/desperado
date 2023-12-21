@@ -22,3 +22,6 @@ can_be_grounded = true;
 ignores_walls = false;
 free = true;
 hit_wall = false;
+
+//Skin behavior
+is_ea = (get_player_color(player) == 7);

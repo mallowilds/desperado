@@ -10,7 +10,7 @@ if ((get_local_setting(SET_HUD_SIZE) != 0 || get_local_setting(SET_HUD_NAMES) !=
 	
 	shader_start();
 	
-	if (num_bullets > 0) draw_sprite(sprite_get("nametag_bullets"), num_bullets, x+8, y-char_height-40);
+	if (num_bullets > 0) draw_sprite(sprite_get("nametag_bullets"+(get_player_color(player)==7?"_ea":"")), num_bullets, x+8, y-char_height-40);
 	
 	draw_set_alpha(nametag_flame_alpha);
 	draw_sprite(sprite_get("nametag_fire"), get_gameplay_time()/5, x+8, y-char_height-40);
@@ -19,7 +19,7 @@ if ((get_local_setting(SET_HUD_SIZE) != 0 || get_local_setting(SET_HUD_NAMES) !=
 	
 	if (nametag_white_flash > 0) {
 		draw_set_alpha(nametag_white_flash);
-		gpu_set_fog(true, c_white, 0, 1);
+		gpu_set_fog(true, (get_player_color(player)==7?/*#*/$9ae2d3:c_white), 0, 1);
 		draw_sprite(sprite_get("nametag_bullets"), num_bullets, x+8, y-char_height-40);
 		if (num_bullets >= 4) draw_sprite(sprite_get("nametag_fire"), get_gameplay_time()/5, x+8, y-char_height-40);
 		gpu_set_fog(false, c_white, 0, 1);

@@ -6,11 +6,12 @@ switch state {
     case 01:
     case 02:
         with (player_id) shader_start();
-        draw_sprite_ext(sprite_get("bullet"), 0, x, y, spr_dir, 1, proj_angle, c_white, 1);
+        draw_sprite_ext(sprite_get("bullet"+(get_player_color(player)==7?"_ea":"")), 0, x, y, spr_dir, 1, proj_angle, c_white, 1);
         shader_end();
         break;
     
-    case 11:
+    case 11: // idle
+    case 16: // idle-like state (while waiting for taunt shot)
         draw_sprite_ext(icon_spr, icon_image, x-16, y-78, icon_scale, icon_scale, 0, c_white, 1);
         if (get_match_setting(SET_HITBOX_VIS)) draw_sprite_ext(sprite_get("sign_mask"), 0, x, y, 1, 1, 0, c_white, 0.5);
         break;
@@ -34,6 +35,11 @@ switch state {
         with (player_id) shader_start();
         draw_sprite(sprite_get("sign_burn_top"), image_index, x, y);
         shader_end();
+        break;
+    
+    case 19: // intro
+        var _y = (image_index < 1 ? -58 : (image_index < 2 ? -82 : -78) )
+        draw_sprite_ext(icon_spr, icon_image, x-16, y+_y, icon_scale, icon_scale, 0, c_white, 1);
         break;
     
     case 21:
