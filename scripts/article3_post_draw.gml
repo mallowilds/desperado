@@ -10,7 +10,8 @@ switch state {
         shader_end();
         break;
     
-    case 11:
+    case 11: // idle
+    case 16: // idle-like state (while waiting for taunt shot)
         draw_sprite_ext(icon_spr, icon_image, x-16, y-78, icon_scale, icon_scale, 0, c_white, 1);
         if (get_match_setting(SET_HITBOX_VIS)) draw_sprite_ext(sprite_get("sign_mask"), 0, x, y, 1, 1, 0, c_white, 0.5);
         break;

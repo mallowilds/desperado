@@ -120,13 +120,13 @@ switch state {
     
     // Idle
     case 11:
-        sprite_index = sprite_get("sign");
+        sprite_index = sprite_get("sign"+(is_ea?"_ea":""));
         image_index = 0;
         
         // Detect dashes
         var dash_dir = signpost_detect_dashes();
         if (dash_dir != 0) {
-            sprite_index = sprite_get((dash_dir*spr_dir == -1) ? "sign_move_l" : "sign_move_r");
+            sprite_index = sprite_get((dash_dir*spr_dir == -1) ? "sign_move_l"+(is_ea?"_ea":"") : "sign_move_r"+(is_ea?"_ea":""));
             state = (dash_dir*spr_dir == -1 ? 12 : 13);
             state_timer = 0;
             sound_play(asset_get("sfx_holy_grass"), false, noone, 0.7, 0.75+(0.35*random_func(12, 1, false)));
@@ -154,13 +154,26 @@ switch state {
     
     // Sway left
     case 12:
-        sprite_index = sprite_get("sign_move_l");
-        image_index = state_timer / 5;
-        if (image_index >= 4) {
-            sprite_index = sprite_get("sign");
-            state = 11;
-            state_timer = 0;
+    
+        if (!is_ea) {
+            sprite_index = sprite_get("sign_move_l");
+            image_index = state_timer / 5;
+            if (image_index >= 4) {
+                sprite_index = sprite_get("sign");
+                state = 11;
+                state_timer = 0;
+            }
         }
+        else {
+            sprite_index = sprite_get("sign_move_l_ea");
+            image_index = state_timer / 7;
+            if (image_index >= 3) {
+                sprite_index = sprite_get("sign_ea");
+                state = 11;
+                state_timer = 0;
+            }
+        }
+        
         
         // Update dash tracker
         signpost_detect_dashes();
@@ -187,12 +200,24 @@ switch state {
     
     // Sway right
     case 13:
-        sprite_index = sprite_get("sign_move_r");
-        image_index = state_timer / 5;
-        if (image_index >= 4) {
-            sprite_index = sprite_get("sign")
-            state = 11;
-            state_timer = 0;
+        
+        if (!is_ea) {
+            sprite_index = sprite_get("sign_move_r");
+            image_index = state_timer / 5;
+            if (image_index >= 4) {
+                sprite_index = sprite_get("sign");
+                state = 11;
+                state_timer = 0;
+            }
+        }
+        else {
+            sprite_index = sprite_get("sign_move_r_ea");
+            image_index = state_timer / 7;
+            if (image_index >= 3) {
+                sprite_index = sprite_get("sign_ea");
+                state = 11;
+                state_timer = 0;
+            }
         }
         
         // Update dash tracker
@@ -221,7 +246,7 @@ switch state {
     // Death
     case 14:
         if (hitstop > 0) break;
-        sprite_index = sprite_get("sign_die");
+        sprite_index = sprite_get("sign_die"+(is_ea?"_ea":""));
         image_index = 1+(state_timer / 7);
         if (image_index >= 5) {
             if (player_id.signpost_obj == self) player_id.signpost_obj = noone;
@@ -232,7 +257,7 @@ switch state {
     
     // Burn away
     case 15:
-        sprite_index = sprite_get("sign_burn");
+        sprite_index = sprite_get("sign_burn"+(is_ea?"_ea":""));
         image_index = state_timer / 5;
         if (image_index >= 17) {
             if (player_id.signpost_obj == self) player_id.signpost_obj = noone;
@@ -246,6 +271,39 @@ switch state {
         
         break;
     
+    // Shot down - init
+    case 16:
+        sprite_index = sprite_get("sign_shoot"+(is_ea?"_ea":""));
+        image_index = 0;
+        
+        // Detect hitboxes
+        if (signpost_detect_hitboxes()) {
+            state = 14;
+            state_timer = 0;
+        }
+        
+        // Apply gravity
+        vsp += 0.4;
+        if (player_id.object_index != oTestPlayer && y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
+            instance_destroy();
+            exit;
+        }
+        
+        break;
+    
+    // Shot down - die
+    case 17:
+        if (hitstop > 0) break;
+        sprite_index = sprite_get("sign_shoot"+(is_ea?"_ea":""));
+        image_index = 1+(state_timer / 4);
+        if (image_index >= 9) {
+            if (player_id.signpost_obj == self) player_id.signpost_obj = noone;
+            instance_destroy();
+            exit;
+        }
+        break;
+        
+    
     //#endregion
     
     
@@ -257,15 +315,11 @@ switch state {
         ignores_walls = true;
         signpost_obj = player_id.signpost_obj;
         
-        if (instance_exists(signpost_obj) && signpost_obj.state != 14 && signpost_obj.state != 15) {
+        if (instance_exists(signpost_obj) && signpost_obj.state != 14 && signpost_obj.state != 15 && signpost_obj.state != 17) {
 
             if (x*spr_dir <= signpost_obj.x*spr_dir) { // i.e. signpost is in front
                 if (point_distance(x, y, signpost_obj.x, signpost_obj.y-50) < 160) {
-                    signpost_obj.state_timer = 0;
-                    signpost_obj.state = 14;
-                    sound_play(asset_get("sfx_syl_ustrong_part3"))
-                    sound_play(asset_get("sfx_ell_drill_stab"))
-                    spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, player_id.vfx_bullseye_small);
+                    shoot_down_signpost(signpost_obj);
                     instance_destroy();
                     exit;
                 }
@@ -274,11 +328,7 @@ switch state {
             }
             else {
                 if (point_distance(x, y, signpost_obj.x, signpost_obj.y-50) < 30) {
-                    signpost_obj.state_timer = 0;
-                    signpost_obj.state = 14;
-                    sound_play(asset_get("sfx_syl_ustrong_part3"))
-                    sound_play(asset_get("sfx_ell_drill_stab"))
-                    spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, player_id.vfx_bullseye_small);
+                    shoot_down_signpost(signpost_obj);
                     instance_destroy();
                     exit;
                 }
@@ -323,12 +373,8 @@ switch state {
             if (screen_wrap && spr_dir == -1 && x+hsp < view_get_xview()) collide = collide || collision_line(x+xview, y, x+xview+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false); // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
             else if (screen_wrap && spr_dir == 1 && x+hsp > view_get_xview()+view_get_wview()) collide = collide || collision_line(x-xview, y, x-xview+lengthdir_x(160, move_angle), y+lengthdir_y(160, move_angle), signpost_obj, false, false); // WARN: Possible Desync. Consider using get_instance_x(asset_get("camera_obj")).
             
-            if (signpost_obj.state != 14 && signpost_obj.state != 15 && collide) {
-                signpost_obj.state = 14;
-                signpost_obj.state_timer = 0;
-                sound_play(asset_get("sfx_syl_ustrong_part3"))
-                sound_play(asset_get("sfx_ell_drill_stab"))
-                spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, player_id.vfx_bullseye_small);
+            if (signpost_obj.state != 14 && signpost_obj.state != 15 && signpost_obj.state != 17 && collide) {
+                shoot_down_signpost(signpost_obj);
                 instance_destroy();
                 exit;
             }
@@ -474,3 +520,15 @@ state_timer++;
     
     mask_index = old_mask;
     return false;
+
+// For use by taunt gunshot
+#define shoot_down_signpost(_signpost_obj)
+    _signpost_obj.state_timer = 0;
+    _signpost_obj.state = 17;
+    sound_play(asset_get("sfx_syl_ustrong_part3"))
+    sound_play(asset_get("sfx_ell_drill_stab"))
+    var hfx = spawn_hit_fx(_signpost_obj.x+4, _signpost_obj.y-64, player_id.vfx_bullseye_small);
+    hfx.depth = _signpost_obj.depth-1;
+    hfx.spr_dir = 1;
+
+    

@@ -604,18 +604,26 @@ switch (attack) {
     	break;
     
     case AT_TAUNT_2:
+    
+    	var taunt_active = instance_exists(signpost_obj) && signpost_obj.state != 14 && signpost_obj.state != 15 && signpost_obj.state != 17;
+    	
+    	if (window == 1 && window_time_is(1) && taunt_active) {
+    		signpost_obj.state = 16;
+    		signpost_obj.state_timer = 0;
+    	}
     	
     	if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)-1)) {
     		if (object_index != oTestPlayer) {
     			var taunt_shot = instance_create(x+(60*spr_dir), y-70, "obj_article3");
     			taunt_shot.state = 20;
     		}
-    		else if (instance_exists(signpost_obj) && signpost_obj.state != 14 && signpost_obj.state != 15) { // playtest room behavior
-    			signpost_obj.state = 14;
+    		else if (taunt_active) { // playtest room behavior
+    			signpost_obj.state = 17;
     			signpost_obj.state_timer = 0;
     			sound_play(asset_get("sfx_syl_ustrong_part3"))
                 sound_play(asset_get("sfx_ell_drill_stab"))
-                spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, vfx_bullseye_small);
+                var hfx = spawn_hit_fx(signpost_obj.x, signpost_obj.y-50, vfx_bullseye_small);
+                hfx.depth = signpost_obj.depth-1;
     		}
     	}
     	
