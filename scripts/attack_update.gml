@@ -88,6 +88,15 @@ switch (attack) {
         	sound_play(sound_get("desp_heavyswing"), 0, noone, .4, .95)
         }
     	break;
+    case AT_USTRONG_2: 
+		if (window > 1 && (window < 5 && window_timer < 17)) {
+            hud_offset = 60;
+        }
+        if window == 2 && window_timer == 3 && !hitpause {
+        	sound_play(asset_get("sfx_may_root"), 0, noone, 1, .95)
+        	sound_play(sound_get("desp_heavyswing"), 0, noone, .3, .93)
+        }
+    	break;
     case AT_DSTRONG:
         if window == 2 && window_timer == 2 && !hitpause {
         	sound_play(sound_get("desp_hiss"), 0, noone, 1.5)

@@ -36,3 +36,6 @@ Changes:
 + NAir 1 lifetime 2 -> 4
 + NAir 1 angle 40 -> 50 (experimental, this is a major buff)
 + BAir startup 16 -> 14
+- Pratland time 15 -> 20
+- Pratfall accel .85 -> .4
+= Ustrong stats standardized between skull + no skull variants

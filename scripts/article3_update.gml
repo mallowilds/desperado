@@ -556,5 +556,3 @@ state_timer++;
     var hfx = spawn_hit_fx(_signpost_obj.x+4, _signpost_obj.y-64, player_id.vfx_bullseye_small);
     hfx.depth = _signpost_obj.depth-1;
     hfx.spr_dir = 1;
-
-    

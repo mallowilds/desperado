@@ -1,11 +1,10 @@
-// ustrong_skullless.gml
+// ustrong.gml
 
 make_attack(AT_USTRONG_2,
-    AG_SPRITE, sprite_get("ustrong"),
+    AG_SPRITE, sprite_get("ustrong_skulless"),
     AG_NUM_WINDOWS, 4,
     AG_STRONG_CHARGE_WINDOW, 1,
     AG_HURTBOX_SPRITE, sprite_get("ustrong_hurt"),
-    AG_MUNO_ATTACK_NAME, "UStrong (Skullless)",
 )
 
 make_window(AT_USTRONG_2, 1,
@@ -18,8 +17,8 @@ make_window(AT_USTRONG_2, 2,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 2,
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, sound_get("desp_swinglow_2"),
-    AG_WINDOW_SFX_FRAME, 1,
+    AG_WINDOW_SFX, asset_get("sfx_swipe_heavy2"),
+    AG_WINDOW_SFX_FRAME, 3,
 )
 
 make_window(AT_USTRONG_2, 3,
@@ -56,6 +55,7 @@ make_hitbox(AT_USTRONG_2, 1,
     HG_KNOCKBACK_SCALING, 1.1,
     HG_BASE_HITPAUSE, 8,
     HG_HITPAUSE_SCALING, 1,
+    HG_EFFECT, 3,
 
     HG_VISUAL_EFFECT, 304,
     HG_VISUAL_EFFECT_Y_OFFSET, -10,
@@ -82,6 +82,7 @@ make_hitbox(AT_USTRONG_2, 2,
     HG_KNOCKBACK_SCALING, 1.1,
     HG_BASE_HITPAUSE, 8,
     HG_HITPAUSE_SCALING, 1,
+    HG_EFFECT, 3,
 
     HG_VISUAL_EFFECT, 304,
     HG_VISUAL_EFFECT_Y_OFFSET, -10,

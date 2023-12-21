@@ -125,9 +125,9 @@ make_hitbox(AT_USPECIAL, 2,
     HG_ANGLE, 56,
     //HG_ANGLE_FLIPPER, 6,
     HG_BASE_KNOCKBACK, 7,
-    HG_KNOCKBACK_SCALING, .5,
+    HG_KNOCKBACK_SCALING, .4,
     HG_BASE_HITPAUSE, 7,
-    HG_HITSTUN_MULTIPLIER, .8,
+    HG_HITSTUN_MULTIPLIER, .6,
     HG_HITPAUSE_SCALING, .7,
     HG_HIT_SFX, asset_get("sfx_blow_medium1"),
 )
@@ -179,7 +179,7 @@ make_hitbox(AT_USPECIAL, 2,
         )
     }
 
-#macro GRAB_FRAMES 7
+#macro GRAB_FRAMES 12
 #define _get_grab_frames()
     return GRAB_FRAMES
 #macro GRAB_FRAME_START 6

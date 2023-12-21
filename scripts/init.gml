@@ -166,7 +166,7 @@ techroll_speed = 10 // 8 – 11. The speed during techroll’s movement
 
 // Landing
 land_time = 4 // 4 – 6. The number of frames in your normal landing state
-prat_land_time = 15 // 3 – 24. The number of frames in your prat land state
+prat_land_time = 20 // 3 – 24. The number of frames in your prat land state
 wave_land_time = 12 // 6 – 12 usually 8. The number of frames your waveland state lasts
 wave_land_adj = 1.2 // 1.2 – 1.5. The multiplier to your initial hsp when wavelanding. Usually greater than 1
 wave_friction = 0.15 // 0 – .15. Grounded deceleration when wavelanding
@@ -175,7 +175,7 @@ wave_friction = 0.15 // 0 – .15. Grounded deceleration when wavelanding
 air_dodge_speed = 7.5 // 7.5 – 8	The speed during airdodge’s movement
 
 air_accel = .5 // .2 – .4. The hsp acceleration applied when you hold left or right in a normal aerial state
-prat_fall_accel = .85 // .4 – 1.5.	A multiplier to your normal horizontal aerial acceleration: 1 = normal 0 = no acceleration
+prat_fall_accel = .5 // .4 – 1.5.	A multiplier to your normal horizontal aerial acceleration: 1 = normal 0 = no acceleration
 air_friction = .02 // .02 – .07. Natural deceleration applied while in the air. Also applies while in hitstun, increasing survivability
 
 max_fall = 9 // 8 – 11. The maximum vsp you can accelerate to while falling normally
