@@ -11,17 +11,12 @@ for (var i = 0; i <= 7; i++) set_article_color_slot(i, get_color_profile_slot_r(
 
 switch alt_palette {
     
-    case 0:
+    case 0: //base alt
         set_character_color_slot( 1, 221, 157, 136);
         set_article_color_slot( 1, 221, 157, 136);
         break;
-    
-    case 9:
-        set_character_color_shading(1, -2);
-        set_character_color_shading(2,  2);
-        break;
-    
-    case 7:
+        
+    case 7: //ea
         set_character_color_shading(0, 0);
         set_character_color_shading(1, 0);
         set_character_color_shading(2, 0);
@@ -33,15 +28,12 @@ switch alt_palette {
         outline_color = [42, 90, 63]; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
         break;
     
-    case 13:
-        outline_color = [50, 0, 0]; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
-        break;
     
-    case 14:
+    case 11: //baja blast
         set_character_color_slot( 2, 8, 117, 75, 0.5);
         set_article_color_slot( 2, 221, 157, 136);
         break;
-    case 15:
+    case 15: //halloween
         set_character_color_shading(0, 3);
         set_character_color_shading(1, 3);
     
@@ -85,6 +77,8 @@ switch (get_match_setting(SET_SEASON)) {
     set_color_profile_slot( 12, 6, 255, 102, 0 ); //Fireyellow
     set_color_profile_slot( 12, 7, 43, 58, 92 ); //Gun
     set_color_profile_slot( 12, 8, 27, 37, 59 ); //Firedark
+    set_character_color_shading(0, 3);
+    set_character_color_shading(1, 3);
     break;
   case 4: // christmas
     // Mr. 10 Below

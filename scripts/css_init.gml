@@ -13,14 +13,28 @@ alt_name[6]  = "Doubt";
 alt_name[7]  = "Timeless"; 
 alt_name[8]  = "Posession   ";
 alt_name[9]  = "Dies Irae";
-alt_name[10]  = "Desperate Outlaw      ";
-alt_name[11]  = "Blasted      ";
+alt_name[10]  = "Desperate Outlaw                      ";
+alt_name[11]  = "Blasted  ";
 alt_name[12]  = "Seasonal";
 alt_name[13]  = "Forevermore (temp)";
 alt_name[14]  = "Mr. 101  (temp)";
 alt_name[15]  = "Dullahan (temp)";
 alt_name[16]  = "Mr. 10 Below (temp)"
 
+switch (get_match_setting(SET_SEASON)) {
+        case 1:
+    alt_name[12]  = "Nevermore       ";
+    break;
+        case 2:
+    alt_name[12]  = "Mr. 101         ";
+    break;
+        case 3:
+    alt_name[12]  = "Dullahan        ";
+    break;
+        case 4: 
+    alt_name[12]  = "Mr 10 Below        ";
+    break;
+}
 
 bulletcoordmain = [10, 120]
 bulletcoordbe = [12, 110]
