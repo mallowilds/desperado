@@ -382,7 +382,7 @@ switch state {
             var x_offset = lengthdir_x(-2*progress*(progress-1)*height, angle+90); // https://www.desmos.com/calculator/x54440men2
             var y_offset = lengthdir_y(-2*progress*(progress-1)*height, angle+90);
             
-            var spr_type = "ashpart_" + string(1+random_func_2(6*player, 3, true));
+            var spr_type = "ashpart_" + string(1+random_func_2(6*player+i, 6, true));
             var sparkle = {
                 sp_x : round((x + x_dist + x_offset)/2)*2, // Anti-mixels trick
                 sp_y : round((y + y_dist + y_offset)/2)*2,

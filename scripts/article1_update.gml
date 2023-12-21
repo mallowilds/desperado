@@ -904,7 +904,7 @@ else hitstop = floor(hitstop);
 
 
 #define spawn_ash_particle(seed1, seed2)
-    var ash_type = "ashpart_" + string(1+random_func_2(seed1, 3, true));
+    var ash_type = "ashpart_" + string(1+random_func_2(seed1, 6, true));
     spawn_particle_random(ash_type, 18, seed2);
 
 
