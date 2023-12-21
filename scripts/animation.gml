@@ -51,6 +51,14 @@ if (head_obj.state != 0) {
 	
 }
 
+else if (state == PS_ATTACK_GROUND && attack == AT_USTRONG_2 && image_index > 4) { // Special handling since the attack shouldn't be changing mid-active frames
+	sprite_index = sprite_get("ustrong");
+}
+
+else if (state == PS_ATTACK_GROUND && attack == AT_EXTRA_2 && image_index > 5) { // Ditto for DAttack
+	sprite_index = sprite_get("dattack");
+}
+
 //#endregion
 
 

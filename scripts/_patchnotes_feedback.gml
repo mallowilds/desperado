@@ -2,12 +2,8 @@
 /*Patch Notes and Feedback; Im gonna be using this to document random feedback i get and eventually compile patch notes on here.
 
 
--fix plat offset (shear)
--fix ea sign die offset (shear)
 -finish vfx (me)
 
--dspecial faster but doesnt stall you in the air (did half of this, dspecial is faster. shear if you see this maybe you could make it stall less in the air?)
--Fspecial longer cooldown by about 30 frames (+ needs cooldown if you didnt explode it and it returns to you, probably should just make a wisp at the spot where it popped)
 
 Changes:
 + Jab 1/2 lifetime 2 -> 3

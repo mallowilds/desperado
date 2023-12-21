@@ -126,7 +126,6 @@ if (!hitpause || state == PS_HITSTUN) { // Should still advance on enemy hitpaus
 //#endregion
 
 
-
 //#region Reset fractional damage on enemy death
 with object_index {
     if (!clone && (state == PS_DEAD || state == PS_RESPAWN)) {
@@ -165,6 +164,49 @@ if (num_bullets > 6 || num_bullets < 0) {
     print_debug("ERROR: bad bullet count (" + string(num_bullets) + "). Resetting.");
     num_bullets = clamp(num_bullets, 0, 6);
 }
+
+
+
+//#region Skull-less-ness management
+if (head_obj.state != 0) {
+	
+	if (hurtboxID.sprite_index == sprite_get("desp_hurt")) {
+	    hurtboxID.sprite_index = sprite_get("desp_hurt_skulless");
+	    hurtboxID.mask_index = sprite_get("desp_hurt_skulless");
+	}
+	
+	else if (state == PS_HITSTUN || state == PS_HITSTUN_LAND) {
+        hurtboxID.sprite_index = sprite_get("desp_hitstun_hurt_skulless");
+    	hurtboxID.mask_index = sprite_get("desp_hitstun_hurt_skulless");
+    }
+	
+	else {
+	    var _s = null;
+    	
+    	for (var i = 0; i < array_length(anim_list); i++) {
+    		if (hurtboxID.sprite_index == sprite_get(anim_list[i]+"_hurt")) {
+    			_s = anim_list[i];
+    		}
+    	}
+    	
+    	if (_s != null) {
+    	    _s = _s + "_skulless_hurt";
+    	    //hurtboxID.sprite_index = sprite_get(_s);
+    	    //hurtboxID.mask_index = sprite_get("_s");
+    	    print_debug(_s)
+    	}
+    	
+	}
+}
+else if (hurtboxID.sprite_index == sprite_get("desp_hurt_skulless") || hurtboxID.sprite_index == sprite_get("desp_hitstun_hurt_skulless")) {
+    hurtboxID.sprite_index = sprite_get("desp_hurt"); // game will autocorrect from here as needed
+	hurtboxID.mask_index = sprite_get("desp_hurt");
+}
+
+//#endregion
+
+
+
 
 
 
