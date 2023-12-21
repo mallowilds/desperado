@@ -32,7 +32,7 @@ if ((get_local_setting(SET_HUD_SIZE) != 0 || get_local_setting(SET_HUD_NAMES) !=
 
 // Sparkle management (manages flame and ash particles. See update.gml)
 // Note: due to flame coloration, this tampers with color slot 0
-set_article_color_slot(0, color_get_red(get_color_profile_slot_r(get_player_color(player), 8)), color_get_green(get_color_profile_slot_g(get_player_color(player), 8)), color_get_blue(get_color_profile_slot_b(get_player_color(player), 8)));
+set_article_color_slot(0, get_color_profile_slot_r(get_player_color(player), 8), get_color_profile_slot_g(get_player_color(player), 8), get_color_profile_slot_b(get_player_color(player), 8));
 shader_start();
 
 for (var i = 0; i < ds_list_size(sparkle_list); i++) {

@@ -18,6 +18,9 @@ TAUNT SIGNPOST
 - 13: Sway right
 - 14: Death
 - 15: Burn away
+- 16: Shot down / waiting
+- 17: Shot down / death
+- 19: Spawn anim
 
 TAUNT GUNSHOT
 - 20: Initialization
