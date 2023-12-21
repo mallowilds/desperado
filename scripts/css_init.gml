@@ -12,13 +12,14 @@ alt_name[5]  = "Dust & Desire";
 alt_name[6]  = "Doubt"; 
 alt_name[7]  = "Timeless"; 
 alt_name[8]  = "Posession   ";
-alt_name[9]  = "Blind Obsession";
-alt_name[10]  = "Dies Irae";
-alt_name[11]  = "Desperate Outlaw      ";
-alt_name[12]  = "In the Blood";
-alt_name[13]  = "Hunted";
-alt_name[14]  = "Blasted";
-alt_name[15]   = "Guns 'n Roses";
+alt_name[9]  = "Dies Irae";
+alt_name[10]  = "Desperate Outlaw      ";
+alt_name[11]  = "Blasted      ";
+alt_name[12]  = "Seasonal";
+alt_name[13]  = "Forevermore (temp)";
+alt_name[14]  = "Mr. 101  (temp)";
+alt_name[15]  = "Dullahan (temp)";
+alt_name[16]  = "Mr. 10 Below (temp)"
 
 
 bulletcoordmain = [10, 120]
