@@ -15,11 +15,16 @@ Changes:
 - DTilt's forward reach decreased to better match visual
 + Bulletless FStrong endlag 31(46) -> 18(27)
 + Standard FStrong endlag 31(46) -> 28(42)
+= UStrong stats standardized between skull + no skull variants
 + NAir 1 lifetime 2 -> 4
 + NAir 1 angle 40 -> 50 (experimental, this is a major buff)
 + BAir startup 16 -> 14
++ Dspecial endlag 45 -> 30 (yes)
+= DSpecial max fall speed 3 -> 4, air accel 0 -> 0.2
 - Pratland time 15 -> 20
 - Pratfall accel .85 -> .4
-= UStrong stats standardized between skull + no skull variants
-+ NSpecial skull home made significantly faster
-+ Dspecial endlag 45 -> 30 (yes)
+- FSpec: 45f cooldown added upon safely returning to desperado
+- FSpec-2: Skull pop startup 10+0 -> 10+8
+- Skull: Respawn time 60->75 frames
+- Skull: Penalty respawn time 90 -> 120 frames
++ Skull NSpec: Locked-in prefire duration 20->10 frames
