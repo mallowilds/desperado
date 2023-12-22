@@ -119,6 +119,15 @@ sprite_change_offset("fspec_2", 118, 122);
 sprite_change_offset("dattack_skulless", 118, 122);
 sprite_change_offset("dattack", 118, 122);
 
+sprite_change_offset("idle_holiday1", 118, 122);
+sprite_change_offset("idle_holiday1_die", 118, 122);
+sprite_change_offset("idle_holiday2", 118, 122);
+sprite_change_offset("idle_holiday2_die", 118, 122);
+sprite_change_offset("idle_holiday3", 118, 122);
+// No idle_holiday3_die
+sprite_change_offset("idle_holiday4", 118, 122);
+sprite_change_offset("idle_holiday4_die", 118, 122);
+
 sprite_change_offset("vfx_1", 156, 156);
 sprite_change_offset("vfx_2", 156, 156);
 sprite_change_offset("vfx_bone_large", 156, 156);

@@ -72,6 +72,18 @@ signpost_obj = noone;                   // taunt
 // Training mode assets
 draw_skull_grabbox = 0;
 
+// Holiday detection
+var col = get_player_color(player);
+is_seasonal = (12 <= col && col <= 16);
+seasonal_type = is_seasonal ? col-12 : 0; // interim until proper seasonal functionality added
+if (col == 12) seasonal_type = get_match_setting(SET_SEASON);
+display_seasonal = is_seasonal;
+vfx_seasonal = [noone,
+                hit_fx_create(sprite_get("idle_holiday1_die"), 25),
+                hit_fx_create(sprite_get("idle_holiday2_die"), 15),
+                noone,
+                hit_fx_create(sprite_get("idle_holiday4_die"), 20),
+                ];
 
 //Article
 head_obj = instance_create(x, y, "obj_article1");

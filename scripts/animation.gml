@@ -29,7 +29,7 @@ custom_crouch() // run the custom crouch code
 
 
 
-//#region Skull-less-ness management
+//#region Skullessness management
 
 if (head_obj.state != 0) {
 	
@@ -45,7 +45,8 @@ if (head_obj.state != 0) {
 	    _s = _s + "_skulless";
 	    sprite_index = sprite_get(_s);
 	    
-	    if (_s == "dash_skulless") image_index = state_timer*dash_anim_speed;
+	    if (_s == "idle_skulless") image_index = state_timer*idle_anim_speed;
+	    else if (_s == "dash_skulless") image_index = state_timer*dash_anim_speed;
 	    else if (_s == "walk_skulless") image_index = state_timer*walk_anim_speed;
 	}
 	
@@ -62,6 +63,13 @@ else if (state == PS_ATTACK_GROUND && attack == AT_EXTRA_2 && image_index > 5) {
 //#endregion
 
 
+//#region Seasonal management
+// else-if chain continues from skullessness to prevent head pop-in
+else if (display_seasonal && state == PS_IDLE || state == PS_SPAWN || state == PS_RESPAWN) {
+	sprite_index = sprite_get("idle_holiday"+string(seasonal_type));
+	image_index = state_timer*idle_anim_speed;
+}
+//#endregion
 
 
 // Defines always go at the bottom of the file.

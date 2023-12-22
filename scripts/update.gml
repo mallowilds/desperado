@@ -16,7 +16,7 @@ You can have up to 6 bullets, which have stacking effects on damage. I have the 
 
 
 
-if (get_gameplay_time() == 4 && has_intro) set_attack(AT_INTRO);
+if (get_gameplay_time() == 4 && has_intro && !is_seasonal) set_attack(AT_INTRO);
 
 //#region SFX things
 if state == PS_CROUCH && state_timer == 1 && !hitpause {
@@ -209,9 +209,16 @@ else if (state == PS_ATTACK_GROUND || state == PS_ATTACK_AIR) { // Note: desp do
 
 //#endregion
 
-
-
-
+//#region Seasonal management
+if (display_seasonal && state != PS_IDLE && state != PS_SPAWN && state != PS_RESPAWN) {
+	display_seasonal = false;
+	if (vfx_seasonal[seasonal_type] != noone) {
+		var season_despawn = spawn_hit_fx(x, y, vfx_seasonal[seasonal_type]);
+		season_despawn.spr_dir = spr_dir;
+		season_despawn.depth = depth-1;
+	}
+}
+//#endregion
 
 
 
