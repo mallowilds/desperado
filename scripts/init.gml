@@ -307,6 +307,11 @@ vfx_bullseye_small = hit_fx_create(sprite_get("vfx_2"), 23);
 vfx_fstrong_blast = hit_fx_create(sprite_get("fstrongblast"), 12);
 vfx_wisp_end = hit_fx_create(sprite_get("wispend"), 9);
 
+
+//other
+set_victory_theme(sound_get("victory"))
+set_victory_bg(CH_FORSBURN)
+
 set_hit_particle_sprite(1, sprite_get("skull_hpart"));
 
 //Sprites
