@@ -191,8 +191,8 @@ if (head_obj.state != 0) {
     	
     	if (_s != null) {
     	    _s = _s + "_skulless_hurt";
-    	    //hurtboxID.sprite_index = sprite_get(_s);
-    	    //hurtboxID.mask_index = sprite_get("_s");
+    	    hurtboxID.sprite_index = sprite_get(_s);
+    	    hurtboxID.mask_index = sprite_get("_s");
     	    print_debug(_s)
     	}
     	
@@ -201,6 +201,10 @@ if (head_obj.state != 0) {
 else if (hurtboxID.sprite_index == sprite_get("desp_hurt_skulless") || hurtboxID.sprite_index == sprite_get("desp_hitstun_hurt_skulless")) {
     hurtboxID.sprite_index = sprite_get("desp_hurt"); // game will autocorrect from here as needed
 	hurtboxID.mask_index = sprite_get("desp_hurt");
+}
+else if (state == PS_ATTACK_GROUND || state == PS_ATTACK_AIR) { // Note: desp doesn't use air hurts, so they can be safely ignored here
+	hurtboxID.sprite_index = get_attack_value(attack, AG_HURTBOX_SPRITE);
+	hurtboxID.mask_index = get_attack_value(attack, AG_HURTBOX_SPRITE);
 }
 
 //#endregion
