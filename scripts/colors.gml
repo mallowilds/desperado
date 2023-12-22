@@ -38,7 +38,7 @@ set_color_profile_slot_range( 8, 1, 1, 1 );
 
 
 // ALTERNATE COLORS
-set_num_palettes( 13 );
+set_num_palettes( 16 );
 
 // dreadnought - hyu
 set_color_profile_slot( 1, 0, 209, 207, 255 ); //Bones
