@@ -73,10 +73,8 @@ signpost_obj = noone;                   // taunt
 draw_skull_grabbox = 0;
 
 // Holiday detection
-var col = get_player_color(player);
-is_seasonal = (12 <= col && col <= 16);
-seasonal_type = is_seasonal ? col-12 : 0; // interim until proper seasonal functionality added
-if (col == 12) seasonal_type = get_match_setting(SET_SEASON);
+is_seasonal = (get_player_color(player) == 12);
+seasonal_type = get_match_setting(SET_SEASON);
 display_seasonal = is_seasonal;
 vfx_seasonal = [noone,
                 hit_fx_create(sprite_get("idle_holiday1_die"), 25),

@@ -1,7 +1,7 @@
 //do a url check before release
 sound_play(sound_get("desp_click"))
 
-
+init_shader();
 
 alt_name[0]  = "Ashes to Ashes"; 
 alt_name[1]  = "Dreadnought"; 

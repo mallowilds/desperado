@@ -26,10 +26,6 @@ TAUNT GUNSHOT
 - 20: Initialization
 - 21: Moving
 
-BULLET WISP MANAGER
-- 30: Initialization
-- 31: Active
-
 */
 
 
@@ -414,62 +410,6 @@ switch state {
         }
         
         break;
-    
-    //#endregion
-    
-    
-    
-    //#region Wisp Manager
-    //Init
-    case 30:
-        var distance = point_distance(x, y, player_id.x, player_id.y-26);
-        
-        if (x != player_id.x) spr_dir = (x < player_id.x ? 1 : -1);
-        duration = floor(distance / 10);
-        if ("height" not in self) height = (distance > 400 ? 200 : distance/2)*spr_dir;
-        if ("y_target_offset" not in self) y_target_offset = 26;
-        
-        state = 31;
-        state_timer = 0;
-        
-        break;
-    
-    // Active
-    case 31:
-        
-        if (state_timer >= duration) {
-            instance_destroy();
-            exit;
-        }
-        
-        var angle = point_direction(x, y, player_id.x, player_id.y-y_target_offset);
-        var freq = 2;
-        
-        for (var i = 0; i < freq; i++) {
-            
-            var progress = ((state_timer+(i/freq)) / duration);
-            
-            var x_dist = progress*(player_id.x-x);
-            var y_dist = progress*(player_id.y-y_target_offset-y);
-            var x_offset = lengthdir_x(-2*progress*(progress-1)*height, angle+90); // https://www.desmos.com/calculator/x54440men2
-            var y_offset = lengthdir_y(-2*progress*(progress-1)*height, angle+90);
-            
-            var spr_type = "ashpart_" + string(1+random_func_2(6*player+i, 6, true));
-            var sparkle = {
-                sp_x : round((x + x_dist + x_offset)/2)*2, // Anti-mixels trick
-                sp_y : round((y + y_dist + y_offset)/2)*2,
-                sp_sprite_index : sprite_get(spr_type),
-                sp_max_lifetime : 15,
-                sp_lifetime : 0,
-                sp_spr_dir : spr_dir,
-                sp_skull_owned : 0,
-            };
-            ds_list_add(player_id.sparkle_list, sparkle);
-            
-        }
-        
-        break;
-    
     
     //#endregion
     

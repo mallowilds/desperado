@@ -11,12 +11,12 @@ make_attack(AT_FSPECIAL_2,
 
 make_window(AT_FSPECIAL_2, 1,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 6,
+    AG_WINDOW_LENGTH, 10,
     AG_WINDOW_ANIM_FRAMES, 1,
 
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, sound_get("desp_snap"),
-    AG_WINDOW_SFX_FRAME, 5,
+    AG_WINDOW_SFX_FRAME, 9,
 )
 
 make_window(AT_FSPECIAL_2, 2,
@@ -30,7 +30,7 @@ make_window(AT_FSPECIAL_2, 2,
 
 make_window(AT_FSPECIAL_2, 3,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 13,
+    AG_WINDOW_LENGTH, 9,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_ANIM_FRAME_START, 2,
 )

@@ -335,12 +335,6 @@ switch (state) {
 		}
 		
 		if (state_timer == delay_total) {
-			if respawn_give_bullet for (var i = 0; i < 2; i++) {
-				var wisp = instance_create(x, y-20, "obj_article3");
-				wisp.state = 30;
-				wisp.height = (-25+(50*i))*clamp(point_distance(x, y, player_id.x, player_id.y-26)/100, 1, 4);
-				wisp.y_target_offset = 50;
-			}
 			duration = point_distance(x, y, player_id.x, player_id.y-26)/10;
 		}
 		
@@ -348,6 +342,44 @@ switch (state) {
 			x = respawn_init_x + (player_id.x-respawn_init_x)*(state_timer-delay_total)/duration;
 			y = respawn_init_y + (player_id.y-26-respawn_init_y)*(state_timer-delay_total)/duration;
 			if (state_timer%5 == 0) spawn_hit_fx(x, y, player_id.vfx_wisp_end)
+			
+			if (respawn_give_bullet) {
+				var angle = point_direction(x, y-20, player_id.x, player_id.y-50);
+		        var freq = 2;
+		        
+		        for (var i = 0; i < freq; i++) {
+		            
+		            var progress = ((state_timer-delay_total+(i/freq)) / duration);
+		            var sin_pos = sin(2*pi*progress) * (duration > 40 ? 60 : duration*1.5);
+		            var x_offset = lengthdir_x(sin_pos, angle+90);
+		            var y_offset = lengthdir_y(sin_pos, angle+90);
+		            
+		            var spr_type = "ashpart_" + string(1+random_func_2(6*player+i, 3, true));
+		            var sparkle = {
+		                sp_x : round((x + x_offset)/2)*2, // Anti-mixels trick
+		                sp_y : round((y - 20 + y_offset)/2)*2,
+		                sp_sprite_index : sprite_get(spr_type),
+		                sp_max_lifetime : 15,
+		                sp_lifetime : 0,
+		                sp_spr_dir : spr_dir,
+		                sp_skull_owned : 0,
+		            };
+		            ds_list_add(player_id.sparkle_list, sparkle);
+		            
+		            var spr_type = "ashpart_" + string(4+random_func_2(6*player+i+freq, 3, true));
+		            var sparkle = {
+		                sp_x : round((x - x_offset)/2)*2, // Anti-mixels trick
+		                sp_y : round((y - 20 - y_offset)/2)*2,
+		                sp_sprite_index : sprite_get(spr_type),
+		                sp_max_lifetime : 15,
+		                sp_lifetime : 0,
+		                sp_spr_dir : spr_dir,
+		                sp_skull_owned : 0,
+		            };
+		            ds_list_add(player_id.sparkle_list, sparkle);
+		            
+		        }
+			}
 		}
 		
 		if (duration != -1 && state_timer > duration + delay_total) {
@@ -534,18 +566,6 @@ switch (state) {
 		switch window {
 			
 			case 1:
-				sprite_index = sprite_get("skullactive");
-				image_index = 4;
-				
-				spawn_ash_particle(player*3, player*3+1);
-				
-				if (window_timer > 8) {
-					window = 2;
-					window_timer = 0;
-				}
-				break;
-			
-			case 2:
 				spawn_ash_particle(player*3, player*3+1);
 				state = 5;
 				state_timer = 0;
