@@ -4,20 +4,7 @@
 
 
 // Handling for parried/reflected stuff
-if (my_hitboxID.orig_player == player && my_hitboxID.player != player) {
-    
-    if (attack == AT_FSPECIAL || attack == AT_FSPECIAL_2) {
-        // Force parried state
-        with my_hitboxID.head_obj.bashed_id {
-            was_parried = true;
-            set_state(free ? PS_PRATFALL : PS_PRATLAND);
-        }
-    }
-    
-    exit;
-    
-}
-
+if (my_hitboxID.orig_player == player && my_hitboxID.player != player) exit;
 
 
 // Spawn wasted bullet visual + deduct 2 bullets
@@ -36,3 +23,20 @@ if (num_bullets >= 1) {
     nametag_white_flash = 1;
 }
 num_bullets = clamp(num_bullets-2, 0, 6);
+
+
+// On parried fspec: kill head
+if (my_hitboxID.attack == AT_FSPECIAL) {
+    with head_obj {
+        state = 4;
+        state_timer = 0;
+        respawn_penalty = true;
+    }
+}
+
+else if (my_hitboxID.attack == AT_FSPECIAL_2) {
+    with head_obj {
+        // it's dying anyway, but also...
+        respawn_give_bullet = false;
+    }
+}
