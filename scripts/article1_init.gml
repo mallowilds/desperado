@@ -46,6 +46,8 @@ orig_player = player;
 orig_player_id = player_id;
 hud_arrow = sprite_get("skull_hud_arrow");
 
+//Skin behavior
+is_ea = (get_player_color(player) == 7);
 
 
 

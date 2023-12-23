@@ -143,7 +143,7 @@ switch (state) {
 	//#region State 1: Idle	----------------------------------------------------
 	case 1:
 		visible = true;
-	    sprite_index = sprite_get("skullidle");
+	    sprite_index = sprite_get("skullidle"+(is_ea?"_ea":""));
 	    image_index = state_timer * player_id.idle_anim_speed;
 	    hsp *= 0.9;
 		vsp *= 0.9;
@@ -160,7 +160,7 @@ switch (state) {
 	
 	//#region State 2: Hitstun -------------------------------------------------
 	case 2:
-		sprite_index = sprite_get("skullhurt");
+		sprite_index = sprite_get("skullhurt"+(is_ea?"_ea":""));
 		image_index = state_timer / 4;
 		can_fspecial = false;
 		
@@ -176,7 +176,7 @@ switch (state) {
 		if (hsp == 0 && !moving_vertically) {
 			state = 4;
 			state_timer = 0;
-			sprite_index = sprite_get("skulldie");
+			sprite_index = sprite_get("skulldie"+(is_ea?"_ea":""));
 			image_index = 0;
 			spr_dir *= -1;
 			hsp = old_hsp * -1;
@@ -186,7 +186,7 @@ switch (state) {
 		if (!free) {
 			state = 4;
 			state_timer = 0;
-			sprite_index = sprite_get("skulldie");
+			sprite_index = sprite_get("skulldie"+(is_ea?"_ea":""));
 			image_index = 0;
 			vsp = old_vsp * -1;
 			hsp = old_hsp;
@@ -212,7 +212,7 @@ switch (state) {
 			case 1:
 			
 			    if (window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-			    	sprite_index = sprite_get("skullhurt");
+			    	sprite_index = sprite_get("skullhurt"+(is_ea?"_ea":""));
 			    	image_index = 0;
 			    	spr_dir = bashed_id.spr_dir;
 			    }
@@ -265,7 +265,7 @@ switch (state) {
 				break;
 				
 			case 3:
-				sprite_index = sprite_get("skullactive");
+				sprite_index = sprite_get("skullactive"+(is_ea?"_ea":""));
 				image_index = 4 + (window_timer/3)%4;
 				
 				spawn_ash_particle(player*3, player*3+1);
@@ -298,7 +298,7 @@ switch (state) {
 		hsp = 0;
 		vsp = 0;
 		
-		sprite_index = sprite_get("skulldie");
+		sprite_index = sprite_get("skulldie"+(is_ea?"_ea":""));
 		can_fspecial = false;
 		
 		image_index = state_timer / 5;
@@ -407,7 +407,7 @@ switch (state) {
 	//#region Command Attack: AT_FSPECIAL ------------------------------------
 	case AT_FSPECIAL:
 		visible = true;
-	    sprite_index = sprite_get("skullactive");
+	    sprite_index = sprite_get("skullactive"+(is_ea?"_ea":""));
 	    can_fspecial = true;
 		
 		switch (window) {
@@ -542,7 +542,7 @@ switch (state) {
 					state = 4;
 					state_timer = 0;
 					respawn_penalty = true;
-					sprite_index = sprite_get("skullidle");
+					sprite_index = sprite_get("skullidle"+(is_ea?"_ea":""));
 					image_index = 0;
 					vsp = -4;
 					hsp = 3*spr_dir;
@@ -585,7 +585,7 @@ switch (state) {
 	//#region Command Attack: AT_FTHROW ------------------------------------------------
 	case AT_FTHROW:
 		visible = true;
-	    sprite_index = sprite_get("skullactive");
+	    sprite_index = sprite_get("skullactive"+(is_ea?"_ea":""));
 	    can_fspecial = false;
 		
 		switch (window) {
@@ -626,7 +626,7 @@ switch (state) {
 				break;
 				
 			case 2:
-				sprite_index = sprite_get("skullactive");
+				sprite_index = sprite_get("skullactive"+(is_ea?"_ea":""));
 				image_index = 4 + (window_timer/3)%4;
 				
 				spawn_ash_particle(player*3, player*3+1);
@@ -656,7 +656,7 @@ switch (state) {
 	//#region Command Attack: AT_UTHROW ------------------------------------------------
 	case AT_UTHROW:
 		visible = true;
-	    sprite_index = sprite_get("skullactive");
+	    sprite_index = sprite_get("skullactive"+(is_ea?"_ea":""));
 	    can_fspecial = false;
 		
 		switch (window) {
@@ -697,7 +697,7 @@ switch (state) {
 				break;
 				
 			case 2:
-				sprite_index = sprite_get("skullactive");
+				sprite_index = sprite_get("skullactive"+(is_ea?"_ea":""));
 				image_index = 4 + (window_timer/3)%4;
 				
 				spawn_ash_particle(player*3, player*3+1);
@@ -731,7 +731,7 @@ switch (state) {
 			
 			case 1:
 				
-				sprite_index = sprite_get("skullhurt");
+				sprite_index = sprite_get("skullhurt"+(is_ea?"_ea":""));
 				
 				draw_x = 0;
 				draw_y = 0;
@@ -1019,7 +1019,7 @@ if (hbox.player_id.url == CH_SHOVEL_KNIGHT && hbox.attack == AT_DAIR && hbox.typ
 state = 2;
 state_timer = 0;
 moving_vertically = (hsp == 0);
-sprite_index = sprite_get("skull_hurt");
+sprite_index = sprite_get("skull_hurt"+(is_ea?"_ea":""));
 
 
 #define filters(hbox)
