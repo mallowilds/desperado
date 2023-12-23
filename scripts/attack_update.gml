@@ -668,11 +668,13 @@ switch (attack) {
     	
     	sound_play(grab_sfx);
     	
+    	if (!hitpause) {
+    		old_hsp = hsp;
+    		old_vsp = vsp;
+    	}
     	hitpause = true;
     	if (grab_hitstop > hitstop_full) hitstop_full = grab_hitstop;
     	if (grab_hitstop > hitstop) hitstop = grab_hitstop;
-    	old_hsp = hsp;
-    	old_vsp = vsp;
     	
     }
     

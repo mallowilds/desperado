@@ -31,6 +31,7 @@ if (my_hitboxID.attack == AT_FSPECIAL) {
         state = 4;
         state_timer = 0;
         respawn_penalty = true;
+        respawn_give_bullet = false;
     }
 }
 
