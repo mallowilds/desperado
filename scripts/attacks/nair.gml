@@ -82,7 +82,7 @@ make_hitbox(AT_NAIR, 1,
     HG_BASE_HITPAUSE, 4,
     HG_HITPAUSE_SCALING, .3,
     HG_HITSTUN_MULTIPLIER, .8,
-    
+    HG_HIT_PARTICLE_NUM, 1,
     HG_HIT_SFX, asset_get("sfx_blow_medium2"),
 );
 
@@ -106,6 +106,7 @@ make_hitbox(AT_NAIR, 2,
     HG_BASE_HITPAUSE, 4,
     HG_HITPAUSE_SCALING, .3,
     HG_HITSTUN_MULTIPLIER, .8,
+    HG_HIT_PARTICLE_NUM, 1,
 
 
     HG_HIT_SFX, asset_get("sfx_blow_medium2"),
@@ -134,6 +135,8 @@ make_hitbox(AT_NAIR, 3,
     HG_VISUAL_EFFECT, 304,
     HG_HIT_SFX, asset_get("sfx_blow_medium3"),
     HG_HITBOX_GROUP, 2,
+    HG_HIT_PARTICLE_NUM, 1,
+
 );
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

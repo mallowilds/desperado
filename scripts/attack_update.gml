@@ -305,7 +305,6 @@ switch (attack) {
         }
         if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
             
-            sound_play(sound_get("desp_shot"))
             
             set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 8 + (0.25 * num_bullets));
             set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.7 + (0.05 * num_bullets));
@@ -315,8 +314,11 @@ switch (attack) {
             if (num_bullets <= 0) {
                 window = 9;
                 window_timer = 0;
+                sound_play(sound_get("desp_smallclick"))
+                sound_play(sound_get("desp_snap"))
             }
             else {
+                sound_play(sound_get("desp_shot"))
                 num_bullets--;
                 nametag_white_flash = 1;
                 
@@ -584,7 +586,7 @@ switch (attack) {
 				}
 				
 				// Loop
-				if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH) - 8) && special_down && (down_down || down_stick_down) && !free) {
+				if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH) - 4) && special_down && (down_down || down_stick_down) && !free) {
 		            window = 1;
 		            window_timer = 4;
 		            

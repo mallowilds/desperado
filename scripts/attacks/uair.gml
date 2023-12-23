@@ -51,6 +51,7 @@ make_hitbox(AT_UAIR, 1,
     HG_KNOCKBACK_SCALING, .5,
     HG_BASE_HITPAUSE, 6,
     HG_HITPAUSE_SCALING, .3,
+    HG_HIT_PARTICLE_NUM, 1,
 
     HG_HIT_SFX, asset_get("sfx_blow_medium3"),
     HG_VISUAL_EFFECT, vfx_smog,
@@ -73,7 +74,8 @@ make_hitbox(AT_UAIR, 2,
     HG_KNOCKBACK_SCALING, .5,
     HG_BASE_HITPAUSE, 6,
     HG_HITPAUSE_SCALING, .3,
-    
+    HG_HIT_PARTICLE_NUM, 1,
+
     HG_HIT_SFX, asset_get("sfx_blow_medium3"),
     HG_VISUAL_EFFECT, vfx_smog,
 )
@@ -87,6 +89,7 @@ make_hitbox(AT_UAIR, 3,
     HG_HITBOX_Y, -57,
     HG_WIDTH, 86,
     HG_HEIGHT, 89,
+    HG_HIT_PARTICLE_NUM, 1,
 
     HG_PRIORITY, 1,
     HG_DAMAGE, 4,
