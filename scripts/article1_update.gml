@@ -785,6 +785,8 @@ switch (state) {
 				draw_x = 0;
 				draw_y = 0;
 				
+				if (target_id != noone && (target_id.state == PS_HITSTUN || target_id.state == PS_HITSTUN_LAND)) reticle_angle = point_direction(x, y, target_id.x, target_id.y-target_id.char_height/2);
+				
 				if (!reticle_flash_peaked) {
 					reticle_flash = clamp(reticle_flash+0.3, 0, 1);
 					if (reticle_flash == 1) reticle_flash_peaked = true;
