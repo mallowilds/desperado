@@ -67,7 +67,7 @@ make_window(AT_USPECIAL, 4, // throw startup
 
 make_window(AT_USPECIAL, 5, // throw
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 18,
+    AG_WINDOW_LENGTH, 14,
     AG_WINDOW_ANIM_FRAMES, 4,
     AG_WINDOW_ANIM_FRAME_START, 8,
     AG_WINDOW_VSPEED_TYPE, 0,

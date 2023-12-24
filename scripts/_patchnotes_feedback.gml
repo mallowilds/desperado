@@ -31,6 +31,10 @@ Changes (1.1, Dec 24):
     -Nspecial (Desperate Measures) final hit KBG has been increased (0.75 to 1.0 -> 0.9 to 1.15).
         -This change makes the move much more effective at late percents for sealing out kills.
         -BKB has been left unchanged (8.25 to 9.5, depending on the number of bullets shot).
+    -Uspecial Throw endlag reduced (18 -> 14)
 -Nerfs:
     -Opponents hitting the skull now cause Desperado to take 1% self damage.
     -Nspecial (HEADSHOT) now deals 1% self damage per bullet shot.
+
+
+todo: ADD HUD NUMBERS (I NEED TO MAKE THESE LOL)
