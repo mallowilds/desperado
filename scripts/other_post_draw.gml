@@ -6,9 +6,15 @@
 if ("head_obj" not in other_player_id) exit;
 with other_player_id {
     if (head_obj.state == AT_NSPECIAL && instance_exists(head_obj.target_id) && head_obj.target_id == other) {
-        if (head_obj.window == 2) draw_sprite(sprite_get("reticle"), (head_obj.window_timer<6?4-(head_obj.window_timer/2):1), other.x-86, other.y-112-(other.char_height*2/3));
+        if (head_obj.window == 2) {
+            draw_set_alpha(0.8);
+            draw_sprite(sprite_get("reticle"), (head_obj.window_timer<6?4-(head_obj.window_timer/2):1), other.x-86, other.y-112-(other.char_height*2/3));
+            draw_set_alpha(1);
+        }
         else if (head_obj.window == 3) {
+            draw_set_alpha(0.8);
             draw_sprite(sprite_get("reticle"), 1, other.x-86, other.y-112-(other.char_height*2/3));
+            draw_set_alpha(1);
             
             draw_set_alpha(head_obj.reticle_flash);
             gpu_set_fog(true, c_white, 0, 1);
