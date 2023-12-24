@@ -1,11 +1,7 @@
 
 /*Patch Notes and Feedback; Im gonna be using this to document random feedback i get and eventually compile patch notes on here.
 
-
--finish vfx (me)
-
-
-Changes:
+Changes (Pre release):
 + Jab 1/2 lifetime 2 -> 3
 - DAttack startup 4 -> 9
 - DTilt's forward reach decreased to better match visual
@@ -24,3 +20,19 @@ Changes:
 - Skull: Respawn time 60->75 frames
 - Skull: Penalty respawn time 90 -> 120 frames
 + Skull NSpec: Locked-in prefire duration 20->10 frames
+
+Changes (1.1, Dec 24):
+
+-Bugfixes: 
+    Fixed seasonal costume appearing on respawn.
+    Removed unnecessary debug text.
+-Buffs:
+    -Nspecial (HEADSHOT) now properly locks if the opponent is in hitstun, becoming way more reliable.
+    -Nspecial (Desperate Measures) final hit scaling base increased, 7 -> .85.
+        -This change effectively makes the move much more reliable at late percents for sealing out kills.
+        -The wording is odd, but it now scales from .9 to 1.15 scaling, whereas before it scaled from .75 to 1.1.
+        -For reference, the BKB currently scales from 8.25 to 9.5, depending on the amount of bullets shot.
+    
+-Nerfs:
+    -Opponents hitting the skull now cause Desperado to take 1% self damage.
+    -Nspecial (HEADSHOT) now deals 1% self damage per bullet shot.
