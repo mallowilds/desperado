@@ -1018,6 +1018,7 @@ if (hbox.player_id.url == CH_SHOVEL_KNIGHT && hbox.attack == AT_DAIR && hbox.typ
 }
  
 //State stuff
+if (state != 2) take_damage(player, hbox.player, 1);
 state = 2;
 state_timer = 0;
 moving_vertically = (hsp == 0);

@@ -723,6 +723,7 @@ switch (attack) {
     	var vfx = spawn_hit_fx(head_obj.x, head_obj.y-30, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_VISUAL_EFFECT))
     	vfx.depth = head_obj.depth-1;
     	head_obj.shots_absorbed++;
+    	take_damage(player, player, 1)
     }
     
     // Refine shot collision
