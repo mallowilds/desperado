@@ -307,7 +307,7 @@ switch (attack) {
             
             
             set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 8 + (0.25 * num_bullets));
-            set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.7 + (0.05 * num_bullets));
+            set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.85 + (0.05 * num_bullets));
             //print(get_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING))
             //print(get_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK))
             

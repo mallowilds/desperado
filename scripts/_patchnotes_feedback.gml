@@ -24,15 +24,13 @@ Changes (Pre release):
 Changes (1.1, Dec 24):
 
 -Bugfixes: 
-    Fixed seasonal costume appearing on respawn.
-    Removed unnecessary debug text.
+    -Fixed seasonal costume appearing on respawn.
+    -Removed unnecessary debug text.
 -Buffs:
-    -Nspecial (HEADSHOT) now properly locks if the opponent is in hitstun, becoming way more reliable.
-    -Nspecial (Desperate Measures) final hit scaling base increased, 7 -> .85.
-        -This change effectively makes the move much more reliable at late percents for sealing out kills.
-        -The wording is odd, but it now scales from .9 to 1.15 scaling, whereas before it scaled from .75 to 1.1.
-        -For reference, the BKB currently scales from 8.25 to 9.5, depending on the amount of bullets shot.
-    
+    -Nspecial (HEADSHOT) no longer pauses tracking early while the opponent is in hitstun, making it way more reliable.
+    -Nspecial (Desperate Measures) final hit KBG has been increased (0.75 to 1.0 -> 0.9 to 1.15).
+        -This change makes the move much more effective at late percents for sealing out kills.
+        -BKB has been left unchanged (8.25 to 9.5, depending on the number of bullets shot).
 -Nerfs:
     -Opponents hitting the skull now cause Desperado to take 1% self damage.
     -Nspecial (HEADSHOT) now deals 1% self damage per bullet shot.
