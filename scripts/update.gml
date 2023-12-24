@@ -193,7 +193,6 @@ if (head_obj.state != 0) {
     	    _s = _s + "_skulless_hurt";
     	    hurtboxID.sprite_index = sprite_get(_s);
     	    hurtboxID.mask_index = sprite_get("_s");
-    	    print_debug(_s)
     	}
     	
 	}

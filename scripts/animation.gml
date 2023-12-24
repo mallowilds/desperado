@@ -65,7 +65,7 @@ else if (state == PS_ATTACK_GROUND && attack == AT_EXTRA_2 && image_index > 5) {
 
 //#region Seasonal management
 // else-if chain continues from skullessness to prevent head pop-in
-else if (display_seasonal && state == PS_IDLE || state == PS_SPAWN || state == PS_RESPAWN) {
+else if (display_seasonal && (state == PS_IDLE || state == PS_SPAWN || state == PS_RESPAWN)) {
 	sprite_index = sprite_get("idle_holiday"+string(seasonal_type));
 	image_index = state_timer*idle_anim_speed;
 }
