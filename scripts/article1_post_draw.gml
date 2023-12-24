@@ -19,8 +19,10 @@ if (state != 0) {
 
 if (state == AT_NSPECIAL) {
     switch window {
+        
         case 2:
         case 3:
+            // See other_post_draw for target sprite
             draw_sprite_ext(sprite_get("skullnspec"+(is_ea?"_ea":"")), 0, x+(4*spr_dir)+draw_x, y-32+draw_y, spr_dir, 1, reticle_angle-180*(spr_dir==-1), c_white, 1);
             break;
         case 4:

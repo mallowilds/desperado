@@ -26,12 +26,14 @@ Changes (1.1, Dec 24):
 -Bugfixes: 
     -Fixed seasonal costume appearing on respawn.
     -Removed unnecessary debug text.
+	-Added a target visual on NSpecial (HEADSHOT).
+	-Added notification for practice mode's reload shortcut.
 -Buffs:
-    -Nspecial (HEADSHOT) no longer pauses tracking early while the opponent is in hitstun, making it way more reliable.
-    -Nspecial (Desperate Measures) final hit KBG has been increased (0.75 to 1.0 -> 0.9 to 1.15).
+    -NSpecial (HEADSHOT) no longer pauses tracking early while the opponent is in hitstun, making it way more reliable.
+    -NSpecial (Desperate Measures) final hit KBG has been increased (0.75 to 1.0 -> 0.9 to 1.15).
         -This change makes the move much more effective at late percents for sealing out kills.
         -BKB has been left unchanged (8.25 to 9.5, depending on the number of bullets shot).
-    -Uspecial Throw endlag reduced (18 -> 14)
+    -Uspecial Throw endlag reduced (17 -> 13)
 -Nerfs:
     -Opponents hitting the skull now cause Desperado to take 1% self damage.
     -Nspecial (HEADSHOT) now deals 1% self damage per bullet shot.

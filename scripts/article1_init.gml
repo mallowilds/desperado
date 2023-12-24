@@ -28,12 +28,12 @@ penalty_delay = 120;                                // Altered respawn delay if 
 respawn_give_bullet = false;
 
 can_fspecial = false;
-skull_stored_attack = noone;
 
 shots_absorbed = 0;
 redir_angle = 0;
 redir_target_obj = noone;
 shot_visual = noone;
+target_id = noone;
 
 //Terrain behavior
 can_be_grounded = false;                            //Determines if the article follows platforms when free == false.

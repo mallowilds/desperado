@@ -6,7 +6,6 @@
 
 if ("num_bullets" not in self) exit; // Cull error messages on reload
 
-//#region Draw gun
 var player_color = get_player_color(player);
 var gun_sprite = sprite_get(player_color == 7 ? "desp_hud_ea" : "desp_hud");
 
@@ -28,15 +27,16 @@ else {
     }
 }
 
-
-
-
-
 shader_start();
 draw_sprite(gun_sprite, reload_anim_frame, temp_x, temp_y-98);
 shader_end();
-//#endregion
-
 
 // Reset article color slots
 init_shader();
+
+
+
+if (get_match_setting(SET_PRACTICE)) {
+    draw_debug_text(temp_x, temp_y-26, "DSPEC+TAUNT:")
+    draw_debug_text(temp_x, temp_y-14, "Full reload")
+}
