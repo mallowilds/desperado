@@ -57,6 +57,7 @@ set_num_hitboxes(AT_DATTACK, 2)
 
 make_hitbox(AT_DATTACK, 1,
     HG_HITBOX_TYPE, 1,
+    HG_MUNO_HITBOX_MISC_ADD, "Can cancel into Up Strong on hit.",
 
     HG_WINDOW, 2,
     HG_LIFETIME, 2,

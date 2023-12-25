@@ -60,7 +60,8 @@ make_hitbox(AT_EXTRA_2, 1,
 
     HG_WINDOW, 2,
     HG_LIFETIME, 2,
-
+    HG_MUNO_HITBOX_MISC_ADD, "Can cancel into Up Strong on hit.",
+    
     HG_HITBOX_X, 20,
     HG_HITBOX_Y, -10,
     HG_WIDTH, 60,
