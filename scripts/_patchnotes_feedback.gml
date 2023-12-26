@@ -35,6 +35,7 @@ Changes (1.1, Dec 24):
 		-This change makes the move much more effective at late percents for sealing out kills.
 		-BKB has been left unchanged (8.25 to 9.5, depending on the number of bullets shot).
 	-FStrong startup decreased (24 -> 21)
+	-Desperado's Heart size increased (1 -> 3)
 	
 -Nerfs:
 	-Opponents hitting the skull now cause Desperado to take 1% self damage.
@@ -43,6 +44,7 @@ Changes (1.1, Dec 24):
 		-This is intended to prevent stalling with zero bullets; any usage of NSpecial with bullets should be unaffected.
 	-Nair 1 Hitstun Multiplier lowered (.8 -> .7)
 	-Nair 1 Startup increased (5 -> 6)
+	-Nair 1 KBS Increased (.1 -> .2)
 	-Uair landing lag increased (4 -> 5)
 	-DSpecial max hsp lowered (3 -> 2)
 	-Fspecial damage decreased (3, 4 -> 2, 3)
