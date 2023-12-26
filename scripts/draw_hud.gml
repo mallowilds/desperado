@@ -15,7 +15,7 @@ if (get_player_color(player) != 7) {
         set_article_color_slot(i, floor(get_color_profile_slot_r(player_color, 7)*0.75), floor(get_color_profile_slot_g(player_color, 7)*0.75), floor(get_color_profile_slot_b(player_color, 7)*0.75));
     }
     for (var i = 0; i < num_bullets; i++) {
-        set_article_color_slot(i, get_color_profile_slot_r(player_color, 5), get_color_profile_slot_g(player_color, 5), get_color_profile_slot_b(player_color, 5));
+        set_article_color_slot(i, get_color_profile_slot_r(player_color, hud_bullet_color_slot), get_color_profile_slot_g(player_color, hud_bullet_color_slot), get_color_profile_slot_b(player_color, hud_bullet_color_slot));
     }
 }
 else {

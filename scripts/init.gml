@@ -61,6 +61,16 @@ reload_anim_state = 0;                  // See update.gml
 reload_anim_timer = 0;
 reload_anim_frame = 0;
 
+switch get_player_color(player) {
+    case 2:
+    case 3:
+    case 5:
+    case 12:
+        hud_bullet_color_slot = 3;
+    default:
+        hud_bullet_color_slot = 5;
+}
+
 nametag_white_flash = 0;
 nametag_flame_alpha = 0;
 
