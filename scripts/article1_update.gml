@@ -46,7 +46,7 @@ if (shot_visual != noone) {
 
 //#region Death / blast zone / clairen field handling ------------------------------------
 
-if (state != 4 && state != 5) {
+if (state != 0 && state != 4 && state != 5) {
 	
 	if (place_meeting(x, y, asset_get("plasma_field_obj")) && state != 0) {
 		state = 4;
