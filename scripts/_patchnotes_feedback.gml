@@ -33,7 +33,10 @@ Changes (1.1, Dec 24):
     -NSpecial (Desperate Measures) final hit KBG has been increased (0.75 to 1.0 -> 0.9 to 1.15).
         -This change makes the move much more effective at late percents for sealing out kills.
         -BKB has been left unchanged (8.25 to 9.5, depending on the number of bullets shot).
-    -Uspecial Throw endlag reduced (17 -> 13)
+	-NSpecial is now limited to one use per airtime (unless refreshed with a DSpecial reload).
+		-This is intended to prevent stalling with zero bullets; any usage of NSpecial with bullets should be unaffected.
+	-USpecial Throw endlag reduced (17 -> 13)
+	-DSpecial max hsp lowered (3 -> 2)
 -Nerfs:
     -Opponents hitting the skull now cause Desperado to take 1% self damage.
     -Nspecial (HEADSHOT) now deals 1% self damage per bullet shot.
@@ -41,6 +44,4 @@ Changes (1.1, Dec 24):
 
 todo: ADD HUD NUMBERS (I NEED TO MAKE THESE LOL)
 fix nair (hitstun mult maybe?)
-reduce dspec hsp (you can bhop it to camp people out. not fun)
 reduce uair landing lag, fspec damage
-add cooldown to nspec no bullets (stalling)

@@ -43,6 +43,7 @@ if state == PS_LANDING_LAG && (attack == AT_BAIR || attack == AT_EXTRA_1) {
 // Be sure to also reset these in death.gml and got_hit.gml as needed!
 
 if (!free) move_cooldown[AT_DSPECIAL] = 0;
+if (!free || state == PS_WALL_JUMP) move_cooldown[AT_NSPECIAL] = 0; // also gets reset by dspecial for Shenanigans
 
 //#endregion
 

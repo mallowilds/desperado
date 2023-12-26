@@ -25,3 +25,6 @@ if (reload_anim_state == 1 || reload_anim_state == 2) {
     reload_anim_state = 0;
     reload_anim_timer = 0;
 }
+
+// Reset anti-stall checks
+move_cooldown[AT_NSPECIAL] = 0;
