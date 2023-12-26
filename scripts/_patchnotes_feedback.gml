@@ -23,7 +23,7 @@ Changes (Pre release):
 
 Changes (1.1, Dec 24):
 
--Bugfixes: 
+-Bugfixes/Adjusts: 
     -Fixed seasonal costume appearing on respawn.
     -Removed unnecessary debug text.
 	-Added a target visual on NSpecial (HEADSHOT).
@@ -40,3 +40,7 @@ Changes (1.1, Dec 24):
 
 
 todo: ADD HUD NUMBERS (I NEED TO MAKE THESE LOL)
+fix nair (hitstun mult maybe?)
+reduce dspec hsp (you can bhop it to camp people out. not fun)
+reduce uair landing lag, fspec damage
+add cooldown to nspec no bullets (stalling)
