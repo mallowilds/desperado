@@ -10,7 +10,7 @@ make_attack(AT_FSTRONG,
 )
 
 make_window(AT_FSTRONG, 1,
-    AG_WINDOW_LENGTH, 12,
+    AG_WINDOW_LENGTH, 9,
     AG_WINDOW_ANIM_FRAMES, 3,
 )
 

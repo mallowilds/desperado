@@ -5,7 +5,7 @@ make_attack(AT_UAIR,
     AG_SPRITE, sprite_get("uair"),
     AG_NUM_WINDOWS, 3,
     AG_HAS_LANDING_LAG, 1,
-    AG_LANDING_LAG, 4,
+    AG_LANDING_LAG, 5,
     AG_HURTBOX_SPRITE, sprite_get("uair_hurt"),
 )
 

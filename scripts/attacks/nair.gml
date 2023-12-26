@@ -11,11 +11,11 @@ make_attack(AT_NAIR,
 
 make_window(AT_NAIR, 1, //startup 1
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 5,
+    AG_WINDOW_LENGTH, 6,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
-    AG_WINDOW_SFX_FRAME, 4,
+    AG_WINDOW_SFX_FRAME, 5,
 )
 
 make_window(AT_NAIR, 2, //active 2
@@ -81,7 +81,7 @@ make_hitbox(AT_NAIR, 1,
     HG_KNOCKBACK_SCALING, .1,
     HG_BASE_HITPAUSE, 4,
     HG_HITPAUSE_SCALING, .3,
-    HG_HITSTUN_MULTIPLIER, .8,
+    HG_HITSTUN_MULTIPLIER, .7,
     HG_HIT_PARTICLE_NUM, 1,
     HG_HIT_SFX, asset_get("sfx_blow_medium2"),
 );
@@ -105,7 +105,7 @@ make_hitbox(AT_NAIR, 2,
     HG_KNOCKBACK_SCALING, .1,
     HG_BASE_HITPAUSE, 4,
     HG_HITPAUSE_SCALING, .3,
-    HG_HITSTUN_MULTIPLIER, .8,
+    HG_HITSTUN_MULTIPLIER, .7,
     HG_HIT_PARTICLE_NUM, 1,
 
 
