@@ -62,8 +62,12 @@ reload_anim_timer = 0;
 reload_anim_frame = 0;
 
 switch get_player_color(player) {
-    case 2:
+    case 8:
+        hud_bullet_color_slot = 6;
+        break;
     case 3:
+        hud_bullet_color_slot = 1;
+        break;
     case 5:
     case 12:
         hud_bullet_color_slot = 3;

@@ -28,6 +28,7 @@ Changes (1.1, Dec 24):
 	-Removed unnecessary debug text.
 	-Added a target visual on NSpecial (HEADSHOT).
 	-Added notification for practice mode's reload shortcut.
+	-Adjusted HUD Colors to hopefully be more intuitive across all color palettes, with default adjusted aswell.
 	
 -Buffs:
 	-NSpecial (HEADSHOT) no longer pauses tracking early while the opponent is in hitstun, making it way more reliable.
