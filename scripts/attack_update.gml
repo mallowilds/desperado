@@ -227,7 +227,7 @@ switch (attack) {
 	        	// no break
 	        
 	        case 3:
-	        	if (has_hit && !hitpause) {
+	        	if (skull_grabbed || (has_hit && !hitpause)) {
 	        		set_attack_value(AT_DAIR, AG_NUM_WINDOWS, 6);
 		        	window = 4;
 		        	window_timer = 0;
@@ -470,7 +470,12 @@ switch (attack) {
 		        break;
 		    
 		    case 3:
-		    	can_wall_jump = true;
+		    	if (window_time_is(1) && (instance_exists(grabbed_player_obj) || skull_grabbed)) {
+					set_attack_value(AT_USPECIAL, AG_NUM_WINDOWS, 5);
+					window = 4;
+					window_timer = 0;
+				}
+		    	else can_wall_jump = true;
 		    	break;
 		    
     		case 4:

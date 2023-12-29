@@ -1038,6 +1038,7 @@ with hbox {
         && (!player_equal) //uncomment to prevent the article from being hit by its owner.
         && ( !get_match_setting(SET_TEAMS) || get_match_setting(SET_TEAMATTACK) || !team_equal ) //uncomment to prevent the article from being hit by its owner's team.
         && (effect != 9) //filter polite hitboxes
+        && (kb_value != 0 || kb_scale != 0)
 }
  
 #define create_article_hitbox(attack, hbox_num, _x, _y)
