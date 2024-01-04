@@ -192,9 +192,6 @@ switch (state) {
 			hsp = old_hsp;
 		}
 		
-		old_hsp = hsp;
-		old_vsp = vsp;
-		
 		break;
 	//#endregion
 		
@@ -864,6 +861,9 @@ if (hitstop <= 0) {
 	hitstop = 0;
 }
 else hitstop = floor(hitstop);
+
+old_hsp = hsp;
+old_vsp = vsp;
 //#endregion
 
 
