@@ -21,7 +21,7 @@ Changes (Pre release):
 - Skull: Penalty respawn time 90 -> 120 frames
 + Skull NSpec: Locked-in prefire duration 20->10 frames
 
-Changes (1.1, Dec 24):
+Changes (1.1, Dec 26):
 
 -Bugfixes/Adjusts: 
 	-Fixed seasonal costume appearing on respawn.
@@ -50,6 +50,20 @@ Changes (1.1, Dec 24):
 	-DSpecial max hsp lowered (3 -> 2)
 	-Fspecial damage decreased (3, 4 -> 2, 3)
 
+Changes (1.15, Dec 31)
 
+-Bugfixes/Adjusts:
+	-Fixed collision bugs with up b grabbing the skull.
+	-Fixed HUD elements breaking when hit out of certain attacks.
+	-Changed Forward Special skulls return trajectory when angled up.
+		-Small, but should make it a little bit easier to use HEADSHOT.
+-Buffs:
+	-Increased the size of the final hit of Scorching Forward Tilt, to prevent the move from dropping when above Desperado.
+	-Skull no longer gets destroyed when making contact with attacks that deal 0 hitstun. 
+		-Technically a bug, but more of a fix.
+-Nerfs:
+	-Reverted N-Special's KB scaling changes from last patch as they were unnecessary and overboard after initial feedback.
+	-Desperado's Heart size decreased (3 -> 1)
+		-His christmas tree burned down.
 
 todo: ADD HUD NUMBERS (I NEED TO MAKE THESE LOL)

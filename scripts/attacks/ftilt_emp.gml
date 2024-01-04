@@ -98,7 +98,7 @@ make_hitbox(AT_EXTRA_3, 3,
     HG_HITBOX_X, 60,
     HG_HITBOX_Y, -27,
     HG_WIDTH, 106,
-    HG_HEIGHT, 68,
+    HG_HEIGHT, 74,
     HG_SHAPE, 2,
 
     HG_PRIORITY, 1,
