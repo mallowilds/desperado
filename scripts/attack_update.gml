@@ -49,7 +49,7 @@ switch (attack) {
     		sound_play(sound_get("desp_click"));
     		reload_anim_state = 3;
         	reload_anim_timer = 0;
-    		if (num_bullets < 6) {
+    		if (num_bullets < 6 && !was_parried) {
     			num_bullets++;
     			nametag_white_flash = 1;
     		}

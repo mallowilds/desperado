@@ -10,7 +10,6 @@ if ((prev_state == PS_ATTACK_AIR || prev_state == PS_ATTACK_GROUND) && attack ==
 
 
 if (prev_state == PS_ATTACK_GROUND && attack == AT_FSTRONG_2) {
-    sound_stop(sound_get("desp_spin"));
     if (!bullet_lost) {
         num_bullets--;
         nametag_white_flash = 1;
@@ -25,6 +24,7 @@ if (reload_anim_state == 1 || reload_anim_state == 2) {
     reload_anim_state = 0;
     reload_anim_timer = 0;
 }
+sound_stop(sound_get("desp_spin"));
 
 // Reset anti-stall checks
 move_cooldown[AT_NSPECIAL] = 0;
