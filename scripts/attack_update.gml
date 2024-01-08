@@ -762,7 +762,7 @@ switch (attack) {
     
     var shot_visual = {
         sp_x : x + (shot_x - shot_hb_w/2)*spr_dir + hsp,
-        sp_y : y + shot_y + vsp,
+        sp_y : y + shot_y + vsp - 2, // 1/8/24: y offset patch
         sp_length : shot_end_x - (shot_x - shot_hb_w/2),
         sp_start_index : start_index,
         sp_tile_index : tile_index,

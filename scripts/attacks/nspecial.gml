@@ -65,9 +65,9 @@ make_hitbox(AT_NSPECIAL, 1,
     HG_LIFETIME, 1,
 
     HG_HITBOX_X, 106,
-    HG_HITBOX_Y, -60,
+    HG_HITBOX_Y, -58,
     HG_WIDTH, 60,
-    HG_HEIGHT, 34,
+    HG_HEIGHT, 40,
     HG_SHAPE, 1,
     HG_HITBOX_GROUP, 1,
 
@@ -98,9 +98,9 @@ make_hitbox(AT_NSPECIAL, 2,
     HG_LIFETIME, 1,
 
     HG_HITBOX_X, 106,
-    HG_HITBOX_Y, -60,
+    HG_HITBOX_Y, -58,
     HG_WIDTH, 60,
-    HG_HEIGHT, 36,
+    HG_HEIGHT, 40,
     HG_SHAPE, 1,
     HG_HITBOX_GROUP, 2,
 
