@@ -5,7 +5,7 @@ make_attack(AT_EXTRA_3,
     AG_NUM_WINDOWS, 4,
     AG_HURTBOX_SPRITE, sprite_get("ftilt_hurt"),
     AG_MUNO_ATTACK_NAME, "Scorching FTilt",
-    AG_MUNO_ATTACK_MISC, "With more than 4 bullets, this move becomes a multihit.",
+    AG_MUNO_ATTACK_MISC, "With at least 4 bullets, this move becomes a multihit.",
 )
 
 make_window(AT_EXTRA_3, 1,

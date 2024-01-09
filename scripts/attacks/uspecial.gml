@@ -9,6 +9,7 @@ make_attack(AT_USPECIAL,
     AG_AIR_SPRITE, sprite_get("uspecial"),
     AG_HURTBOX_SPRITE, sprite_get("uspecial_hurt"),
     AG_USES_CUSTOM_GRAVITY, 1,
+    AG_MUNO_ATTACK_MISC, "Purple zone in hitbox viewer denotes grab box for FSpecial skull.",
 )
 
 make_window(AT_USPECIAL, 1, //Startup

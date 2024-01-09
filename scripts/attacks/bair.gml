@@ -6,7 +6,7 @@ make_attack(AT_BAIR,
   AG_HAS_LANDING_LAG, 1,
   AG_LANDING_LAG, 10,
   AG_NUM_WINDOWS, 3,
-  AG_MUNO_ATTACK_MISC, "With more than 4 bullets, this move becomes larger and gains a tipper.",
+  AG_MUNO_ATTACK_MISC, "With at least 4 bullets, this move becomes larger and gains a tipper.",
   AG_HURTBOX_SPRITE, sprite_get("bair_hurt"))
 
 make_window(AT_BAIR, 1,

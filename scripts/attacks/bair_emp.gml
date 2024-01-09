@@ -6,7 +6,7 @@ make_attack(AT_EXTRA_1,
   AG_HAS_LANDING_LAG, 1,
   AG_LANDING_LAG, 10,
   AG_MUNO_ATTACK_NAME, "Scorching BAir",
-  AG_MUNO_ATTACK_MISC, "With more than 4 bullets, this move becomes larger and gains a tipper.",
+  AG_MUNO_ATTACK_MISC, "With at least 4 bullets, this move becomes larger and gains a tipper.",
   AG_NUM_WINDOWS, 3,
   AG_HURTBOX_SPRITE, sprite_get("bair_hurt"))
 

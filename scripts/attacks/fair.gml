@@ -7,6 +7,7 @@ make_attack(AT_FAIR,
     AG_HAS_LANDING_LAG, 1,
     AG_LANDING_LAG, 6,
     AG_HURTBOX_SPRITE, sprite_get("fair_hurt"),
+    AG_MUNO_ATTACK_MISC, "Only the finishing hit can be hitfalled.",
 )
 
 make_window(AT_FAIR, 1,

@@ -7,6 +7,7 @@ make_attack(AT_NAIR,
     AG_LANDING_LAG, 4,
     AG_HURTBOX_SPRITE, sprite_get("nair_hurt"),
     AG_NUM_WINDOWS, 6,
+    AG_MUNO_ATTACK_MISC, "Input attack twice for second hit.",
 )
 
 make_window(AT_NAIR, 1, //startup 1
