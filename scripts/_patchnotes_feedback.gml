@@ -66,4 +66,28 @@ Changes (1.15, Dec 31)
 	-Desperado's Heart size decreased (3 -> 1)
 		-His christmas tree burned down.
 
+Changes (1.16, Jan 8)
+
+-Happy new year!
+-Bugfixes/Adjusts:
+	-Fixed sfx playing longer than they should when hit out of certain moves.
+	-Jab no longer gives you a bullet if the first hit is parried and you finish the move.
+	-If you win the game without a skull, your portrait will be changed to reflect this.
+
+Nerfs:
+	-Reduced lerping effect on Fair (40% -> 20%) to make the move look and feel more natural.
+	-Reduced hitbox sizes on all 3 hits of jab 
+	-Reduced N-Airs hitbox size and brought it closer to the body. It shouldnt be very disjointed at all now.
+Buffs:
+	-Increased hitbox on Desperate Measures slightly below the gun fire- It was whiffing on some extra tiny characters like Kirby (Spam), but still shouldnt hit most crouches.
+	-Corrected one of Back Airs hitboxes being slightly weaker than the others.
+	-Back air knockback scaling increased (.6 -> .7). Affects both versions, but tipper stats on Scorched Bair are unchanged.
+
+Mothra Notes:
+-Reduce fstrong bkb to 9 or 9.5 (lol)
+-Buff dattack somehow (might remove the gatling tho ngl that shit mid ah fuck)
+-fix ustrong having burn stun effect for some reason??? lol?? i already did this
+-fix eye glowing without skull on nspec (lol)
+-fix ustrong not having a hurtbox if you dont have a skull OOPSIES
+
 todo: ADD HUD NUMBERS (I NEED TO MAKE THESE LOL)

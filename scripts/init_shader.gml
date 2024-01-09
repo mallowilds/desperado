@@ -33,10 +33,10 @@ switch alt_palette {
         set_character_color_slot( 2, 8, 117, 75, 0.5);
         set_article_color_slot( 2, 221, 157, 136);
         break;
-    case 15: //halloween
-        set_character_color_shading(0, 3);
-        set_character_color_shading(1, 3);
-    
+    case 13: //GENESIS
+        set_character_color_shading(4, .5);
+        break;
+
 }
 
 

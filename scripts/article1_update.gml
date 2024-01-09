@@ -515,12 +515,12 @@ switch (state) {
 				var target_sp = 2.25*ln(0.9*window_timer+1); // https://www.desmos.com/calculator/d2byh0mgnk
 				
 				if (throw_dir != -1) {
-					if (window_timer == 1) angle_change = clamp((player_id.x-x)/10, -50, 50);
+					if (window_timer == 1) angle_change = clamp((player_id.x-x)/10, -50, 50); // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					else if (angle_change > 0) angle_change = clamp(angle_change-0.5, 0, angle_change);
 					else if (angle_change < 0) angle_change = clamp(angle_change+0.5, angle_change, 0);
 				}
 				else { //thrown up
-					if (window_timer == 1) angle_change = clamp((player_id.x-x)/-10, -30, 30);
+					if (window_timer == 1) angle_change = clamp((player_id.x-x)/-10, -30, 30); // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 					else if (angle_change > 0) angle_change = clamp(angle_change+0.5, 0, angle_change);
 					else if (angle_change < 0) angle_change = clamp(angle_change-0.5, angle_change, 0);
 				}	

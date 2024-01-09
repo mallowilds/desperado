@@ -109,8 +109,8 @@ if atk == AT_EXTRA_1 && hbox == 4 { //bair
 	sound_play(sound_get("desp_weirdhit"))
 }
 if atk == AT_FAIR && hbox != 4 {
-    hit_player_obj.x = lerp(floor(hit_player_obj.x), x+10 * spr_dir, .4)
-    hit_player_obj.y = lerp(floor(hit_player_obj.y), y-5, .4)
+    hit_player_obj.x = lerp(floor(hit_player_obj.x), x+10 * spr_dir, .2)
+    hit_player_obj.y = lerp(floor(hit_player_obj.y), y-5, .2)
     sound_play(sound_get("desp_cast_short"), 0, noone, 0.9, 1)
 }
 if atk == AT_FAIR && hbox == 4 {

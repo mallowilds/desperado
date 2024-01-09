@@ -162,8 +162,8 @@ set_color_profile_slot( 11, 7, 161, 205, 208 ); //Gun
 set_color_profile_slot( 11, 8, 8, 117, 75 ); //Firedark
 
 // Seasonal
-set_color_profile_slot( 12, 0, 0, 255, 0 ); //Bones
-set_color_profile_slot( 12, 1, 0, 255, 0 ); //Horns
+set_color_profile_slot( 12, 0, 222, 24, 24 ); //Bones
+set_color_profile_slot( 12, 1, 222, 24, 24 ); //Horns
 set_color_profile_slot( 12, 2, 0, 255, 0 ); //Smog
 set_color_profile_slot( 12, 3, 0, 255, 0 ); //Ash
 set_color_profile_slot( 12, 4, 0, 255, 0 ); //Coat
@@ -172,93 +172,104 @@ set_color_profile_slot( 12, 6, 0, 255, 0 ); //Fireyellow
 set_color_profile_slot( 12, 7, 0, 255, 0 ); //Gun
 set_color_profile_slot( 12, 8, 0, 255, 0 ); //Firedark
 
+// GENESIS
+set_color_profile_slot( 13, 0, 94, 94, 94 ); //Bones
+set_color_profile_slot( 13, 1, 176, 18, 8 ); //Horns
+set_color_profile_slot( 13, 2, 112, 112, 112 ); //Smog
+set_color_profile_slot( 13, 3, 176, 18, 8 ); //Ash
+set_color_profile_slot( 13, 4, 46, 46, 46 ); //Coat
+set_color_profile_slot( 13, 5, 219, 23, 10 ); //Fire
+set_color_profile_slot( 13, 6, 166, 166, 166 ); //Fireyellow
+set_color_profile_slot( 13, 7, 69, 69, 69 ); //Gun
+set_color_profile_slot( 13, 8, 138, 14, 6 ); //Firedark
+
 // Forevermore
-set_color_profile_slot( 13, 0, 255, 143, 219 ); //Bones
-set_color_profile_slot( 13, 1, 255, 158, 187 ); //Horns
-set_color_profile_slot( 13, 2, 143, 86, 131 ); //Smog
-set_color_profile_slot( 13, 3, 255, 201, 218 ); //Ash
-set_color_profile_slot( 13, 4, 196, 77, 147 ); //Coat
-set_color_profile_slot( 13, 5, 246, 77, 213 ); //Fire
-set_color_profile_slot( 13, 6, 255, 175, 254 ); //Fireyellow
-set_color_profile_slot( 13, 7, 148, 84, 134 ); //Gun
-set_color_profile_slot( 13, 8, 246, 77, 213 ); //Firedark
+set_color_profile_slot( 14, 0, 255, 143, 219 ); //Bones
+set_color_profile_slot( 14, 1, 255, 158, 187 ); //Horns
+set_color_profile_slot( 14, 2, 143, 86, 131 ); //Smog
+set_color_profile_slot( 14, 3, 255, 201, 218 ); //Ash
+set_color_profile_slot( 14, 4, 196, 77, 147 ); //Coat
+set_color_profile_slot( 14, 5, 246, 77, 213 ); //Fire
+set_color_profile_slot( 14, 6, 255, 175, 254 ); //Fireyellow
+set_color_profile_slot( 14, 7, 148, 84, 134 ); //Gun
+set_color_profile_slot( 14, 8, 246, 77, 213 ); //Firedark
 
 // Mr. 101
-set_color_profile_slot( 14, 0, 186, 181, 173 ); //Bones
-set_color_profile_slot( 14, 1, 237, 116, 95 ); //Horns
-set_color_profile_slot( 14, 2, 140, 95, 36 ); //Smog
-set_color_profile_slot( 14, 3, 166, 27, 0 ); //Ash
-set_color_profile_slot( 14, 4, 235, 101, 12 ); //Coat
-set_color_profile_slot( 14, 5, 204, 34, 0 ); //Fire
-set_color_profile_slot( 14, 6, 255, 102, 0 ); //Fireyellow
-set_color_profile_slot( 14, 7, 235, 101, 12 ); //Gun
-set_color_profile_slot( 14, 8, 166, 27, 0 ); //Firedark
+set_color_profile_slot( 15, 0, 186, 181, 173 ); //Bones
+set_color_profile_slot( 15, 1, 237, 116, 95 ); //Horns
+set_color_profile_slot( 15, 2, 140, 95, 36 ); //Smog
+set_color_profile_slot( 15, 3, 166, 27, 0 ); //Ash
+set_color_profile_slot( 15, 4, 235, 101, 12 ); //Coat
+set_color_profile_slot( 15, 5, 204, 34, 0 ); //Fire
+set_color_profile_slot( 15, 6, 255, 102, 0 ); //Fireyellow
+set_color_profile_slot( 15, 7, 235, 101, 12 ); //Gun
+set_color_profile_slot( 15, 8, 166, 27, 0 ); //Firedark
 
 // Dullahan
-set_color_profile_slot( 15, 0, 255, 96, 0 ); //Bones
-set_color_profile_slot( 15, 1, 255, 96, 0 ); //Horns
-set_color_profile_slot( 15, 2, 10, 7, 7 ); //Smog
-set_color_profile_slot( 15, 3, 9, 74, 0 ); //Ash 
-set_color_profile_slot( 15, 4, 27, 37, 59 ); //Coat
-set_color_profile_slot( 15, 5, 166, 27, 0 ); //Fire
-set_color_profile_slot( 15, 6, 255, 102, 0 ); //Fireyellow
-set_color_profile_slot( 15, 7, 43, 58, 92 ); //Gun
-set_color_profile_slot( 15, 8, 27, 37, 59 ); //Firedark
+set_color_profile_slot( 16, 0, 255, 96, 0 ); //Bones
+set_color_profile_slot( 16, 1, 255, 96, 0 ); //Horns
+set_color_profile_slot( 16, 2, 10, 7, 7 ); //Smog
+set_color_profile_slot( 16, 3, 9, 74, 0 ); //Ash
+set_color_profile_slot( 16, 4, 27, 37, 59 ); //Coat
+set_color_profile_slot( 16, 5, 166, 27, 0 ); //Fire
+set_color_profile_slot( 16, 6, 255, 102, 0 ); //Fireyellow
+set_color_profile_slot( 16, 7, 43, 58, 92 ); //Gun
+set_color_profile_slot( 16, 8, 27, 37, 59 ); //Firedark
 
 // Mr. 10 Below
-set_color_profile_slot( 16, 0, 208, 209, 224 ); //Bones
-set_color_profile_slot( 16, 1, 102, 112, 171 ); //Horns
-set_color_profile_slot( 16, 2, 83, 91, 139 ); //Smog
-set_color_profile_slot( 16, 3, 188, 191, 207 ); //Ash
-set_color_profile_slot( 16, 4, 9, 48, 204 ); //Coat
-set_color_profile_slot( 16, 5, 88, 96, 141 ); //Fire
-set_color_profile_slot( 16, 6, 188, 191, 207 ); //Fireyellow
-set_color_profile_slot( 16, 7, 188, 191, 207 ); //Gun
-set_color_profile_slot( 16, 8, 37, 54, 130 ); //Firedark
+set_color_profile_slot( 17, 0, 208, 209, 224 ); //Bones
+set_color_profile_slot( 17, 1, 102, 112, 171 ); //Horns
+set_color_profile_slot( 17, 2, 83, 91, 139 ); //Smog
+set_color_profile_slot( 17, 3, 188, 191, 207 ); //Ash
+set_color_profile_slot( 17, 4, 9, 48, 204 ); //Coat
+set_color_profile_slot( 17, 5, 88, 96, 141 ); //Fire
+set_color_profile_slot( 17, 6, 188, 191, 207 ); //Fireyellow
+set_color_profile_slot( 17, 7, 188, 191, 207 ); //Gun
+set_color_profile_slot( 17, 8, 37, 54, 130 ); //Firedark
 
 // guns and roses
-set_color_profile_slot( 17, 0, 221, 136, 136 ); //Bones
-set_color_profile_slot( 17, 1, 94, 50, 50 ); //Horns
-set_color_profile_slot( 17, 2, 163, 115, 115 ); //Smog
-set_color_profile_slot( 17, 3, 143, 24, 14 ); //Ash
-set_color_profile_slot( 17, 4, 94, 50, 50 ); //Coat
-set_color_profile_slot( 17, 5, 255, 43, 43 ); //Fire
-set_color_profile_slot( 17, 6, 255, 115, 33 ); //Fireyellow
-set_color_profile_slot( 17, 7, 196, 151, 151 ); //Gun
-set_color_profile_slot( 17, 8, 209, 0, 0 ); //Firedark
+set_color_profile_slot( 18, 0, 221, 136, 136 ); //Bones
+set_color_profile_slot( 18, 1, 94, 50, 50 ); //Horns
+set_color_profile_slot( 18, 2, 163, 115, 115 ); //Smog
+set_color_profile_slot( 18, 3, 143, 24, 14 ); //Ash
+set_color_profile_slot( 18, 4, 94, 50, 50 ); //Coat
+set_color_profile_slot( 18, 5, 255, 43, 43 ); //Fire
+set_color_profile_slot( 18, 6, 255, 115, 33 ); //Fireyellow
+set_color_profile_slot( 18, 7, 196, 151, 151 ); //Gun
+set_color_profile_slot( 18, 8, 209, 0, 0 ); //Firedark
 
 // in the blood
-set_color_profile_slot( 18, 0, 171, 133, 133 ); //Bones
-set_color_profile_slot( 18, 1, 204, 56, 33 ); //Horns
-set_color_profile_slot( 18, 2, 49, 50, 45 ); //Smog
-set_color_profile_slot( 18, 3, 227, 122, 37 ); //Ash
-set_color_profile_slot( 18, 4, 164, 0, 0 ); //Coat
-set_color_profile_slot( 18, 5, 182, 1, 0 ); //Fire
-set_color_profile_slot( 18, 6, 180, 83, 18 ); //Fireyellow
-set_color_profile_slot( 18, 7, 212, 72, 55 ); //Gun
-set_color_profile_slot( 18, 8, 130, 0, 0 ); //Firedark
+set_color_profile_slot( 19, 0, 171, 133, 133 ); //Bones
+set_color_profile_slot( 19, 1, 204, 56, 33 ); //Horns
+set_color_profile_slot( 19, 2, 49, 50, 45 ); //Smog
+set_color_profile_slot( 19, 3, 227, 122, 37 ); //Ash
+set_color_profile_slot( 19, 4, 164, 0, 0 ); //Coat
+set_color_profile_slot( 19, 5, 182, 1, 0 ); //Fire
+set_color_profile_slot( 19, 6, 180, 83, 18 ); //Fireyellow
+set_color_profile_slot( 19, 7, 212, 72, 55 ); //Gun
+set_color_profile_slot( 19, 8, 130, 0, 0 ); //Firedark
 
 // blind obsession
-set_color_profile_slot( 19, 0, 67, 114, 150 ); //Bones
-set_color_profile_slot( 19, 1, 27, 92, 125 ); //Horns
-set_color_profile_slot( 19, 2, 8, 70, 82 ); //Smog
-set_color_profile_slot( 19, 3, 6, 148, 135 ); //Ash
-set_color_profile_slot( 19, 4, 41, 69, 87 ); //Coat
-set_color_profile_slot( 19, 5, 17, 166, 156 ); //Fire
-set_color_profile_slot( 19, 6, 136, 255, 130 ); //Fireyellow
-set_color_profile_slot( 19, 7, 17, 38, 51 ); //Gun
-set_color_profile_slot( 19, 8, 17, 38, 51 ); //Firedark
+set_color_profile_slot( 20, 0, 67, 114, 150 ); //Bones
+set_color_profile_slot( 20, 1, 27, 92, 125 ); //Horns
+set_color_profile_slot( 20, 2, 8, 70, 82 ); //Smog
+set_color_profile_slot( 20, 3, 6, 148, 135 ); //Ash
+set_color_profile_slot( 20, 4, 41, 69, 87 ); //Coat
+set_color_profile_slot( 20, 5, 17, 166, 156 ); //Fire
+set_color_profile_slot( 20, 6, 136, 255, 130 ); //Fireyellow
+set_color_profile_slot( 20, 7, 17, 38, 51 ); //Gun
+set_color_profile_slot( 20, 8, 17, 38, 51 ); //Firedark
 
 // hunted
-set_color_profile_slot( 20, 0, 79, 79, 79 ); //Bones
-set_color_profile_slot( 20, 1, 78, 78, 78 ); //Horns
-set_color_profile_slot( 20, 2, 23, 18, 18 ); //Smog
-set_color_profile_slot( 20, 3, 73, 63, 102 ); //Ash
-set_color_profile_slot( 20, 4, 121, 32, 32 ); //Coat
-set_color_profile_slot( 20, 5, 255, 38, 38 ); //Fire
-set_color_profile_slot( 20, 6, 255, 0, 0 ); //Fireyellow
-set_color_profile_slot( 20, 7, 74, 62, 62 ); //Gun
-set_color_profile_slot( 20, 8, 130, 0, 0 ); //Firedark
+set_color_profile_slot( 21, 0, 79, 79, 79 ); //Bones
+set_color_profile_slot( 21, 1, 78, 78, 78 ); //Horns
+set_color_profile_slot( 21, 2, 23, 18, 18 ); //Smog
+set_color_profile_slot( 21, 3, 73, 63, 102 ); //Ash
+set_color_profile_slot( 21, 4, 121, 32, 32 ); //Coat
+set_color_profile_slot( 21, 5, 255, 38, 38 ); //Fire
+set_color_profile_slot( 21, 6, 255, 0, 0 ); //Fireyellow
+set_color_profile_slot( 21, 7, 74, 62, 62 ); //Gun
+set_color_profile_slot( 21, 8, 130, 0, 0 ); //Firedark
 
 
 /* This is a comment used by that one RoA colors.gml generator tool to store palette data. You can safely keep it in your colors.gml if you plan to re-use the tool later, or safely remove it if you don't.

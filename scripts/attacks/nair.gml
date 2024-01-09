@@ -70,10 +70,10 @@ make_hitbox(AT_NAIR, 1,
     HG_LIFETIME, 4,
 
     HG_HITBOX_X, -28,
-    HG_HITBOX_Y, -2,
+    HG_HITBOX_Y, -12,
 
-    HG_WIDTH, 68,
-    HG_HEIGHT, 63,
+    HG_WIDTH, 63,
+    HG_HEIGHT, 58,
 
     HG_PRIORITY, 1,
     HG_DAMAGE, 4,
@@ -93,11 +93,11 @@ make_hitbox(AT_NAIR, 2,
     HG_WINDOW, 2,
     HG_LIFETIME, 4,
 
-    HG_HITBOX_X, 31,
-    HG_HITBOX_Y, -8,
+    HG_HITBOX_X, 35,
+    HG_HITBOX_Y, -16,
 
-    HG_WIDTH, 68,
-    HG_HEIGHT, 65,
+    HG_WIDTH, 63,
+    HG_HEIGHT, 58,
 
     HG_PRIORITY, 1,
     HG_DAMAGE, 3,
