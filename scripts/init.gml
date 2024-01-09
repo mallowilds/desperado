@@ -86,7 +86,7 @@ signpost_obj = noone;                   // taunt
 // Training mode assets
 draw_skull_grabbox = 0;
 
-// Holiday detection
+// Special alt detection
 is_seasonal = (get_player_color(player) == 12);
 seasonal_type = get_match_setting(SET_SEASON);
 display_seasonal = is_seasonal;
@@ -96,6 +96,10 @@ vfx_seasonal = [noone,
                 noone,
                 hit_fx_create(sprite_get("idle_holiday4_die"), 20),
                 ];
+
+is_genesis = (get_player_color(player) == 2); // temp slot
+genesis_spawn_player = player; // default to self (for training mode)
+gen_image_index = 0;
 
 //Article
 head_obj = instance_create(x, y, "obj_article1");
@@ -149,7 +153,6 @@ anim_list = [
     "uair",
     "uphurt",
     "uspecial",
-    "ustrong",
     "utilt",
     "walkturn",
     "walk",
@@ -307,7 +310,6 @@ air_dodge_sound = 0;
 
 //custom intro
 AT_INTRO = 2; //the attack index the intro uses, 2 doesn't overwrite any other attack
-has_intro = true; //change to false if you don't have one/don't want it active
 
 // VFX
 vfx_bone_large = hit_fx_create(sprite_get("vfx_bone_large"), 30);

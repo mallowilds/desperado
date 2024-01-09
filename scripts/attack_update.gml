@@ -13,6 +13,7 @@ switch (attack) {
 	
 	//#region Intro ------------------------------------------------------------
     case 2: //intro
+    	if (is_genesis) gen_image_index = get_window_value(attack, window, AG_WINDOW_ANIM_FRAME_START) + get_window_value(attack, window, AG_WINDOW_ANIM_FRAMES)*(window_timer/get_window_value(attack, window, AG_WINDOW_LENGTH));
         if window == 1 && (window_timer == 39) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
             sound_play(sound_get("desp_rockbreak"))
         }

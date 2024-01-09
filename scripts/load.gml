@@ -127,6 +127,7 @@ sprite_change_offset("idle_holiday3", 118, 122);
 // No idle_holiday3_die
 sprite_change_offset("idle_holiday4", 118, 122);
 sprite_change_offset("idle_holiday4_die", 118, 122);
+sprite_change_offset("intro_gen", 118, 122);
 
 sprite_change_offset("vfx_1", 156, 156);
 sprite_change_offset("vfx_2", 156, 156);
@@ -158,6 +159,10 @@ sprite_change_offset("skull_hud_health", 5, 8)
 sprite_change_offset("fire1", 10, 10);
 sprite_change_offset("fire2", 10, 10);
 sprite_change_offset("fire3", 10, 10);
+sprite_change_offset("fire1_gen", 10, 10);
+sprite_change_offset("fire2_gen", 10, 10);
+sprite_change_offset("fire3_gen", 10, 10);
+sprite_change_offset("fire4_gen", 10, 10);
 sprite_change_offset("bullet", 3, 6); // Non-even offset to enable spinning
 sprite_change_offset("bullet_ea", 3, 6);
 

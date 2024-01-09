@@ -2,21 +2,15 @@
 // https://rivalslib.com/workshop_guide/programming/reference/scripts/event_scripts.html#every-frame
 // Code here is run every frame for your character.
 
-/* Bullet Mechanic
-
-You can have up to 6 bullets, which have stacking effects on damage. I have the basic damage mult setup, but a few things need to be added. 
--At 4+  bullets, i want there to be smoke particles that display around desperado. i still need to make these so dont worry about them rn
--Additionally, while at 4+ bullets, all attacks that deal more than 3% should layer a sound effect on top of the normal hit (Gonna change, for now use sound_get("desp_knock") [DONE]
--At 6 bullets, the outline should gradient from black to the 'FireOutline' color, the last extra slot. If possible. If not just use the default color (130, 0, 0)
-//i still need to update colors.gml with the unique fireoutline coloirs most of them are red rn, am lazy
--When nspecial is used, each bullet is fired and removed.
--When fstrong is used (dw about this yet gonna animate first), 1 bullet is removed. If no bullets, its just a punch.
-
-*/
-
-
-
-if (get_gameplay_time() == 4 && has_intro && !is_seasonal) set_attack(AT_INTRO);
+//if (get_gameplay_time() < 4 && is_genesis) visible = false;
+if (get_gameplay_time() == 4 && !is_seasonal) {
+	set_attack(AT_INTRO);
+	if (is_genesis) {
+		with oPlayer if (player != other.player) other.genesis_spawn_player = player;
+		set_attack_value(AT_INTRO, AG_SPRITE, sprite_get("intro_gen"));
+		//visible = false;
+	}
+}
 
 //#region SFX things
 if state == PS_CROUCH && state_timer == 1 && !hitpause {
@@ -109,7 +103,10 @@ for (var i = 0; i < ds_list_size(sparkle_list); i++) {
     }
 }
 
-if (num_bullets >= 4 && get_gameplay_time() % 7 == 0) spawn_sparkle(get_gameplay_time()%17, get_gameplay_time()%37);
+if (num_bullets >= 4 && get_gameplay_time() % 7 == 0) {
+	if (is_genesis) spawn_sparkle_genesis(get_gameplay_time()%17, get_gameplay_time()%37);
+	else spawn_sparkle(get_gameplay_time()%17, get_gameplay_time()%37);
+}
 //#endregion
 
 
@@ -234,6 +231,10 @@ if (display_seasonal && state != PS_IDLE && state != PS_SPAWN && state != PS_RES
     if (sparkle_type == 0) spawn_particle_random("fire1", 10, seed2);
     else if (sparkle_type == 1) spawn_particle_random("fire2", 15, seed2);
     else if (sparkle_type == 2) spawn_particle_random("fire3", 15, seed2);
+   
+#define spawn_sparkle_genesis(seed1, seed2)
+    var sparkle_type = random_func_2(seed1, 4, true)+1;
+    spawn_particle_random("fire"+string(sparkle_type)+"_gen", 10, seed2);
     
 #define spawn_particle_random(in_sprite, lifetime, seed)
     var min_rad = 34;

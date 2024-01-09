@@ -63,11 +63,15 @@ else if (state == PS_ATTACK_GROUND && attack == AT_EXTRA_2 && image_index > 5) {
 //#endregion
 
 
-//#region Seasonal management
+//#region Special alt management
 // else-if chain continues from skullessness to prevent head pop-in
 else if (display_seasonal && (state == PS_IDLE || state == PS_SPAWN || state == PS_RESPAWN)) {
 	sprite_index = sprite_get("idle_holiday"+string(seasonal_type));
 	image_index = state_timer*idle_anim_speed;
+}
+
+else if (is_genesis && (get_gameplay_time() <= 5 || attack == AT_INTRO && state == PS_ATTACK_GROUND && gen_image_index < 14)) {
+	sprite_index = sprite_get("null");
 }
 //#endregion
 
