@@ -14,28 +14,29 @@ switch (attack) {
 	//#region Intro ------------------------------------------------------------
     case 2: //intro
     	if (is_genesis) {
+    		
     		gen_image_index = get_window_value(attack, window, AG_WINDOW_ANIM_FRAME_START) + get_window_value(attack, window, AG_WINDOW_ANIM_FRAMES)*(window_timer/get_window_value(attack, window, AG_WINDOW_LENGTH));
     		if (get_gameplay_time() % 6 == 0) spawn_genesis_intro_sparkle(get_gameplay_time()%17, get_gameplay_time()%37, x, y);
     		if (get_gameplay_time() % 6 == 3) spawn_genesis_intro_sparkle(get_gameplay_time()%17, get_gameplay_time()%37, genesis_spawn_player_id.x-(50*genesis_spawn_player_id.spr_dir), genesis_spawn_player_id.y);
-    	}
-	    	if (is_genesis) {
-	    		print(window_timer)
-	    		if window == 1 && window_timer == 15 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-	    			sound_play(sound_get("gen_intro"))
-	    		}
-	    		if window == 2 && window_timer == 1 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-	    			sound_play(sound_get("desp_breathsmall"))
-		            sound_play(sound_get("desp_swinglow"), 0, noone, .6, .9)
-	    		}
-	    		if window == 2 && window_timer == 40 { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-	    			sound_stop(sound_get("gen_intro"))
-	    			sound_play(sound_get("gen_intro_2"))
-	    		}
-	    	} else {
-	        if window == 1 && (window_timer == 39){ // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+    	
+    		if (window == 1 && window_time_is(15)) {
+    			sound_play(sound_get("gen_intro"))
+    		}
+    		else if (window == 2 && window_time_is(1)) { 
+    			sound_play(sound_get("desp_breathsmall"))
+	            sound_play(sound_get("desp_swinglow"), 0, noone, .6, .9)
+    		}
+    		else if (window == 2 && window_time_is(40)) {
+    			sound_stop(sound_get("gen_intro"))
+    			sound_play(sound_get("gen_intro_2"))
+    		}
+    		
+    	} else {
+    		
+	        if (window == 1 && window_time_is(39)) {
 	            sound_play(sound_get("desp_rockbreak"))
 	        }
-	        if window == 2 {
+	        else if (window == 2) {
 	            switch (window_timer) {
 	                case 1: 
 	                   // sound_play(sound_get("desp_whisper"))
@@ -51,7 +52,9 @@ switch (attack) {
 	                    break;
 	            }
 	        }
-	    }
+	        
+    	}
+
     break;
     //#endregion
     

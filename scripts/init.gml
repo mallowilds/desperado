@@ -97,7 +97,7 @@ vfx_seasonal = [noone,
                 hit_fx_create(sprite_get("idle_holiday4_die"), 20),
                 ];
 
-is_genesis = (get_player_color(player) == 13); // temp slot
+is_genesis = (get_player_color(player) == 13);
 genesis_spawn_player_id = self; // default to self (for training mode)
 gen_image_index = 0;
 
