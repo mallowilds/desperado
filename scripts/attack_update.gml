@@ -32,7 +32,7 @@ switch (attack) {
 	    			sound_play(sound_get("gen_intro_2"))
 	    		}
 	    	} else {
-	        if window == 1 && (window_timer == 39) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+	        if window == 1 && (window_timer == 39){ // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
 	            sound_play(sound_get("desp_rockbreak"))
 	        }
 	        if window == 2 {
@@ -51,26 +51,7 @@ switch (attack) {
 	                    break;
 	            }
 	        }
-    	}
-        if window == 1 && (window_timer == 39) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-            sound_play(sound_get("desp_rockbreak"))
-        }
-        if window == 2 {
-            switch (window_timer) {
-                case 1: 
-                   // sound_play(sound_get("desp_whisper"))
-                    sound_play(sound_get("desp_breathsmall"))
-                    sound_play(asset_get("sfx_syl_ustrong_part2"), 0, noone, .6, .9)
-                    sound_play(sound_get("desp_swinglow"), 0, noone, .6, .9)
-                    break;
-                case 11:
-                    sound_play(asset_get("sfx_syl_ustrong_part2"), 0, noone, .6, 1.1)
-                    break;
-                case 31:
-                    sound_play(sound_get("sfx_snb_clothes"))
-                    break;
-            }
-        }
+	    }
     break;
     //#endregion
     
