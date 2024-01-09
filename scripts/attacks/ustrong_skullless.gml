@@ -4,7 +4,7 @@ make_attack(AT_USTRONG_2,
     AG_SPRITE, sprite_get("ustrong_skulless"),
     AG_NUM_WINDOWS, 4,
     AG_STRONG_CHARGE_WINDOW, 1,
-    AG_HURTBOX_SPRITE, sprite_get("ustrong_hurt"),
+    AG_HURTBOX_SPRITE, sprite_get("ustrong_skulless_hurt"),
 )
 
 make_window(AT_USTRONG_2, 1,
