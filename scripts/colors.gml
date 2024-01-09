@@ -38,7 +38,7 @@ set_color_profile_slot_range( 8, 1, 1, 1 );
 
 
 // ALTERNATE COLORS
-set_num_palettes( 13 );
+set_num_palettes( 14 );
 
 // dreadnought - hyu
 set_color_profile_slot( 1, 0, 209, 207, 255 ); //Bones
@@ -181,9 +181,7 @@ set_color_profile_slot( 13, 4, 46, 46, 46 ); //Coat
 set_color_profile_slot( 13, 5, 219, 23, 10 ); //Fire
 set_color_profile_slot( 13, 6, 166, 166, 166 ); //Fireyellow
 set_color_profile_slot( 13, 7, 69, 69, 69 ); //Gun
-set_color_profile_slot( 13, 8, 138, 14, 6 ); //Firedark
-
-// Forevermore
+set_color_profile_slot( 13, 8, 184, 184, 184 ); //Firedark// Forevermore
 set_color_profile_slot( 14, 0, 255, 143, 219 ); //Bones
 set_color_profile_slot( 14, 1, 255, 158, 187 ); //Horns
 set_color_profile_slot( 14, 2, 143, 86, 131 ); //Smog
