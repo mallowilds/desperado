@@ -2,13 +2,11 @@
 // https://rivalslib.com/workshop_guide/programming/reference/scripts/event_scripts.html#every-frame
 // Code here is run every frame for your character.
 
-//if (get_gameplay_time() < 4 && is_genesis) visible = false;
 if (get_gameplay_time() == 4 && !is_seasonal) {
 	set_attack(AT_INTRO);
 	if (is_genesis) {
-		with oPlayer if (player != other.player) other.genesis_spawn_player = player;
+		with oPlayer if (self != other) other.genesis_spawn_player_id = self;
 		set_attack_value(AT_INTRO, AG_SPRITE, sprite_get("intro_gen"));
-		//visible = false;
 	}
 }
 
@@ -228,15 +226,15 @@ if (display_seasonal && state != PS_IDLE && state != PS_SPAWN && state != PS_RES
 
 #define spawn_sparkle(seed1, seed2)
     var sparkle_type = random_func_2(seed1, 3, true);
-    if (sparkle_type == 0) spawn_particle_random("fire1", 10, seed2);
-    else if (sparkle_type == 1) spawn_particle_random("fire2", 15, seed2);
-    else if (sparkle_type == 2) spawn_particle_random("fire3", 15, seed2);
+    if (sparkle_type == 0) spawn_particle_random("fire1", 10, seed2, spr_dir);
+    else if (sparkle_type == 1) spawn_particle_random("fire2", 15, seed2, spr_dir);
+    else if (sparkle_type == 2) spawn_particle_random("fire3", 15, seed2, spr_dir);
    
 #define spawn_sparkle_genesis(seed1, seed2)
     var sparkle_type = random_func_2(seed1, 4, true)+1;
-    spawn_particle_random("fire"+string(sparkle_type)+"_gen", 10, seed2);
+    spawn_particle_random("fire"+string(sparkle_type)+"_gen", 10, seed2, 1);
     
-#define spawn_particle_random(in_sprite, lifetime, seed)
+#define spawn_particle_random(in_sprite, lifetime, seed, in_spr_dir)
     var min_rad = 34;
     var rad_range = 14;
     var y_offset = -40;
@@ -250,7 +248,7 @@ if (display_seasonal && state != PS_IDLE && state != PS_SPAWN && state != PS_RES
         sp_sprite_index : sprite_get(in_sprite),
         sp_max_lifetime : lifetime,
         sp_lifetime : 0,
-        sp_spr_dir : spr_dir,
+        sp_spr_dir : in_spr_dir,
         sp_skull_owned : 0,
     };
     ds_list_add(sparkle_list, sparkle);

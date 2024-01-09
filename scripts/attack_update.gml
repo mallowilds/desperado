@@ -13,7 +13,11 @@ switch (attack) {
 	
 	//#region Intro ------------------------------------------------------------
     case 2: //intro
-    	if (is_genesis) gen_image_index = get_window_value(attack, window, AG_WINDOW_ANIM_FRAME_START) + get_window_value(attack, window, AG_WINDOW_ANIM_FRAMES)*(window_timer/get_window_value(attack, window, AG_WINDOW_LENGTH));
+    	if (is_genesis) {
+    		gen_image_index = get_window_value(attack, window, AG_WINDOW_ANIM_FRAME_START) + get_window_value(attack, window, AG_WINDOW_ANIM_FRAMES)*(window_timer/get_window_value(attack, window, AG_WINDOW_LENGTH));
+    		if (get_gameplay_time() % 6 == 0) spawn_genesis_intro_sparkle(get_gameplay_time()%17, get_gameplay_time()%37, x, y);
+    		if (get_gameplay_time() % 6 == 3) spawn_genesis_intro_sparkle(get_gameplay_time()%17, get_gameplay_time()%37, genesis_spawn_player_id.x-(50*genesis_spawn_player_id.spr_dir), genesis_spawn_player_id.y);
+    	}
         if window == 1 && (window_timer == 39) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
             sound_play(sound_get("desp_rockbreak"))
         }
@@ -783,6 +787,25 @@ switch (attack) {
 #define shot_collision(_x, _y, _w, _h)
 	if (centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false) && head_obj.hittable) return 2; // Note: GML treats 2 as true
 	return centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("par_block"), false) || centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("plasma_field_obj"), true);
+    
+// used for genesis alt. Differs from normal procedure!
+#define spawn_genesis_intro_sparkle(seed1, seed2, in_x, in_y)
+	var in_sprite = "fire"+string(random_func_2(seed1, 4, true)+1)+"_gen";
+    var x_range = 60;
+    var y_range = 70;
+    var y_offset = -45;
+    var _x = in_x + random_func_2(seed2, x_range, false) - (x_range/2);
+    var _y = in_y - random_func_2(seed2+1, y_range, false) + (y_range/2) + y_offset;
+    var sparkle = {
+        sp_x : _x,
+        sp_y : _y,
+        sp_sprite_index : sprite_get(in_sprite),
+        sp_max_lifetime : 10,
+        sp_lifetime : 0,
+        sp_spr_dir : 1,
+        sp_skull_owned : 0,
+    };
+    ds_list_add(sparkle_list, sparkle);
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.

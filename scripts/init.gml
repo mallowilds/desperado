@@ -98,7 +98,7 @@ vfx_seasonal = [noone,
                 ];
 
 is_genesis = (get_player_color(player) == 2); // temp slot
-genesis_spawn_player = player; // default to self (for training mode)
+genesis_spawn_player_id = self; // default to self (for training mode)
 gen_image_index = 0;
 
 //Article

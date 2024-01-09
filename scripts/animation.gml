@@ -70,7 +70,7 @@ else if (display_seasonal && (state == PS_IDLE || state == PS_SPAWN || state == 
 	image_index = state_timer*idle_anim_speed;
 }
 
-else if (is_genesis && (get_gameplay_time() <= 5 || attack == AT_INTRO && state == PS_ATTACK_GROUND && gen_image_index < 14)) {
+else if (is_genesis && (get_gameplay_time() <= 5 || attack == AT_INTRO && state == PS_ATTACK_GROUND && gen_image_index < 13.5)) {
 	sprite_index = sprite_get("null");
 }
 //#endregion
