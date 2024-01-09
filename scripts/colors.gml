@@ -181,7 +181,9 @@ set_color_profile_slot( 13, 4, 46, 46, 46 ); //Coat
 set_color_profile_slot( 13, 5, 219, 23, 10 ); //Fire
 set_color_profile_slot( 13, 6, 166, 166, 166 ); //Fireyellow
 set_color_profile_slot( 13, 7, 69, 69, 69 ); //Gun
-set_color_profile_slot( 13, 8, 184, 184, 184 ); //Firedark// Forevermore
+set_color_profile_slot( 13, 8, 184, 184, 184 ); //Firedark
+
+// Forevermore
 set_color_profile_slot( 14, 0, 255, 143, 219 ); //Bones
 set_color_profile_slot( 14, 1, 255, 158, 187 ); //Horns
 set_color_profile_slot( 14, 2, 143, 86, 131 ); //Smog

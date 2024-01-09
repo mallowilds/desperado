@@ -42,9 +42,7 @@ for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
 
 // Genesis alt intro (self-targeted)
 if (is_genesis && self == genesis_spawn_player_id && attack == AT_INTRO && state == PS_ATTACK_GROUND && gen_image_index < 14.5) {
-    shader_start();
     draw_sprite_ext(sprite_get("intro_gen"), gen_image_index, other.x-(50*other.spr_dir), other.y, other.spr_dir, 1, 0, c_white, 1);
-    shader_end();
 }
 
 shader_end();
