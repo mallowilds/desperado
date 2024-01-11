@@ -325,7 +325,7 @@ switch (state) {
 		
 		var delay_total =  (respawn_penalty ? penalty_delay : respawn_delay);
 		
-		if (state_timer == 1) {
+		if (state_timer <= 1) { // hitpause creates an edge case where state_timer = 0
 			duration = -1;
 			respawn_init_x = x;
 			respawn_init_y = y;
