@@ -538,7 +538,12 @@ switch (state) {
 					can_fspecial = false;
 					visible = false;
 					player_id.move_cooldown[AT_FSPECIAL] = 45;
-					if (player_id.state != PS_HITSTUN && player_id.state != PS_HITSTUN_LAND) create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
+					
+					var regen_vfx = spawn_hit_fx(player_id.x+(4*player_id.spr_dir), player_id.y-56, player_id.vfx_bullseye_small);
+					regen_vfx.depth = player_id.depth-1;
+					sound_play(asset_get("sfx_mol_bombpop"));
+					
+					//if (player_id.state != PS_HITSTUN && player_id.state != PS_HITSTUN_LAND) create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
 				}
 				
 				// 3 seconds in: just kill off the skull, it's probably trapped
