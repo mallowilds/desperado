@@ -32,9 +32,7 @@ switch state {
     
     case 15:
         if (image_index < 10) draw_sprite_ext(icon_spr, icon_image, x-16, y-78, icon_scale, icon_scale, 0, c_white, 1);
-        with (player_id) shader_start();
         draw_sprite(sprite_get("sign_burn_top"+(get_player_color(player)==7?"_ea":"")), image_index, x, y);
-        shader_end();
         break;
     
     case 19: // intro
