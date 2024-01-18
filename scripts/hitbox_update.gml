@@ -20,6 +20,7 @@ if (attack == AT_FSPECIAL_2) {
                 spawn_ash_particle(6*player, 6*player+1);
                 spawn_ash_particle(6*player+3, 6*player+4);
             }
+        case 3:
         
         case 2:
             hitstop_timer = clamp(hitstop_timer-1, 0, 20);

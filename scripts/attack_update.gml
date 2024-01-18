@@ -163,7 +163,7 @@ switch (attack) {
     	case AT_DATTACK:
     	case AT_EXTRA_2:
     		if window < 4 && has_hit {
-    			can_ustrong = true;
+    		//	can_ustrong = true;
     		}
     	break;
     //#endregion
@@ -309,8 +309,12 @@ switch (attack) {
         can_fast_fall = false
         if window == 1 {
         	if window_timer == 1 && !hitpause && num_bullets > 0 {
-        		var vflash = spawn_hit_fx(x, y, vfx_flash)
-        		vflash.depth = depth - 1;
+        		if head_obj.state == 0 {
+	        		var vflash = spawn_hit_fx(x, y, vfx_flash)
+	        		vflash.depth = depth - 1;
+	        		vflash.follow_id = self
+	        		vflash.follow_time = 1000
+        		}
         		sound_play(sound_get("desp_sharpen"))
         	}
             var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);

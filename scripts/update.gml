@@ -215,7 +215,28 @@ if (display_seasonal && state != PS_IDLE && state != PS_SPAWN && state != PS_RES
 }
 //#endregion
 
+//#region Genesis Alt Hueshift (this is a template)
+	
+	
+    hue_offset = hue_offset + (1*hue_increasing)
+    if hue_offset > 255 {
+    	hue_increasing = -1
+    }
+    if hue_offset < 200 {
+    	hue_increasing = 1
+    }
+    
+    print(hue_offset)
 
+    color_rgb=make_color_rgb(  176, 18, 8 ); //input rgb values here, uses rgb to create a gamemaker colour variable
+    
+    value = (color_get_value(color_rgb)+hue_offset) mod 255; //finds the hue and shifts it
+    
+    color_hsv = make_color_hsv(color_get_hue(color_rgb),color_get_saturation(color_rgb),value); //creates a new gamemaker colour variable using the shifted hue
+    
+    set_color_profile_slot( 13, 1, color_get_red(color_hsv),color_get_green(color_hsv),color_get_blue(color_hsv)); //uses that variable to set the slot's new colours
+    set_color_profile_slot( 13, 3, color_get_red(color_hsv),color_get_green(color_hsv),color_get_blue(color_hsv)); //uses that variable to set the slot's new colours
+//#endregion
 
 #define set_head_state(new_state)
     head_obj.state = new_state;

@@ -208,7 +208,7 @@ air_friction = .02 // .02 – .07. Natural deceleration applied while in the air
 max_fall = 9 // 8 – 11. The maximum vsp you can accelerate to while falling normally
 fast_fall = 11.5 // 11 – 16. The vsp applied when fastfalling
 gravity_speed = .4// .3 – .6. The gravitational acceleration applied in non-hitstun aerial states
-hitstun_grav = .4// .45 – .525. The gravitational acceleration applied in hitstun. Changes to this have large consequences to your character's survivibility
+hitstun_grav = .48// .45 – .525. The gravitational acceleration applied in hitstun. Changes to this have large consequences to your character's survivibility
 
 // Jumping
 max_djumps = 1 // The max number of double jumps you can use.
@@ -327,6 +327,10 @@ set_victory_theme(sound_get("victory"))
 set_victory_bg(CH_FORSBURN)
 
 set_hit_particle_sprite(1, sprite_get("skull_hpart"));
+
+hue_offset=160;
+hue_speed=1; //change this to change the speed of the hueshift
+hue_increasing = 1
 
 //Sprites
 // spr_nspecial_proj = sprite_get("nspecial_proj")

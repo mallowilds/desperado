@@ -83,11 +83,40 @@ Buffs:
 	-Corrected one of Back Airs hitboxes being slightly weaker than the others.
 	-Back air knockback scaling increased (.6 -> .7). Affects both versions, but tipper stats on Scorched Bair are unchanged.
 
-Mothra Notes:
--Reduce fstrong bkb to 9 or 9.5 (lol)
--Buff dattack somehow (might remove the gatling tho ngl that shit mid ah fuck)
--fix ustrong having burn stun effect for some reason??? lol?? i already did this
--fix eye glowing without skull on nspec (lol)
--fix ustrong not having a hurtbox if you dont have a skull OOPSIES
+Changes (1.2, Jan 14)
 
-todo: ADD HUD NUMBERS (I NEED TO MAKE THESE LOL)
+-Last patch before deadline ends (unless something important comes up). Makes a few pretty major changes that reel his kit back and make him feel more fun to fight while keeping the essence of what i want the character to do.
+-Bugfixes/Adjusts:
+	-Fixed up strong using Burn Stun effect (dont ask).
+	-Added some extra notes for the Woodcock.
+	-Fixed eye glowing when using N-Special skulless.
+	-Fixed eye glow showing up in the wrong spot while moving.
+	-Fixed up strong using the wrong hurtbox index without a skull.
+	-Fixed skull occasionally getting stuck (hopefully).
+	-Fixed Skulless DAttack having wildly varied startup from skull DAttack.
+	
+-Nerfs:
+	-Removed the automatic Pop when the skull returns to Desperado after using F-Special.
+		-It felt like a bit overkill for the move, and it incentivized running away and mashing it whenever its off cooldown.
+		-This change should hopefully add more pressure for Desperado to be thoughtful using F-Special.
+	-FStrong (Empowered) Base knockback reduced from 10.5 to 9.5. Scaling reduced from 1.25 to 1.2. 
+		-Oops! If this is still too powerful, I can tune it down more post-patch. I do want it to stay as one of the strongest options in the game though, its very slow/laggy and uses a bullet.
+	-Fair last hit now has a hitstun multiplier of .85, to make it a bit easier to escape.
+	-Dattack gatling removed.
+		-This was extremely niche. Too niche.
+	-Desperate Measures now has extended parrystun instead of normal parrystun.
+		-i thought they were the same not gonna lie 
+-Buffs: 
+	-Dattack startup reduced, 9 -> 6.
+	-Dattack second hit angle adjusted, 65 -> 80.
+		-This move was underperforming pretty hard, so the startup was reduced a bit and it got a different angle to hopefully promote it being used a bit more, especially to compensate with the loss of the gatling.
+	-Fspecial manual detonation startup reduced, 10 -> 7. 
+		-Since the autodet got removed, this has been added just to promote it being used a little more, and make it a more generous.
+		
+Changes (1.25, Jan 18th)
+	-Pre-GENESIS patch to get the character into a slightly better spot (Though really, I just need to fix the hitstun gravity). 
+	-Added a GENESIS alt. 
+-Buffs:
+	-Hitstun Grav .4 -> .48
+		-This was an oversight. It was way too extreme before, meaning Desperado would die much earlier than expected off the top, getting galaxied at ludicrously low percents.
+		-He should feel much more like an average lightweight, and not an extreme one.

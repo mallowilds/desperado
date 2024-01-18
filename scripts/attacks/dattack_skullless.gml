@@ -9,7 +9,7 @@ make_attack(AT_EXTRA_2,
 )
 
 make_window(AT_EXTRA_2, 1, //startup
-    AG_WINDOW_LENGTH, 4,
+    AG_WINDOW_LENGTH, 7,
     AG_WINDOW_ANIM_FRAMES, 2,
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, asset_get("sfx_swipe_medium1"),
@@ -99,7 +99,7 @@ make_hitbox(AT_EXTRA_2, 2,
 
     HG_PRIORITY, 2,
     HG_DAMAGE, 4,
-    HG_ANGLE, 65,
+    HG_ANGLE, 80,
     //HG_ANGLE_FLIPPER, 6,
     HG_BASE_KNOCKBACK, 7,
     HG_BASE_HITPAUSE, 7,

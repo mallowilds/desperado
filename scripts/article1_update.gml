@@ -582,7 +582,11 @@ switch (state) {
 				vsp = 0;
 				sprite_index = sprite_get("null");
 				respawn_penalty = false;
-				var hbox = create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				if get_player_color(player) == 14 {
+					var hbox = create_hitbox(AT_FSPECIAL_2, 3, x+(4*spr_dir), y-32);
+				} else {
+					var hbox = create_hitbox(AT_FSPECIAL_2, 1, x+(4*spr_dir), y-32);
+				}
 				hbox.head_obj = self;
 				break;
 		}
