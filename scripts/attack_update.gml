@@ -774,7 +774,7 @@ switch (attack) {
 	var first_index = get_num_hitboxes(atk)+1;
 	var shot_hb_w = get_hitbox_value(atk, hbox_num, HG_WIDTH);
     var shot_hb_h = get_hitbox_value(atk, hbox_num, HG_HEIGHT);
-    var shot_x = _x + spr_dir*floor(shot_hb_w/2);
+    var shot_x = _x + floor(shot_hb_w/2)*spr_dir;
 	var shot_y = _y;
 	
 	// Do full-size hitboxes
@@ -783,7 +783,7 @@ switch (attack) {
         set_hitbox_value(atk, first_index+shot_loops, HG_PARENT_HITBOX, hbox_num);
         set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_TYPE, get_hitbox_value(atk, hbox_num, HG_HITBOX_TYPE));
         set_hitbox_value(atk, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(atk, hbox_num, HG_LIFETIME));
-        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_X, (shot_x-x));
+        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_X, (shot_x-x)*spr_dir);
         set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_Y, (shot_y-y));
         set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_GROUP, get_hitbox_value(atk, hbox_num, HG_HITBOX_GROUP));
         
@@ -796,7 +796,7 @@ switch (attack) {
     
     // Do end hitbox
     shot_x -= round(shot_hb_w*spr_dir) / 2;
-    shot_hb_w = length - ((shot_loops)*shot_hb_w);
+    shot_hb_w = length - ((shot_loops)*shot_hb_w) + 2; // extend by 1 on each side to account for destructible terrain (e.g. kragg pillar)
     if (shot_hb_w % 2 == 1) shot_x += spr_dir;	// hitboxes can't have non-integer widths, so shift outward by 1 to account for the difference
     shot_x += (floor(shot_hb_w/2) * spr_dir);
     
@@ -805,7 +805,7 @@ switch (attack) {
         set_hitbox_value(atk, first_index+shot_loops, HG_PARENT_HITBOX, 0);
         set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_TYPE, get_hitbox_value(atk, hbox_num, HG_HITBOX_TYPE));
         set_hitbox_value(atk, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(atk, hbox_num, HG_LIFETIME));
-        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_X, (shot_x-x));
+        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_X, (shot_x-x)*spr_dir);
         set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_Y, (shot_y-y));
         set_hitbox_value(atk, first_index+shot_loops, HG_WIDTH, shot_hb_w);
         set_hitbox_value(atk, first_index+shot_loops, HG_HEIGHT, shot_hb_h);
