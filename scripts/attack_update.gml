@@ -763,7 +763,7 @@ switch (attack) {
 		
 	}
 	
-	return upper_bound;
+	return (spr_dir == -1) ? lower_bound : upper_bound;
 
 
 // Creates multiple copies of a hitbox to fill a certain length.
