@@ -51,6 +51,7 @@ if (reload_anim_state == 1 || reload_anim_state == 2) {
     reload_anim_state = 0;
     reload_anim_timer = 0;
 }
+sound_stop(sound_get("desp_spin"));
 
 // Reset seasonal alt
 display_seasonal = is_seasonal;

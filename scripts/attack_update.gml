@@ -316,6 +316,8 @@ switch (attack) {
 	        		vflash.follow_time = 1000
         		}
         		sound_play(sound_get("desp_sharpen"))
+        		vflash.follow_id = self;
+        		vflash.follow_time = 999;
         	}
             var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
             if (window_time_is(1)) {
@@ -723,74 +725,109 @@ switch (attack) {
     return collision_rectangle(_x-(_w/2), _y-(_h/2), _x+(_w/2), _y+(_h/2), obj, prec, false);
 
 
-// Generates hitboxes and visuals from an nspecial melee hitboxes.
+// Generates hitboxes and visuals from nspecial melee hitboxes.
+// Primarily an interface for the below functions.
 // edge_width is the length to the point in the edge sprite where it should hit a wall.
 #define create_nspec_shot(hbox_num, start_index, tile_index, edge_index, edge_width, shot_lifetime, smoke_index, smoke_time_offset, smoke_lifetime)
+	
+	var _w = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_WIDTH);
+    var _h = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HEIGHT);
+    var _x = x + spr_dir*(get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HITBOX_X)-floor(_w/2));
+	var _y = y + get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HITBOX_Y);
+	
+	var length = get_shot_length(_x, _y, 16*_w, _h);
+	
+	create_shot_hitbox(_x, _y, length, AT_NSPECIAL, hbox_num);
+	create_shot_visual(_x+hsp, _y+vsp-2, length, start_index, tile_index, edge_index, edge_width, shot_lifetime, smoke_index, smoke_time_offset, smoke_lifetime);
+	shot_hit_skull(_x, _y, length, _h, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_VISUAL_EFFECT));
+	
 
-    // Set initial hitboxes
-    var shot_loops = 0;
-    var first_index = get_num_hitboxes(AT_NSPECIAL)+1;
-    var shot_x = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HITBOX_X);
-    var shot_y = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HITBOX_Y);
-    var shot_hb_w = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_WIDTH);
-    var shot_hb_h = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HEIGHT);
-    
-    var shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h); // Helper function, checks for walls and clairen field (see below)
-    while (!shot_collides && shot_loops < 20) {
+// Generates furthest rectangular space a shot can occupy.
+// (_x, _y) denotes left-center position of rectangle (assuming spr_dir == 1).
+#define get_shot_length(_x, _y, max_length, height)
+	
+	var lower_bound = 0;
+	var upper_bound = max_length;
+	
+	while (abs(lower_bound - upper_bound) > 1) {
+		
+		var middle_bound = floor((lower_bound+upper_bound)/2)
+		var left_pos = min(_x, _x+(middle_bound*spr_dir));
+		var right_pos = max(_x, _x+(middle_bound*spr_dir));
+		
+		var is_colliding = false;
+		is_colliding |= noone != collision_rectangle(left_pos, _y-(height/2), right_pos, _y+(height/2), asset_get("par_block"), false, false);
+		is_colliding |= noone != collision_rectangle(left_pos, _y-(height/2), right_pos, _y+(height/2), asset_get("obj_clairen_field"), true, false);
+		is_colliding |= (noone != collision_rectangle(left_pos, _y-(height/2), right_pos, _y+(height/2), head_obj, true, false)
+						&& head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5
+						);
+		
+		if (is_colliding) upper_bound = middle_bound;
+		else lower_bound = middle_bound;
+		
+	}
+	
+	return (spr_dir == -1) ? lower_bound : upper_bound;
+
+
+// Creates multiple copies of a hitbox to fill a certain length.
+// Starting position is (_x, _y), denoting the left-center of the first hitbox (assuming spr_dir == 1).
+#define create_shot_hitbox(_x, _y, length, atk, hbox_num)
+	
+	var shot_loops = 0;
+	var first_index = get_num_hitboxes(atk)+1;
+	var shot_hb_w = get_hitbox_value(atk, hbox_num, HG_WIDTH);
+    var shot_hb_h = get_hitbox_value(atk, hbox_num, HG_HEIGHT);
+    var shot_x = _x + floor(shot_hb_w/2)*spr_dir;
+	var shot_y = _y;
+	
+	// Do full-size hitboxes
+	while ((shot_loops+1)*shot_hb_w <= length) {
         
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_PARENT_HITBOX, hbox_num);
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_LIFETIME));
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HITBOX_X, shot_x);
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HITBOX_Y, shot_y);
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HITBOX_GROUP, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HITBOX_GROUP));
+        set_hitbox_value(atk, first_index+shot_loops, HG_PARENT_HITBOX, hbox_num);
+        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_TYPE, get_hitbox_value(atk, hbox_num, HG_HITBOX_TYPE));
+        set_hitbox_value(atk, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(atk, hbox_num, HG_LIFETIME));
+        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_X, (shot_x-x)*spr_dir);
+        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_Y, (shot_y-y));
+        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_GROUP, get_hitbox_value(atk, hbox_num, HG_HITBOX_GROUP));
         
-        shot_hbox = create_hitbox(attack, first_index+shot_loops, x+(shot_x*spr_dir), y+shot_y);
+        create_hitbox(atk, first_index+shot_loops, shot_x, shot_y);
         
         shot_loops++;
-        shot_x += shot_hb_w;
+        shot_x += shot_hb_w*spr_dir;
         
-        shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);        
     }
     
-    //Check if collision was triggered by skull
-    if (shot_collides == 2) {
-    	set_head_state(AT_NSPECIAL);
-    	var vfx = spawn_hit_fx(head_obj.x, head_obj.y-30, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_VISUAL_EFFECT))
-    	vfx.depth = head_obj.depth-1;
-    	head_obj.shots_absorbed++;
-    	take_damage(player, player, 1)
-    }
-    
-    // Refine shot collision
-    while (shot_collides && shot_hb_w > 0) {
-    	shot_hb_w -= 2;
-    	shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);
-        if (shot_collides) shot_x -= 1;
-		shot_collides = shot_collision(shot_x, shot_y, shot_hb_w, shot_hb_h);
-    }
+    // Do end hitbox
+    shot_x -= round(shot_hb_w*spr_dir) / 2;
+    shot_hb_w = length - ((shot_loops)*shot_hb_w) + 2; // extend by 1 on each side to account for destructible terrain (e.g. kragg pillar)
+    if (shot_hb_w % 2 == 1) shot_x += spr_dir;	// hitboxes can't have non-integer widths, so shift outward by 1 to account for the difference
+    shot_x += (floor(shot_hb_w/2) * spr_dir);
     
     if (shot_hb_w > 0) {
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_PARENT_HITBOX, 0);
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HITBOX_TYPE, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HITBOX_TYPE));
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_LIFETIME));
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HITBOX_X, shot_x);
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HITBOX_Y, shot_y);
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_WIDTH, shot_hb_w);
-        set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, HG_HEIGHT, shot_hb_h);
-        for (var i = 9; i <= 57; i++) set_hitbox_value(AT_NSPECIAL, first_index+shot_loops, i, get_hitbox_value(AT_NSPECIAL, hbox_num, i));
+    	
+        set_hitbox_value(atk, first_index+shot_loops, HG_PARENT_HITBOX, 0);
+        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_TYPE, get_hitbox_value(atk, hbox_num, HG_HITBOX_TYPE));
+        set_hitbox_value(atk, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(atk, hbox_num, HG_LIFETIME));
+        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_X, (shot_x-x)*spr_dir);
+        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_Y, (shot_y-y));
+        set_hitbox_value(atk, first_index+shot_loops, HG_WIDTH, shot_hb_w);
+        set_hitbox_value(atk, first_index+shot_loops, HG_HEIGHT, shot_hb_h);
+        for (var i = 9; i <= 57; i++) set_hitbox_value(atk, first_index+shot_loops, i, get_hitbox_value(atk, hbox_num, i));
         
-        shot_hbox = create_hitbox(attack, first_index+shot_loops, x+(shot_x*spr_dir), y+shot_y);
+        var hbox = create_hitbox(atk, first_index+shot_loops, shot_x, shot_y);
+
     }
     
-    // Set up visual
-    var shot_end_x = shot_x+shot_hb_w/2;
-    shot_x = get_hitbox_value(AT_NSPECIAL, 1, HG_HITBOX_X);
-    shot_hb_w = get_hitbox_value(AT_NSPECIAL, 1, HG_WIDTH);
-    
-    var shot_visual = {
-        sp_x : x + (shot_x - shot_hb_w/2)*spr_dir + hsp,
-        sp_y : y + shot_y + vsp - 2, // 1/8/24: y offset patch
-        sp_length : shot_end_x - (shot_x - shot_hb_w/2),
+
+// Creates a shot visual object and adds it to the shot rendering list.
+// edge_width is the length to the point in the edge sprite where it should hit a wall.
+#define create_shot_visual(_x, _y, length, start_index, tile_index, edge_index, edge_width, shot_lifetime, smoke_index, smoke_time_offset, smoke_lifetime)
+	
+	var shot_visual = {
+        sp_x : _x,
+        sp_y : _y,
+        sp_length : length,
         sp_start_index : start_index,
         sp_tile_index : tile_index,
         sp_edge_index : edge_index,
@@ -805,11 +842,19 @@ switch (attack) {
     ds_list_add(nspec_shot_list, shot_visual);
 
 
-// Helper function for above
-#define shot_collision(_x, _y, _w, _h)
-	if (centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false) && head_obj.hittable) return 2; // Note: GML treats 2 as true
-	return centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("par_block"), false) || centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, asset_get("plasma_field_obj"), true);
-    
+// Check whether a given shot length triggered a skull hit.
+#define shot_hit_skull(_x, _y, length, height, hit_vfx)
+	
+	if (head_obj.state == 0 || head_obj.state == 4 || head_obj.state == 5) return;
+	if (head_obj == collision_line(_x+(length*spr_dir), _y-(height/2), _x+(length*spr_dir), _y+(height/2), head_obj, true, true)) {
+		set_head_state(AT_NSPECIAL);
+    	var vfx = spawn_hit_fx(head_obj.x, head_obj.y-30, hit_vfx)
+    	vfx.depth = head_obj.depth-1;
+    	head_obj.shots_absorbed++;
+    	take_damage(player, player, 1)
+	}
+
+
 // used for genesis alt. Differs from normal procedure!
 #define spawn_genesis_intro_sparkle(seed1, seed2, in_x, in_y)
 	var in_sprite = "fire"+string(random_func_2(seed1, 4, true)+1)+"_gen";
@@ -828,6 +873,7 @@ switch (attack) {
         sp_skull_owned : 0,
     };
     ds_list_add(sparkle_list, sparkle);
+
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv
 // DANGER File below this point will be overwritten! Generated defines and macros below.
