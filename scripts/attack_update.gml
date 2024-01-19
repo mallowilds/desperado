@@ -312,6 +312,8 @@ switch (attack) {
         		var vflash = spawn_hit_fx(x, y, vfx_flash)
         		vflash.depth = depth - 1;
         		sound_play(sound_get("desp_sharpen"))
+        		vflash.follow_id = self;
+        		vflash.follow_time = 999;
         	}
             var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
             if (window_time_is(1)) {
