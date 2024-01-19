@@ -46,12 +46,13 @@ if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && !head_o
 move_cooldown[AT_DSPECIAL] = 0;
 move_cooldown[AT_NSPECIAL] = 0;
 
+// Reset seasonal alt
+display_seasonal = is_seasonal;
+
 // Reset HUD
 if (reload_anim_state == 1 || reload_anim_state == 2) {
     reload_anim_state = 0;
     reload_anim_timer = 0;
+    sound_stop(spin_sfx_instance);
+	spin_sfx_instance = noone;
 }
-sound_stop(sound_get("desp_spin"));
-
-// Reset seasonal alt
-display_seasonal = is_seasonal;

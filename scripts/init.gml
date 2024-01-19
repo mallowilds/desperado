@@ -83,6 +83,10 @@ nspec_shot_list = ds_list_create();     // similar particle manager for nspecial
 
 signpost_obj = noone;                   // taunt
 
+spin_sfx_instance = noone;
+bair_sfx_instance = noone;
+whisper_sfx_instance = noone;
+
 // Training mode assets
 draw_skull_grabbox = 0;
 

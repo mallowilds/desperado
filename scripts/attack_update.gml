@@ -63,12 +63,13 @@ switch (attack) {
     
     case AT_JAB:
     	if (window == 7 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
-    		sound_play(sound_get("desp_spin"))
+    		spin_sfx_instance = sound_play(sound_get("desp_spin"));
     		reload_anim_state = 1;
         	reload_anim_timer = 0;
     	}
     	if (window == 9 && window_time_is(floor(13*(has_hit?1:1.5)))) {
-    		sound_stop(sound_get("desp_spin"))
+    		sound_stop(spin_sfx_instance);
+    		spin_sfx_instance = noone;
     		sound_play(sound_get("desp_click"));
     		reload_anim_state = 3;
         	reload_anim_timer = 0;
@@ -133,11 +134,12 @@ switch (attack) {
 			bullet_lost = false;
 			reload_anim_state = 1;
 			reload_anim_timer = 0;
-			sound_play(sound_get("desp_spin"));
+			spin_sfx_instance = sound_play(sound_get("desp_spin"));
 			fstrong_blast_obj = noone;
 		}
 		if (window == 3 && window_time_is(1)) {
-			sound_stop(sound_get("desp_spin"));
+			sound_stop(spin_sfx_instance);
+			spin_sfx_instance = noone;
 			sound_play(sound_get("desp_cointoss"), false, noone, 1)
 			
 			bullet_lost = true;
@@ -194,7 +196,7 @@ switch (attack) {
 
 	case AT_BAIR: 
         if (window == 1 && window_time_is(1)) {
-            sound_play(sound_get("desp_whip"), 0, noone, .8, 1 );
+            bair_sfx_instance = sound_play(sound_get("desp_whip"), 0, noone, .8, 1 );
         }
     	break;
     case AT_EXTRA_1: 
@@ -314,10 +316,10 @@ switch (attack) {
 	        		vflash.depth = depth - 1;
 	        		vflash.follow_id = self
 	        		vflash.follow_time = 1000
+	        		vflash.follow_id = self;
+        			vflash.follow_time = 999;
         		}
         		sound_play(sound_get("desp_sharpen"))
-        		vflash.follow_id = self;
-        		vflash.follow_time = 999;
         	}
             var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
             if (window_time_is(1)) {
@@ -409,7 +411,7 @@ switch (attack) {
 					set_window_value(AT_FSPECIAL, 2, AG_WINDOW_VSPEED, -3)
 				}
 				if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) - 2 {
-					sound_play(asset_get("sfx_spin"));
+					sound_play(asset_get("sfx_spin"))
 				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
 					set_head_state(AT_FSPECIAL);
 					head_obj.visible = true;
@@ -579,6 +581,8 @@ switch (attack) {
         			reload_anim_timer = 0;
         		}
         		
+        		else if (window_time_is(4)) spin_sfx_instance = sound_play(sound_get("desp_spin"));
+        		
         		if (vsp > 4) vsp = 4;
 	            
 	            can_fast_fall = false;
@@ -586,7 +590,7 @@ switch (attack) {
 	            break;
 			
 			case 2:
-				if (window_time_is(1)) sound_play(sound_get("desp_whisper"))
+				if (window_time_is(1)) whisper_sfx_instance = sound_play(sound_get("desp_whisper"));
 				
 				if (vsp > 4) vsp = 4;
 	            can_fast_fall = false;
@@ -595,9 +599,12 @@ switch (attack) {
 			
 			case 3:
 				if (window_time_is(1)) {
-					sound_stop(sound_get("desp_spin"))
-		            sound_play(sound_get("desp_click"))
-		            sound_stop(sound_get("desp_whisper"))
+					sound_stop(spin_sfx_instance);
+					spin_sfx_instance = noone;
+		            sound_stop(whisper_sfx_instance);
+		            whisper_sfx_instance = noone;
+		            
+		            sound_play(sound_get("desp_click"));
 		            
 		            reload_anim_state = 3;
         			reload_anim_timer = 0;
@@ -846,7 +853,7 @@ switch (attack) {
 #define shot_hit_skull(_x, _y, length, height, hit_vfx)
 	
 	if (head_obj.state == 0 || head_obj.state == 4 || head_obj.state == 5) return;
-	if (head_obj == collision_line(_x+(length*spr_dir), _y-(height/2), _x+(length*spr_dir), _y+(height/2), head_obj, true, true)) {
+	if (head_obj == collision_rectangle(_x+(length*spr_dir)-2, _y-(height/2), _x+(length*spr_dir)+2, _y+(height/2), head_obj, true, true)) {
 		set_head_state(AT_NSPECIAL);
     	var vfx = spawn_hit_fx(head_obj.x, head_obj.y-30, hit_vfx)
     	vfx.depth = head_obj.depth-1;

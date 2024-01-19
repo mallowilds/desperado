@@ -25,9 +25,6 @@ make_window(AT_DSPECIAL, 1, //start
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
     AG_WINDOW_ANIM_FRAMES, 2,
-    AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX_FRAME, 4,
-    AG_WINDOW_SFX, sound_get("desp_spin"),
     AG_WINDOW_CUSTOM_GRAVITY, 0.3,
 )
 

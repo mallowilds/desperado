@@ -26,7 +26,8 @@ if state == PS_WAVELAND && state_timer == 0 && !hitpause {
 
 }
 if state == PS_LANDING_LAG && (attack == AT_BAIR || attack == AT_EXTRA_1) {
-    sound_stop(sound_get("desp_whip"));
+    sound_stop(bair_sfx_instance);
+    bair_sfx_instance = noone;
 }
 //#endregion
 
@@ -225,9 +226,7 @@ if (display_seasonal && state != PS_IDLE && state != PS_SPAWN && state != PS_RES
     if hue_offset < 200 {
     	hue_increasing = 1
     }
-    
-    print(hue_offset)
-
+	
     color_rgb=make_color_rgb(  176, 18, 8 ); //input rgb values here, uses rgb to create a gamemaker colour variable
     
     value = (color_get_value(color_rgb)+hue_offset) mod 255; //finds the hue and shifts it
