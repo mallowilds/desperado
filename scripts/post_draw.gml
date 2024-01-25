@@ -46,7 +46,9 @@ for (var i = 0; i < ds_list_size(sparkle_list); i++) {
 shader_end();
 init_shader();
 
-createMask(sprite_get("staticimg"));
+
+// Apply gensis mask
+if (is_genesis) createMask(sprite_get("staticimg"));
 
 
 #define maskHeader()
