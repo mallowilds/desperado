@@ -23,7 +23,7 @@ make_window(AT_TAUNT_GEN, 2,
 
 make_window(AT_TAUNT_GEN, 3,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 4,    // Long enough to wait out buffer
+    AG_WINDOW_LENGTH, 4,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 9,
 )

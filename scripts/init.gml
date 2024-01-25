@@ -93,7 +93,8 @@ whisper_sfx_instance = noone;
 draw_skull_grabbox = 0;
 
 // Special alt detection
-is_seasonal = (get_player_color(player) == 12);
+// (note: synced_var was set to player color in css_update for desync prevention)
+is_seasonal = (get_synced_var(player) == 12);
 seasonal_type = get_match_setting(SET_SEASON);
 display_seasonal = is_seasonal;
 vfx_seasonal = [noone,
@@ -103,7 +104,7 @@ vfx_seasonal = [noone,
                 hit_fx_create(sprite_get("idle_holiday4_die"), 20),
                 ];
 
-is_genesis = (get_player_color(player) == 13);
+is_genesis = (get_synced_var(player) == 13);
 genesis_spawn_player_id = self; // default to self (for training mode)
 gen_image_index = 0;
 

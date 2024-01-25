@@ -45,3 +45,6 @@ if get_player_color(player) == 7 {
     tcolor2 = c_white
     bsubimg = 0
 }
+
+// For sake of desync prevention: store color to the synced_var (used in init.gml)
+set_synced_var(player, get_player_color(player));
