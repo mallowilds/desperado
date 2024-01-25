@@ -91,7 +91,7 @@ createMask(sprite_get("staticimg"));
     draw_set_alpha(0);
     draw_rectangle_color(0, 0, room_width, room_height, c_white, c_white, c_white, c_white, 0);
     draw_set_alpha(1);
-    draw_sprite_ext(sprite_index, image_index, x + draw_x, y + draw_y, spr_dir * (small_sprites + 1), (small_sprites + 1), spr_angle, c_white, .3);
+    draw_sprite_ext(sprite_index, image_index, x + draw_x, y + draw_y, spr_dir * (small_sprites + 1), (small_sprites + 1), spr_angle, c_white, .15);
     maskMidder();
     shader_start();
     draw_sprite_tiled_ext(the_image, 0, 0, 0, .5, .5, c_white, 1);
