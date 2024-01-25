@@ -113,6 +113,8 @@ sprite_change_offset("walljump", 118, 122);
 sprite_change_offset("waveland_skulless", 118, 122);
 sprite_change_offset("waveland", 118, 122);
 
+sprite_change_offset("g_taunt", 118, 122); // TODO: skulless variant
+
 sprite_change_offset("intro", 118, 122);
 sprite_change_offset("fspec", 118, 122);
 sprite_change_offset("fspec_2", 118, 122);

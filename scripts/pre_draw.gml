@@ -45,6 +45,12 @@ if (is_genesis && self == genesis_spawn_player_id && attack == AT_INTRO && state
     draw_sprite_ext(sprite_get("intro_gen"), gen_image_index, other.x-(50*other.spr_dir), other.y, other.spr_dir, 1, 0, c_white, 1);
 }
 
+// Genesis taunt (Giik's genesis effect)
+if (is_genesis && random_func(player+1, 2, 1) == 0 && state == PS_ATTACK_GROUND && attack == AT_TAUNT_GEN && window == 2) {
+    var fs = random_func(player+2, sprite_height-1, 1);
+    draw_sprite_part_ext(sprite_index,image_index,0,fs, abs(sprite_width), random_func(1, 20, 1)+1, (x+(random_func(2, 3, 1)-1)*11) - sprite_get_xoffset(sprite_index)*spr_dir, y+fs - sprite_get_yoffset(sprite_index), spr_dir, 1, image_blend, 0.8);
+}
+
 shader_end();
 
 

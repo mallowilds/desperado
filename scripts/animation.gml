@@ -73,6 +73,15 @@ else if (display_seasonal && (state == PS_IDLE || state == PS_SPAWN || state == 
 else if (is_genesis && (get_gameplay_time() <= 5 || attack == AT_INTRO && state == PS_ATTACK_GROUND && gen_image_index < 13.5)) {
 	sprite_index = sprite_get("null");
 }
+
+else if (is_genesis && state == PS_ATTACK_GROUND && attack == AT_TAUNT_GEN && window == 2) {
+	genesis_flicker_timer++;
+	if (genesis_flicker_timer >= 0) {
+		var r = random_func_2(player, 200 - genesis_flicker_timer, true);
+		if (r == 0) genesis_flicker_timer = -4;
+	}
+	if (genesis_flicker_timer < 0) image_index = 8;
+}
 //#endregion
 
 

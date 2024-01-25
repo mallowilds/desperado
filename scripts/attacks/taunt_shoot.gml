@@ -1,28 +1,31 @@
-// taunt.gml
-// Place sign
+// taunt_shoot.gml
+// Shoot down sign
 
-make_attack(AT_TAUNT,
-    AG_SPRITE, sprite_get("taunt"),
+make_attack(AT_TAUNT_2,
+    AG_SPRITE, sprite_get("taunt_2"),
     AG_NUM_WINDOWS, 2,
     AG_HAS_LANDING_LAG, 3,
     AG_OFF_LEDGE, 0,
     AG_HURTBOX_SPRITE, sprite_get("desp_hurt"),
 )
 
-make_window(AT_TAUNT, 1,
+make_window(AT_TAUNT_2, 1,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 6,
-    AG_WINDOW_ANIM_FRAMES, 2,
+    AG_WINDOW_LENGTH, 18,
+    AG_WINDOW_ANIM_FRAMES, 4,
     AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, asset_get("sfx_zetter_downb"),
-    AG_WINDOW_SFX_FRAME, 5,
+    AG_WINDOW_SFX, sound_get("desp_twirl"),
+    AG_WINDOW_SFX_FRAME, 1,
 ) 
 
-make_window(AT_TAUNT, 2,
+make_window(AT_TAUNT_2, 2,
+    AG_WINDOW_HAS_SFX, 1,
+    AG_WINDOW_SFX, sound_get("desp_cartoonshot"),
+    AG_WINDOW_SFX_FRAME, 1,
     AG_WINDOW_TYPE, 2,
-    AG_WINDOW_LENGTH, 18,
+    AG_WINDOW_LENGTH, 15,
     AG_WINDOW_ANIM_FRAMES, 3,
-    AG_WINDOW_ANIM_FRAME_START, 2,
+    AG_WINDOW_ANIM_FRAME_START, 4,
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

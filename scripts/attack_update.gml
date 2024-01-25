@@ -682,6 +682,37 @@ switch (attack) {
     	
     	break;
     
+    case 49: // AT_TAUNT_GEN
+    
+    	if (window == 1 && window_timer == 1) {
+    		genesis_flicker_timer = 0; // Handled by animation.gml
+    		sound_play(sound_get("gen_intro_2"));
+    	}
+    	
+    	else if (window == 2) {
+    		if (attack_pressed || special_pressed || strong_down || taunt_pressed || shield_pressed || jump_pressed) {
+    			window = 3;
+    			window_timer = 0;
+    			clear_button_buffer(PC_ATTACK_PRESSED);		// yes this is necessary :(
+    			clear_button_buffer(PC_SPECIAL_PRESSED);
+    			clear_button_buffer(PC_STRONG_PRESSED);
+    			clear_button_buffer(PC_JUMP_PRESSED);
+    			clear_button_buffer(PC_SHIELD_PRESSED);
+    			clear_button_buffer(PC_TAUNT_PRESSED);
+    		}
+    		
+    		if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
+    			window_timer = 0;
+    		}
+    	}
+    	
+    	else if (window == 3) {
+    		if (window_timer == 1) genesis_sfx_instance = sound_play(sound_get("gen_intro_2"));
+    		if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH)) sound_stop(genesis_sfx_instance);
+    	}
+    	
+    	break;
+    
     //#endregion
     
     

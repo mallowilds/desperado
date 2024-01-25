@@ -1,35 +1,31 @@
-// taunt.gml
-/*
-Taunt is one of the moves that i want the chamber to spin with.
+// taunt_genesis.gml
 
-
-*/
-
-make_attack(AT_TAUNT_2,
-    AG_SPRITE, sprite_get("taunt_2"),
-    AG_NUM_WINDOWS, 2,
+make_attack(AT_TAUNT_GEN,
+    AG_SPRITE, sprite_get("g_taunt"),
+    AG_NUM_WINDOWS, 3,
     AG_HAS_LANDING_LAG, 3,
     AG_OFF_LEDGE, 0,
-    AG_HURTBOX_SPRITE, asset_get("ex_guy_hurt_box"),
+    AG_HURTBOX_SPRITE, sprite_get("desp_hurt"),
 )
 
-make_window(AT_TAUNT_2, 1,
+make_window(AT_TAUNT_GEN, 1,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 18,
+    AG_WINDOW_LENGTH, 12,
     AG_WINDOW_ANIM_FRAMES, 4,
-    AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, sound_get("desp_twirl"),
-    AG_WINDOW_SFX_FRAME, 1,
 ) 
 
-make_window(AT_TAUNT_2, 2,
-    AG_WINDOW_HAS_SFX, 1,
-    AG_WINDOW_SFX, sound_get("desp_cartoonshot"),
-    AG_WINDOW_SFX_FRAME, 1,
-    AG_WINDOW_TYPE, 2,
-    AG_WINDOW_LENGTH, 15,
-    AG_WINDOW_ANIM_FRAMES, 3,
+make_window(AT_TAUNT_GEN, 2,
+    AG_WINDOW_TYPE, 1,
+    AG_WINDOW_LENGTH, 28,
+    AG_WINDOW_ANIM_FRAMES, 4,
     AG_WINDOW_ANIM_FRAME_START, 4,
+)
+
+make_window(AT_TAUNT_GEN, 3,
+    AG_WINDOW_TYPE, 1,
+    AG_WINDOW_LENGTH, 4,    // Long enough to wait out buffer
+    AG_WINDOW_ANIM_FRAMES, 1,
+    AG_WINDOW_ANIM_FRAME_START, 9,
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

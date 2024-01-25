@@ -50,8 +50,10 @@ AG_WINDOW_SKULL_GRABBOX_Y = 42;
 AG_WINDOW_SKULL_GRABBOX_W = 43;
 AG_WINDOW_SKULL_GRABBOX_H = 44;
 AG_MUNO_ATTACK_NAME = 70; // Woodcock compat, can be freely changed
-AG_MUNO_ATTACK_MISC = 71
-HG_MUNO_HITBOX_MISC_ADD = 72
+AG_MUNO_ATTACK_MISC = 71;
+HG_MUNO_HITBOX_MISC_ADD = 72;
+AT_TAUNT_GEN = 49; // Unfortunately needs to be updated manually in attack_update if changed
+
 // Character-specific assets
 num_bullets = 0;                        // 0-6
 bullet_mult = 0.125;                    // multiplier per bullet. Constant value
