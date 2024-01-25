@@ -53,7 +53,7 @@ with other_player_id {
     draw_set_alpha(0);
     draw_rectangle_color(0, 0, room_width, room_height, c_white, c_white, c_white, c_white, 0);
     draw_set_alpha(1);
-    draw_sprite_ext(sprite_get("intro_gen"), gen_image_index, other.x-(50*other.spr_dir), other.y, other.spr_dir, 1, 0, c_white, .3);
+    draw_sprite_ext(sprite_get("intro_gen"), gen_image_index, other.x-(50*other.spr_dir), other.y, other.spr_dir, 1, 0, c_white, .15);
     maskMidder();
     shader_start();
     draw_sprite_tiled_ext(the_image, 0, 0, 0, .5, .5, c_white, 1);
