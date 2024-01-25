@@ -315,9 +315,7 @@ switch (attack) {
 	        		var vflash = spawn_hit_fx(x, y, vfx_flash)
 	        		vflash.depth = depth - 1;
 	        		vflash.follow_id = self
-	        		vflash.follow_time = 1000
-	        		vflash.follow_id = self;
-        			vflash.follow_time = 999;
+	        		vflash.follow_time = 1000;
         		}
         		sound_play(sound_get("desp_sharpen"))
         	}
