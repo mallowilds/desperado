@@ -55,7 +55,7 @@ make_hitbox(AT_FSPECIAL_2, 1,
 
     HG_HIT_SFX, asset_get("sfx_blow_medium1"),
     
-    HG_PROJECTILE_SPRITE, sprite_get("skullatk"),
+    HG_PROJECTILE_SPRITE, sprite_get(is_genesis ? "vfx_skullatk_gen" : "skullatk"),
     HG_PROJECTILE_ANIM_SPEED, 1/2,
     HG_PROJECTILE_DESTROY_EFFECT, vfx_null,
     HG_PROJECTILE_MASK, -1,
@@ -101,36 +101,6 @@ make_hitbox(AT_FSPECIAL_2, 2,
     HG_VISUAL_EFFECT, vfx_smog,
     HG_HIT_PARTICLE_NUM, 1,
 
-)
-
-// Visual (GENESIS)
-make_hitbox(AT_FSPECIAL_2, 1,
-    HG_HITBOX_TYPE, 2,
-    HG_LIFETIME, 12,
-    
-    HG_WIDTH, 0,
-    HG_HEIGHT, 0,
-    HG_PRIORITY, -1,
-    HG_DAMAGE, 0,
-    HG_ANGLE, 45,
-    HG_BASE_KNOCKBACK, 1,
-    HG_KNOCKBACK_SCALING, .1,
-
-    HG_BASE_HITPAUSE, 1,
-    HG_HITPAUSE_SCALING, .1,
-
-    HG_HIT_SFX, asset_get("sfx_blow_medium1"),
-    
-    HG_PROJECTILE_SPRITE, sprite_get("vfx_skullatk_gen"),
-    HG_PROJECTILE_ANIM_SPEED, 1/2,
-    HG_PROJECTILE_DESTROY_EFFECT, vfx_null,
-    HG_PROJECTILE_MASK, -1,
-    HG_PROJECTILE_IS_TRANSCENDENT, 1,
-    HG_PROJECTILE_ENEMY_BEHAVIOR, 1,
-    HG_PROJECTILE_GROUND_BEHAVIOR, 1,
-    HG_PROJECTILE_WALL_BEHAVIOR, 1,
-    HG_PROJECTILE_UNBASHABLE, 1,
-    HG_PROJECTILE_DOES_NOT_REFLECT, 1,
 )
 
 // #region vvv LIBRARY DEFINES AND MACROS vvv

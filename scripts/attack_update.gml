@@ -579,7 +579,7 @@ switch (attack) {
         			reload_anim_timer = 0;
         		}
         		
-        		else if (window_time_is(4)) spin_sfx_instance = sound_play(sound_get("desp_spin"));
+        		else if (window_time_is(2)) spin_sfx_instance = sound_play(sound_get("desp_spin"));
         		
         		if (vsp > 4) vsp = 4;
 	            
@@ -632,6 +632,7 @@ switch (attack) {
 		            window = 1;
 		            window_timer = 4;
 		            
+		            spin_sfx_instance = sound_play(sound_get("desp_spin"));
 		            reload_anim_state = 1;
         			reload_anim_timer = 0;
 		        }
