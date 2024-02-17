@@ -269,14 +269,22 @@ switch (attack) {
         		fast_falling = false;
         		
         		if (instance_exists(grabbed_player_obj)) {
-    				grabbed_player_obj.x += x + (40*spr_dir) + hsp;
-    				grabbed_player_obj.x /= 2;
-    				grabbed_player_obj.y += y - 20 + vsp;
-    				grabbed_player_obj.y /= 2;
-    				grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
-    				grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
-    				grabbed_player_obj.hitstop++;
-    				grabbed_player_obj.fall_through = true;
+        			
+        			if (grabbed_player_obj.state = PS_DEAD || grabbed_player_obj.state = PS_RESPAWN) {
+        				grabbed_player_obj = noone;
+        			}
+        			
+        			else {
+        				grabbed_player_obj.x += x + (40*spr_dir) + hsp;
+	    				grabbed_player_obj.x /= 2;
+	    				grabbed_player_obj.y += y - 20 + vsp;
+	    				grabbed_player_obj.y /= 2;
+	    				grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
+	    				grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
+	    				grabbed_player_obj.hitstop++;
+	    				grabbed_player_obj.fall_through = true;
+        			}
+    				
     			}
         		
         		if (skull_grabbed && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
@@ -482,12 +490,20 @@ switch (attack) {
     			do_skull_grabbox(get_hitbox_value(AT_USPECIAL, 1, HG_BASE_HITPAUSE), asset_get("sfx_blow_medium3"));
     			
     			if (instance_exists(grabbed_player_obj)) {
-    				grabbed_player_obj.x = x + (36*spr_dir) + hsp;
-    				grabbed_player_obj.y = y - 54 + vsp;
-    				grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
-    				grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
-    				grabbed_player_obj.fall_through = true;
-    				grabbed_player_obj.hitstop++;
+    				
+    				if (grabbed_player_obj.state = PS_DEAD || grabbed_player_obj.state = PS_RESPAWN) {
+        				grabbed_player_obj = noone;
+        			}
+        			
+        			else {
+	    				grabbed_player_obj.x = x + (36*spr_dir) + hsp;
+	    				grabbed_player_obj.y = y - 54 + vsp;
+	    				grabbed_player_obj.hurtboxID.x = grabbed_player_obj.x;
+	    				grabbed_player_obj.hurtboxID.y = grabbed_player_obj.y;
+	    				grabbed_player_obj.fall_through = true;
+	    				grabbed_player_obj.hitstop++;
+        			}
+	    			
     			}
     			
     			if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH)) && (instance_exists(grabbed_player_obj) || skull_grabbed)) {
