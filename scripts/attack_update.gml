@@ -2,8 +2,9 @@
 // https://rivalslib.com/workshop_guide/programming/reference/scripts/event_scripts.html#every-frame
 // Runs every frame while your character is attacking.
 
-//B - Reversals
-if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || attack == AT_USPECIAL || attack == AT_DAIR){
+// B - Reversals
+// (2/21/2024: DAir is now handled manually, see below)
+if (attack == AT_NSPECIAL || attack == AT_FSPECIAL || attack == AT_DSPECIAL || attack == AT_USPECIAL){
     trigger_b_reverse()
 }
 
@@ -228,6 +229,15 @@ switch (attack) {
 	        	if (vsp > -1.5) vsp = -1.5;
 	        	skull_grabbed = false;
 	        	grabbed_player_obj = noone
+	        	
+		        if (window_timer <= 6){
+		        	var dir = (right_down - left_down) + (right_stick_pressed - left_stick_pressed);
+		        	dir = clamp(dir, -1, 1);
+		            if (dir != 0 && dir == -spr_dir){
+		                spr_dir = dir;
+		            }
+		        }
+	        	
 	        	// Accomodating for script order issues \/
 	        	if (window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) draw_skull_grabbox = 2;
 	        	
