@@ -909,7 +909,31 @@ old_vsp = vsp;
 	var edge_width = 38;
 	var smoke_index = sprite_get("nspec_blast_smoke");
 	
-	var shot_length = 1600; // no collision yet
+	var shot_length = 0; // wait for it...
+	if (angle <= 90) {
+		var radian_angle = pi * angle / 180
+		var top_bz_len = (y - get_stage_data(SD_TOP_BLASTZONE_Y)) / sin(radian_angle);
+		var right_bz_len = (get_stage_data(SD_RIGHT_BLASTZONE_X) - x) / cos(radian_angle);
+		var shot_length = min(top_bz_len, right_bz_len);
+	}
+	else if (angle <= 180) {
+		var radian_angle = pi * (180 - angle) / 180;
+		var top_bz_len = (y - get_stage_data(SD_TOP_BLASTZONE_Y)) / sin(radian_angle);
+		var left_bz_len = (x - get_stage_data(SD_LEFT_BLASTZONE_X)) / cos(radian_angle);
+		var shot_length = min(top_bz_len, left_bz_len);
+	}
+	else if (angle <= 270) {
+		var radian_angle = pi * (angle - 180) / 180;
+		var bottom_bz_len = (get_stage_data(SD_BOTTOM_BLASTZONE_Y) - y) / sin(radian_angle);
+		var left_bz_len = (x - get_stage_data(SD_LEFT_BLASTZONE_X)) / cos(radian_angle);
+		var shot_length = min(bottom_bz_len, left_bz_len); 
+	}
+	else {
+		var radian_angle = pi * (360 - angle) / 180;;
+		var bottom_bz_len = (get_stage_data(SD_BOTTOM_BLASTZONE_Y) - y) / sin(radian_angle);
+		var right_bz_len = (get_stage_data(SD_RIGHT_BLASTZONE_X) - x) / cos(radian_angle);
+		var shot_length = min(bottom_bz_len, right_bz_len); 
+	}
 	
 	shot_visual = {
         sp_x : _x,

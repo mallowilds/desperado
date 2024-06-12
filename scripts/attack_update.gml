@@ -830,7 +830,10 @@ switch (attack) {
 		
 	}
 	
-	return (spr_dir == -1) ? lower_bound : upper_bound;
+	var result = (spr_dir == -1) ? lower_bound : upper_bound;
+	if (spr_dir == 1) result = min(result, get_stage_data(SD_RIGHT_BLASTZONE_X) - x);
+	else result = min(result, x - get_stage_data(SD_LEFT_BLASTZONE_X));
+	return result;
 
 
 // Creates multiple copies of a hitbox to fill a certain length.

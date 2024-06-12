@@ -4,38 +4,50 @@
 
 shader_start();
 
+
 // NSpecial shots
 for (var i = 0; i < ds_list_size(nspec_shot_list); i++) {
     var sp = ds_list_find_value(nspec_shot_list, i);
+    var _x = sp.sp_x;
+    var _y = sp.sp_y;
+    var _spr_dir = sp.sp_spr_dir;
     
     var smoke_start_time = sp.sp_smoke_time_offset + sp.sp_shot_lifetime
     if (sp.sp_lifetime >= smoke_start_time) {
         
-        var sp_image_index = (sp.sp_lifetime-smoke_start_time) * (sprite_get_number(sp.sp_smoke_index) / sp.sp_smoke_lifetime);
-        var sp_start_width = min(sprite_get_width(sp.sp_smoke_index), sp.sp_length)
-        var sp_x_near = sp.sp_x+(sp.sp_spr_dir*sprite_get_xoffset(sp.sp_smoke_index))
-        var sp_x_far = sp.sp_x+(sp.sp_spr_dir*sp.sp_length)
-        var tile_tl_x = (sp_x_far < sp.sp_x ? sp_x_far : sp_x_near);
-        var tile_br_x = (sp_x_far > sp.sp_x ? sp_x_far : sp_x_near);
+        var smoke_sprite_index = sp.sp_smoke_index;
+        var smoke_y_offset = sprite_get_yoffset(smoke_sprite_index);
+        
+        var sp_image_index = (sp.sp_lifetime-smoke_start_time) * (sprite_get_number(smoke_sprite_index) / sp.sp_smoke_lifetime);
+        var sp_start_width = min(sprite_get_width(smoke_sprite_index), sp_length)
+        var sp_x_near = _x+(_spr_dir*sprite_get_xoffset(smoke_sprite_index))
+        var sp_x_far = _x+(_spr_dir*sp_length)
+        var tile_tl_x = (sp_x_far < _x ? sp_x_far : sp_x_near);
+        var tile_br_x = (sp_x_far > _x ? sp_x_far : sp_x_near);
 
-        draw_sprite_tiled_area(sp.sp_smoke_index, sp_image_index, sp_x_near, sp.sp_y-sprite_get_yoffset(sp.sp_smoke_index), tile_tl_x, sp.sp_y-sprite_get_yoffset(sp.sp_smoke_index), tile_br_x, sp.sp_y-sprite_get_yoffset(sp.sp_smoke_index)+sprite_get_height(sp.sp_smoke_index));
+        draw_sprite_tiled_area(smoke_sprite_index, sp_image_index, sp_x_near, _y-smoke_y_offset, tile_tl_x, _y-smoke_y_offset, tile_br_x, _y-smoke_y_offset+sprite_get_height(smoke_sprite_index));
 
     }
     
     if (sp.sp_lifetime < sp.sp_shot_lifetime) {
-        var sp_image_index = sp.sp_lifetime * (sprite_get_number(sp.sp_tile_index) / sp.sp_shot_lifetime);
         
-        var sp_start_width = min(sprite_get_width(sp.sp_start_index), sp.sp_length)
-        var sp_x_far = sp.sp_x+(sp.sp_spr_dir*(sp.sp_length-sp.sp_edge_width))
-        var tile_tl_x = (sp_x_far < sp.sp_x ? sp_x_far : sp.sp_x+(sp.sp_spr_dir*sprite_get_width(sp.sp_start_index)));
-        var tile_br_x = (sp_x_far > sp.sp_x ? sp_x_far : sp.sp_x+(sp.sp_spr_dir*sprite_get_width(sp.sp_start_index)));
+        var tile_sprite_index = sp.sp_tile_index;
+        var start_sprite_index = sp.sp_start_index;
+        var sp_length = sp.sp_length;
+        
+        var sp_image_index = sp.sp_lifetime * (sprite_get_number(tile_sprite_index) / sp.sp_shot_lifetime);
+        var sp_start_width = min(sprite_get_width(start_sprite_index), sp_length)
+        var sp_x_far = _x+(_spr_dir*(sp_length-sp.sp_edge_width))
+        var tile_tl_x = (sp_x_far < _x ? sp_x_far : _x+(_spr_dir*sprite_get_width(start_sprite_index)));
+        var tile_br_x = (sp_x_far > _x ? sp_x_far : _x+(_spr_dir*sprite_get_width(start_sprite_index)));
         
         // Draw priority: tile < end < start
-        if (sp.sp_length > 44) {
-            draw_sprite_tiled_area(sp.sp_tile_index, sp_image_index, sp.sp_x, sp.sp_y-sprite_get_yoffset(sp.sp_tile_index), tile_tl_x, sp.sp_y-sprite_get_yoffset(sp.sp_tile_index), tile_br_x, sp.sp_y+(sprite_get_height(sp.sp_tile_index)/2))
-            draw_sprite_ext(sp.sp_edge_index, sp_image_index, sp_x_far, sp.sp_y, sp.sp_spr_dir, 1, 0, c_white, 1);
+        if (sp_length > 44) {
+            draw_sprite_tiled_area(tile_sprite_index, sp_image_index, _x, _y-sprite_get_yoffset(tile_sprite_index), tile_tl_x, _y-sprite_get_yoffset(tile_sprite_index), tile_br_x, _y+(sprite_get_height(tile_sprite_index)/2))
+            draw_sprite_ext(sp.sp_edge_index, sp_image_index, sp_x_far, _y, _spr_dir, 1, 0, c_white, 1);
         }
-        draw_sprite_part_ext(sp.sp_start_index, sp_image_index, 0, 0, sp_start_width, sprite_get_height(sp.sp_start_index), sp.sp_x, sp.sp_y-sprite_get_yoffset(sp.sp_start_index), sp.sp_spr_dir, 1, c_white, 1);
+        draw_sprite_part_ext(start_sprite_index, sp_image_index, 0, 0, sp_start_width, sprite_get_height(start_sprite_index), _x, _y-sprite_get_yoffset(start_sprite_index), _spr_dir, 1, c_white, 1);
+        
     }
     
 }
@@ -69,32 +81,32 @@ shader_end();
     {
         var sprite,subimg,xx,yy,x1,y1,x2,y2;
         sprite = argument0;
-        subimg = argument1; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
-        xx = argument2; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
-        yy = argument3; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
-        x1 = argument4; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
-        y1 = argument5; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
-        x2 = argument6; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
-        y2 = argument7; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+        subimg = argument1;
+        xx = argument2;
+        yy = argument3;
+        x1 = argument4;
+        y1 = argument5;
+        x2 = argument6;
+        y2 = argument7;
      
         var sw,sh,i,j,jj,left,top,width,height,X,Y;
         sw = sprite_get_width(sprite);
-        sh = sprite_get_height(sprite); // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+        sh = sprite_get_height(sprite);
      
         i = x1-((x1 mod sw) - (xx mod sw)) - sw*((x1 mod sw)<(xx mod sw));
-        j = y1-((y1 mod sh) - (yy mod sh)) - sh*((y1 mod sh)<(yy mod sh));  // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
-        jj = j; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
-     
+        j = y1-((y1 mod sh) - (yy mod sh)) - sh*((y1 mod sh)<(yy mod sh)); 
+        jj = j;
+        
         for(i=i; i<=x2; i+=sw) {
             for(j=j; j<=y2; j+=sh) {
      
                 if(i <= x1) left = x1-i;
                 else left = 0;
-                X = i+left; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+                X = i+left;
      
                 if(j <= y1) top = y1-j;
                 else top = 0;
-                Y = j+top; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+                Y = j+top;
      
                 if(x2 <= i+sw) width = ((sw)-(i+sw-x2)+1)-left;
                 else width = sw-left;
@@ -103,9 +115,11 @@ shader_end();
                 else height = sh-top;
      
                 draw_sprite_part(sprite,subimg,left,top,width,height,X,Y);
+
             }
-            j = jj; // WARN: Possible Desync. Object var set in draw script. Consider using `var` or creating constants in `init.gml`.
+            j = jj;
         }
+        
         return 0;
     }
 

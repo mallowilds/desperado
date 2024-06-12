@@ -55,11 +55,13 @@ if (shot_visual != noone) {
     var smoke_image_index = (shot_visual.sp_lifetime-smoke_start_time) * (sprite_get_number(shot_visual.sp_smoke_index) / shot_visual.sp_smoke_lifetime);
     
     if (shot_visual.sp_lifetime >= smoke_start_time) {
+        var i = 0;
         while (sprite_get_width(shot_visual.sp_smoke_index) < length_remaining) {
             draw_sprite_ext(shot_visual.sp_smoke_index, smoke_image_index, cur_x, cur_y, 1, 1, shot_visual.sp_angle, c_white, 1);
             length_remaining -= sprite_get_width(shot_visual.sp_smoke_index);
             cur_x += lengthdir_x(sprite_get_width(shot_visual.sp_smoke_index), shot_visual.sp_angle);
             cur_y += lengthdir_y(sprite_get_width(shot_visual.sp_smoke_index), shot_visual.sp_angle);
+            i++;
         }
         var part_x_adj = lengthdir_x(sprite_get_xoffset(shot_visual.sp_smoke_index), shot_visual.sp_angle) + lengthdir_x(sprite_get_yoffset(shot_visual.sp_smoke_index), shot_visual.sp_angle+90);
         var part_y_adj = lengthdir_y(sprite_get_xoffset(shot_visual.sp_smoke_index), shot_visual.sp_angle) + lengthdir_y(sprite_get_yoffset(shot_visual.sp_smoke_index), shot_visual.sp_angle+90);
