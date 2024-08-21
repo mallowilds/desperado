@@ -77,8 +77,10 @@ switch (get_match_setting(SET_SEASON)) {
     set_color_profile_slot( 12, 6, 255, 102, 0 ); //Fireyellow
     set_color_profile_slot( 12, 7, 43, 58, 92 ); //Gun
     set_color_profile_slot( 12, 8, 27, 37, 59 ); //Firedark
-    set_character_color_shading(0, 3);
-    set_character_color_shading(1, 3);
+	if (get_player_color(player) == 12 || get_player_name(player) == "PKRUS") {
+		set_character_color_shading(0, 3);
+		set_character_color_shading(1, 3);
+	}
     break;
   case 4: // christmas
     // Mr. 10 Below
