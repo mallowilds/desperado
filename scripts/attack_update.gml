@@ -183,7 +183,8 @@ switch (attack) {
             }
             if window_timer == get_window_value(AT_NAIR, 3, AG_WINDOW_LENGTH) && !hitpause {
                 attack_end();
-                set_state(PS_IDLE_AIR)
+                if (was_parried) set_state(PS_PRATFALL);
+                else set_state(PS_IDLE_AIR);
             }
         }
     	break;
