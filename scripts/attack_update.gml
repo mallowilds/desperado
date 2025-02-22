@@ -794,14 +794,13 @@ switch (attack) {
 // edge_width is the length to the point in the edge sprite where it should hit a wall.
 #define create_nspec_shot(hbox_num, start_index, tile_index, edge_index, edge_width, shot_lifetime, smoke_index, smoke_time_offset, smoke_lifetime)
 	
-	var _w = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_WIDTH);
     var _h = get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HEIGHT);
-    var _x = x + spr_dir*(get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HITBOX_X)-floor(_w/2));
+    var _x = x + spr_dir*nspec_x_pos;
 	var _y = y + get_hitbox_value(AT_NSPECIAL, hbox_num, HG_HITBOX_Y);
 	
-	var length = get_shot_length(_x, _y, 16*_w, _h);
+	var length = get_shot_length(_x, _y, 960, _h);
 	
-	create_shot_hitbox(_x, _y, length, AT_NSPECIAL, hbox_num);
+	create_shot_hitbox(nspec_x_pos, length, AT_NSPECIAL, hbox_num);
 	create_shot_visual(_x+hsp, _y+vsp-2, length, start_index, tile_index, edge_index, edge_width, shot_lifetime, smoke_index, smoke_time_offset, smoke_lifetime);
 	shot_hit_skull(_x, _y, length, _h, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_VISUAL_EFFECT));
 	
@@ -810,81 +809,43 @@ switch (attack) {
 // (_x, _y) denotes left-center position of rectangle (assuming spr_dir == 1).
 #define get_shot_length(_x, _y, max_length, height)
 	
+	if (spr_dir == 1) max_length = min(max_length, get_stage_data(SD_RIGHT_BLASTZONE_X) - x);
+	else max_length = min(max_length, x - get_stage_data(SD_LEFT_BLASTZONE_X));
+	
 	var lower_bound = 0;
 	var upper_bound = max_length;
+	var loops = log2(max_length);
 	
-	while (abs(lower_bound - upper_bound) > 1) {
-		
-		var middle_bound = floor((lower_bound+upper_bound)/2)
-		var left_pos = min(_x, _x+(middle_bound*spr_dir));
-		var right_pos = max(_x, _x+(middle_bound*spr_dir));
+	for (i = 0; i <= loops; i++) {
+		var position = (lower_bound+upper_bound)/2;
+		var x1 = min(_x, _x+(position*spr_dir));
+		var x2 = max(_x, _x+(position*spr_dir));
+		var y1 = _y-(height/2);
+		var y2 = _y+(height/2);
 		
 		var is_colliding = false;
-		is_colliding |= noone != collision_rectangle(left_pos, _y-(height/2), right_pos, _y+(height/2), asset_get("par_block"), false, false);
-		is_colliding |= noone != collision_rectangle(left_pos, _y-(height/2), right_pos, _y+(height/2), asset_get("obj_clairen_field"), true, false);
-		is_colliding |= (noone != collision_rectangle(left_pos, _y-(height/2), right_pos, _y+(height/2), head_obj, true, false)
-						&& head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5
-						);
+		is_colliding |= noone != collision_rectangle(x1, y1, x2, y2, asset_get("par_block"), false, false);
+		is_colliding |= noone != collision_rectangle(x1, y1, x2, y2, asset_get("obj_clairen_field"), true, false);
+		is_colliding |= head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 &&
+						noone != collision_rectangle(x1, y1, x2, y2, head_obj, true, false);
 		
-		if (is_colliding) upper_bound = middle_bound;
-		else lower_bound = middle_bound;
-		
+		if (is_colliding) upper_bound = position;
+		else lower_bound = position;
 	}
 	
-	var result = (spr_dir == -1) ? lower_bound : upper_bound;
-	if (spr_dir == 1) result = min(result, get_stage_data(SD_RIGHT_BLASTZONE_X) - x);
-	else result = min(result, x - get_stage_data(SD_LEFT_BLASTZONE_X));
-	return result;
+	return round(position);
 
 
-// Creates multiple copies of a hitbox to fill a certain length.
-// Starting position is (_x, _y), denoting the left-center of the first hitbox (assuming spr_dir == 1).
-#define create_shot_hitbox(_x, _y, length, atk, hbox_num)
-	
-	var shot_loops = 0;
-	var first_index = get_num_hitboxes(atk)+1;
-	var shot_hb_w = get_hitbox_value(atk, hbox_num, HG_WIDTH);
-    var shot_hb_h = get_hitbox_value(atk, hbox_num, HG_HEIGHT);
-    var shot_x = _x + floor(shot_hb_w/2)*spr_dir;
-	var shot_y = _y;
-	
-	// Do full-size hitboxes
-	while ((shot_loops+1)*shot_hb_w <= length) {
-        
-        set_hitbox_value(atk, first_index+shot_loops, HG_PARENT_HITBOX, hbox_num);
-        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_TYPE, get_hitbox_value(atk, hbox_num, HG_HITBOX_TYPE));
-        set_hitbox_value(atk, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(atk, hbox_num, HG_LIFETIME));
-        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_X, (shot_x-x)*spr_dir);
-        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_Y, (shot_y-y));
-        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_GROUP, get_hitbox_value(atk, hbox_num, HG_HITBOX_GROUP));
-        
-        create_hitbox(atk, first_index+shot_loops, shot_x, shot_y);
-        
-        shot_loops++;
-        shot_x += shot_hb_w*spr_dir;
-        
-    }
+// Lengthens a hitbox to match the given length, then spawns it.
+// Places the leftmost edge at _x (assuming spr_dir == 1).
+#define create_shot_hitbox(_x, length, atk, hbox_num)
+
+    var shot_x = _x + ceil(length/2);
+    set_hitbox_value(atk, hbox_num, HG_HITBOX_X, shot_x);
+    set_hitbox_value(atk, hbox_num, HG_WIDTH, length);
+    var shot_y = get_hitbox_value(atk, hbox_num, HG_HITBOX_Y);
     
-    // Do end hitbox
-    shot_x -= round(shot_hb_w*spr_dir) / 2;
-    shot_hb_w = length - ((shot_loops)*shot_hb_w) + 2; // extend by 1 on each side to account for destructible terrain (e.g. kragg pillar)
-    if (shot_hb_w % 2 == 1) shot_x += spr_dir;	// hitboxes can't have non-integer widths, so shift outward by 1 to account for the difference
-    shot_x += (floor(shot_hb_w/2) * spr_dir);
-    
-    if (shot_hb_w > 0) {
-    	
-        set_hitbox_value(atk, first_index+shot_loops, HG_PARENT_HITBOX, 0);
-        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_TYPE, get_hitbox_value(atk, hbox_num, HG_HITBOX_TYPE));
-        set_hitbox_value(atk, first_index+shot_loops, HG_LIFETIME, get_hitbox_value(atk, hbox_num, HG_LIFETIME));
-        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_X, (shot_x-x)*spr_dir);
-        set_hitbox_value(atk, first_index+shot_loops, HG_HITBOX_Y, (shot_y-y));
-        set_hitbox_value(atk, first_index+shot_loops, HG_WIDTH, shot_hb_w);
-        set_hitbox_value(atk, first_index+shot_loops, HG_HEIGHT, shot_hb_h);
-        for (var i = 9; i <= 57; i++) set_hitbox_value(atk, first_index+shot_loops, i, get_hitbox_value(atk, hbox_num, i));
-        
-        var hbox = create_hitbox(atk, first_index+shot_loops, shot_x, shot_y);
-
-    }
+    create_hitbox(atk, hbox_num, x+(shot_x*spr_dir), y+shot_y);
     
 
 // Creates a shot visual object and adds it to the shot rendering list.

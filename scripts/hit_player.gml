@@ -126,9 +126,14 @@ if atk == AT_UAIR {
 }
 if atk == AT_NSPECIAL {
 	if hbox == 1 {
+		var _y = round(lerp(my_hitboxID.y, hit_player_obj.y-hit_player_obj.char_height*0.5, 0.8));
+		spawn_hit_fx(hit_player_obj.x, _y, vfx_bullseye_small);
 		sound_play(sound_get("hit_p00_a"))
+		
 	}
 	if hbox == 2 {
+		var _y = round(lerp(my_hitboxID.y, hit_player_obj.y-hit_player_obj.char_height*0.5, 0.8));
+		spawn_hit_fx(hit_player_obj.x, _y, vfx_bullseye);
 		sound_play(sound_get("desp_heavy_hit"))
 		sound_play(asset_get("sfx_mol_bat_whack"))
 	}
@@ -139,15 +144,15 @@ if atk == AT_FSTRONG_2 && hbox == 2 {
 //#endregion
 
 
-//#region Hit FX management
+//#region Generalized HFX depth adjusts
 with hit_fx_obj {
 	if player_id == other.id {
         if hit_fx == other.vfx_bone_large {
             depth = other.depth+1
         }
-        if hit_fx == other.vfx_bullseye {
-           // depth = other.depth-1
-        }
+        /*if hit_fx == other.vfx_bullseye {
+           depth = other.depth-1
+        }*/
     }
 }
 //#endregion

@@ -55,18 +55,20 @@ make_window(AT_NSPECIAL, 9,
 )
 
 
-set_num_hitboxes(AT_NSPECIAL, 3);
+set_num_hitboxes(AT_NSPECIAL, 0);
+
+nspec_x_pos = 76;
 
 // NSpec multihit
 make_hitbox(AT_NSPECIAL, 1,
     HG_HITBOX_TYPE, 1,
-    //HG_WINDOW, 2,
-    //HG_WINDOW_CREATION_FRAME, 0,
-    HG_LIFETIME, 1,
+    HG_WINDOW, 2, // Note: spawned manually
+    HG_WINDOW_CREATION_FRAME, 0,
+    HG_LIFETIME, 3,
 
-    HG_HITBOX_X, 106,
+    HG_HITBOX_X, 106, // Note: overwriten; set left-most position above
     HG_HITBOX_Y, -58,
-    HG_WIDTH, 60,
+    HG_WIDTH, 60, // Note: overwritten to maximize length
     HG_HEIGHT, 40,
     HG_SHAPE, 1,
     HG_HITBOX_GROUP, 1,
@@ -84,7 +86,7 @@ make_hitbox(AT_NSPECIAL, 1,
     HG_SDI_MULTIPLIER, 0.01,
     HG_EXTENDED_PARRY_STUN, 1,
 
-    HG_VISUAL_EFFECT, vfx_bullseye_small,
+    HG_VISUAL_EFFECT, 1, // Spawned manually for positioning reasons
     HG_VISUAL_EFFECT_X_OFFSET, 32,
     HG_VISUAL_EFFECT_Y_OFFSET, 5,
     HG_HIT_SFX, asset_get("sfx_blow_weak1"),
@@ -94,13 +96,13 @@ make_hitbox(AT_NSPECIAL, 1,
 // NSpec finisher
 make_hitbox(AT_NSPECIAL, 2,
     HG_HITBOX_TYPE, 1,
-    //HG_WINDOW, 3,
-    //HG_WINDOW_CREATION_FRAME, 0,
-    HG_LIFETIME, 1,
+    HG_WINDOW, 3, // Note: spawned manually
+    HG_WINDOW_CREATION_FRAME, 0,
+    HG_LIFETIME, 3,
 
-    HG_HITBOX_X, 106,
+    HG_HITBOX_X, 106, // Note: overwriten; set left-most position above
     HG_HITBOX_Y, -58,
-    HG_WIDTH, 60,
+    HG_WIDTH, 60, // Note: overwritten to maximize length
     HG_HEIGHT, 40,
     HG_SHAPE, 1,
     HG_HITBOX_GROUP, 2,
@@ -117,7 +119,7 @@ make_hitbox(AT_NSPECIAL, 2,
     //HG_HITSTUN_MULTIPLIER, .8,
     HG_EXTENDED_PARRY_STUN, 1,
 
-    HG_VISUAL_EFFECT, vfx_bullseye,
+    HG_VISUAL_EFFECT, 1, // Spawned manually for positioning reasons
     HG_HIT_SFX, asset_get("sfx_blow_heavy1"),
     HG_HIT_PARTICLE_NUM, 1,
 )
@@ -125,8 +127,8 @@ make_hitbox(AT_NSPECIAL, 2,
 // NSpec reflection
 make_hitbox(AT_NSPECIAL, 3,
     HG_HITBOX_TYPE, 2,
-    //HG_WINDOW, 3,
-    //HG_WINDOW_CREATION_FRAME, 0,
+    HG_WINDOW, 999,
+    HG_WINDOW_CREATION_FRAME, 0,
     HG_LIFETIME, 3,
 
     //HG_HITBOX_X, 106,
