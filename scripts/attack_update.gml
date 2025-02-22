@@ -816,12 +816,14 @@ switch (attack) {
 	var upper_bound = max_length;
 	var loops = log2(max_length);
 	
+	var y1 = _y-(height/2);
+	var y2 = _y+(height/2);
+	
 	for (i = 0; i <= loops; i++) {
 		var position = (lower_bound+upper_bound)/2;
-		var x1 = min(_x, _x+(position*spr_dir));
-		var x2 = max(_x, _x+(position*spr_dir));
-		var y1 = _y-(height/2);
-		var y2 = _y+(height/2);
+		var outer_x = _x+(position*spr_dir)
+		var x1 = min(_x, outer_x);
+		var x2 = max(_x, outer_x);
 		
 		var is_colliding = false;
 		is_colliding |= noone != collision_rectangle(x1, y1, x2, y2, asset_get("par_block"), false, false);
