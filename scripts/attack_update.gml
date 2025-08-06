@@ -817,7 +817,7 @@ switch (attack) {
 	
 	create_shot_hitbox(nspec_x_pos, length, AT_NSPECIAL, hbox_num);
 	create_shot_visual(_x+hsp, _y+vsp-2, length, start_index, tile_index, edge_index, edge_width, shot_lifetime, smoke_index, smoke_time_offset, smoke_lifetime);
-	shot_hit_skull(_x, _y, length, _h, get_hitbox_value(AT_NSPECIAL, hbox_num, HG_VISUAL_EFFECT));
+	shot_hit_skull(_x, _y, length, _h, (hbox_num == 1 ? vfx_bullseye_small : vfx_bullseye));
 	
 
 // Generates furthest rectangular space a shot can occupy.
@@ -897,8 +897,8 @@ switch (attack) {
 	if (head_obj.state == 0 || head_obj.state == 4 || head_obj.state == 5) return;
 	if (head_obj == collision_rectangle(_x+(length*spr_dir)-2, _y-(height/2), _x+(length*spr_dir)+2, _y+(height/2), head_obj, true, true)) {
 		set_head_state(AT_NSPECIAL);
-    	var vfx = spawn_hit_fx(head_obj.x, head_obj.y-30, hit_vfx)
-    	vfx.depth = head_obj.depth-1;
+    	var vfx = spawn_hit_fx(_x+(length*spr_dir), _y+4, hit_vfx)
+    	vfx.depth = min(depth-1, head_obj.depth-1);
     	head_obj.shots_absorbed++;
     	take_damage(player, player, 1)
 	}

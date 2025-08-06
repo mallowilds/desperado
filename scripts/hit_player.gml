@@ -136,14 +136,13 @@ if atk == AT_NSPECIAL {
 	if hbox == 1 {
 		var _y = round(lerp(my_hitboxID.y, hit_player_obj.y-hit_player_obj.char_height*0.5, 0.8));
 		spawn_hit_fx(hit_player_obj.x, _y, vfx_bullseye_small);
-		sound_play(sound_get("hit_p00_a"))
-		
+		sound_play(sound_get("hit_p00_a"));
 	}
 	if hbox == 2 {
 		var _y = round(lerp(my_hitboxID.y, hit_player_obj.y-hit_player_obj.char_height*0.5, 0.8));
 		spawn_hit_fx(hit_player_obj.x, _y, vfx_bullseye);
-		sound_play(sound_get("desp_heavy_hit"))
-		sound_play(asset_get("sfx_mol_bat_whack"))
+		sound_play(sound_get("desp_heavy_hit"));
+		sound_play(asset_get("sfx_mol_bat_whack"));
 	}
 }
 if atk == AT_FSTRONG_2 && hbox == 2 {
