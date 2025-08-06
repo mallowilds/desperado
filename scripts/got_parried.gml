@@ -36,8 +36,13 @@ if (my_hitboxID.attack == AT_FSPECIAL) {
 }
 
 else if (my_hitboxID.attack == AT_FSPECIAL_2) {
-    with head_obj {
-        // it's dying anyway, but also...
-        respawn_give_bullet = false;
-    }
+    // it's dying anyway, but also...
+    head_obj.respawn_give_bullet = false;
+}
+
+
+// Break skull if latched
+if (head_obj.state == AT_EXTRA_1) {
+    head_obj.state_timer = 999;
+    head_obj.respawn_penalty = true;
 }

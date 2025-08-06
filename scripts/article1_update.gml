@@ -60,7 +60,7 @@ if (state != 0 && state != 4 && state != 5) {
 		respawn_penalty = true;
 	}
 	
-	else if (player_id.object_index == oPlayer) {
+	else if (player_id.object_index == oPlayer && state != AT_EXTRA_1) {
 		
 		if (y > get_stage_data(SD_BOTTOM_BLASTZONE_Y)) {
 			state = 4;
@@ -739,6 +739,7 @@ switch (state) {
 	case AT_EXTRA_1:
 		can_fspecial = true;
 		respawn_penalty = false;
+		is_hittable = (state_timer <= 2); // ensure that clashes still break the head
 		
 		if (target_id.hitstop > 0) {
 			state_timer--;
@@ -761,6 +762,9 @@ switch (state) {
 		else if (player_id.state = PS_DEAD) {
 			set_head_state(0);
 			target_id = noone;
+		}
+		else if (target_id.state == PS_RESPAWN || target_id.state == PS_DEAD) {
+			state_timer = 999;
 		}
 		
 		if (state_timer > 180 && (player_id.attack != AT_FSPECIAL_2 || player_id.state != clamp(player_id.state, PS_ATTACK_AIR, PS_ATTACK_GROUND))) {
