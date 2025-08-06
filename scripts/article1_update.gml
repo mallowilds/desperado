@@ -30,7 +30,7 @@ Reactive Attacks
 ignores_walls = false;
 
 //#region Hittability handling --------------------------------------------------------
-hittable = !(state = 0 || state == 3 || state == 4 || state == 5);
+hittable = !(state = 0 || state == 3 || state == 4 || state == 5 || (state == AT_EXTRA_1 && state_timer > 2));
 
 if (state != AT_NSPECIAL) shots_absorbed = 0;
 
@@ -739,8 +739,7 @@ switch (state) {
 	case AT_EXTRA_1:
 		can_fspecial = true;
 		respawn_penalty = false;
-		is_hittable = (state_timer <= 2); // ensure that clashes still break the head
-		
+
 		if (!instance_exists(target_id)) {
 			set_head_state(4);
 			target_id = noone;
@@ -842,8 +841,6 @@ switch (state) {
 			
 			case 3:
 			
-				hittable = false;
-				
 				draw_x = 0;
 				draw_y = 0;
 				
