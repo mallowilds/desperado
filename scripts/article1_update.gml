@@ -741,6 +741,13 @@ switch (state) {
 		respawn_penalty = false;
 		is_hittable = (state_timer <= 2); // ensure that clashes still break the head
 		
+		if (!instance_exists(target_id)) {
+			set_head_state(4);
+			target_id = noone;
+			hsp = 0;
+			vsp = 0;
+		}
+		
 		if (target_id.hitstop > 0) {
 			state_timer--;
 			hsp = 0;
@@ -770,7 +777,7 @@ switch (state) {
 		if (state_timer > 180 && (player_id.attack != AT_FSPECIAL_2 || player_id.state != clamp(player_id.state, PS_ATTACK_AIR, PS_ATTACK_GROUND))) {
 			// SFX/VFX
 			set_head_state(4);
-			target_obj = noone;
+			target_id = noone;
 			hsp = 0;
 			vsp = 0;
 		}
