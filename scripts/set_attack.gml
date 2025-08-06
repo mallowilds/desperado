@@ -29,7 +29,12 @@ switch attack {
     
     // FSpecial command
     case AT_FSPECIAL:
-        if (head_obj.state != 0) attack = AT_FSPECIAL_2;
+        if (head_obj.state != 0) {
+            attack = AT_FSPECIAL_2;
+            var startup_length = fspecial_command_startups[head_obj.state == AT_EXTRA_1];
+            set_window_value(AT_FSPECIAL_2, 1, AG_WINDOW_LENGTH, startup_length);
+            set_window_value(AT_FSPECIAL_2, 1, AG_WINDOW_SFX_FRAME, startup_length-1);
+        }
         break;
     
     // Taunt 2 / destroy signpost

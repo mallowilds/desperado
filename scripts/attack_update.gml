@@ -427,6 +427,11 @@ switch (attack) {
 				} else {
 					set_window_value(AT_FSPECIAL, 2, AG_WINDOW_VSPEED, -3)
 				}
+				
+				if (window_timer < 6) {
+					fspec_held = special_down;
+				}
+				
 				if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) - 2 {
 					sound_play(asset_get("sfx_spin"))
 				} else if window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH) {
@@ -438,7 +443,8 @@ switch (attack) {
 					head_obj.spr_dir = spr_dir;
 					head_obj.x = x+(48*spr_dir);
 					head_obj.y = y-10;
-					head_obj.throw_dir = (-1*up_down) + (1*down_down);
+					head_obj.throw_dir = down_down - up_down;
+					head_obj.extend_throw = fspec_held;
 				}
 				break;
 			case 2:
@@ -452,12 +458,19 @@ switch (attack) {
 	case AT_FSPECIAL_2:
 		can_move = false;
 		can_fast_fall = false;
-		switch(window){
+		switch(window) {
 			case 1:
-				if !free {
-					set_window_value(AT_FSPECIAL_2, 2, AG_WINDOW_VSPEED, 0)
-				} else {
-					set_window_value(AT_FSPECIAL_2, 2, AG_WINDOW_VSPEED, -3)
+				var head_latched = (head_obj.state == AT_EXTRA_1);
+				if (window_timer == 1 && head_latched) {
+					// TODO: adjust flash position to be at head's eye socket
+	        		var vflash = spawn_hit_fx(head_obj.x, head_obj.y, vfx_flash);
+	        		vflash.depth = head_obj.depth - 1;
+	        		vflash.follow_id = head_obj;
+	        		vflash.follow_time = 1000;
+        			sound_play(sound_get("desp_sharpen"));
+				}
+				else if (window_timer == get_window_value(attack, window, AG_WINDOW_LENGTH)-1) {
+					set_window_value(AT_FSPECIAL_2, 2, AG_WINDOW_VSPEED, fspecial_command_boosts[free*(1+head_latched)]);
 				}
 				break;
 			case 2:
@@ -465,6 +478,7 @@ switch (attack) {
 					set_head_state(AT_FSPECIAL_2);
 					head_obj.has_hit = false;
 					head_obj.spr_dir = spr_dir;
+					head_obj.target_id = noone;
 				}
 				break;
 		}

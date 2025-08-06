@@ -29,8 +29,16 @@ if (my_hitboxID.damage + mult_damage_add > 3 && num_bullets >= 4) {
 
 //#region Skull hitbox management
 if (atk == AT_FSPECIAL && my_hitboxID.orig_player == player) { // FSpecial
-	my_hitboxID.head_obj.hitstop = hit_player_obj.hitstop;
-	my_hitboxID.head_obj.has_hit = true;
+	var h = my_hitboxID.head_obj;
+	h.hitstop = hit_player_obj.hitstop;
+	h.has_hit = true;
+	h.state = AT_EXTRA_1;
+	h.state_timer = 0;
+	if (h.target_id == noone || get_player_damage(hit_player) > get_player_damage(h.target_id.player)) {
+		h.target_id = hit_player_obj;
+		h.target_relative_x = (h.x - hit_player_obj.x) * 0.8;
+		h.target_relative_y = (h.y - hit_player_obj.y) * 0.8;
+	}
 }
 if (atk == AT_FSPECIAL_2 && my_hitboxID.orig_player == player) { // Skull explosion
 	my_hitboxID.hitstop_timer = hit_player_obj.hitstop;

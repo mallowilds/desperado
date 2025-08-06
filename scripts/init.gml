@@ -1,49 +1,5 @@
 // init.gml
 
-
-//...And so he left, with his pyrrhic plunder.
-//Desperado, the Remnant of Ash
-
-//lore:
-//Desperado was one of the first mechanics, working with another man, using gunpowder and ash to create what are known today as guns. At the front of the gold rush, he was there, innovating and pushing his craft.
-//After a particularly heavy dust storm seperated the small mining town he had founded from the rest of the world, the small populous was unable to sustain themselves. 
-//In a senseless act of greed to try and leave the dust storm, he stole everything from his partner, who retaliated, shooting him and going on to be credited as the creator of the firearm in its use in modern day Aether - though its still shunned by the government, so its uses are limited, being sold in black markets and under the table deals.
-//As a restless and vengeful spirit, Desperado is still said to roam the aimless stretches of Aether, haunting and hunting people who follow the path he did.
-
-//Desperado is a powerful Zoner who plays keepaway - His main goal is to reload his gun every stock, which has up to 6 bullets in it, by using Down Special, or a few unique normals. 
-//His gun is the first one ever created- It's incredbily powerful, but volatile. By adding bullets to the chamber, it increases the heat of the gun, and Desperado, giving him a damage buff for every bullet inside.
-//Bullets give him up to 75% more damage and give him access to a few new attacks: (Ftilt?) (fspec)?
-//You can expend bullets by using F-Strong or (maybe an aerial rekka?). F-Strong is his most powerful one, a large shrapnel explosion, but requires a bullet to use, so bec areful.
-//N-Special is Desperate Measures: A strong gunshot attack that expends all his bullets in a hammer fan. This move gets incredibly strong with higher bullet counts, becoming the strongest projectile tool in the game with all 6.
-//However, it also uses every bullet in your chamber, forcing you to reload everything again in order to use the attack. 
-
-//As for the rest of his kit, hes slow, large, and slightly floaty, meaning he has a pretty big weakness in his disadvantage. His damage also starts out quite low, needing bullets to ramp it up. 
-//However, to make up for this, he has very large, powerful disjoints, quicker startup on key moves than you'd expect, and a myriad of tools to combo into Desperate Measures, making getting hit with 5 or 6 bullets extremely scary for the enemy.
-
-//Down Special - Reload 
-//Desperado loads a bullet into his chamber, increasing the heat of the weapon, and his damage. You can have up to 6 bullets in the chamber at a time, for up to a 75% damage multiplier. This also affects certain other moves.
-
-//Neutral Special - Desperate Measures 
-//Desperado shoots every bullet in his chamber in a hammer fan. This move gets sequentially stronger with every bullet shot, and at full bullets, becomes the strongest projectile in the game. Once used, you need to reload your bullets.
-
-//Forward Special - maybe he sets upa smoke clone
-// after a second it sends writhing tendrils towards the opponent if they dont hit it 
-//idk yet :(
-
-//Up Special - Deadshot
-//Desperado uses a whip-like- attack and swings in front and above him. its a quick attack with a sweetspot on the end that makes as an excellent finisher.
-//If the whip touches a wall, he will zoop towards it, giving him an upwards boost and letting him walljump.
-//Otherwise, he'll get a small boost, and doesn't go into pratfall.
-
-
-//todo
-
-//finish moveset
-//finish specials
-//put in extra stuff (portrait preview)
-//trailer
-
-
 // Character-specific indices
 AG_WINDOW_SKULL_GRABBOX_X = 41; // Reserved slots for uspecial
 AG_WINDOW_SKULL_GRABBOX_Y = 42;
@@ -82,6 +38,7 @@ nametag_flame_alpha = 0;
 
 sparkle_list = ds_list_create();        // particle list. implementation is taken from aur, hence the name
 nspec_shot_list = ds_list_create();     // similar particle manager for nspecial shots.
+fspec_held = false;
 
 signpost_obj = noone;                   // taunt
 

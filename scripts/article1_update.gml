@@ -4,6 +4,7 @@
 
 /*STATE LIST
 
+Standard States
 - 0: Inactive
 - 1: Idle
 - 2: Hitstun
@@ -11,13 +12,18 @@
 - 4: Dying
 - 5: Respawning
 
-- Attack: AT_FSPECIAL
-	- Window 1: Startup
+Command Attacks
+- AT_FSPECIAL (initial throw)
 	- Window 2: Active
-	- Window 3: Endlag
-	
-- Attack: AT_USTRONG
-	- Unfilled
+	- Window 3: Slow down
+	- Window 4: Return
+- AT_FSPECIAL_2 (skull pop)
+- AT_FTHROW (rethrow from USpecial)
+- AT_UTHROW (rethrow from DAir)
+
+Reactive Attacks
+- AT_EXTRA_1 (latch on and explode)
+- AT_NSPECIAL (homing beam)
 
 */
 
@@ -406,34 +412,50 @@ switch (state) {
 		visible = true;
 	    sprite_index = sprite_get("skullactive"+(is_ea?"_ea":""));
 	    can_fspecial = true;
+	    target_id = noone;
 		
 		switch (window) {
 			
-			case 1:
-				// Deprecated
-				break;
-				
+			// Active
 			case 2:
 				image_index = (window_timer/3)%4;
 				
-				if (hitstop <= 0) vsp = clamp(vsp+0.2, vsp, 7);
-				
-				if (hitstop <= 0 && window_timer == 1) { // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					hsp = (6+throw_dir) *spr_dir;
-					vsp = -3.5 + 3*throw_dir;
-					
-					hitbox = create_hitbox(AT_FSPECIAL, 1, x, y);
-					hitbox.spr_dir = spr_dir;
-					hitbox.head_obj = self;
+				if (hitstop <= 0) {
+					// Initialize speeds/hitbox
+					if (window_timer == 1) {
+						orig_throw_dir = throw_dir; // for return behavior
+						hsp_force = (throw_dir == 0 ? 7.5 : 6.5)*spr_dir;
+						vsp_force = 2.5*throw_dir;
+						hitbox = create_hitbox(AT_FSPECIAL, 1, x, y-30);
+						hitbox.spr_dir = spr_dir;
+						hitbox.head_obj = self;
+					}
+					// The wall bounce detection of all time
+					else if (hsp == 0) { // the "else" protects initialization
+						spr_dir *= -1;
+						hsp_force *= -1;
+						window_timer += 2;
+						// Cheeky bit of gamefeel for offstage plays
+						if (abs(vsp_force) == 2.5) {
+							hsp_force -= 1*spr_dir;
+							vsp_force += 1.5*throw_dir;
+						}
+					}
+					// Ground bounce detection
+					else if (!free && throw_dir != 0) { // the "else" protects against weird clipping behavior
+						throw_dir *= -1;
+						vsp_force *= -1;
+						window_timer += 2;
+					}
+					// Set speeds
+					hsp = hsp_force;
+					vsp = vsp_force;
 				}
 				
-				// End just before hitting ground (or if it takes too long)
-				var offset = (vsp > 4 ? 40 : 6.66*vsp + 10);
-				if ( window_timer >= 25 || ( vsp > 0 && (position_meeting(x, y+offset, asset_get("par_block")) || position_meeting(x, y+30, asset_get("par_jumpthrough"))) ) ) {
-					hitbox = noone;
+				// End based on duration
+				if (window_timer >= (extend_throw ? 20 : 10)) {
 					window = 3;
 					window_timer = 0;
-					if (vsp > 4) vsp = 4;
 					break;
 				}
 				
@@ -444,62 +466,44 @@ switch (state) {
 					hitbox.y = y-30;
 					hitbox.hsp = hsp;
 					hitbox.vsp = vsp;
-					
 					spawn_ash_particle(player*3, player*3+1);
-				}
-				
-				// Bounce detections
-				if (hitstop <= 0) {
-					
-					// The wall detection of all time
-					if (hsp == 0) {
-						window = 3;
-						window_timer = 0;
-						spr_dir *= -1;
-						hsp = 1.5*spr_dir;
-					}
-					
-					/*
-					// Enemy bounce detection
-					if (has_hit) {
-						window = 3;
-						window_timer = 0;
-						vsp = -3;
-						hsp = -4*spr_dir;
-						has_hit = false;
-					}*/
-					
-					// Ground bounce detection (backup)
-					if (!free) {
-						window = 3;
-						window_timer = 0;
-						vsp = -4;
-						hsp = 3*spr_dir;
-					}
-					
 				}
 				
 				break;
 			
-			// Slow down
+			// Slow down (partially active)
 			case 3:
+				image_index = (4*(hitbox==noone)) + (window_timer/3)%4;
 				
-				// Update hitbox
-				if (hitbox != noone) {
+				if (hitstop <= 0) {
+					// The wall bounce detection of all time
+					if (hsp == 0 && hsp_force != 0) {
+						spr_dir *= -1;
+						hsp_force *= -1;
+						window_timer += 2;
+					}
+					// Ground bounce detection
+					if (!free && throw_dir != 0) {
+						vsp_force *= -1;
+						window_timer += 2;
+					}
+					// Update speeds
+					hsp_force *= 0.91;
+					vsp_force *= 0.91;
+					hsp = hsp_force;
+					vsp = vsp_force;
+				}
+				
+				if (hitbox != noone && abs(hsp) + abs(vsp) > 2) {
 					hitbox.length++; // Lifetime extender
 					hitbox.x = x;
 					hitbox.y = y-30;
 					hitbox.hsp = hsp;
 					hitbox.vsp = vsp;
-					
 					spawn_ash_particle(player*3, player*3+1);
 				}
 				
-				image_index = (4*(hitbox==noone)) + (window_timer/3)%4;
-				hsp *= 0.91;
-				vsp *= 0.91;
-				
-				if (window_timer >= 36) {
+				if (window_timer >= 72) {
 					window = 4;
 					window_timer = 0;
 					hitbox = noone;
@@ -509,21 +513,15 @@ switch (state) {
 			
 			// Return
 			case 4:
-			
 				image_index = 4 + (window_timer/3)%4;
-				
 				var target_sp = 2.25*ln(0.9*window_timer+1); // https://www.desmos.com/calculator/d2byh0mgnk
 				
-				if (throw_dir != -1) {
-					if (window_timer == 1) angle_change = clamp((player_id.x-x)/10, -50, 50); // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
+				if (orig_throw_dir != 1) {
+					if (window_timer <= 1) angle_change = clamp((player_id.x-x)/10, -50, 50);
 					else if (angle_change > 0) angle_change = clamp(angle_change-0.5, 0, angle_change);
 					else if (angle_change < 0) angle_change = clamp(angle_change+0.5, angle_change, 0);
 				}
-				else { //thrown up
-					if (window_timer == 1) angle_change = clamp((player_id.x-x)/-10, -30, 30); // WARN: Possible repetition during hitpause. Consider using window_time_is(frame) https://rivalslib.com/assistant/function_library/attacks/window_time_is.html
-					else if (angle_change > 0) angle_change = clamp(angle_change+0.5, 0, angle_change);
-					else if (angle_change < 0) angle_change = clamp(angle_change-0.5, angle_change, 0);
-				}	
+				else angle_change = 0;
 				
 				if (point_distance(x, y, player_id.x, player_id.y-26) < target_sp) move_speed = point_distance(x, y, player_id.x, player_id.y-50);
 				else move_speed = target_sp;
@@ -542,12 +540,10 @@ switch (state) {
 					var regen_vfx = spawn_hit_fx(player_id.x+(4*player_id.spr_dir), player_id.y-56, player_id.vfx_bullseye_small);
 					regen_vfx.depth = player_id.depth-1;
 					sound_play(asset_get("sfx_mol_bombpop"));
-					
-					//if (player_id.state != PS_HITSTUN && player_id.state != PS_HITSTUN_LAND) create_hitbox(AT_FSPECIAL_2, 1, player_id.x+(player_id.spr_dir*-6), player_id.y-52);
 				}
 				
-				// 3 seconds in: just kill off the skull, it's probably trapped
-				if (state_timer > 180) {
+				// 4 seconds in: just kill off the skull, it's probably trapped
+				if (state_timer > 240) {
 					state = 4;
 					state_timer = 0;
 					respawn_penalty = true;
@@ -557,6 +553,8 @@ switch (state) {
 					hsp = 3*spr_dir;
 					can_fspecial = false;
 				}
+				
+				break;
 				
 		}
 		
@@ -734,6 +732,37 @@ switch (state) {
 		}
 		
 		break;	
+	
+	//#endregion
+	
+	//#region Reactive Attack: AT_EXTRA_1 ----------------------------------------------
+	case AT_EXTRA_1:
+		can_fspecial = true;
+		respawn_penalty = false;
+		
+		if (target_id.hitstop > 0) {
+			state_timer--;
+			hsp = 0;
+			vsp = 0;
+			break;
+		}
+	
+		sprite_index = sprite_get("skullhurt"+(is_ea?"_ea":""));
+		hsp = target_id.hsp;
+		vsp = target_id.vsp;
+		x = target_id.x + target_relative_x;
+		y = target_id.y + target_relative_y;
+		depth = target_id.depth-1;
+		
+		if (state_timer > 180 && (player_id.attack != AT_FSPECIAL_2 || player_id.state != clamp(player_id.state, PS_ATTACK_AIR, PS_ATTACK_GROUND))) {
+			// SFX/VFX
+			set_head_state(4);
+			target_obj = noone;
+			hsp = 0;
+			vsp = 0;
+		}
+		
+		break;
 	
 	//#endregion
 	

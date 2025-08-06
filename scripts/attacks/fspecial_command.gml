@@ -9,23 +9,25 @@ make_attack(AT_FSPECIAL_2,
     AG_HURTBOX_SPRITE, sprite_get("fspec_2_hurt"),
 )
 
+fspecial_command_startups = [7, 14]; // Longer if head is clamped to opponent. See set_attack.gml
 make_window(AT_FSPECIAL_2, 1,
     AG_WINDOW_TYPE, 1,
-    AG_WINDOW_LENGTH, 7,
+    AG_WINDOW_LENGTH, fspecial_command_startups[0],
     AG_WINDOW_ANIM_FRAMES, 1,
 
     AG_WINDOW_HAS_SFX, 1,
     AG_WINDOW_SFX, sound_get("desp_snap"),
-    AG_WINDOW_SFX_FRAME, 6,
+    AG_WINDOW_SFX_FRAME, fspecial_command_startups[0]-1,
 )
 
+fspecial_command_boosts = [0, -3, -5]; // Grounded, unclamped head, clamped head. See attack_update.gml
 make_window(AT_FSPECIAL_2, 2,
     AG_WINDOW_TYPE, 1,
     AG_WINDOW_LENGTH, 5,
     AG_WINDOW_ANIM_FRAMES, 1,
     AG_WINDOW_ANIM_FRAME_START, 1,
     AG_WINDOW_VSPEED_TYPE, 1,
-    AG_WINDOW_VSPEED, -3,
+    AG_WINDOW_VSPEED, fspecial_command_boosts[0],
 )
 
 make_window(AT_FSPECIAL_2, 3,

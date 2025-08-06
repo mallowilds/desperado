@@ -22,11 +22,13 @@ old_hsp = 0;
 old_vsp = 0;
 has_hit = false;
 
+extend_throw = player_id.fspec_held;
+angle_change = 0;
 hittable = false;
 
 respawn_penalty = true;                             // Switches which respawn delay is used.
-respawn_delay = 75;                                 // Default respawn delay.
-penalty_delay = 120;                                // Altered respawn delay if the skull is killed or bashed.
+respawn_delay = 90;                                 // Default respawn delay.
+penalty_delay = 150;                                // Altered respawn delay if the skull is killed or bashed.
 respawn_give_bullet = false;
 
 can_fspecial = false;
@@ -35,7 +37,10 @@ shots_absorbed = 0;
 redir_angle = 0;
 redir_target_obj = noone;
 shot_visual = noone;
-target_id = noone;
+target_id = noone; // Used for both homing (NSpecial reaction) and latching (FSpecial on-hit)
+
+target_relative_x = 0;
+target_relative_y = 0;
 
 //Terrain behavior
 can_be_grounded = false;                            //Determines if the article follows platforms when free == false.
