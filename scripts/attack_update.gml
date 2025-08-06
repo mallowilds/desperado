@@ -329,7 +329,7 @@ switch (attack) {
         can_move = false
         can_fast_fall = false
         if window == 1 {
-        	if window_timer == 1 && !hitpause && num_bullets > 0 {
+        	if (window_timer == 1 && !hitpause && num_bullets > 0) {
         		if head_obj.state == 0 {
 	        		var vflash = spawn_hit_fx(x, y, vfx_flash)
 	        		vflash.depth = depth - 1;
@@ -338,23 +338,24 @@ switch (attack) {
         		}
         		sound_play(sound_get("desp_sharpen"))
         	}
-            var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
-            if (window_time_is(1)) {
+        	if (window_time_is(1)) {
                 start_hsp = hsp;
                 start_vsp = vsp;
                 move_cooldown[AT_NSPECIAL] = 999; // anti-stall, reset in update/got_hit/death.gml
                 
             }
+            var window_len = get_window_value(attack, window, AG_WINDOW_LENGTH);
             hsp = lerp(hsp, 0, window_timer/window_len);
             vsp = lerp(vsp, 0, window_timer/window_len);
+            if (window_timer = window_len-1) {
+            	skull_latched = (head_obj.state == AT_EXTRA_1);
+            }
         }
         if window == 2 || (window == 3 && window_timer < 6){
             vsp = 0
             hsp = 0 
         }
         if (window == 1 && window_time_is(get_window_value(attack, window, AG_WINDOW_LENGTH))) {
-            
-            
             set_hitbox_value(AT_NSPECIAL, 2, HG_BASE_KNOCKBACK, 8 + (0.25 * num_bullets));
             set_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING, 0.75 + (0.05 * num_bullets));
             //print(get_hitbox_value(AT_NSPECIAL, 2, HG_KNOCKBACK_SCALING))
@@ -838,12 +839,16 @@ switch (attack) {
 		var outer_x = _x+(position*spr_dir)
 		var x1 = min(_x, outer_x);
 		var x2 = max(_x, outer_x);
+		// x3 and x4 shift skull collision to its center if it's latched
+		var ignore_head = skull_latched && position <= 20;
+		var x3 = min(_x, outer_x-20*spr_dir);
+		var x4 = max(_x, outer_x-20*spr_dir);
 		
 		var is_colliding = false;
 		is_colliding |= noone != collision_rectangle(x1, y1, x2, y2, asset_get("par_block"), false, false);
 		is_colliding |= noone != collision_rectangle(x1, y1, x2, y2, asset_get("obj_clairen_field"), true, false);
-		is_colliding |= head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 &&
-						noone != collision_rectangle(x1, y1, x2, y2, head_obj, true, false);
+		is_colliding |= !ignore_head && head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 &&
+						noone != collision_rectangle(skull_latched?x3:x1, y1, skull_latched?x4:x2, y2, head_obj, true, false);
 		
 		if (is_colliding) upper_bound = position;
 		else lower_bound = position;

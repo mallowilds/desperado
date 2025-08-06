@@ -754,6 +754,15 @@ switch (state) {
 		y = target_id.y + target_relative_y;
 		depth = target_id.depth-1;
 		
+		if (player_id.state_cat == SC_HITSTUN || player_id.state == PS_RESPAWN) {
+			state_timer = 999;
+			respawn_penalty = true;
+		}
+		else if (player_id.state = PS_DEAD) {
+			set_head_state(0);
+			target_id = noone;
+		}
+		
 		if (state_timer > 180 && (player_id.attack != AT_FSPECIAL_2 || player_id.state != clamp(player_id.state, PS_ATTACK_AIR, PS_ATTACK_GROUND))) {
 			// SFX/VFX
 			set_head_state(4);
