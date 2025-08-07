@@ -100,7 +100,7 @@ if (state != 0 && state != 4 && state != 5) {
 
 //#region Bash handling --------------------------------------------------------
 
-unbashable = (state = 0 || state == 4 || state == 5);
+unbashable = (state = 0 || state == 4 || state == 5 || state == AT_EXTRA_1);
 if (getting_bashed && !unbashable) {
 	state = 3;
 	state_timer = 0;
