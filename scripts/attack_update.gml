@@ -779,7 +779,7 @@ switch (attack) {
 	var _w = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_W);
 	var _h = get_window_value(attack, window, AG_WINDOW_SKULL_GRABBOX_H);
 	
-	if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && head_obj.state != AT_NSPECIAL && centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false)) {
+	if (head_obj.state != 0 && head_obj.state != 4 && head_obj.state != 5 && head_obj.state != AT_NSPECIAL && head_obj.state != AT_EXTRA_1 && centered_rect_meeting(x+(_x*spr_dir), y+_y, _w, _h, head_obj, false)) {
     	set_head_state(0);
     	skull_grabbed = true;
     	head_obj.visible = false;

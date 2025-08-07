@@ -1,8 +1,8 @@
 // hit_player.gml
 // https://rivalslib.com/workshop_guide/programming/reference/scripts/event_scripts.html#hit-player-gml
 // Called when you hit aatk = my_hitboxID.attack 
-atk = my_hitboxID.attack 
-hbox = my_hitboxID.hbox_num
+var atk = my_hitboxID.attack 
+var hbox = my_hitboxID.hbox_num
 
 
 //#region Damage multiplier & 4+ Bullet SFX
@@ -74,6 +74,11 @@ if (atk == AT_DAIR && hbox == 1) {
 if (atk == AT_USPECIAL && hbox == 1 && !hit_player_obj.super_armor) {
 	grabbed_player_obj = hit_player_obj;
 	my_hitboxID.destroyed = true;
+}
+
+// On throw: if skull is latched, reset lifetime for consistency
+if (hbox == 2 && (atk == AT_DAIR || atk == AT_USPECIAL) && head_obj.state == AT_EXTRA_1) {
+	head_obj.state_timer = 0;
 }
 
 //#endregion

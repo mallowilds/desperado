@@ -745,12 +745,15 @@ switch (state) {
 			target_id = noone;
 			hsp = 0;
 			vsp = 0;
+			break;
 		}
 		
 		if (target_id.hitstop > 0) {
 			state_timer--;
-			hsp = 0;
-			vsp = 0;
+			x = target_id.x + target_relative_x;
+			y = target_id.y + target_relative_y;
+			hsp = target_id.hsp;
+			vsp = target_id.vsp;
 			break;
 		}
 	
