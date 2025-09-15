@@ -259,6 +259,7 @@ switch (attack) {
 				    	old_vsp = -8;
 				    	destroy_hitboxes();
 		        	}
+		        	if (window_timer < 3) fall_through = true;
 	        	}
 	        	// no break
 	        
